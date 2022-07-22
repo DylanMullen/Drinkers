@@ -21,7 +21,7 @@ export default class WaterfallSocket
             let listen = this.listen.bind(this);
             let connected = this.setConnected.bind(this);
 
-            let url = "ws://api.drinkers.beer"
+            let url = "wss://api.drinkers.beer:8443"
 
             this.socket = new WebSocket( url + "/waterfall/ws/" + this.game.uuid + "?uuid=" + this.game.cookie.uuid)
 
