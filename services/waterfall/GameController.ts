@@ -36,7 +36,6 @@ export async function createWaterfallGame(settings: WaterfallGameSettings)
     if (response.error)
         return;
 
-    console.log(response)
 
     let state: WaterfallState = convertToState(response);
 
@@ -71,7 +70,7 @@ export async function joinWaterfallGame(joinRequest: WaterfallJoinRequest): Prom
 
 async function sendCreateRequest(settings: WaterfallGameSettings)
 {
-    return await fetch("https://api.drinkers.beer/waterfall/create", {
+    return await fetch("http://api.drinkers.beer/waterfall/create", {
         method: "POST",
         body: JSON.stringify({
             owner: {
@@ -87,7 +86,7 @@ async function sendCreateRequest(settings: WaterfallGameSettings)
 
 async function sendJoinRequest(request: WaterfallJoinRequest)
 {
-    return await fetch( "https://api.drinkers.beer/waterfall/join", {
+    return await fetch( "http://api.drinkers.beer/waterfall/join", {
         method: "POST",
         body: JSON.stringify(request)
     }).then(res => res.json())

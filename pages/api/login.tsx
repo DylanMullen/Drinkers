@@ -81,7 +81,6 @@ async function loginWithDiscord(code: string)
 
   if (discordDetails === undefined)
   {
-    console.log("failed herer")
     return;
   }
 
@@ -154,7 +153,7 @@ async function authDiscord(code: string): Promise<DiscordAuth>
     code: code,
     scope: "identify",
     grantType: "authorization_code",
-    redirectUri:  "https://drinkers.beer/"
+    redirectUri:  "http://drinkers.beer/api/login"
   })
   return {
     accessToken: response.access_token,
