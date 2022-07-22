@@ -1,0 +1,98 @@
+$red-card: #D90B04;
+$black-card: lighten(#333236, 10%);
+
+.waterfall-date
+{
+    width: 100%;
+    height: 100%;
+    // background-color: red;
+    display: flex;
+    position: relative;
+    align-items: center;
+    // justify-content: center;
+
+    gap: .5rem;
+    // margin-top: 1rem;
+
+    transition: transform 150ms ease-in-out;
+
+    transform-origin: center;
+
+    width: fit-content;
+
+    &--click
+    {
+        cursor: pointer;
+        &:hover,&:focus
+        {
+            transform: scale(1.1);
+        }
+        &:active
+        {
+            transform: scale(1);
+        }
+    }
+    
+    &__dates
+    {
+        list-style: none;
+        position: absolute;
+        margin: 0;
+        top: -1.5rem;
+        // padding: 0;
+        // left: 1rem;
+
+        display: flex;
+        gap: .25rem;
+
+        &__icon
+        {
+            position: relative;
+            width: 1.5rem;
+            // overflow: hidden;
+            aspect-ratio: 1 / 1;
+
+            span
+            {
+                border-radius: 50%;
+            }
+        }
+
+        &__tooltip
+        {
+            position: absolute;font-size: 1rem;
+            left: 50%;
+            top: -2rem;
+            transform: translate(-50%, 0);
+            white-space: nowrap;
+
+            padding: .2rem .25rem;
+            border-radius: .25rem !important;
+            z-index: 50;
+
+            background-color: $black-card;
+            box-shadow: 0px 0px .5rem darken($black-card, 5%);
+
+            color: #DDD;
+        }
+    }
+
+    &__avatar
+    {
+        width: 2.75rem;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    &__name
+    {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+        font-weight: 400;
+        color: black;
+
+        border-left: 2px solid darkgray;
+        padding-left: .5rem;
+    }
+}

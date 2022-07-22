@@ -1,0 +1,142 @@
+$primary: #BBBBBB;
+
+$join-color: #90e0ef;
+$create-color: #ccff33;
+$profile-color: #ffaa00;
+
+$pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+.waterfall-menuoption
+{
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: white;
+
+    position: relative;
+
+    width: 12rem;
+    aspect-ratio: 1/1;
+
+    // background-color: gray;
+    background-color: transparent;
+
+    border: 0;
+    outline: 0;
+
+    cursor: pointer;
+
+    transition: transform 150ms $pop;
+
+    &__icon
+    {
+        font-size: 0;
+        color: lightgray;
+
+        border-radius: 50%;
+        border: 2px solid lightgray;
+
+        padding: .75rem;
+        width: fit-content;
+
+        svg
+        {
+            aspect-ratio: 1/1;
+            font-size: 3rem;
+        }
+    }
+
+    &__text
+    {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+        font-weight: 400;
+        color: white;
+    }
+
+    &:hover,
+    &:focus
+    {
+        transform: scale(1.1);
+
+        .waterfall-menuoption__highlight
+        {
+            width: 85%;
+        }
+
+        .waterfall-menuoption__text
+        {
+            letter-spacing: 3px;
+            font-weight: 500;
+        }
+    }
+
+    &__highlight
+    {
+        width: 0;
+        height: 3px;
+        // background-color: red;
+
+        transition: width 150ms $pop;
+
+        border-radius: 500px;
+
+    }
+
+    &--join
+    {
+        .waterfall-menuoption__highlight
+        {
+            background-color: $join-color;
+        }
+
+        &:hover
+        {
+
+            .waterfall-menuoption__icon
+            {
+                color: $join-color;
+            }
+        }
+    }
+
+    &--create
+    {
+        .waterfall-menuoption__highlight
+        {
+            background-color: $create-color;
+        }
+
+        &:hover
+        {
+
+            .waterfall-menuoption__icon
+            {
+                color: $create-color;
+            }
+        }
+    }
+
+    &--profile
+    {
+        .waterfall-menuoption__highlight
+        {
+            background-color: $profile-color;
+        }
+
+        &:hover
+        {
+
+            .waterfall-menuoption__icon
+            {
+                color: $profile-color;
+            }
+        }
+    }
+
+
+}

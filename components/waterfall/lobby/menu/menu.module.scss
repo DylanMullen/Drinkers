@@ -1,0 +1,31 @@
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+$vw-desktop: 1200px;
+
+
+.waterfall-menu
+{
+    display: flex;
+    gap: 1rem;
+    align-self: center;
+
+    @media (max-width: $vw-tablet) {
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        gap: 0;
+
+        >:first-child
+        {
+            grid-column: 1/span 2;
+        }
+        >:nth-child(2)
+        {
+            grid-column: 3/span 2
+        }
+        >:last-child
+        {
+            grid-column: 2 / span 3;
+        }
+    }
+}

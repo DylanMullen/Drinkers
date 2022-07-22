@@ -1,0 +1,161 @@
+
+$pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+$vw-desktop: 1200px;
+.help-modal
+{
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    
+    &__header
+    {
+        height: 3rem;
+        width: 100%;
+
+        border-bottom: 2px solid gray;
+    }
+
+    &__content
+    {
+        display: flex;
+        width: 100%;
+        gap: 1rem;
+
+        @media (max-width: calc($vw-laptops + 10rem)) {
+            flex-direction: column;
+        }
+    }
+
+    &__card
+    {
+        display: grid;
+        place-items: center;
+        gap: 1rem;
+        padding: 1rem;
+
+        font-size: 1.3rem;
+        // width: 18rem;
+
+        position: relative;
+
+        &__wrapper
+        {
+            width: 18rem;
+        }
+    }
+
+    &__info-panel
+    {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        gap: 2rem;
+        &__info
+        {
+            width: 100%;
+            line-height: 2.5rem;
+            font-size: 1.25rem;
+            text-align: center;
+
+            background-color: lightgray;
+            border-radius: .5rem;
+            padding: 1rem;
+            @media (max-width: calc($vw-laptops + 10rem)) {
+                display: none;
+            }
+        }
+    }
+
+    &__suite-selector
+    {
+        display: flex;
+        gap: 1rem;
+        position: relative;
+
+        z-index: 10;
+
+        &__btn
+        {
+            font-size: 0;
+            width: 2.25rem;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            border: 2px solid black;
+            outline: 0;
+            background-color: lightgray;
+
+            cursor: pointer;
+
+            transition: transform 150ms $pop;
+
+            &--modifier
+            {
+                background: linear-gradient(135deg, rgba(76,75,80,1) 50%, rgba(217,11,4,1) 50%);
+            }
+
+            &:hover,&:focus
+            {
+                transform: scale(1.25);
+            }
+        }
+    }
+
+    &__card-selector
+    {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+
+        // width: 100%;
+        height: fit-content;
+
+        gap: .75rem;
+
+        &__btn
+        {
+            width: 100%;
+            background-color: transparent;
+            border: 0;
+
+            font-size: 1.5rem;
+            cursor: pointer;
+
+            // background-color: white;
+            // border-radius: 500px;
+
+            letter-spacing: 2px; 
+
+            width: 75%;
+            
+            padding-bottom: .25rem;
+            border-bottom: 2px solid gray;
+
+            transition: transform 150ms ease-in-out;
+
+            &:hover,&:focus
+            {
+                transform: scale(1.15);
+            }
+
+        }
+
+        li{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &>li:last-child
+        {
+            grid-column: 2 / span 2;
+        }
+    }
+}

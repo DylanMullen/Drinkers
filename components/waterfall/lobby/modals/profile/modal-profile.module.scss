@@ -1,0 +1,191 @@
+.profile-modal
+{
+
+    height: 100%;
+    padding: 1rem;
+    hr
+    {
+        width: 85%;
+        margin: .25rem 0;
+    }
+
+    &__signin
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    &__signup
+    {
+        width: 100%;
+        // padding: 0 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+
+        &__title
+        {
+            text-align: center;
+            letter-spacing: 2px;
+            font-weight: 500;
+
+        }
+
+        &__form
+        {
+            display: flex;
+            flex-direction: column;
+            gap: .85rem;
+        }
+        &__footer
+        {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    &__btn
+    {
+        border: 0;
+        background-color: transparent;
+        outline: 0;
+
+        font-size: 1.25rem;
+        letter-spacing: 2px;
+
+        cursor: pointer;
+        position: relative;
+        height: fit-content;
+        &::after
+        {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            border-radius: 500px;
+            bottom: -.5rem;
+            left: 0;
+        }
+
+
+        &--register::after
+        {
+            background-color: red;
+        }
+        &--login::after
+        {
+            background-color: green;
+        }
+
+        &:hover,&:focus
+        {
+            transform: scale(1.1);
+        }
+        &:active
+        {
+            transform: scale(0.95);
+        }
+    }
+
+
+    &__seperator
+    {
+
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+
+    &__providers
+    {
+        width: 100%;
+        display: flex;
+        height: fit-content;
+        align-items: center;
+        gap: .75rem;
+        &__divider
+        {
+            height: 2px;
+            background-color: white;
+            border: 0;
+        }
+    }
+
+    &__provider
+    {
+        cursor: pointer;
+        font-size: 0;
+        padding: .5rem;
+        aspect-ratio: 1/1;
+
+        border-radius: 50%;
+        border: 2px solid white;
+        background-color: transparent;
+
+        svg
+        {
+            font-size: 2rem;
+            color: #5865F2;
+            aspect-ratio: 1 / 1;
+        }
+
+        &:hover,
+        &:focus
+        {
+            transform: scale(1.1);
+        }
+
+        &:active
+        {
+            transform: scale(.95);
+        }
+    }
+}
+
+.profile-modal__logged
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    // gap: 1rem;
+
+    &__header
+    {
+        padding: 1rem 0;
+    }
+
+    hr
+    {
+        margin-top: .5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    &__body
+    {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 0 1rem;
+    }
+
+    &__title
+    {
+        letter-spacing: 2px;
+        font-weight: 500;
+        width: 100%;
+
+        text-align: center;
+
+        &--left
+        {
+            text-align: left;
+            
+        }
+    }
+}

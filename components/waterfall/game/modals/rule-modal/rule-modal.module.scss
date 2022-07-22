@@ -1,0 +1,84 @@
+.waterfall-rulemodal
+{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    &__title
+    {
+        font-size: 2rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-align: center;
+        margin-bottom: .75rem;
+    }
+    &__rules
+    {
+        display: flex;
+        flex-direction: column;
+        gap: .25rem;
+    }
+
+    &__split
+    {
+        width: 100%;
+        margin: 1rem 0;
+    }
+
+    &__create
+    {
+        height: 100%;
+        position: relative;
+        display: grid;
+        place-items: center;
+        &__input
+        {
+            width: 100%;
+            height: 100%;
+            resize: none;
+            font-size: 1.25rem;
+            padding: .5rem;
+    
+            border: none;
+            outline: none;
+    
+            background-color: rgba($color: white, $alpha: .5);
+    
+            transition: background-color 150ms ease-in-out;
+
+            border-radius: .25rem;
+    
+            &:hover,&:focus
+            {
+                background-color: rgba($color: white, $alpha: .85);
+    
+            }
+
+        }
+
+        &__btn
+        {
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+            right: 1rem;
+
+            background-color: transparent;
+            outline: none;
+            font-size: 0;
+            border: 0;
+            text-align: center;
+            border: 2px solid white;
+            border-radius: 50%;
+            aspect-ratio: 1/1;
+
+            height: fit-content;
+            cursor: pointer;
+    
+            svg
+            {
+                font-size: 1.5rem;
+            }
+
+        }
+    }
+}

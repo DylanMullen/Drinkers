@@ -1,0 +1,98 @@
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+$vw-desktop: 1200px;
+
+
+.waterfall-userlist
+{
+
+    width: 100%;
+
+    &__list
+    {
+
+        list-style: none;
+
+        display: grid;
+        margin: 0;
+        padding: 0;
+
+        // gap: 1rem;
+
+        row-gap: 2.5rem;
+        column-gap: 1rem;
+
+        place-items: center;
+
+        [data-users="1"] &
+        {
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        [data-users="2"] &
+        {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        [data-users="3"] &
+        {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        [data-users="4"] &
+        {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media (max-width: calc($vw-mobile + 10rem))
+        {
+            grid-template-columns: repeat(1, 1fr) !important;
+        }
+
+        @media (min-width: calc($vw-mobile + 10rem)) and (max-width: $vw-laptops)
+        {
+            grid-template-columns: repeat(2, 1fr) !important;
+        }
+    }
+
+    &__add
+    {
+        height: 100%;
+        aspect-ratio: 1/1;
+        font-size: 0;
+        overflow: hidden;
+
+        background: transparent;
+        outline: 0;
+
+        border: 0;
+        // border-radius: 50%;
+
+        cursor: pointer;
+
+        opacity: .5;
+
+        transition: transform 150ms ease-in-out, opacity 150ms ease-in-out;
+
+        svg
+        {
+            font-size: 2.75rem;
+            color: white;
+        }
+
+        &:hover,
+        &:focus
+        {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        &:active
+        {
+            transform: scale(0.95);
+            opacity: 1;
+        }
+    }
+
+}

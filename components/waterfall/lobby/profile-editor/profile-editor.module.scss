@@ -1,0 +1,124 @@
+$pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+
+.profile-editor
+{
+    display: flex;
+    width: fit-content;
+    gap: 1.75rem;
+    align-items: center;
+
+    &__body
+    {
+        display: flex;
+        flex-direction: column;
+    }
+
+    
+
+    &__avatar
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .5rem;
+
+        &__selected
+        {
+            border-radius: 50%;
+            overflow: hidden;
+            width: 4rem;
+            font-size: 0;
+            aspect-ratio: 1/1;
+            display: flex;
+
+            img
+            {
+                object-fit: cover;
+            }
+        }
+
+        &__options
+        {
+            display: flex;
+            gap: .5rem;
+        }
+
+        &__option
+        {
+            width: 1.75rem;
+            aspect-ratio: 1 / 1;
+            font-size: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            background-color: transparent;
+            cursor: pointer;
+            border-radius: 50%;
+            overflow: hidden;
+
+            img
+            {
+                object-fit: cover;
+            }
+        }
+    }
+
+    &__username
+    {
+        position: relative;
+        display: flex;
+        gap: .5rem;
+
+        &__input
+        {
+            width: 16ch;
+            font-size: 1.25rem;
+            // padding: .75rem;
+            // padding-right: 2.5rem;
+            background-color: transparent;
+            border: 0;
+            outline: 0;
+            border-bottom: 2px dotted darkgray;
+        }
+
+        
+    }
+
+    &__dice,&__save
+    {
+        font-size: 0;
+        cursor: pointer;
+        aspect-ratio: 1/1;
+        border: 0;
+        outline: 0;
+        background-color: transparent;
+
+        transition: transform 150ms $pop;
+
+        svg
+        {
+            font-size: 2rem;
+        }
+
+        &:hover,
+        &:focus
+        {
+            transform: scale(1.1);
+        }
+
+        &:active
+        {
+            transform: scale(0.95);
+        }
+    }
+
+    &__dice svg
+    {
+        color: #bd1f36;
+    }
+    &__save svg
+    {
+        color: green;
+    }
+}

@@ -1,0 +1,77 @@
+$red-card: #D90B04;
+$black-card: lighten(#333236, 10%);
+
+
+.userstatus
+{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: .25rem;
+    :first-child
+    {
+        margin-left: 0;
+    }
+
+    &__item
+    {
+        width: 2rem;
+        aspect-ratio: 1/1;
+        position: relative;
+
+        border-radius: 50%;
+        // overflow: hidden;
+
+        // background-color: red;
+
+
+        cursor: pointer;
+
+        display: grid;
+        place-items: center;
+
+        border: 2px solid darkgray;
+
+        // margin-left: -.75rem;
+
+        &__icon
+        {
+            font-size: 0;
+            span
+            {
+                font-size: 1rem;
+            }
+            img
+            {
+                border-radius: 50%;
+            }
+        }
+
+        &__tooltip
+        {
+            position: absolute;
+            white-space: nowrap;
+            font-size: 1rem;
+            left: 50%;
+            top: -2.25rem;
+            transform: translate(-50%, 0);
+            letter-spacing: 2px;
+
+            padding: .2rem .25rem;
+            border-radius: .25rem;
+            z-index: 50;
+
+            [data-color="black"] & {
+                background-color: $black-card;
+                box-shadow: 0px 0px .5rem darken($black-card, 5%);
+
+                color: #DDD;
+            }
+            [data-color="red"] & {
+                background-color: $red-card;
+                box-shadow: 0px 0px .5rem darken($red-card, 5%);
+                color: #DDD;
+            }
+        }
+    }
+}

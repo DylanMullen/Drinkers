@@ -1,0 +1,181 @@
+$bg-color: #8728cb;
+
+$pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+$vw-desktop: 1200px;
+
+
+
+.waterfall-lobby
+{
+    width: 100%;
+    padding: 0 18vw;
+    margin-top: 6rem;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 1rem;
+
+    @media (max-width: $vw-tablet)
+    {
+        padding: 0 1rem;
+        margin-top: 0;
+    }
+}
+
+.waterfall-info
+{
+    background-color: rgba($bg-color, .25);
+    // grid-row: 1 / span 3;
+
+    border-radius: .5rem;
+    box-shadow: inset 1px 0 1rem rgba(0, 0, 0, 0.25);
+
+    border: 2px solid rgba(darken($bg-color, 5%), .25);
+    // margin: 1rem 2.5rem !important;
+    // width: 5rem;
+    position: relative;
+
+    &__icon
+    {
+        font-size: 0;
+        background: linear-gradient(180deg, rgba(201, 110, 18, 1) 5%, rgba(223, 141, 3, 1) 21%, rgba(236, 157, 0, 1) 39%, rgba(246, 193, 1, 1) 59%, rgba(250, 233, 111, 1) 79%, rgba(255, 248, 151, 1) 100%);
+        padding: 1rem;
+        border-radius: 50%;
+        width: fit-content;
+        position: absolute;
+
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -60%);
+
+        box-shadow: 0px 1px 1rem black;
+
+        svg
+        {
+            font-size: 6rem;
+            color: white;
+        }
+    }
+
+}
+
+.waterfall-footer
+{
+    height: 10rem;
+    // background-color: yellow;
+    display: grid;
+    place-items: center;
+
+    &__banner
+    {
+        display: flex;
+        width: fit-content;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 2.5rem;
+
+        transition: transform 150ms ease-in-out;
+
+        outline: 0;
+
+        cursor: pointer;
+
+
+
+        &__text
+        {
+            font-size: 2.5rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+
+            color: white;
+
+            transition: letter-spacing 150ms ease-in-out, font-weight 150ms ease-in-out;
+
+            position: relative;
+
+
+            &::after
+            {
+                content: '';
+                display: block;
+                width: 0;
+                height: 5px;
+                background: linear-gradient(90deg, rgba(201, 110, 18, 1) 5%, rgba(223, 141, 3, 1) 21%, rgba(236, 157, 0, 1) 39%, rgba(246, 193, 1, 1) 59%, rgba(250, 233, 111, 1) 79%, rgba(255, 248, 151, 1) 100%);
+
+                position: absolute;
+                bottom: -2rem;
+
+                transition: width 150ms $pop;
+                border-radius: 500px;
+            }
+        }
+
+        &__btn
+        {
+            font-size: 0;
+
+            background-color: transparent;
+            padding: 1rem;
+            margin: 0;
+
+            outline: none;
+
+            border: 2px solid lightgray;
+            border-radius: 50%;
+
+            // margin-left: auto;
+
+            color: white;
+
+            cursor: pointer;
+
+            svg
+            {
+                font-size: 3rem;
+                color: white;
+
+                transition: color 500ms $pop;
+            }
+        }
+
+        &:hover,&:focus
+        {
+            transform: scale(1.12);
+
+            .waterfall-footer__banner__text
+            {
+                letter-spacing: 3px;
+                font-weight: 600;
+                &::after
+                {
+                    width: 100%;
+
+                }
+            }
+
+            .waterfall-footer__banner__btn svg
+            {
+                color: #ffe97f;
+            }
+
+            @media (max-width: $vw-tablet) {
+                transform: scale(1.05);
+            }
+        }
+        
+
+
+    }
+
+    @media (max-width: $vw-tablet) {
+        height: fit-content;
+    }
+}

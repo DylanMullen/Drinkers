@@ -1,0 +1,333 @@
+$controls-spacing: 13vw;
+$red-card: #D90B04;
+$black-card: lighten(#333236, 10%);
+
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+$vw-desktop: 1200px;
+
+.waterfall-toolbar
+{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+
+
+    gap: 1rem;
+
+    z-index: 5;
+    top: 1.5rem;
+
+    &--right
+    {
+        right: 1.5rem;
+    }
+
+    &--left
+    {
+        left: 1.5rem;
+    }
+
+
+    &__btn
+    {
+        font-size: 0;
+        width: fit-content;
+        height: fit-content;
+        aspect-ratio: 1 / 1;
+        text-align: center;
+        cursor: pointer;
+
+        border: 2px solid white;
+        border-radius: 50%;
+
+        padding: .5rem;
+
+        background-color: transparent;
+        color: white;
+        opacity: 0.5;
+
+        display: grid;
+        place-items: center;
+
+        transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+        margin-left: auto;
+
+        svg
+        {
+            font-size: 1.5rem;
+            margin: .25rem;
+        }
+
+        &:hover,
+        &:focus
+        {
+            opacity: 1;
+        }
+
+        &:active
+        {
+            transform: scale(0.95) !important;
+        }
+
+        .waterfall-toolbar--left &:hover,
+        .waterfall-toolbar--left &:focus
+        {
+            transform: translate(1rem, 0);
+        }
+
+        .waterfall-toolbar--right &:hover,
+        .waterfall-toolbar--right &:focus
+        {
+            transform: translate(-1rem, 0);
+        }
+    }
+
+    &__rules
+    {
+        position: relative;
+
+
+        transition: transform 150ms ease-in-out;
+
+        display: flex;
+
+        &__wrapper
+        {
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            transition: width 150ms ease-in-out, height 150ms ease-in-out;
+        }
+
+        &:hover,
+        &:focus-within,
+        &:focus-visible,
+        &--show
+        {
+            overflow: visible;
+            display: flex;
+            // transform: translate(-20vw, 0);
+        }
+
+        &:hover &__wrapper,
+        &:focus-within &__wrapper,
+        &--show &__wrapper
+        {
+            // padding-left: 1rem;
+            width: 100%;
+            height: 100%;
+        }
+
+        &:hover .waterfall-toolbar__btn,
+        &:focus-within .waterfall-toolbar__btn,
+        &:active .waterfall-toolbar__btn,
+        &--show .waterfall-toolbar__btn
+        {
+            transform: translate(-1rem, 0) !important;
+            opacity: 1;
+        }
+    }
+
+}
+
+.waterfall-help
+{
+    font-size: 0;
+    text-align: center;
+    padding: .5rem;
+    border-radius: 50%;
+
+    outline: none;
+    border: none;
+    text-align: center;
+
+    position: absolute;
+
+    right: 1.5rem;
+    top: 1.5rem;
+
+    cursor: pointer;
+    background-color: transparent;
+
+
+
+    opacity: 0.5;
+
+    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+
+    z-index: 5;
+
+    svg
+    {
+        font-size: 1.5rem;
+    }
+
+    &:hover,
+    &:focus
+    {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+.waterfall-game
+{
+    display: grid;
+    place-items: center;
+    height: 70%;
+    position: relative;
+    padding: 2rem 0;
+
+    &__card
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        gap: 5rem;
+
+        &__wrapper
+        {
+            position: relative;
+            width: 18rem;
+            z-index: 3;
+        }
+
+        @media (max-width: $vw-tablet)
+        {
+            display: grid;
+            grid-template-columns: repeat(2, 50%);
+            place-items: center;
+            width: 100%;
+
+            gap: 1rem;
+
+            >:nth-child(2)
+            {
+                grid-column: 1 / span 2;
+            }
+
+            >:first-child
+            {
+                grid-row: 2;
+                // align-self: center;
+            }
+
+        }
+
+    }
+
+    &__skip,
+    &__next
+    {
+        position: relative;
+        z-index: 1;
+
+        &:hover::before,
+        &:focus-within::before
+        {
+            width: 15rem;
+            opacity: 1;
+        }
+
+        @media (max-width: $vw-tablet)
+        {
+            &::before
+            {
+                display: none;
+            }
+        }
+    }
+
+
+    &__skip::before,
+    &__next::before
+    {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 15rem;
+        height: 2px;
+        // background-color: red;
+
+        border-bottom: 2px solid white;
+
+        top: calc(50% - 1px);
+        z-index: 0;
+
+        // opacity: 0.5;
+
+        width: 0%;
+
+        transition: width 150ms ease-in-out;
+
+        border-radius: 500px;
+
+        @media (max-width: $vw-tablet)
+        {
+            display: none;
+        }
+    }
+
+    &__skip::before
+    {
+        right: -15rem;
+    }
+
+    &__next::before
+    {
+        left: -15rem;
+    }
+
+
+
+}
+
+.waterfall-back
+{
+    background-color: transparent;
+    color: white;
+    outline: none;
+    border: none;
+    font-size: 0;
+
+    border-radius: 50%;
+    border: 2px solid white;
+    padding: .5rem;
+
+    position: absolute;
+    top: 1.25rem;
+    left: 1.25rem;
+
+    opacity: 0.5;
+
+    z-index: 5;
+
+    cursor: pointer;
+    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+
+    aspect-ratio: 1/1;
+
+    svg
+    {
+        font-size: 1.5rem;
+    }
+
+    &:hover,
+    &:focus
+    {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+.waterfall-footer
+{
+    // background-color: red;
+
+    width: 100%;
+    padding: 0 8vw;
+    padding-top: 1.5rem;
+}

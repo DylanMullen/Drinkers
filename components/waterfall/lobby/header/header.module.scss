@@ -1,0 +1,110 @@
+$icon-padding: .75rem;
+$icon-margin: calc($icon-padding - .25rem);
+$icon-shadow: rgba(250, 233, 111, 1);
+
+$pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+$vw-desktop: 1200px;
+
+
+.waterfall-header
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 1.5rem 0;
+    padding-top: 8rem;
+    gap: 3rem;
+
+    &__logo
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+
+        &:hover
+        {
+            .waterfall-header__title
+            {
+                letter-spacing: 5px;
+                font-weight: 600;
+
+                &::after
+                {
+                    width: 100%;
+                    transition-delay: 0ms;
+                }
+            }
+        }
+    }
+
+    &__icon
+    {
+        border-radius: 50%;
+        background: linear-gradient(180deg, rgba(201, 110, 18, 1) 5%, rgba(223, 141, 3, 1) 21%, rgba(236, 157, 0, 1) 39%, rgba(246, 193, 1, 1) 59%, rgba(250, 233, 111, 1) 79%, rgba(255, 248, 151, 1) 100%);
+        display: grid;
+        place-items: center;
+        box-shadow: 0 0 2rem .25rem $icon-shadow;
+        // margin: 3rem;
+        width: 11rem;
+        aspect-ratio: 1/1;
+
+        & span
+        {
+            border-radius: 50%;
+            padding: $icon-padding  !important;
+            margin: $icon-margin  !important;
+        }
+
+        @media (max-width: $vw-tablet) {
+            width: 20rem;
+            & span
+            {
+                padding: 2.5rem !important;
+            }
+        }
+    }
+
+    &__title
+    {
+        font-size: 5rem;
+        position: relative;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: lightgray;
+        transition: letter-spacing 150ms $pop, font-weight 150ms $pop;
+
+        &::after
+        {
+            content: "";
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: -.5rem;
+            width: 0;
+            height: 5px;
+            background: linear-gradient(90deg, rgba(201, 110, 18, 1) 5%, rgba(223, 141, 3, 1) 21%, rgba(236, 157, 0, 1) 39%, rgba(246, 193, 1, 1) 59%, rgba(250, 233, 111, 1) 79%, rgba(255, 248, 151, 1) 100%);
+
+            border-radius: 500px;
+
+
+            transition: width 150ms $pop;
+        }
+
+        @media (max-width: $vw-tablet) {
+            display: none;
+        }
+    }
+
+    @media (max-width: $vw-tablet) {
+        padding-top: 2.75rem;
+    }
+
+
+}

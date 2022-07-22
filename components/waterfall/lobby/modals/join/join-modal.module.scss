@@ -1,0 +1,71 @@
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+$vw-desktop: 1200px;
+
+.join-modal
+{
+    display: flex;
+    flex-direction: column;
+
+    // width: 25vw;
+
+    // padding: 1rem;
+
+    margin: 1rem;
+
+    &__header
+    {
+        display: flex;
+
+        padding-bottom: 1rem;
+        border-bottom: 2px solid gray;
+
+        gap: 1rem;
+
+        *:not(hr) {
+            margin: auto 0;
+        }
+        
+
+        @media (max-width: $vw-mobile) {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            gap: .5rem;
+            hr
+            {
+                display: none;
+            }
+        }
+    }
+
+    &__error
+    {
+        width: 85%;
+        margin: 0 auto;
+        padding: .5rem 1rem;
+
+        background-color: #e5383b;
+        
+        color: white;
+        text-align: center;
+        text-transform: capitalize;
+        letter-spacing: 2px;
+        font-weight: 500;
+
+        border: 2px solid #a4161a;
+        border-radius: .5rem;
+    }
+
+    &__form
+    {
+        padding-top: 2rem;
+
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+}

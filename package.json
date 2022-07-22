@@ -5,16 +5,36 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start -p 3000 -H 192.168.1.137",
+    "lint": "next lint",
+    "analyze": "cross-env ANALYZE=true next build",
+    "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
+    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.121.0",
+    "@next/bundle-analyzer": "^12.2.3",
+    "@reduxjs/toolkit": "^1.8.3",
+    "cookies-next": "^2.1.1",
+    "cross-env": "^7.0.3",
+    "discord-oauth2": "^2.10.0",
+    "framer-motion": "^6.3.16",
     "next": "12.1.6",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-icons": "^4.4.0",
+    "react-redux": "^8.0.2",
+    "redux": "^4.2.0",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
+    "@types/cookie": "^0.5.1",
+    "@types/cookies": "^0.7.7",
+    "@types/node": "^18.0.0",
+    "@types/react": "^18.0.14",
+    "@types/uuid4": "^2.0.0",
     "eslint": "8.18.0",
-    "eslint-config-next": "12.1.6"
+    "eslint-config-next": "12.1.6",
+    "sass": "^1.53.0"
   }
 }
