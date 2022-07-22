@@ -168,7 +168,7 @@ function getFaceValue(face: number): string
 
 async function requestCardValue(gameID: string, face: number, suite: number, modifier: boolean)
 {
-    let response: any = await fetch(process.env.NEXT_PUBLIC_API_HOST + "/waterfall/game/" + gameID + "/card", {
+    let response: any = await fetch("https://api.drinkers.beer/waterfall/game/" + gameID + "/card", {
         method: "POST",
         body: JSON.stringify({
             face: face,

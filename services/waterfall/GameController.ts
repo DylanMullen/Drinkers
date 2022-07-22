@@ -71,7 +71,7 @@ export async function joinWaterfallGame(joinRequest: WaterfallJoinRequest): Prom
 
 async function sendCreateRequest(settings: WaterfallGameSettings)
 {
-    return await fetch(process.env.NEXT_PUBLIC_API_HOST + "/waterfall/create", {
+    return await fetch("https://api.drinkers.beer/waterfall/create", {
         method: "POST",
         body: JSON.stringify({
             owner: {
@@ -87,7 +87,7 @@ async function sendCreateRequest(settings: WaterfallGameSettings)
 
 async function sendJoinRequest(request: WaterfallJoinRequest)
 {
-    return await fetch(process.env.API_URL + "/waterfall/join", {
+    return await fetch( "https://api.drinkers.beer/waterfall/join", {
         method: "POST",
         body: JSON.stringify(request)
     }).then(res => res.json())
