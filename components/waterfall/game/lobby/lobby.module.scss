@@ -40,7 +40,7 @@
 
         &>*
         {
-            position: absolute;
+            position: absolute !important;
             width: $width;
             top: 0;
             left: 0;

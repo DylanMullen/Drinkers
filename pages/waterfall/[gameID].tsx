@@ -21,11 +21,11 @@ import { GetServerSidePropsContext } from 'next';
 import RuleList from 'components/waterfall/game/rule-list';
 import { getUser, User } from 'utils/UserUtil';
 import HelpModal from 'components/waterfall/game/modals/help-modal';
-import StartMenu from 'components/waterfall/game/start-menu';
 import WildcardModal from 'components/waterfall/game/modals/wildcard-modal';
 import Backdrop from 'components/shared/backdrop/Backdrop';
 import { Error } from 'components/waterfall/lobby/modals/join/JoinModal';
 import Lobby from 'components/waterfall/game/lobby';
+import { domAnimation, LazyMotion } from 'framer-motion';
 
 type Props = {
     gameID: string
@@ -236,6 +236,7 @@ function getWaterfallCard(card: WaterfallCard, hiddenBack: boolean, flipCallback
             face: card.face,
             suite: card.suite,
             hidden: hiddenBack,
+            cardsLeft: card.cardsLeft,
             cardOwner: cardOwner
         }}
         ruleDetails={{ title: card.details.title, description: card.details.description }}
@@ -264,9 +265,11 @@ function ModalWrapper()
         <>
             {
                 modalState?.show &&
-                <Backdrop closeCallback={getCurrentGame().closeModal}>
-                    {modal}
-                </Backdrop>
+                <LazyMotion features={domAnimation}>
+                    <Backdrop closeCallback={getCurrentGame().closeModal}>
+                        {modal}
+                    </Backdrop>
+                </LazyMotion>
             }
         </>
     )

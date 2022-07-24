@@ -5,10 +5,7 @@ import styles from 'styles/pages/waterfall/home.module.scss';
 import Header from 'components/waterfall/lobby/header';
 import Menu from 'components/waterfall/lobby/menu';
 
-import { IoBeer, IoBeerOutline, IoGameController as GameController } from 'react-icons/io5';
-import CreateModal from 'components/waterfall/lobby/modals/create';
-import ProfileModal from 'components/waterfall/lobby/modals/profile/ProfileModal';
-import JoinModal from 'components/waterfall/lobby/modals/join';
+import { IoBeer } from 'react-icons/io5';
 import LobbyModalWrapper from 'components/waterfall/lobby/modals';
 
 type ModalWrapperProps = {
@@ -20,21 +17,6 @@ function WaterfallHome()
 {
 
     const [modal, setModalId] = useState(-1);
-
-    useEffect(() =>
-    {
-
-        async function test()
-        {
-            const now = new Date().getTime()
-            await fetch("https://api.drinkers.beer/");
-            console.log(new Date().getTime() - now)
-        }
-
-        test()
-
-
-    }, [])
 
     return (
         <>

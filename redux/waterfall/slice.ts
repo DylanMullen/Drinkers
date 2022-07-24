@@ -155,6 +155,24 @@ export const waterfallSlice = createSlice({
         thumbMaster: (state, action: PayloadAction<string>) =>
         {
             state.game.mechanics.thumbMaster = action.payload
+        }, updateSetting: (state, action: PayloadAction<{ setting: string, value: any }>) =>
+        {
+            switch (action.payload.setting)
+            {
+                case "maxPlayer": {
+                    state.game.players.max = action.payload.value
+                    return;
+                }
+                case "enableActions": {
+                    state.game.mechanics.actions = action.payload.value
+                    return;
+                }
+                case "hiddenBack": {
+                    state.game.mechanics.hiddenBack = action.payload.value
+                    return;
+                }
+
+            }
         }
     }
 })
@@ -166,7 +184,8 @@ export const
         removePlayer, nextPlayer,
         nextCard, newDate, newRule,
         removeRule, updateModal, openModal,
-        thumbMaster, updateNextTurnButton, kicked
+        thumbMaster, updateNextTurnButton, kicked,
+        updateSetting
     } = waterfallSlice.actions;
 
 export const selectLobby = (state: RootState) => state.waterfall.lobby
@@ -175,7 +194,7 @@ export const selectCard = (state: RootState) => state.waterfall.card;
 
 export const selectGameName = (state: RootState) => state.waterfall.game.gameName
 export const selectStarted = (state: RootState) => state.waterfall.game.started
-export const selectKicked = (state:RootState) => state.waterfall.game.kicked
+export const selectKicked = (state: RootState) => state.waterfall.game.kicked
 
 export const selectPlayers = (state: RootState) => state.waterfall.game.players;
 export const selectMechanics = (state: RootState) => state.waterfall.game.mechanics;

@@ -11,6 +11,7 @@ type WaterfallGameSettings = {
         gameName: string,
         hiddenBack: boolean
         maxPlayers: number
+        actionsEnabled: boolean
     }
 }
 

@@ -67,10 +67,6 @@ function ProfileModal({ close }: Props)
                             <div className={styles["profile-modal__signin"]}>
                                 <ProfileEditor />
                                 <div className={styles["profile-modal__signup"]}>
-                                    {/* <form action="" className={styles["profile-modal__signup__form"]}>
-                                        <TextInput label='Email' />
-                                        <TextInput label='Password' password={true} />
-                                    </form> */}
                                     <div className={styles["profile-modal__signup__footer"]}>
                                         <div className={styles["profile-modal__providers"]}>
                                             <hr className={styles["profile-modal__providers__divider"]} />
@@ -78,16 +74,6 @@ function ProfileModal({ close }: Props)
                                             <a className={styles["profile-modal__provider"]} href={DISCORDURL} target={"_blank"} rel={"noreferrer"}><SiDiscord /></a>
                                             <hr className={styles["profile-modal__providers__divider"]} />
                                         </div>
-                                        {/* <InputGroup columns={2}>
-                                            <button
-                                                className={styles["profile-modal__btn"] + " " + styles["profile-modal__btn--register"]}>
-                                                Register
-                                            </button>
-                                            <button
-                                                className={styles["profile-modal__btn"] + " " + styles["profile-modal__btn--login"]}>
-                                                Login
-                                            </button>
-                                        </InputGroup> */}
 
                                     </div>
                                 </div>

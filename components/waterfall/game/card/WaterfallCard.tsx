@@ -22,6 +22,7 @@ export type CardDetails = {
     face: number,
     suite: number,
     hidden: boolean,
+    cardsLeft?: number
     cardOwner?: CardOwner | undefined
 }
 
@@ -162,6 +163,10 @@ function WaterfallPlayingCard({ cardDetails, ruleDetails, flipSettings = { click
                         {
                             cardDetails.cardOwner !== undefined &&
                             <footer className={styles["waterfall-card__footer"]}>
+                                {
+                                    cardDetails.cardsLeft &&
+                                    <span className={styles["waterfall-card__cardsleft"]}>{cardDetails.cardsLeft+1}</span>
+                                }
                                 {
                                     cardDetails.cardOwner &&
                                     <div className={styles["waterfall-card__user"]}>

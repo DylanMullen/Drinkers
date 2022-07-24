@@ -7,6 +7,7 @@ import { uuid } from 'uuidv4';
 import OAuth from 'discord-oauth2';
 
 import { setCookie } from 'cookies-next';
+import { API_URL } from "settings/Config";
 
 interface Discord
 {
@@ -34,17 +35,17 @@ type DiscordUser = {
 }
 
 const discord = new OAuth();
-const dynamo = new DynamoDBClient({ region: "eu-west-2"});
+const dynamo = new DynamoDBClient({ region: "eu-west-2" });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse)
 {
   if (req.method === "GET" && Object.keys(req.query).length !== 0 && req.query.code !== undefined)
   {
     let userDetails = await loginWithDiscord(req.query.code as string);
-    if (userDetails === undefined)
+    if (userDetails === undefined || userDetails.error !== undefined || !userDetails.auth)
     {
       res.status(403).json({
-        error: "Player not found and cannot be created."
+        error: userDetails?.error ? userDetails.error : "Player not found and cannot be created."
       })
       return;
     }
@@ -103,7 +104,7 @@ async function loginWithDiscord(code: string)
       };
     } catch (error)
     {
-      return undefined;
+      return { error: error };
     }
   }
   return {
@@ -153,7 +154,7 @@ async function authDiscord(code: string): Promise<DiscordAuth>
     code: code,
     scope: "identify",
     grantType: "authorization_code",
-    redirectUri:  "http://drinkers.beer/api/login"
+    redirectUri: API_URL + "/api/login"
   })
   return {
     accessToken: response.access_token,

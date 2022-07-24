@@ -2,7 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'redux/store';
-import { removePlayer, selectGame } from 'redux/waterfall/slice';
+import { removePlayer, selectGame, selectLobby } from 'redux/waterfall/slice';
 import UserAdminBar from './admin-bar/UserAdminBar';
 import UserStatusBar from './status-bar/UserStatusBar';
 
@@ -36,22 +36,24 @@ type UserDetails = {
 function User({ user, settings: { dummy, lobby } = { dummy: false, lobby: { ready: false } } }: Props)
 {
     const [isHovered, setHovered] = useState(false);
-    const [ready, setReady] = useState(lobby?.ready ?? false);
-    let dispatch = useAppDispatch();
 
     let { ownerId, players } = useAppSelector(selectGame);
-
+    
     let clientCookie = getCookie("user");
     let clientUUID = clientCookie !== undefined ? JSON.parse(clientCookie as string).uuid : ""
-
-
+    
+    
     let isNext = players.next === user.uuid;
-
+    
     const kickUser = (e: React.MouseEvent<HTMLButtonElement>) =>
     {
         getCurrentGame().sendKickRequest(user.uuid);
     }
-
+    
+    const readyUp = (e:React.MouseEvent<HTMLButtonElement>)=>{
+        e.currentTarget.blur()
+        getCurrentGame().sendReadyRequest(clientUUID);
+    }
 
     return (
         <li className={`${styles["user__wrapper"]} ${isNext && !dummy ? styles["user--next"] : ""}`}>
@@ -79,9 +81,11 @@ function User({ user, settings: { dummy, lobby } = { dummy: false, lobby: { read
                 <span className={styles["user__name"]}>{user.username}</span>
                 {
                     lobby &&
-                    <button className={styles["user__ready"]} data-ready={ready} onClick={(e: React.MouseEvent<HTMLButtonElement>) => { e.currentTarget.blur(); setReady(prev => !prev) }}>
+                    <button className={styles["user__ready"]} data-ready={lobby.ready}
+                        disabled={user.uuid !== clientUUID}
+                        onClick={readyUp}>
                         {
-                            ready ?
+                            lobby.ready ?
                                 <IoMdCheckmarkCircleOutline /> : <CloseIcon />
                         }
                     </button>

@@ -1,26 +1,35 @@
-import React, { useId, useState } from 'react'
+import React, { useEffect, useId, useState } from 'react'
 
 import styles from './switchinput.module.scss'
 
 type Props = {
     label: string,
+    disabled?: boolean,
+    defaultValue?:boolean,
     changeCallback?: Function
 }
 
-function SwitchInput({ label, changeCallback = () => { } }: Props)
+function SwitchInput({ label, disabled = false, defaultValue = true, changeCallback = () => { } }: Props)
 {
 
-    const [isChecked, setChecked] = useState(false);
+    const [isChecked, setChecked] = useState(defaultValue);
     const id = useId();
 
     const onChange = () =>
     {
+        if (disabled)
+            return;
+
         setChecked(prev =>
         {
             changeCallback(!prev)
             return !prev
         })
     };
+
+    useEffect(()=>{
+        setChecked(defaultValue);
+    },[defaultValue])
 
     return (
         <div className={styles["input-switch"]}>

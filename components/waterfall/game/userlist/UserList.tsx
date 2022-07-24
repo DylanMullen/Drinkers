@@ -1,11 +1,9 @@
 import React, { useId } from 'react'
 import { useAppSelector } from 'redux/store';
-import { selectPlayers } from 'redux/waterfall/slice';
+import { selectLobby, selectPlayers } from 'redux/waterfall/slice';
 import User from '../user/User';
 
 import styles from './userlist.module.scss';
-
-import { AiOutlinePlusCircle } from 'react-icons/ai'
 
 type Props = {
     lobby?: boolean
@@ -19,12 +17,16 @@ function UserList({ lobby = false }: Props)
     const id = useId;
 
     const players = useAppSelector(selectPlayers).users;
+    const readyPlayerList = useAppSelector(selectLobby);
 
     const playerList: React.ReactNode[] = [];
+
 
     for (let x = 0; x < Object.keys(players).length; x++)
     {
         let player = players[x];
+        let ready = readyPlayerList?.readyPlayers.includes(player.uuid);
+
         playerList.push(
             <User key={id + "-" + x}
                 user={{
@@ -32,7 +34,7 @@ function UserList({ lobby = false }: Props)
                     username: player.username,
                     avatar: player.avatar
                 }}
-                settings={{ dummy: lobby, lobby: { ready: true } }}
+                settings={{ dummy: lobby, lobby: lobby ? { ready: ready ?? false } : undefined }}
             />
         )
     }

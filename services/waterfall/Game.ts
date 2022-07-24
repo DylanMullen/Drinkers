@@ -1,7 +1,7 @@
 import { getCookie } from "cookies-next";
 import React from "react";
 import store from "redux/store";
-import { getWaterfallPlayerByUUID, getWaterfallPlayerIndex, getWaterfallPlayers, kicked, leave, lobby, newDate, newPlayer, newRule, nextCard, nextPlayer, ready, removePlayer, start, thumbMaster, updateModal } from "redux/waterfall/slice";
+import { getWaterfallPlayerByUUID, getWaterfallPlayerIndex, getWaterfallPlayers, kicked, leave, lobby, newDate, newPlayer, newRule, nextCard, nextPlayer, ready, removePlayer, start, thumbMaster, updateModal, updateSetting } from "redux/waterfall/slice";
 import { PayloadNextUser, WaterfallCard, WaterfallDate, WaterfallModal, WaterfallPlayer, WaterfallRule } from "redux/waterfall/types";
 import WaterfallSocket from "./WaterfallSocket";
 
@@ -42,6 +42,10 @@ export default class Game
     {
         if (uuid === "")
             return
+
+        if (store.getState().waterfall.lobby?.readyPlayers && store.getState().waterfall.lobby?.readyPlayers.includes(uuid))
+            return;
+            
         this.socket.send(JSON.stringify({
             action: 20,
             senderUUID: this.cookie.uuid,
@@ -55,6 +59,17 @@ export default class Game
             action: 21,
             senderUUID: this.cookie.uuid
         }))
+    }
+
+    sendUpdateSetting(setting: string, value: any)
+    {
+        let request = {
+            action: 23,
+            senderUUID: this.cookie.uuid,
+            setting: setting,
+            value: value
+        }
+        this.socket.send(JSON.stringify(request));
     }
 
     sendKickRequest(playerUUID: string)
@@ -154,7 +169,7 @@ export default class Game
     handleRemovedPlayer(uuid: string, players: PayloadNextUser)
     {
         if (uuid === this.cookie.uuid)
-        {   
+        {
             console.log("herer")
             this.socket.close();
             store.dispatch(kicked());
@@ -203,10 +218,15 @@ export default class Game
 
     handleWildcard(card: WaterfallCard)
     {
-        store.dispatch(nextCard(card))
+        store.dispatch(nextCard({ ...card, cardsLeft: store.getState().waterfall.card.cardsLeft }))
 
         if (card.details.action)
             this.handleActions(card.creatorUUID, card.details.action)
+    }
+
+    handleUpdateSetting(setting: string, value: any)
+    {
+        store.dispatch(updateSetting({ setting, value }))
     }
 
 

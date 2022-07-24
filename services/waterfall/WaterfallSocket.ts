@@ -98,6 +98,10 @@ export default class WaterfallSocket
                 this.game.handleEnd();
                 break;
             }
+            case 23: {
+                this.game.handleUpdateSetting(json.setting, json.value)
+                break;
+            }
         }
     }
 

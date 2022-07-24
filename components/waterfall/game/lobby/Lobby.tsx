@@ -2,12 +2,13 @@ import SubmitButton from 'components/shared/input/buttons/submit';
 import RangeInput from 'components/shared/input/range';
 import SwitchInput from 'components/shared/input/switch';
 import TextInput from 'components/shared/input/text';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppSelector } from 'redux/store';
-import { getWaterfallPlayerByUUID, selectGame } from 'redux/waterfall/slice';
+import { getWaterfallPlayerByUUID, selectGame, selectMechanics, selectPlayers } from 'redux/waterfall/slice';
 import { getCurrentGame } from 'services/waterfall/GameController';
+import { getUser, User } from 'utils/UserUtil';
 import WaterfallCard from '../card/WaterfallCard';
-import User from '../user';
+import UserCard from '../user';
 import UserList from '../userlist';
 
 import styles from './lobby.module.scss';
@@ -60,14 +61,28 @@ function CardStack()
 
 function Settings()
 {
+    const [user, setUser] = useState<User>()
+
     const game = useAppSelector(selectGame);
     const gameOwner = getWaterfallPlayerByUUID(game.ownerId);
+    const mechanics = useAppSelector(selectMechanics);
+    const players = useAppSelector(selectPlayers);
     const minPlayers = Object.keys(game.players.users).length;
 
     const startGame = () =>
     {
         getCurrentGame().sendStartRequest();
     }
+
+    const updateSetting = (value: any, setting: string) =>
+    {
+        console.log("updating")
+        getCurrentGame().sendUpdateSetting(setting, value);
+    }
+
+    useEffect(() => { setUser(getUser()) }, [])
+
+    const disabled = (user?.uuid ?? "") !== game.ownerId
 
     return (
         <section className={styles["waterfall-lobby__settings"]}>
@@ -79,7 +94,7 @@ function Settings()
                     <div className={styles["waterfall-lobby__settings__owner"]}>
                         <span className={styles["waterfall-lobby__settings__subtitle"]}>Owner</span>
                         <hr className={styles["waterfall-lobby__settings__divider"]} />
-                        <User
+                        <UserCard
                             user={{ username: gameOwner?.username ?? "Guest", avatar: gameOwner?.avatar ?? "", uuid: gameOwner?.uuid ?? "" }}
                             settings={{ dummy: true }}
                         />
@@ -91,13 +106,25 @@ function Settings()
                     </div>
                     <hr className={styles["waterfall-lobby__settings__divider"]} />
                     <div className={styles["waterfall-lobby__settings__row"]}>
-                        <SwitchInput label='Hidden?' />
-                        <SwitchInput label='Enable Actions?' />
-                        <SwitchInput label='Random Order?' />
+                        <SwitchInput
+                            label='Hidden?'
+                            defaultValue={mechanics.hiddenBack}
+                            disabled={disabled}
+                            changeCallback={(e: boolean) => { updateSetting(e, "hiddenBack") }} />
+                        <SwitchInput
+                            label='Enable Actions?'
+                            defaultValue={mechanics.actions}
+                            disabled={disabled}
+
+                            changeCallback={(e: boolean) => { updateSetting(e, "enableActions") }} />
+                        {/* <SwitchInput label='Random Order?' defaultValue={true} changeCallback={(e:boolean)=>{updateSetting(e, "hiddenBack")}}/> */}
                     </div>
 
                     <div className={styles["waterfall-lobby__settings__row"]}>
-                        <RangeInput label='%value Players' min={minPlayers} max={8} defValue={8} />
+                        <RangeInput 
+                        label='%value Players' min={minPlayers} max={8} defValue={players.max} 
+                        disabled={disabled}
+                        changeCallback={(e: string) => { updateSetting(e, "maxPlayer") }} />
                     </div>
                 </div>
             </div>
