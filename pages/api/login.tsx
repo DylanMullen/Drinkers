@@ -146,15 +146,13 @@ async function getDiscord(code: string): Promise<Discord | undefined>
 
 async function authDiscord(code: string): Promise<DiscordAuth>
 {
-
-
   let response = await discord.tokenRequest({
     clientId: "852274286017249330",
     clientSecret: "chrso7QY82dIOnrt2XcywvrqDuiTyFTN",
     code: code,
     scope: "identify",
     grantType: "authorization_code",
-    redirectUri: API_URL + "/api/login"
+    redirectUri: API_URL.replace("api.", "") + "/api/login"
   })
   return {
     accessToken: response.access_token,
