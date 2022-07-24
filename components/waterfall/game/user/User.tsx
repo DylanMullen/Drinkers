@@ -64,7 +64,7 @@ function User({ user, dummy = false }: Props)
                     onMouseLeave={() => setHovered(prev => !prev)}
                 >
                     {
-                        isHovered && clientUUID === ownerId && user.uuid !== clientUUID && !dummy &&
+                        isHovered && clientUUID === ownerId && user.uuid !== clientUUID &&
                         < button className={styles["user__admin"]} onClick={kickUser}><IoClose /></button>
                     }
                     <Image src={user.avatar} width="100%" height="100%" alt={`Avatar of ${user.username}`}/>

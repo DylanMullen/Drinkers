@@ -47,7 +47,6 @@ export default class WaterfallSocket
 
     send(data: string)
     {
-        // if (!this.open) return;
 
         this.socket.send(data)
     }
