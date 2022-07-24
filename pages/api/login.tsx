@@ -41,31 +41,34 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 {
   if (req.method === "GET" && Object.keys(req.query).length !== 0 && req.query.code !== undefined)
   {
-    let userDetails = await loginWithDiscord(req.query.code as string);
-    if (userDetails === undefined || userDetails.error !== undefined || !userDetails.auth)
+    try
     {
-      res.status(403).json({
-        error: userDetails?.error ? userDetails.error : "Player not found and cannot be created."
+      let userDetails = await loginWithDiscord(req.query.code as string);
+      if (userDetails === undefined)
+      {
+        res.status(403).json({
+          error: "Player not found and cannot be created."
+        })
+        return;
+      }
+
+      let date = new Date(userDetails.auth.expires * 1000);
+
+      setCookie("user", userDetails, {
+        req,
+        res,
+        expires: date
+      })
+
+      res.redirect("/");
+      return;
+    } catch (error)
+    {
+      res.status(500).json({
+        error: error
       })
       return;
     }
-
-    // const cookie = new Cookies(req, res)
-
-    let date = new Date(userDetails.auth.expires * 1000);
-
-    // cookie.set('user', JSON.stringify(userDetails), {
-    //   expires: date
-    // })
-
-    setCookie("user", userDetails, {
-      req,
-      res,
-      expires: date
-    })
-
-    res.redirect("/");
-    return;
   }
   else if (req.method === "POST")
   {
@@ -81,31 +84,23 @@ async function loginWithDiscord(code: string)
   const discordDetails = await getDiscord(code);
 
   if (discordDetails === undefined)
-  {
     return;
-  }
 
   const userDetails = await checkDatabase(discordDetails);
 
   if (userDetails === undefined)
   {
-    try
-    {
-      let response = await registerDiscordAccount(discordDetails)
-      return {
-        uuid: response.uuid,
-        discordId: response.details.user.id,
-        username: response.details.user.username,
-        avatar: response.details.user.avatar,
-        auth: {
-          accessToken: response.details.auth.accessToken,
-          expires: response.details.auth.expires
-        }
-      };
-    } catch (error)
-    {
-      return { error: error };
-    }
+    let response = await registerDiscordAccount(discordDetails)
+    return {
+      uuid: response.uuid,
+      discordId: response.details.user.id,
+      username: response.details.user.username,
+      avatar: response.details.user.avatar,
+      auth: {
+        accessToken: response.details.auth.accessToken,
+        expires: response.details.auth.expires
+      }
+    };
   }
   return {
     uuid: userDetails.uuid,
@@ -188,7 +183,6 @@ async function checkDatabase(details: Discord | Homebrew)
 
     if (awsResponse.Items?.length === 0)
     {
-
       console.log(awsResponse.Items?.length)
       return undefined;
 
@@ -233,7 +227,7 @@ async function registerDiscordAccount(discordDetails: Discord)
   }
   await dynamo.send(new PutItemCommand(params))
   return {
-    uuid: uuid,
+    uuid: userUUID,
     details: discordDetails
   }
 }
