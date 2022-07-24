@@ -1,0 +1,141 @@
+.waterfall-lobby
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &__content
+    {
+        height: 75%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5rem;
+        margin: 0 7rem;
+    }
+
+    &__settings
+    {
+        padding: 1rem;
+        // height: 75%;
+        width: 50%;
+        // flex-grow: 1;
+        // background-color: white;
+    }
+
+    &__footer
+    {
+        flex-grow: 1;
+        // background-color: red;
+    }
+
+    &__cardstack
+    {
+        position: relative;
+        $width: 18rem;
+        width: $width;
+        height: calc($width * 1.4);
+        scale: 0.85;
+
+        &>*
+        {
+            position: absolute !important;
+            width: $width;
+            top: 0;
+            left: 0;
+            box-shadow: 0px 0px 2rem rgba(0, 0, 0, 0.75);
+
+            &:first-child
+            {
+                rotate: 50deg;
+            }
+
+            &:nth-child(2)
+            {
+                rotate: -30deg;
+            }
+        }
+
+    }
+}
+
+.waterfall-lobby__settings
+{
+    color: white;
+
+    &__title
+    {
+        text-align: center;
+        font-weight: 500;
+        font-size: 2.5rem;
+        letter-spacing: 5px;
+        // margin-bottom: 1rem;
+    }
+
+    &__subtitle
+    {
+        font-weight: 400;
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    &__body
+    {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    &__row
+    {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        width: 100% ;
+        flex-wrap: wrap;
+        &--vertical
+        {
+            flex-direction: column;
+        }
+    }
+
+    &__divider
+    {
+        flex-grow: 1;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border: 0;
+
+        height: 4px;
+        background: linear-gradient(90deg, rgba(201, 110, 18, 1) 5%, rgba(223, 141, 3, 1) 21%, rgba(236, 157, 0, 1) 39%, rgba(246, 193, 1, 1) 59%, rgba(250, 233, 111, 1) 79%, rgba(255, 248, 151, 1) 100%);
+        border-radius: 500px;
+
+    }
+
+    &__owner
+    {
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    &__options
+    {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3,auto);
+        place-items: center;
+        gap:1.5rem;
+    }
+
+    &__footer
+    {
+        margin-top: auto;
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 2rem;
+    }
+}

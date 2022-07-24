@@ -22,6 +22,7 @@ export type CardDetails = {
     face: number,
     suite: number,
     hidden: boolean,
+    cardsLeft?: number
     cardOwner?: CardOwner | undefined
 }
 
@@ -70,7 +71,9 @@ export const Suites: any = {
 function WaterfallPlayingCard({ cardDetails, ruleDetails, flipSettings = { clickable: true, callback: () => { } } }: Props)
 {
 
-    const [isFlipped, setFlipped] = useState(false);
+    const [isFlipped, setFlipped] = useState(
+        (flipSettings.onCreation?.flip && flipSettings.onCreation.delay === 0) ?? false
+    );
     const [isHidden, setHidden] = useState(flipSettings.onUpdate?.flip ?? false);
 
     const pips: React.ReactNode[] = []
@@ -116,14 +119,14 @@ function WaterfallPlayingCard({ cardDetails, ruleDetails, flipSettings = { click
             }, flipSettings.onUpdate.delay)
         }
 
-    },[cardDetails])
+    }, [cardDetails])
 
 
     useEffect(() =>
     {
         if (!flipSettings.onCreation)
             return;
-        if (flipSettings.onCreation.flip)
+        if (flipSettings.onCreation.flip && !isFlipped)
             setTimeout(() =>
             {
                 flip(true)
@@ -160,6 +163,10 @@ function WaterfallPlayingCard({ cardDetails, ruleDetails, flipSettings = { click
                         {
                             cardDetails.cardOwner !== undefined &&
                             <footer className={styles["waterfall-card__footer"]}>
+                                {
+                                    cardDetails.cardsLeft &&
+                                    <span className={styles["waterfall-card__cardsleft"]}>{cardDetails.cardsLeft+1}</span>
+                                }
                                 {
                                     cardDetails.cardOwner &&
                                     <div className={styles["waterfall-card__user"]}>

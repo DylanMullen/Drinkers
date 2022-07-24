@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useId, useState } from 'react'
 
 import styles from './textinput.module.scss';
 
@@ -12,6 +12,7 @@ type Props = {
 function TextInput({ retriever, label, password = false, placeholder = "" }: Props)
 {
     const [value, setValue] = useState(placeholder);
+    const id = useId();
 
     const textChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     {
@@ -26,8 +27,8 @@ function TextInput({ retriever, label, password = false, placeholder = "" }: Pro
 
     return (
         <div className={styles["input-text"]}>
-            <label className={styles["input-text__label"]}>{label}</label>
-            <input className={styles["input-text__input"]} type={password ? "password" : "text"}
+            <label htmlFor={`input-${id}`} className={styles["input-text__label"]}>{label}</label>
+            <input id={`input-${id}`} className={styles["input-text__input"]} type={password ? "password" : "text"}
                 value={value} placeholder={placeholder} onChange={textChange} />
         </div>
     )

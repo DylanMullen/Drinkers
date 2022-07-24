@@ -16,7 +16,8 @@ function SubmitButton({ clickCallback = () => { }, textColor = "black", text = "
 
     return (
         <button className={styles["btn-submit"]} onClick={click}
-            style={{ color: textColor }}>
+            style={{ color: textColor }}
+            aria-label="Submit Button">
             {text}
             <span className={styles["btn-submit__icon"]}>
                 <IoMdLogIn />

@@ -47,7 +47,7 @@ function ProfileEditor({ }: Props)
         <div className={styles["profile-editor"]}>
             <div className={styles["profile-editor__avatar"]}>
                 <div className={styles["profile-editor__avatar__selected"]}>
-                    <Image src={"https://ca.slack-edge.com/T0266FRGM-U011PLSSMA9-g7e8a6705c42-512"} alt={`Selected Avatar`} width="100%" height={"100%"} />
+                    <Image priority src={"https://ca.slack-edge.com/T0266FRGM-U011PLSSMA9-g7e8a6705c42-512"} alt={`Selected Avatar`} width="100%" height={"100%"} />
 
                 </div>
                 <div className={styles["profile-editor__avatar__options"]}>
@@ -79,7 +79,7 @@ function ProfileAvatar({ url, callback }: ProfileAvatarProps)
 
     return (
         <button className={styles["profile-editor__avatar__option"]} onClick={click}>
-            <Image src={url} width={"100%"} height={"100%"} alt={`Possible Avatar Selection`}/>
+            <Image src={url} priority width={"100%"} height={"100%"} alt={`Possible Avatar Selection`}/>
         </button>
     )
 }

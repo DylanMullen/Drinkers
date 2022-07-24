@@ -5,6 +5,7 @@ import { CgDetailsLess } from 'react-icons/cg'
 import { useSelector } from 'react-redux'
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import { selectGame, updateModal } from 'redux/waterfall/slice'
+import { API_URL } from 'settings/Config'
 import WaterfallPlayingCard, { CardDetails, RuleDetails } from '../../card/WaterfallCard'
 
 import styles from './help-modal.module.scss';
@@ -168,7 +169,7 @@ function getFaceValue(face: number): string
 
 async function requestCardValue(gameID: string, face: number, suite: number, modifier: boolean)
 {
-    let response: any = await fetch("https://api.drinkers.beer/waterfall/game/" + gameID + "/card", {
+    let response: any = await fetch(API_URL + "/waterfall/game/" + gameID + "/card", {
         method: "POST",
         body: JSON.stringify({
             face: face,

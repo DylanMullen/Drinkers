@@ -172,14 +172,27 @@ $red-card--shadow: #E67470;
 
         padding: 0 .5rem;
 
-        justify-content: flex-end;
+        // justify-content: flex-;
     }
+
+    &__cardsleft
+    {
+        padding: .5rem;
+        border-radius: 50%;
+        aspect-ratio: 1/1;
+        line-height: 1rem;
+        text-align: center;
+        border: 2px solid currentColor;
+    }
+
 
     &__user
     {
         display: flex;
         align-items: center;
         gap: .5rem;
+
+        margin-left: auto;
 
         &__image
         {
@@ -326,6 +339,8 @@ $red-card--shadow: #E67470;
     &__description
     {
         color: black;
+        white-space: pre-wrap;
+        text-align: center;
     }
 }
 

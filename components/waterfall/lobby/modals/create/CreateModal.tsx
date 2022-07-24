@@ -44,22 +44,22 @@ function CreateModal({ close }: Props)
 
     const submit = async () =>
     {
-        let uuid = await createWaterfallGame({
-            owner: {
-                uuid: cookieJSON.uuid,
-                username: cookieJSON.username,
-                avatar: cookieJSON.avatar
-            },
-            settings: {
-                gameName: gameName.length === 0 ? "Waterfall" : gameName,
-                hiddenBack,
-                maxPlayers,
-            }
-        })
+        // let uuid = await createWaterfallGame({
+        //     owner: {
+        //         uuid: cookieJSON.uuid,
+        //         username: cookieJSON.username,
+        //         avatar: cookieJSON.avatar
+        //     },
+        //     settings: {
+        //         gameName: gameName.length === 0 ? "Waterfall" : gameName,
+        //         hiddenBack,
+        //         maxPlayers,
+        //     }
+        // })
         close(-1)
-        router.push("/waterfall/" + uuid, "", {
-            shallow: true
-        })
+        // router.push("/waterfall/" + uuid, "", {
+        //     shallow: true
+        // })
     }
 
     useEffect(() =>

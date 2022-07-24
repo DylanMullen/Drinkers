@@ -1,7 +1,8 @@
 import { Error } from "components/waterfall/lobby/modals/join/JoinModal";
 import store from "redux/store";
 import { join } from "redux/waterfall/slice";
-import WaterfallState, { WaterfallCard, WaterfallGame, WaterfallPlayer } from "redux/waterfall/types";
+import WaterfallState, { WaterfallPlayer } from "redux/waterfall/types";
+import { API_URL } from "settings/Config";
 import Game from "./Game";
 
 type WaterfallGameSettings = {
@@ -10,6 +11,7 @@ type WaterfallGameSettings = {
         gameName: string,
         hiddenBack: boolean
         maxPlayers: number
+        actionsEnabled: boolean
     }
 }
 
@@ -33,17 +35,15 @@ export function getCurrentGame(): Game
 export async function createWaterfallGame(settings: WaterfallGameSettings)
 {
     let response = await sendCreateRequest(settings);
+
     if (response.error)
         return;
 
-
     let state: WaterfallState = convertToState(response);
-
-    store.dispatch(join(state))
+    store.dispatch(join(state));
 
     currentGame = new Game(state.game.gameId, state.game.joinCode);
-
-    await currentGame.socket.startSocket();
+    currentGame.socket.startSocket();
 
     return currentGame.gameCode
 }
@@ -55,22 +55,21 @@ export async function joinWaterfallGame(joinRequest: WaterfallJoinRequest): Prom
 
     let response = await sendJoinRequest(joinRequest);
     if (response.error)
-    {
         return { message: response.error };
-    }
+
 
     let state: WaterfallState = convertToState(response);
     store.dispatch(join(state));
 
     currentGame = new Game(state.game.gameId, state.game.joinCode);
 
-    await currentGame.socket.startSocket();
+    currentGame.socket.startSocket();
     return currentGame.gameCode;
 }
 
 async function sendCreateRequest(settings: WaterfallGameSettings)
 {
-    return await fetch("https://api.drinkers.beer/waterfall/create", {
+    return await fetch(API_URL + "/waterfall/create", {
         method: "POST",
         body: JSON.stringify({
             owner: {
@@ -86,7 +85,7 @@ async function sendCreateRequest(settings: WaterfallGameSettings)
 
 async function sendJoinRequest(request: WaterfallJoinRequest)
 {
-    return await fetch( "https://api.drinkers.beer/waterfall/join", {
+    return await fetch(API_URL + "/waterfall/join", {
         method: "POST",
         body: JSON.stringify(request)
     }).then(res => res.json())

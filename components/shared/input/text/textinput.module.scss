@@ -11,8 +11,9 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     // margin-bottom: rem;
 
-    grid-template-columns: auto auto;
+    grid-template-columns: fit-content(40%) auto;
     gap: 1.5rem;
+    height: fit-content;
 
     &__input
     {

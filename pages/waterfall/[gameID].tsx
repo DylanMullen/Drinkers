@@ -21,10 +21,11 @@ import { GetServerSidePropsContext } from 'next';
 import RuleList from 'components/waterfall/game/rule-list';
 import { getUser, User } from 'utils/UserUtil';
 import HelpModal from 'components/waterfall/game/modals/help-modal';
-import StartMenu from 'components/waterfall/game/start-menu';
 import WildcardModal from 'components/waterfall/game/modals/wildcard-modal';
-import Backdrop from 'components/shared/modal/backdrop/Backdrop';
+import Backdrop from 'components/shared/backdrop/Backdrop';
 import { Error } from 'components/waterfall/lobby/modals/join/JoinModal';
+import Lobby from 'components/waterfall/game/lobby';
+import { domAnimation, LazyMotion } from 'framer-motion';
 
 type Props = {
     gameID: string
@@ -140,7 +141,7 @@ function WaterfallGame({ gameID }: Props)
             <Head>
                 <title>{gameName} | Drinkers</title>
                 <meta name="robots" content="noindex" />
-                <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />                
+                <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
                 <meta name="title" content={`${gameName} | Drinkers"`} />
                 <meta name="description" content="Waterfall is a drinking card game that you can play to spice up your drinking sessions with the fun and exciting prompts in the deck" />
                 <meta name="keywords" content="waterfall, kings cup, drinking, drinking games, still site, the still site, card game, cards, playing cards, alcohol" />
@@ -176,41 +177,40 @@ function WaterfallGame({ gameID }: Props)
                 <RuleToolbarButton />
 
             </div>
-
-            <main className={styles["waterfall-game"]} data-color={isRed && started ? "red" : "black"}>
-                {
-                    (started) ?
-                        <div className={styles["waterfall-game__card"]}>
-                            <div className={styles["waterfall-game__skip"]}>
-                                <ControlButton
-                                    icon="🕒"
-                                    text="Skip Turn"
-                                    callback={skip}
-                                />
-                            </div>
-                            <div className={styles["waterfall-game__card__wrapper"]}>
-                                {playingCard}
-                            </div>
-
-                            <div className={styles["waterfall-game__next"]}>
-                                <ControlButton
-                                    icon="🍺"
-                                    text="Next Turn"
-                                    callback={next}
-                                    disabled={!isNextPlayerEnabled}
-                                />
-                            </div>
-                        </div> :
-                        <StartMenu />
-                }
-
-            </main>
             {
-                started &&
-                <footer className={styles["waterfall-footer"]} data-color={isRed ? "red" : "black"}>
-                    <UserList />
-                </footer>
+                !started ?
+                    <Lobby /> :
+                    <>
+                        <main className={styles["waterfall-game"]} data-color={isRed && started ? "red" : "black"}>
+                            <div className={styles["waterfall-game__card"]}>
+                                <div className={styles["waterfall-game__skip"]}>
+                                    <ControlButton
+                                        icon="🕒"
+                                        text="Skip Turn"
+                                        callback={skip}
+                                    />
+                                </div>
+                                <div className={styles["waterfall-game__card__wrapper"]}>
+                                    {playingCard}
+                                </div>
+
+                                <div className={styles["waterfall-game__next"]}>
+                                    <ControlButton
+                                        icon="🍺"
+                                        text="Next Turn"
+                                        callback={next}
+                                        disabled={!isNextPlayerEnabled}
+                                    />
+                                </div>
+                            </div>
+
+                        </main>
+                        <footer className={styles["waterfall-footer"]} data-color={isRed ? "red" : "black"}>
+                            <UserList />
+                        </footer>
+                    </>
             }
+
 
         </>
     )
@@ -236,6 +236,7 @@ function getWaterfallCard(card: WaterfallCard, hiddenBack: boolean, flipCallback
             face: card.face,
             suite: card.suite,
             hidden: hiddenBack,
+            cardsLeft: card.cardsLeft,
             cardOwner: cardOwner
         }}
         ruleDetails={{ title: card.details.title, description: card.details.description }}
@@ -264,9 +265,11 @@ function ModalWrapper()
         <>
             {
                 modalState?.show &&
-                <Backdrop closeCallback={getCurrentGame().closeModal}>
-                    {modal}
-                </Backdrop>
+                <LazyMotion features={domAnimation}>
+                    <Backdrop closeCallback={getCurrentGame().closeModal}>
+                        {modal}
+                    </Backdrop>
+                </LazyMotion>
             }
         </>
     )

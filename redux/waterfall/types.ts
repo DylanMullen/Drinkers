@@ -22,6 +22,7 @@ export interface WaterfallGame
     players: {
         current: string,
         next: string,
+        max?: number,
         users: {
             [id: number]: WaterfallPlayer
         }
@@ -29,6 +30,7 @@ export interface WaterfallGame
     mechanics: {
         hiddenBack: boolean,
         thumbMaster?: string,
+        actions?: boolean,
         rules: {
             [id: number]: WaterfallRule
         }
@@ -64,6 +66,7 @@ export interface WaterfallCard
     face: number,
     suite: number,
     details: WaterfallCardDetails,
+    cardsLeft?: number
     finished?: boolean
     nextTurn?: boolean
 }
