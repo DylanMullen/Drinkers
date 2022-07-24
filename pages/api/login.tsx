@@ -35,7 +35,7 @@ type DiscordUser = {
 }
 
 const discord = new OAuth();
-const dynamo = new DynamoDBClient({ region: "eu-west-2" });
+const dynamo = new DynamoDBClient({ region: "eu-west-2", credentials: { accessKeyId: "AKIA5AK7PPREGR5PVWMW", secretAccessKey: "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" } });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse)
 {
@@ -62,11 +62,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       res.redirect("/");
       return;
-    } catch (error)
+    } catch (error: any)
     {
-      res.status(500).json({
-        error: error
-      })
+      console.log(error)
       return;
     }
   }
@@ -85,8 +83,8 @@ async function loginWithDiscord(code: string)
 
   if (discordDetails === undefined)
     return;
-
-  const userDetails = await checkDatabase(discordDetails);
+  let userDetails
+  userDetails = await checkDatabase(discordDetails);
 
   if (userDetails === undefined)
   {
