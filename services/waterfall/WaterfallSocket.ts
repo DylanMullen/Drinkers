@@ -1,3 +1,4 @@
+import { WEBSOCKET_URL } from "settings/Config";
 import Game from "./Game";
 
 
@@ -15,24 +16,18 @@ export default class WaterfallSocket
 
     async startSocket()
     {
-        return new Promise((resolve, reject) =>
+
+        let listen = this.listen.bind(this);
+        let connected = this.setConnected.bind(this);
+
+        let url = WEBSOCKET_URL
+        this.socket = new WebSocket(url + "/waterfall/ws/" + this.game.uuid + "?uuid=" + this.game.cookie.uuid)
+
+        this.socket.onmessage = listen
+        this.socket.onopen = () =>
         {
-
-            let listen = this.listen.bind(this);
-            let connected = this.setConnected.bind(this);
-
-            let url = "wss://api.drinkers.beer:8443"
-
-            this.socket = new WebSocket( url + "/waterfall/ws/" + this.game.uuid + "?uuid=" + this.game.cookie.uuid)
-
-            this.socket.onmessage = listen
-            this.socket.onopen = () =>
-            {
-                connected(true)
-                resolve(this.open);
-            }
-            this.socket.onerror = () => reject(false);
-        })
+            connected(true)
+        }
     }
 
     close()
@@ -47,7 +42,8 @@ export default class WaterfallSocket
 
     send(data: string)
     {
-
+        if (!this.open)
+            return;
         this.socket.send(data)
     }
 

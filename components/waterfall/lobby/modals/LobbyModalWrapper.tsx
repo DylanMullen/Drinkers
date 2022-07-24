@@ -1,4 +1,4 @@
-import Backdrop from 'components/shared/modal/backdrop/Backdrop'
+import Backdrop from 'components/shared/backdrop/Backdrop'
 import React, { useState } from 'react'
 import CreateModal from './create'
 import JoinModal from './join'

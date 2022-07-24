@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useIsPresent } from 'framer-motion';
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import styles from './backdrop.module.scss'
 
@@ -11,12 +11,14 @@ type Props = {
 
 function Backdrop({ children, closeCallback = () => { } }: Props)
 {
-  const keyPress = useCallback((e: KeyboardEvent)=>
+  const [time] = useState(new Date().getTime())
+
+  const keyPress = useCallback((e: KeyboardEvent) =>
   {
     if (e.code === "Escape")
       closeCallback(undefined);
-  },[closeCallback])
-  
+  }, [closeCallback])
+
   useEffect(() =>
   {
     document.addEventListener("keydown", keyPress);
@@ -24,6 +26,11 @@ function Backdrop({ children, closeCallback = () => { } }: Props)
     return () => document.removeEventListener("keydown", keyPress);
   }, [keyPress])
 
+  const click = () =>
+  {
+    if(new Date().getTime() - time >= 750)
+      closeCallback()
+  }
 
   return (
     <motion.div
@@ -36,7 +43,7 @@ function Backdrop({ children, closeCallback = () => { } }: Props)
         duration: .5,
         delayChildren: 5
       }}
-      onClick={() => { closeCallback() }}
+      onClick={click}
       className={styles["backdrop"]}>
       {children}
     </motion.div>

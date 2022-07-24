@@ -15,7 +15,8 @@ function SwitchInput({ label, changeCallback = () => { } }: Props)
 
     const onChange = () =>
     {
-        setChecked(prev => {
+        setChecked(prev =>
+        {
             changeCallback(!prev)
             return !prev
         })
@@ -26,7 +27,7 @@ function SwitchInput({ label, changeCallback = () => { } }: Props)
             <label htmlFor={`input-${id}`} className={styles["input-switch__label"]}>{label}</label>
 
             <div className={styles["input-switch__container"]}>
-                <input id={`input-${id}`} type="checkbox" className={styles["input-switch__input"]} checked={isChecked} />
+                <input id={`input-${id}`} type="checkbox" className={styles["input-switch__input"]} onChange={() => { }} checked={isChecked} />
                 <span className={styles["input-switch__slider"]} onClick={onChange} />
             </div>
         </div>

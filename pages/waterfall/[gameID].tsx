@@ -23,7 +23,7 @@ import { getUser, User } from 'utils/UserUtil';
 import HelpModal from 'components/waterfall/game/modals/help-modal';
 import StartMenu from 'components/waterfall/game/start-menu';
 import WildcardModal from 'components/waterfall/game/modals/wildcard-modal';
-import Backdrop from 'components/shared/modal/backdrop/Backdrop';
+import Backdrop from 'components/shared/backdrop/Backdrop';
 import { Error } from 'components/waterfall/lobby/modals/join/JoinModal';
 
 type Props = {

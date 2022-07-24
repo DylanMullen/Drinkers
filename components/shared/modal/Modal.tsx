@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Backdrop from './backdrop/Backdrop'
+import Backdrop from '../backdrop/Backdrop'
 import { motion, Variants } from 'framer-motion';
 
 import styles from './modal.module.scss';

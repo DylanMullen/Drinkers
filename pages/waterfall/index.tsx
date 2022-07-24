@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from '../../node_modules/next/head'
 
 import styles from 'styles/pages/waterfall/home.module.scss';
@@ -20,6 +20,21 @@ function WaterfallHome()
 {
 
     const [modal, setModalId] = useState(-1);
+
+    useEffect(() =>
+    {
+
+        async function test()
+        {
+            const now = new Date().getTime()
+            await fetch("https://api.drinkers.beer/");
+            console.log(new Date().getTime() - now)
+        }
+
+        test()
+
+
+    }, [])
 
     return (
         <>
