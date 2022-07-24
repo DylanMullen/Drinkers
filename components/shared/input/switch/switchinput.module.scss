@@ -4,9 +4,9 @@ $font-size: 1.5rem;
 .input-switch
 {
     display: grid;
-    grid-template-columns: 2fr 4rem;
+    grid-template-columns: fit-content(calc(100% - 4rem)) auto;
     gap: 0.75rem;
-
+    width: fit-content;
     font-size: $font-size;
 
     &__label
@@ -25,6 +25,7 @@ $font-size: 1.5rem;
     &__container
     {
         position: relative;
+        width: 4rem;
     }
 
     &__slider

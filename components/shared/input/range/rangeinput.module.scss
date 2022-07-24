@@ -5,7 +5,7 @@
 
 
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: fit-content(30%) auto;
     gap: 0.75rem;
 
     &__input

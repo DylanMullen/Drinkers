@@ -11,10 +11,17 @@ import styles from './user.module.scss';
 import { getCookie } from 'cookies-next';
 import { IoClose } from 'react-icons/io5';
 import { getCurrentGame } from 'services/waterfall/GameController';
+import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
+import { IoMdClose as CloseIcon } from 'react-icons/io'
 
 type Props = {
     user: UserDetails,
-    dummy?: boolean
+    settings?: {
+        dummy?: boolean
+        lobby?: {
+            ready: boolean
+        }
+    }
 }
 
 type UserDetails = {
@@ -26,10 +33,10 @@ type UserDetails = {
 
 }
 
-function User({ user, dummy = false }: Props)
+function User({ user, settings: { dummy, lobby } = { dummy: false, lobby: { ready: false } } }: Props)
 {
     const [isHovered, setHovered] = useState(false);
-
+    const [ready, setReady] = useState(lobby?.ready ?? false);
     let dispatch = useAppDispatch();
 
     let { ownerId, players } = useAppSelector(selectGame);
@@ -67,9 +74,18 @@ function User({ user, dummy = false }: Props)
                         isHovered && clientUUID === ownerId && user.uuid !== clientUUID &&
                         < button className={styles["user__admin"]} onClick={kickUser}><IoClose /></button>
                     }
-                    <Image src={user.avatar} width="100%" height="100%" alt={`Avatar of ${user.username}`}/>
+                    <Image src={user.avatar} width="100%" height="100%" alt={`Avatar of ${user.username}`} />
                 </div>
                 <span className={styles["user__name"]}>{user.username}</span>
+                {
+                    lobby &&
+                    <button className={styles["user__ready"]} data-ready={ready} onClick={(e: React.MouseEvent<HTMLButtonElement>) => { e.currentTarget.blur(); setReady(prev => !prev) }}>
+                        {
+                            ready ?
+                                <IoMdCheckmarkCircleOutline /> : <CloseIcon />
+                        }
+                    </button>
+                }
             </div>
         </li >
     )

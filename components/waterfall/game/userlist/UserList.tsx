@@ -7,11 +7,13 @@ import styles from './userlist.module.scss';
 
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 
-type Props = {}
+type Props = {
+    lobby?: boolean
+}
 
 
 
-function UserList({ }: Props)
+function UserList({ lobby = false }: Props)
 {
 
     const id = useId;
@@ -24,17 +26,16 @@ function UserList({ }: Props)
     {
         let player = players[x];
         playerList.push(
-            <User key={id + "-" + x} user={
-                {
+            <User key={id + "-" + x}
+                user={{
                     uuid: player.uuid,
                     username: player.username,
                     avatar: player.avatar
-                }
-            } />    
+                }}
+                settings={{ dummy: lobby, lobby: { ready: true } }}
+            />
         )
     }
-
-    // if (playerList.length < 8) playerList.push(<OfflinePlayer />)
 
     return (
         <div data-users={playerList.length > 4 ? 4 : playerList.length} className={styles["waterfall-userlist"]}>
@@ -42,15 +43,6 @@ function UserList({ }: Props)
                 {playerList}
             </ul>
         </div>
-    )
-}
-
-function OfflinePlayer()
-{
-    return (
-        <button className={styles["waterfall-userlist__add"]}>
-            <AiOutlinePlusCircle />
-        </button>
     )
 }
 

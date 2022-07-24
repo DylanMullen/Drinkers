@@ -326,6 +326,8 @@ $red-card--shadow: #E67470;
     &__description
     {
         color: black;
+        white-space: pre-wrap;
+        text-align: center;
     }
 }
 
