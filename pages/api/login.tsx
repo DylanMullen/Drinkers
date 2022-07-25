@@ -60,13 +60,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         expires: date
       })
 
-      res.redirect("/").json({
-        success: userDetails
-      });
+      res.redirect("/");
       return;
     } catch (error: any)
     {
-      res.status(500).json({ error: error.message })
+      res.status(500).json({ error: error })
       return;
     }
   }
