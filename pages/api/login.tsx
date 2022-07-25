@@ -60,11 +60,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         expires: date
       })
 
-      res.redirect("/");
+      res.redirect("/").json({
+        success: userDetails
+      });
       return;
     } catch (error: any)
     {
-      console.log(error)
       return;
     }
   }
@@ -73,7 +74,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     loginWithHomebrew(req.body);
   }
 
-  res.redirect("/")
+  res.redirect("/").json({})
 
 }
 
