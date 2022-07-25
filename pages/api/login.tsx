@@ -179,17 +179,15 @@ async function checkDatabase(details: Discord | Homebrew)
     let discordDetails = details as Discord;
     let awsResponse = await sendDiscordDatabaseLookup(discordDetails.user.id);
 
-    if (awsResponse.Items?.length === 0)
+    if (!awsResponse.Items || (awsResponse.Items && awsResponse.Items.length) === 0)
     {
-      console.log(awsResponse.Items?.length)
       return undefined;
-
     }
 
-    await updateDiscordAccount(awsResponse.Items?.at(0)?.uuid.S as string, discordDetails)
+    await updateDiscordAccount(awsResponse.Items[0].uuid.S as string, discordDetails)
 
     return {
-      uuid: awsResponse.Items?.at(0)?.uuid.S,
+      uuid: awsResponse.Items[0].uuid.S,
       details: discordDetails
     }
 
@@ -232,6 +230,7 @@ async function registerDiscordAccount(discordDetails: Discord)
 
 async function updateDiscordAccount(uuid: string, discordDetails: Discord)
 {
+  console.log(uuid)
   let params: UpdateItemCommandInput = {
     TableName: "users",
     Key: {
