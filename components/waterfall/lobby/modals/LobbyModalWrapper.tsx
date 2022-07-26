@@ -1,11 +1,13 @@
-import Backdrop from 'components/shared/backdrop/Backdrop'
-import React, { useState } from 'react'
-import CookieModal from './cookies'
-import CreateModal from './create'
-import JoinModal from './join'
-import ProfileModal from './profile'
+import React, { lazy, Suspense } from 'react'
 
-import { LazyMotion, domAnimation, } from 'framer-motion'
+import { LazyMotion } from 'framer-motion'
+
+const domAnimation = () => import("components/shared/util").then(res => res.default)
+const Backdrop = lazy(() => import("components/shared/backdrop"))
+
+const JoinModal = lazy(() => import("./join"));
+const ProfileModal = lazy(() => import("./profile"))
+const CookieModal = lazy(() => import("./cookies"))
 
 type Props = {
     id: number;
@@ -20,11 +22,12 @@ function LobbyModalWrapper({ id, close }: Props)
         <>
             {
                 modal &&
-
                 <LazyMotion features={domAnimation}>
-                    <Backdrop closeCallback={close}>
-                        {modal}
-                    </Backdrop>
+                    <Suspense>
+                        <Backdrop closeCallback={close}>
+                            {modal}
+                        </Backdrop>
+                    </Suspense>
                 </LazyMotion>
             }
 
@@ -41,8 +44,6 @@ function getModal(id: number, close: Function)
     {
         case 0:
             return <JoinModal close={close} />
-        case 1:
-            return <CreateModal close={close} />
         case 2:
             return <ProfileModal close={close} />
         case 3:

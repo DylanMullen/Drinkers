@@ -19,6 +19,7 @@ export interface WaterfallGame
     started: boolean,
     kicked: boolean,
     modal?: WaterfallModal
+    action?: WaterfallAction,
     players: {
         current: string,
         next: string,
@@ -80,9 +81,15 @@ export interface WaterfallCardDetails
 
 export interface WaterfallModal
 {
-    type: number,
+    id: number,
     show?: boolean,
     content: any
+}
+
+export interface WaterfallAction
+{
+    id: number,
+    content?: any
 }
 
 /* Payloads */

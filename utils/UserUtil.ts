@@ -1,6 +1,6 @@
 import { randomName } from "components/waterfall/lobby/profile-editor/ProfileEditor"
 import { deleteCookie, getCookie, hasCookie, setCookie } from "cookies-next"
-import { uuid } from "uuidv4"
+import { v4 } from "uuid"
 
 export type User = {
     uuid: string
@@ -28,7 +28,7 @@ export function logout():User
 function createCookie():User
 {
     setCookie("user", {
-        uuid: uuid(),
+        uuid: v4(),
         username: randomName(),
         avatar: "https://ca.slack-edge.com/T0266FRGM-U011PLSSMA9-g7e8a6705c42-512",
         guest: true

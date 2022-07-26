@@ -1,12 +1,10 @@
 import { getCookie } from "cookies-next";
-import React from "react";
 import store from "redux/store";
-import { getWaterfallPlayerByUUID, getWaterfallPlayerIndex, getWaterfallPlayers, kicked, leave, lobby, newDate, newPlayer, newRule, nextCard, nextPlayer, ready, removePlayer, start, thumbMaster, updateModal, updateSetting } from "redux/waterfall/slice";
+import { getWaterfallPlayerByUUID, getWaterfallPlayerIndex, getWaterfallPlayers, kicked, lobby, newDate, newPlayer, newRule, nextCard, nextPlayer, ready, removePlayer, start, thumbMaster, updateAction, updateModal, updateSetting } from "redux/waterfall/slice";
 import { PayloadNextUser, WaterfallCard, WaterfallDate, WaterfallModal, WaterfallPlayer, WaterfallRule } from "redux/waterfall/types";
+import { sendAction } from "./Actions";
 import WaterfallSocket from "./WaterfallSocket";
 
-import RuleModal from "components/waterfall/game/modals/rule-modal/RuleModal";
-import { stopCoverage } from "v8";
 
 export default class Game
 {
@@ -45,7 +43,7 @@ export default class Game
 
         if (store.getState().waterfall.lobby?.readyPlayers && store.getState().waterfall.lobby?.readyPlayers.includes(uuid))
             return;
-            
+
         this.socket.send(JSON.stringify({
             action: 20,
             senderUUID: this.cookie.uuid,
@@ -192,7 +190,7 @@ export default class Game
         store.dispatch(nextPlayer({ current: players.current, next: players.next }))
 
         if (card.details.action)
-            this.handleActions(players.current, card.details.action)
+            store.dispatch(updateAction(card.details.action))
     }
 
     handleUpdatePlayers(players: PayloadNextUser)
@@ -202,7 +200,6 @@ export default class Game
 
     handleSkip(players: PayloadNextUser)
     {
-        console.log(players + " ")
         store.dispatch(nextPlayer(players))
     }
 
@@ -221,7 +218,7 @@ export default class Game
         store.dispatch(nextCard({ ...card, cardsLeft: store.getState().waterfall.card.cardsLeft }))
 
         if (card.details.action)
-            this.handleActions(card.creatorUUID, card.details.action)
+            store.dispatch(updateAction(card.details.action))
     }
 
     handleUpdateSetting(setting: string, value: any)
@@ -231,65 +228,77 @@ export default class Game
 
 
 
+    handleAction()
+    {
+        const action = store.getState().waterfall.game.action;
+        const current = store.getState().waterfall.game.players.current
+
+        if (!action)
+            return;
+
+            
+        sendAction(current, action)
+    }
+
+
     //UTILS
     isNextPlayer(): boolean
     {
         return store.getState().waterfall.game.players.next === this.cookie.uuid
     }
 
-    handleActions(current: string, action: any): void
-    {
-        let modal: WaterfallModal | undefined = store.getState().waterfall.game.modal
+    // handleActions(current: string, action: any): void
+    // {
+    //     let modal: WaterfallModal | undefined = store.getState().waterfall.game.modal
 
-        switch (action.id)
-        {
-            case 0: {
-                store.dispatch(thumbMaster(current))
-                break;
-            }
-            case 1: {
-                modal = {
-                    type: 0,
-                    content: {
-                        players: getWaterfallPlayers(),
-                        dates: store.getState().waterfall.game.mechanics.dates
-                    }
-                }
-                break;
-            }
-            case 2: {
-                modal = {
-                    type: 1,
-                    content: {
-                        suggestions: action.suggestions
-                    }
-                }
-                break;
-            }
-            case 3: {
-                modal = {
-                    type: 3,
-                    content: {
-                        cards: action.cards
-                    }
-                }
-                break;
-            }
+    //     switch (action.id)
+    //     {
+    //         case 0: {
+    //             store.dispatch(thumbMaster(current))
+    //             break;
+    //         }
+    //         case 1: {
+    //             modal = {
+    //                 type: 0,
+    //                 content: {
+    //                     players: getWaterfallPlayers(),
+    //                     dates: store.getState().waterfall.game.mechanics.dates
+    //                 }
+    //             }
+    //             break;
+    //         }
+    //         case 2: {
+    //             modal = {
+    //                 type: 1,
+    //                 content: {
+    //                     suggestions: action.suggestions
+    //                 }
+    //             }
+    //             break;
+    //         }
+    //         case 3: {
+    //             modal = {
+    //                 type: 3,
+    //                 content: {
+    //                     cards: action.cards
+    //                 }
+    //             }
+    //             break;
+    //         }
 
-            default:
-                break;
-        }
+    //         default:
+    //             break;
+    //     }
 
-        if (this.cookie.uuid !== current)
-            return;
+    //     if (this.cookie.uuid !== current)
+    //         return;
 
 
-        store.dispatch(updateModal(modal))
-    }
+    //     store.dispatch(updateModal(modal))
+    // }
 
     closeModal(): void
     {
         store.dispatch(updateModal(undefined))
-
     }
 }

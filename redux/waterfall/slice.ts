@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "redux/store";
 import store from "redux/store";
 import type WaterfallState from "./types";
-import { PayloadNextUser, WaterfallCard, WaterfallDate, WaterfallGame, WaterfallModal, WaterfallPlayer, WaterfallRule } from "./types";
+import { PayloadNextUser, WaterfallAction, WaterfallCard, WaterfallDate, WaterfallGame, WaterfallModal, WaterfallPlayer, WaterfallRule } from "./types";
 
 const initialState: WaterfallState = {
     lobby: {
@@ -173,6 +173,9 @@ export const waterfallSlice = createSlice({
                 }
 
             }
+        }, updateAction: (state, action: PayloadAction<WaterfallAction|undefined>) =>
+        {
+            state.game.action = action.payload
         }
     }
 })
@@ -185,7 +188,7 @@ export const
         nextCard, newDate, newRule,
         removeRule, updateModal, openModal,
         thumbMaster, updateNextTurnButton, kicked,
-        updateSetting
+        updateSetting, updateAction
     } = waterfallSlice.actions;
 
 export const selectLobby = (state: RootState) => state.waterfall.lobby
@@ -204,6 +207,7 @@ export const selectHiddenBack = (state: RootState) => state.waterfall.game.mecha
 export const selectRules = (state: RootState) => state.waterfall.game.mechanics.rules
 
 export const selectModal = (state: RootState) => state.waterfall.game.modal
+export const selectAction = (state:RootState) => state.waterfall.game.action
 
 export const selectCurrentPlayer = (state: RootState) => state.waterfall.game.players.current
 export const selectNextPlayer = (state: RootState) => state.waterfall.game.players.next

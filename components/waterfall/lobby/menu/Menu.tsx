@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 
-import { BiDrink as JoinIcon } from 'react-icons/bi';
-import { HiOutlinePencilAlt as CreateIcon } from 'react-icons/hi'
-import { CgProfile as ProfileIcon } from 'react-icons/cg';
+import { BiDrink as JoinIcon } from '@react-icons/all-files/bi/BiDrink';
+import { HiOutlinePencilAlt as CreateIcon } from '@react-icons/all-files/hi/HiOutlinePencilAlt'
+import { CgProfile as ProfileIcon } from '@react-icons/all-files/cg/CgProfile';
 
 import styles from './menu.module.scss';
 import MenuOption from '../options/MenuOption';
-import { NextRouter, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { createWaterfallGame } from 'services/waterfall/GameController';
 import { getUser, User } from 'utils/UserUtil';
 

@@ -1,18 +1,15 @@
-import Image from 'next/image'
-import React from 'react'
-import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'redux/store';
-import { removePlayer, selectGame, selectLobby } from 'redux/waterfall/slice';
-import UserAdminBar from './admin-bar/UserAdminBar';
+import Image from 'next/image';
+import React, { useState } from 'react';
+import { useAppSelector } from 'redux/store';
+import { selectGame } from 'redux/waterfall/slice';
 import UserStatusBar from './status-bar/UserStatusBar';
 
 import styles from './user.module.scss';
 
 import { getCookie } from 'cookies-next';
+import { IoMdCheckmarkCircleOutline, IoMdClose as CloseIcon } from 'react-icons/io';
 import { IoClose } from 'react-icons/io5';
 import { getCurrentGame } from 'services/waterfall/GameController';
-import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
-import { IoMdClose as CloseIcon } from 'react-icons/io'
 
 type Props = {
     user: UserDetails,
