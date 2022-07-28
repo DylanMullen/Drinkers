@@ -1,6 +1,6 @@
 import { getCookie } from "cookies-next";
 import store from "redux/store";
-import { getWaterfallPlayerByUUID, getWaterfallPlayerIndex, getWaterfallPlayers, kicked, lobby, newDate, newPlayer, newRule, nextCard, nextPlayer, ready, removePlayer, start, thumbMaster, updateAction, updateModal, updateSetting } from "redux/waterfall/slice";
+import { getWaterfallPlayerByUUID, getWaterfallPlayerIndex, getWaterfallPlayers, kicked, lobby, newDate, newPlayer, newRule, nextCard, nextPlayer, ready, removePlayer, start, thumbMaster, unready, updateAction, updateModal, updateSetting } from "redux/waterfall/slice";
 import { PayloadNextUser, WaterfallCard, WaterfallDate, WaterfallModal, WaterfallPlayer, WaterfallRule } from "redux/waterfall/types";
 import { sendAction } from "./Actions";
 import WaterfallSocket from "./WaterfallSocket";
@@ -40,9 +40,6 @@ export default class Game
     {
         if (uuid === "")
             return
-
-        if (store.getState().waterfall.lobby?.readyPlayers && store.getState().waterfall.lobby?.readyPlayers.includes(uuid))
-            return;
 
         this.socket.send(JSON.stringify({
             action: 20,
@@ -139,9 +136,15 @@ export default class Game
     // HANDLERS
 
 
-    handleReady(uuid: string)
+    handleReady(uuid: string, type: number)
     {
+        if (type === 0)
+        {
+            store.dispatch(unready(uuid))
+            return;
+        }
         store.dispatch(ready(uuid));
+
     }
 
     handleStart(card: WaterfallCard, players: any)
@@ -233,10 +236,10 @@ export default class Game
         const action = store.getState().waterfall.game.action;
         const current = store.getState().waterfall.game.players.current
 
-        if (!action)
+        if (!action || !store.getState().waterfall.game.mechanics.actions)
             return;
 
-            
+
         sendAction(current, action)
     }
 

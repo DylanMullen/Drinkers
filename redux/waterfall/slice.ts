@@ -65,6 +65,20 @@ export const waterfallSlice = createSlice({
 
             state.lobby.readyPlayers = [...state.lobby?.readyPlayers, action.payload]
         },
+        unready: (state, action: PayloadAction<string>) =>
+        {
+            if (!state.lobby)
+                return;
+
+            let players: string[] = []
+
+            for (let uuid in state.lobby.readyPlayers)
+            {
+                if (state.lobby.readyPlayers[uuid] === action.payload) continue
+                players.push(state.lobby.readyPlayers[uuid])
+            }
+            state.lobby.readyPlayers = players
+        },
         start: (state) =>
         {
             state.lobby = undefined
@@ -173,7 +187,7 @@ export const waterfallSlice = createSlice({
                 }
 
             }
-        }, updateAction: (state, action: PayloadAction<WaterfallAction|undefined>) =>
+        }, updateAction: (state, action: PayloadAction<WaterfallAction | undefined>) =>
         {
             state.game.action = action.payload
         }
@@ -182,7 +196,7 @@ export const waterfallSlice = createSlice({
 
 export const
     {
-        lobby, ready, start,
+        lobby, ready, unready, start,
         join, leave, newPlayer,
         removePlayer, nextPlayer,
         nextCard, newDate, newRule,
@@ -207,7 +221,7 @@ export const selectHiddenBack = (state: RootState) => state.waterfall.game.mecha
 export const selectRules = (state: RootState) => state.waterfall.game.mechanics.rules
 
 export const selectModal = (state: RootState) => state.waterfall.game.modal
-export const selectAction = (state:RootState) => state.waterfall.game.action
+export const selectAction = (state: RootState) => state.waterfall.game.action
 
 export const selectCurrentPlayer = (state: RootState) => state.waterfall.game.players.current
 export const selectNextPlayer = (state: RootState) => state.waterfall.game.players.next
