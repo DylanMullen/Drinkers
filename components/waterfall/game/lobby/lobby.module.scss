@@ -1,3 +1,8 @@
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+$vw-desktop: 1200px;
+
 .waterfall-lobby
 {
     width: 100%;
@@ -12,16 +17,13 @@
         justify-content: center;
         align-items: center;
         gap: 5rem;
-        margin: 0 7rem;
+
     }
 
     &__settings
     {
         padding: 1rem;
-        // height: 75%;
-        width: 50%;
-        // flex-grow: 1;
-        // background-color: white;
+        // width: 50%;
     }
 
     &__footer
@@ -37,6 +39,7 @@
         width: $width;
         height: calc($width * 1.4);
         scale: 0.85;
+        display: none;
 
         &>*
         {
@@ -57,6 +60,24 @@
             }
         }
 
+    }
+
+    @media (min-width: calc($vw-tablet + 200px))
+    {
+        &__content
+        {
+            margin: 0 7rem;
+        }
+
+        &__cardstack
+        {
+            display: block;
+        }
+
+        &__settings
+        {
+            width: 50%;
+        }
     }
 }
 
@@ -87,13 +108,15 @@
         flex-direction: column;
         gap: 1rem;
     }
+
     &__row
     {
         display: flex;
         align-items: center;
         gap: 1rem;
-        width: 100% ;
+        width: 100%;
         flex-wrap: wrap;
+
         &--vertical
         {
             flex-direction: column;
@@ -126,16 +149,24 @@
     {
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(3,auto);
+        grid-template-columns: repeat(3, auto);
         place-items: center;
-        gap:1.5rem;
+        gap: 1.5rem;
     }
 
     &__footer
     {
         margin-top: auto;
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
         padding-top: 2rem;
+    }
+
+    @media (min-width: calc($vw-tablet + 200px))
+    {
+        &__footer
+        {
+            justify-content: flex-end;
+        }
     }
 }
