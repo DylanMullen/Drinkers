@@ -129,7 +129,18 @@ export default class Game
             senderUUID: this.cookie.uuid,
             card: card
         }
-        console.clear()
+        this.socket.send(JSON.stringify(request))
+    }
+
+    sendOfflinePlayerRequest(player: WaterfallPlayer)
+    {
+        let request = {
+            action: 24,
+            senderUUID: this.cookie.uuid,
+            uuid: player.uuid,
+            username: player.username,
+            avatar: player.avatar,
+        }
         this.socket.send(JSON.stringify(request))
     }
 
@@ -247,7 +258,9 @@ export default class Game
     //UTILS
     isNextPlayer(): boolean
     {
-        return store.getState().waterfall.game.players.next === this.cookie.uuid
+        let player = getWaterfallPlayerByUUID(store.getState().waterfall.game.players.next);
+        let owner = store.getState().waterfall.game.ownerId
+        return (player?.uuid === this.cookie.uuid || (player?.offline && owner === this.cookie.uuid)) ?? false
     }
 
     // handleActions(current: string, action: any): void

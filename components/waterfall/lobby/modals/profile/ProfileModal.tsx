@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Modal from 'components/shared/modal/Modal'
 import { CgProfile as ProfileIcon } from 'react-icons/cg';
-import { getCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next';
 import Profile from '../../profile';
 import { Sign } from 'crypto';
 import TextInput from 'components/shared/input/text';
@@ -14,6 +14,7 @@ import styles from './modal-profile.module.scss'
 import ProfileEditor from '../../profile-editor';
 import SubmitButton from 'components/shared/input/buttons/submit';
 import { getUser, logout, User } from 'utils/UserUtil';
+import { uuid } from 'uuidv4';
 
 type Props = {
     close: Function
@@ -33,7 +34,15 @@ function ProfileModal({ close }: Props)
     const [user, setUser] = useState<User>();
     const isSignedIn = !user?.guest;
 
-
+    const saveUser = (username: string, avatar: string, uuid: string) =>
+    {
+        setCookie("user", {
+            uuid: uuid,
+            username: username,
+            avatar: avatar,
+            guest: true,
+        })
+    }
 
     useEffect(() =>
     {
@@ -65,7 +74,10 @@ function ProfileModal({ close }: Props)
                         {
                             !isSignedIn &&
                             <div className={styles["profile-modal__signin"]}>
-                                <ProfileEditor />
+                                <ProfileEditor 
+                                    hydrate
+                                    callback={saveUser}
+                                />
                                 <div className={styles["profile-modal__signup"]}>
                                     <div className={styles["profile-modal__signup__footer"]}>
                                         <div className={styles["profile-modal__providers"]}>

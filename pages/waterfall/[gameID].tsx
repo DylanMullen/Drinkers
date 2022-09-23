@@ -12,7 +12,7 @@ import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { GiRuleBook } from 'react-icons/gi';
 import { useAppDispatch, useAppSelector } from 'redux/store';
-import { getWaterfallPlayerByUUID, openModal, selectCard, selectGameName, selectHiddenBack, selectKicked, selectNextPlayer, selectRules, selectStarted, updateModal, updateNextTurnButton } from 'redux/waterfall/slice';
+import { getWaterfallPlayerByUUID, openModal, selectCard, selectGameName, selectHiddenBack, selectKicked, selectNextPlayer, selectOwnerId, selectRules, selectStarted, updateModal, updateNextTurnButton } from 'redux/waterfall/slice';
 import { WaterfallCard } from 'redux/waterfall/types';
 import { getCurrentGame, joinWaterfallGame } from 'services/waterfall/GameController';
 import { URL } from 'settings/Config';
@@ -54,6 +54,7 @@ function WaterfallGame({ gameID }: Props)
     const dispatch = useAppDispatch();
 
     let gameName = useAppSelector(selectGameName)
+    let gameOwner = useAppSelector(selectOwnerId)
 
     let hiddenBack = useAppSelector(selectHiddenBack);
     let started = useAppSelector(selectStarted)
@@ -69,8 +70,8 @@ function WaterfallGame({ gameID }: Props)
     });
 
     let isRed = card.suite == 0 || card.suite == 1;
-
-    let isNextPlayerEnabled = useAppSelector(selectNextPlayer) === user?.uuid && card.nextTurn !== undefined
+    let nextPlayer = getWaterfallPlayerByUUID(useAppSelector(selectNextPlayer));
+    let isNextPlayerEnabled = (nextPlayer?.uuid === user?.uuid || (nextPlayer?.offline && user?.uuid === gameOwner)) && card.nextTurn !== undefined
 
     const copyLink = (e: React.MouseEvent<HTMLButtonElement>) =>
     {

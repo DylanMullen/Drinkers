@@ -210,6 +210,8 @@ export const selectGame = (state: RootState) => state.waterfall.game;
 export const selectCard = (state: RootState) => state.waterfall.card;
 
 export const selectGameName = (state: RootState) => state.waterfall.game.gameName
+export const selectOwnerId = (state: RootState) => state.waterfall.game.ownerId
+
 export const selectStarted = (state: RootState) => state.waterfall.game.started
 export const selectKicked = (state: RootState) => state.waterfall.game.kicked
 

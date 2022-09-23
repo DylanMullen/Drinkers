@@ -4,6 +4,7 @@ import { useAppSelector } from "redux/store";
 import { selectModal } from "redux/waterfall/slice";
 import { WaterfallModal } from "redux/waterfall/types";
 import { getCurrentGame } from "services/waterfall/GameController";
+import AddPlayerModal from "./add-player";
 
 const Backdrop = lazy(() => import("components/shared/backdrop"))
 const DateModal = lazy(() => import("../actions/date-modal"))
@@ -57,6 +58,9 @@ function getModal(close: Function, modal: WaterfallModal | undefined): React.Rea
         }
         case 4: {
             return <WildcardModal cards={modal.content.cards} />
+        }
+        case 5: {
+            return <AddPlayerModal close={close} />
         }
         default: {
             return undefined;

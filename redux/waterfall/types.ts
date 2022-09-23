@@ -46,6 +46,7 @@ export interface WaterfallPlayer
     uuid: string,
     username: string,
     avatar: string,
+    offline?: boolean
 }
 
 export interface WaterfallRule
