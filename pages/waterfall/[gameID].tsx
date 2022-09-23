@@ -61,7 +61,8 @@ function WaterfallGame({ gameID }: Props)
     let card = useAppSelector(selectCard);
 
     let kicked = useAppSelector(selectKicked);
-
+    let nextPlayer = getWaterfallPlayerByUUID(useAppSelector(selectNextPlayer));
+    
     let playingCard = getWaterfallCard(card, hiddenBack, () =>
     {
         getCurrentGame().handleAction();
@@ -70,8 +71,8 @@ function WaterfallGame({ gameID }: Props)
     });
 
     let isRed = card.suite == 0 || card.suite == 1;
-    let nextPlayer = getWaterfallPlayerByUUID(useAppSelector(selectNextPlayer));
-    let isNextPlayerEnabled = (nextPlayer?.uuid === user?.uuid || (nextPlayer?.offline && user?.uuid === gameOwner)) && card.nextTurn !== undefined
+    let isOwner = user?.uuid === gameOwner;
+    let isNextPlayerEnabled = (nextPlayer?.uuid === user?.uuid || (nextPlayer?.offline && isOwner)) && card.nextTurn !== undefined
 
     const copyLink = (e: React.MouseEvent<HTMLButtonElement>) =>
     {

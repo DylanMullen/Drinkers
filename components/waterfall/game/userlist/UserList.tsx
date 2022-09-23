@@ -1,11 +1,11 @@
-import React, { useId } from 'react';
+import React, { useEffect, useId, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'redux/store';
-import { selectLobby, selectPlayers, updateModal } from 'redux/waterfall/slice';
-import User from '../user/User';
-
+import { selectLobby, selectOwnerId, selectPlayers, updateModal } from 'redux/waterfall/slice';
 import { FiPlusCircle } from 'react-icons/fi'
 
 import styles from './userlist.module.scss';
+import { getUser, User as TUser} from 'utils/UserUtil';
+import User from '../user/User';
 
 type Props = {
     lobby?: boolean
@@ -13,17 +13,21 @@ type Props = {
 
 
 
-function UserList({ lobby = false }: Props)
+function UserList({ lobby = false,  }: Props)
 {
-
+    const [user,setUser] = useState<TUser>();
     const id = useId;
     const dispatch = useAppDispatch();
-
+    
+    const owner = useAppSelector(selectOwnerId);
     const players = useAppSelector(selectPlayers).users;
     const readyPlayerList = useAppSelector(selectLobby);
 
     const playerList: React.ReactNode[] = [];
 
+    useEffect(()=>{
+        setUser(getUser())
+    },[])
 
     const showAddPlayer = () =>
     {
@@ -34,10 +38,10 @@ function UserList({ lobby = false }: Props)
     for (let x = 0; x < Object.keys(players).length; x++)
     {
         let player = players[x];
-        
+
         if (player === undefined) continue;
 
-        let ready = readyPlayerList?.readyPlayers.includes(player.uuid);
+        let ready = readyPlayerList?.readyPlayers.includes(player.uuid) || player.offline;
 
         playerList.push(
             <User key={id + "-" + x}
@@ -51,7 +55,7 @@ function UserList({ lobby = false }: Props)
         )
     }
 
-    if (playerList.length < 8)
+    if (playerList.length < 8 && owner===user?.uuid)
         playerList.push(
             <button className={styles["waterfall-userlist__add"]} onClick={showAddPlayer}>
                 <FiPlusCircle />

@@ -56,8 +56,8 @@ function ProfileModal({ close }: Props)
                 <Modal
                     customColors={
                         {
-                            accent: "#ffaa00",
-                            icon: "#fab62d",
+                            accent: "linear-gradient(-180deg, rgba(247,157,101,1) 0%, rgba(242,112,89,1) 57%, rgba(242,92,84,1) 100%)",
+                            icon: "#f79d65",
                             text: "white"
                         }
                     }

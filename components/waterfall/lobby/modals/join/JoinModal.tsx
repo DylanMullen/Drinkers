@@ -60,8 +60,8 @@ function JoinModal({ close }: Props)
                 user &&
                 <Modal
                     customColors={{
-                        accent: "#90e0ef",
-                        icon: "#79d8e9",
+                        accent: "linear-gradient(-180deg, rgba(0,180,216,1) 0%, rgba(72,202,228,1) 15%, rgba(173,232,244,1) 100%)",
+                        icon: "#48cae4",
                         text: "white"
                     }}
                     icon={<ProfileIcon />}
