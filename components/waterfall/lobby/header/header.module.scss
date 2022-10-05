@@ -61,13 +61,6 @@ $vw-desktop: 1200px;
             margin: $icon-margin  !important;
         }
 
-        @media (max-width: $vw-tablet) {
-            width: 20rem;
-            & span
-            {
-                padding: 2.5rem !important;
-            }
-        }
     }
 
     &__title
@@ -97,7 +90,7 @@ $vw-desktop: 1200px;
             transition: width 150ms $pop;
         }
 
-        @media (max-width: $vw-tablet) {
+        @media (max-width: calc($vw-tablet - 120px)) {
             display: none;
         }
     }
