@@ -1,6 +1,7 @@
 import Modal from 'components/shared/modal'
 import React from 'react'
 import { BiCookie } from 'react-icons/bi';
+import { handleCookieResponse } from 'services/cookies/CookieManager';
 
 import styles from './cookie-modal.module.scss';
 
@@ -19,10 +20,18 @@ Still Site Limited
 function CookieModal({ }: Props)
 {
     let gdpr = "https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/"
+
+    const accepted = (accepted: boolean) => handleCookieResponse(accepted);
+
     return (
         <Modal
             icon={<BiCookie />}
             title='Cookies'
+            customColors={{
+                accent: "#84563C",
+                icon: "#a67052",
+                text: "#EFE2B2"
+            }}
         >
             <div className={styles["cookie-modal"]}>
                 <h2 className={styles["cookie-modal__title"]}>We use Cookies!</h2>
@@ -39,8 +48,8 @@ function CookieModal({ }: Props)
 
                 </p>
                 <footer className={styles["cookie-modal__footer"]}>
-                    <button className={styles["cookie-modal__button"]}>Essential Cookies</button>
-                    <button className={styles["cookie-modal__button"]}>All Cookies</button>
+                    <button className={styles["cookie-modal__button"]} onClick={() => accepted(false)}>Essential Cookies</button>
+                    <button className={styles["cookie-modal__button"]} onClick={() => accepted(true)}>All Cookies</button>
                 </footer>
             </div>
         </Modal>

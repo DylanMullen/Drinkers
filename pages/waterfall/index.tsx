@@ -11,7 +11,7 @@ import LobbyModalWrapper from 'components/waterfall/lobby/modals';
 function WaterfallHome()
 {
 
-    const [modal, setModalId] = useState(-1);
+    const [modal, setModalId] = useState(3);
 
     return (
         <>
