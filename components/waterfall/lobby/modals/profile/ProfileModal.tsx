@@ -26,7 +26,7 @@ type SignedInProps = {
     setUser: React.Dispatch<React.SetStateAction<User | undefined>>
 }
 
-const DISCORDURL = "https://discord.com/api/oauth2/authorize?client_id=852274286017249330&redirect_uri=https%3A%2F%2Fdrinkers.beer%2Fapi%2Flogin&response_type=code&scope=identify%20email"
+const DISCORDURL = "https://discord.com/api/oauth2/authorize?client_id=852274286017249330&redirect_uri=https%3A%2F%2Fdrinkers.party%2Fapi%2Flogin&response_type=code&scope=identify%20email"
 
 function ProfileModal({ close }: Props)
 {

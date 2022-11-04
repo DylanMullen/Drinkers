@@ -28,6 +28,10 @@ export default class WaterfallSocket
         {
             connected(true)
         }
+        this.socket.onerror = (e) =>
+        {
+            console.log(e)
+        }
     }
 
     close()
