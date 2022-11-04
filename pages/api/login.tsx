@@ -1,9 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/apsi-routes/introduction
 
-import { DynamoDBClient, GetItemCommand, GetItemCommandInput, PutItemCommand, PutItemCommandInput, QueryCommand, QueryCommandInput, UpdateItemCommand, UpdateItemCommandInput } from "@aws-sdk/client-dynamodb";
+import { DynamoDBClient, PutItemCommand, PutItemCommandInput, QueryCommand, QueryCommandInput, UpdateItemCommand, UpdateItemCommandInput } from "@aws-sdk/client-dynamodb";
 import { NextApiRequest, NextApiResponse } from "next";
 
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
 import OAuth from 'discord-oauth2';
 
 import { setCookie } from 'cookies-next';

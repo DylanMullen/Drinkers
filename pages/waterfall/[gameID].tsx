@@ -1,36 +1,35 @@
 import ControlButton from 'components/waterfall/game/buttons/control-btn/ControlButton';
 import WaterfallPlayingCard, { CardOwner } from 'components/waterfall/game/card/WaterfallCard';
 
-import { BsQuestionLg } from 'react-icons/bs'
-import { FaChevronLeft, FaLink } from 'react-icons/fa'
+import { BsQuestionLg } from 'react-icons/bs';
+import { FaChevronLeft, FaLink } from 'react-icons/fa';
 
-import { useRouter } from 'next/router'
-import React, { useCallback, useEffect, useState } from 'react'
+import { useRouter } from 'next/router';
+import React, { lazy, Suspense, useCallback, useEffect, useState } from 'react';
 
-import styles from 'styles/pages/waterfall/game.module.scss'
-import RuleModal from 'components/waterfall/game/modals/rule-modal/RuleModal';
-import UserList from 'components/waterfall/game/userlist';
-import { WaterfallCard, WaterfallModal, WaterfallPlayer } from 'redux/waterfall/types';
-import { useAppDispatch, useAppSelector } from 'redux/store';
-import { getWaterfallPlayerByUUID, getWaterfallPlayers, openModal, selectCard, selectGame, selectGameName, selectHiddenBack, selectKicked, selectLobby, selectMechanics, selectModal, selectNextPlayer, selectRules, selectStarted, updateModal, updateNextTurnButton } from 'redux/waterfall/slice';
-import Head from 'next/head';
-import DateModal from 'components/waterfall/game/modals/date-modal';
-import { GiRuleBook } from 'react-icons/gi';
-import { getCurrentGame, joinWaterfallGame } from 'services/waterfall/GameController';
-import { GetServerSidePropsContext } from 'next';
-import RuleList from 'components/waterfall/game/rule-list';
-import { getUser, User } from 'utils/UserUtil';
-import HelpModal from 'components/waterfall/game/modals/help-modal';
-import WildcardModal from 'components/waterfall/game/modals/wildcard-modal';
-import Backdrop from 'components/shared/backdrop/Backdrop';
 import { Error } from 'components/waterfall/lobby/modals/join/JoinModal';
-import Lobby from 'components/waterfall/game/lobby';
-import { domAnimation, LazyMotion } from 'framer-motion';
+import { GetServerSidePropsContext } from 'next';
+import Head from 'next/head';
+import { GiRuleBook } from 'react-icons/gi';
+import { useAppDispatch, useAppSelector } from 'redux/store';
+import { getWaterfallPlayerByUUID, openModal, selectCard, selectGameName, selectHiddenBack, selectKicked, selectNextPlayer, selectOwnerId, selectRules, selectStarted, updateModal, updateNextTurnButton } from 'redux/waterfall/slice';
+import { WaterfallCard } from 'redux/waterfall/types';
+import { getCurrentGame, joinWaterfallGame } from 'services/waterfall/GameController';
+import { URL } from 'settings/Config';
+import styles from 'styles/pages/waterfall/game.module.scss';
+import { getUser, User } from 'utils/UserUtil';
+import Timer from 'components/shared/input/timer';
+
+const ModalHandler = lazy(() => import("components/waterfall/game/modals"))
+const Lobby = lazy(() => import("components/waterfall/game/lobby"))
+
+const RuleList = lazy(() => import("components/waterfall/game/rule-list"))
+const UserList = lazy(() => import("components/waterfall/game/userlist"))
+
 
 type Props = {
     gameID: string
 }
-
 
 function WaterfallGame({ gameID }: Props)
 {
@@ -54,28 +53,30 @@ function WaterfallGame({ gameID }: Props)
     const dispatch = useAppDispatch();
 
     let gameName = useAppSelector(selectGameName)
+    let gameOwner = useAppSelector(selectOwnerId)
 
     let hiddenBack = useAppSelector(selectHiddenBack);
     let started = useAppSelector(selectStarted)
     let card = useAppSelector(selectCard);
 
     let kicked = useAppSelector(selectKicked);
-
+    let nextPlayer = getWaterfallPlayerByUUID(useAppSelector(selectNextPlayer));
+    
     let playingCard = getWaterfallCard(card, hiddenBack, () =>
     {
-        dispatch(openModal())
+        getCurrentGame().handleAction();
         dispatch(updateNextTurnButton())
 
     });
 
     let isRed = card.suite == 0 || card.suite == 1;
-
-    let isNextPlayerEnabled = useAppSelector(selectNextPlayer) === user?.uuid && card.nextTurn !== undefined
+    let isOwner = user?.uuid === gameOwner;
+    let isNextPlayerEnabled = (nextPlayer?.uuid === user?.uuid || (nextPlayer?.offline && isOwner)) && card.nextTurn !== undefined
 
     const copyLink = (e: React.MouseEvent<HTMLButtonElement>) =>
     {
         e.currentTarget.blur()
-        let url = URL + "/waterfall/" + getCurrentGame().gameCode;
+        let url = URL + "/waterfall/" + getCurrentGame().gameCode + "/";
 
         navigator.clipboard.writeText(url)
     }
@@ -154,7 +155,7 @@ function WaterfallGame({ gameID }: Props)
                 <meta name="og:description" content="Waterfall is a drinking card game that you can play to spice up your drinking sessions with the fun and exciting prompts in the deck" />
             </Head>
 
-            <ModalWrapper />
+            <ModalHandler />
 
 
             <div className={styles["waterfall-toolbar"] + " " + styles["waterfall-toolbar--left"]}>
@@ -165,7 +166,7 @@ function WaterfallGame({ gameID }: Props)
 
             <div className={styles["waterfall-toolbar"] + " " + styles["waterfall-toolbar--right"]}>
                 <button className={styles["waterfall-toolbar__btn"]}
-                    onClick={(e) => { e.currentTarget.blur(); dispatch(updateModal({ type: 2, show: true, content: {} })) }}
+                    onClick={(e) => { e.currentTarget.blur(); dispatch(updateModal({ id: 0, show: true, content: {} })) }}
                 >
                     <BsQuestionLg />
                 </button>
@@ -179,7 +180,9 @@ function WaterfallGame({ gameID }: Props)
             </div>
             {
                 !started ?
-                    <Lobby /> :
+                    <Suspense>
+                        <Lobby />
+                    </Suspense> :
                     <>
                         <main className={styles["waterfall-game"]} data-color={isRed && started ? "red" : "black"}>
                             <div className={styles["waterfall-game__card"]}>
@@ -206,7 +209,9 @@ function WaterfallGame({ gameID }: Props)
 
                         </main>
                         <footer className={styles["waterfall-footer"]} data-color={isRed ? "red" : "black"}>
-                            <UserList />
+                            <Suspense>
+                                <UserList />
+                            </Suspense>
                         </footer>
                     </>
             }
@@ -235,9 +240,9 @@ function getWaterfallCard(card: WaterfallCard, hiddenBack: boolean, flipCallback
         cardDetails={{
             face: card.face,
             suite: card.suite,
-            hidden: hiddenBack,
+            hidden: hiddenBack, 
             cardsLeft: card.cardsLeft,
-            cardOwner: cardOwner
+            cardOwner: cardOwner,
         }}
         ruleDetails={{ title: card.details.title, description: card.details.description }}
         flipSettings={{
@@ -256,49 +261,6 @@ function getWaterfallCard(card: WaterfallCard, hiddenBack: boolean, flipCallback
 }
 
 
-function ModalWrapper()
-{
-    let modalState = useAppSelector(selectModal);
-    let modal: React.ReactNode = getModal(getCurrentGame().closeModal, modalState);
-
-    return (
-        <>
-            {
-                modalState?.show &&
-                <LazyMotion features={domAnimation}>
-                    <Backdrop closeCallback={getCurrentGame().closeModal}>
-                        {modal}
-                    </Backdrop>
-                </LazyMotion>
-            }
-        </>
-    )
-}
-
-function getModal(close: Function, modal: WaterfallModal | undefined): React.ReactNode
-{
-    if (modal === undefined)
-        return undefined;
-    switch (modal.type)
-    {
-        case 0: {
-            return <DateModal dates={modal.content.dates} players={modal.content.players} closeCallback={close} />
-        }
-        case 1: {
-            return <RuleModal suggestions={modal.content.suggestions} closeCallback={close} />
-        }
-        case 2: {
-            return <HelpModal />
-        }
-        case 3: {
-            return <WildcardModal cards={modal.content.cards} />
-        }
-        default: {
-            return undefined;
-        }
-    }
-
-}
 
 function RuleToolbarButton()
 {
@@ -328,9 +290,11 @@ function RuleToolbarButton()
             <button className={styles["waterfall-toolbar__btn"]}>
                 <GiRuleBook />
             </button>
-            <div className={styles["waterfall-toolbar__rules__wrapper"]}>
-                <RuleList />
-            </div>
+            <Suspense>
+                <div className={styles["waterfall-toolbar__rules__wrapper"]}>
+                    <RuleList />
+                </div>
+            </Suspense>
         </div>
     )
 }

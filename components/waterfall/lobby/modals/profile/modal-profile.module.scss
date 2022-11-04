@@ -1,3 +1,5 @@
+$pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
 .profile-modal
 {
 
@@ -126,6 +128,8 @@
         border-radius: 50%;
         border: 2px solid white;
         background-color: transparent;
+
+        transition: transform 150ms $pop;   
 
         svg
         {

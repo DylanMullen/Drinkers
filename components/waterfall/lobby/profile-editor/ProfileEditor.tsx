@@ -11,35 +11,37 @@ import styles from './profile-editor.module.scss'
 const PREFIXES: string[] = ["Drunk", "Sober", "Cold", "Warm", "Fruity", "Foaming", "Hard", "Mild", "Fermented", "Dirty", "Cloudy"];
 const NOUNS: string[] = ["Apple", "Grape", "Vodka", "Whiskey", "Brandy", "Rum", "Gin", "Seltzer", "Pear", "Banana", "Cane"];
 
-type Props = {}
+type Props = {
+    callback: Function,
+    hydrate: boolean,
+    text?: string
+}
 
 type ProfileAvatarProps = {
     url: string,
     callback: Function
 }
 
-function ProfileEditor({ }: Props)
+function ProfileEditor({ callback, hydrate, text }: Props)
 {
     const [user, setUser] = useState<User>();
-    const [username, setUsername] = useState("");
+    const [avatar, setAvatar] = useState("https://ca.slack-edge.com/T0266FRGM-U011PLSSMA9-g7e8a6705c42-512");
+    const [username, setUsername] = useState(randomName());
 
     const usernameChange = (e: React.ChangeEvent<HTMLInputElement>) => setUsername(() => e.target.value);
     const diceClick = () => setUsername(() => randomName());
 
-    const save = () =>
-    {
-        setCookie("user", {
-            uuid: uuid(),
-            username: username,
-            avatar: "https://ca.slack-edge.com/T0266FRGM-U011PLSSMA9-g7e8a6705c42-512",
-            guest: true,
-        })
-    }
+    const click = () => callback(username, avatar, uuid());
+
 
     useEffect(() =>
     {
+        if (!hydrate)
+            return;
+
         let user = getUser();
         setUser(user)
+        setAvatar(user.avatar)
         setUsername(user.username)
     }, [])
 
@@ -47,12 +49,12 @@ function ProfileEditor({ }: Props)
         <div className={styles["profile-editor"]}>
             <div className={styles["profile-editor__avatar"]}>
                 <div className={styles["profile-editor__avatar__selected"]}>
-                    <Image priority src={"https://ca.slack-edge.com/T0266FRGM-U011PLSSMA9-g7e8a6705c42-512"} alt={`Selected Avatar`} width="100%" height={"100%"} />
+                    <Image priority src={avatar} alt={`Selected Avatar`} width="100%" height={"100%"} />
 
                 </div>
                 <div className={styles["profile-editor__avatar__options"]}>
-                    <ProfileAvatar url="https://ca.slack-edge.com/T0266FRGM-U011PLSSMA9-g7e8a6705c42-512" callback={() => { }} />
-                    <ProfileAvatar url="https://ca.slack-edge.com/T0266FRGM-U011PLSSMA9-g7e8a6705c42-512" callback={() => { }} />
+                    <ProfileAvatar url="https://ca.slack-edge.com/T0266FRGM-U011PLSSMA9-g7e8a6705c42-512" callback={setAvatar} />
+                    <ProfileAvatar url="https://ca.slack-edge.com/T0266FRGM-U011PLSSMA9-g7e8a6705c42-512" callback={setAvatar} />
                 </div>
             </div>
             <div className={styles["profile-editor__body"]}>
@@ -64,10 +66,8 @@ function ProfileEditor({ }: Props)
                     <button className={styles["profile-editor__dice"]} onClick={diceClick}>
                         <IoDiceSharp />
                     </button>
-                    <button className={styles["profile-editor__save"]} onClick={save}>
-                        <IoSaveSharp />
-                    </button>
                 </div>
+                <button className={styles["profile-editor__submit"]} onClick={click}>{text ?? "Save"}</button>
             </div>
         </div>
     )
@@ -79,7 +79,7 @@ function ProfileAvatar({ url, callback }: ProfileAvatarProps)
 
     return (
         <button className={styles["profile-editor__avatar__option"]} onClick={click}>
-            <Image src={url} priority width={"100%"} height={"100%"} alt={`Possible Avatar Selection`}/>
+            <Image src={url} priority width={"100%"} height={"100%"} alt={`Possible Avatar Selection`} />
         </button>
     )
 }

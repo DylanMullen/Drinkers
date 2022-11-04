@@ -10,14 +10,13 @@ $vw-laptops: 1024px;
 $vw-desktop: 1200px;
 
 
-.waterfall-header
+.header
 {
     display: flex;
     align-items: center;
     justify-content: center;
 
     padding: 1.5rem 0;
-    padding-top: 8rem;
     gap: 3rem;
 
     &__logo
@@ -26,10 +25,10 @@ $vw-desktop: 1200px;
         align-items: center;
         justify-content: center;
         gap: 3rem;
-
+        
         &:hover
         {
-            .waterfall-header__title
+            .header__title
             {
                 letter-spacing: 5px;
                 font-weight: 600;
@@ -61,13 +60,6 @@ $vw-desktop: 1200px;
             margin: $icon-margin  !important;
         }
 
-        @media (max-width: $vw-tablet) {
-            width: 20rem;
-            & span
-            {
-                padding: 2.5rem !important;
-            }
-        }
     }
 
     &__title
@@ -97,14 +89,9 @@ $vw-desktop: 1200px;
             transition: width 150ms $pop;
         }
 
-        @media (max-width: $vw-tablet) {
+        @media (max-width: calc($vw-tablet - 120px)) {
             display: none;
         }
     }
-
-    @media (max-width: $vw-tablet) {
-        padding-top: 2.75rem;
-    }
-
 
 }

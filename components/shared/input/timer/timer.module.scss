@@ -1,0 +1,41 @@
+.timer
+{
+    width: 100%;
+    min-height: 1rem;
+    background-color: red;
+
+    display: flex;
+
+    // padding: .5rem;
+
+    border-radius: 500px;
+
+    &__slider
+    {
+        max-width: 100%;
+        transition: width 500ms linear, background-color 150ms ease-in-out;
+        min-height: 1rem;
+        height: 100%;
+
+        border-radius: 500px;
+
+        // box-shadow: inset -2px 0px 3px red;
+
+        &[data-status="0"]
+        {
+            background: green;
+        }
+        &[data-status="1"]
+        {
+            background: yellow;
+        }
+        &[data-status="2"]
+        {
+            background: orange;
+        }
+        &[data-status="3"]
+        {
+            background: lightsalmon;
+        }
+    }
+}

@@ -13,9 +13,9 @@ import UserList from '../userlist';
 
 import styles from './lobby.module.scss';
 
-type Props = {}
 
-function Lobby({ }: Props)
+
+function Lobby()
 {
     return (
         <>
@@ -33,8 +33,12 @@ function Lobby({ }: Props)
     )
 }
 
-function CardStack()
+export function CardStack()
 {
+    const [user, setUser] = useState<User>();
+
+    useEffect(() => { setUser(getUser()) }, [])
+
     return (
         <div className={styles["waterfall-lobby__cardstack"]}>
             <WaterfallCard
@@ -51,7 +55,7 @@ function CardStack()
                 cardDetails={{ face: 0, suite: 2, hidden: true }}
                 ruleDetails={{
                     title: "Waterfall",
-                    description: `Welcome $user!\nThe Game will start soon!\n\nWhilst you wait, check out the help button to view the deck and it's rules`
+                    description: `Welcome ${user?.username ?? "Guest"}!\nThe Game will start soon!\n\nWhilst you wait, check out the help button to view the deck and it's rules`
                 }}
                 flipSettings={{ clickable: false, onCreation: { flip: true, delay: 0 } }}
             />
@@ -121,10 +125,10 @@ function Settings()
                     </div>
 
                     <div className={styles["waterfall-lobby__settings__row"]}>
-                        <RangeInput 
-                        label='%value Players' min={minPlayers} max={8} defValue={players.max} 
-                        disabled={disabled}
-                        changeCallback={(e: string) => { updateSetting(e, "maxPlayer") }} />
+                        <RangeInput
+                            label='%value Players' min={minPlayers} max={8} defValue={players.max}
+                            disabled={disabled}
+                            changeCallback={(e: string) => { updateSetting(e, "maxPlayer") }} />
                     </div>
                 </div>
             </div>

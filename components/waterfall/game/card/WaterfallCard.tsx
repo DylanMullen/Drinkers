@@ -7,6 +7,8 @@ import styles from './waterfallcard.module.scss'
 import { motion, PanInfo, useMotionValue, useTransform } from "framer-motion"
 import Image from 'next/image'
 
+import Backface from 'public/cards/Red2.svg'
+
 
 type Props = {
     cardDetails: CardDetails,
@@ -22,8 +24,10 @@ export type CardDetails = {
     face: number,
     suite: number,
     hidden: boolean,
-    cardsLeft?: number
-    cardOwner?: CardOwner | undefined
+    cardsLeft?: number | 0
+    cardOwner?: CardOwner | undefined,
+    isChild?: boolean | undefined
+
 }
 
 export type RuleDetails =
@@ -132,13 +136,16 @@ function WaterfallPlayingCard({ cardDetails, ruleDetails, flipSettings = { click
                 flip(true)
             }, flipSettings.onCreation.delay)
 
+        console.log(Backface)
+
     }, [])
 
     let isRed = cardDetails.suite === 0 || cardDetails.suite === 1
 
     let clazz = `${styles["waterfall-card"]} 
                 ${isFlipped ? styles["waterfall-card--flipped"] : ""} 
-                ${flipSettings.clickable ? styles["waterfall-card--clickable"] : ""}`
+                ${flipSettings.clickable ? styles["waterfall-card--clickable"] : ""} 
+                ${cardDetails.isChild ? styles["waterfall-card--child"] : ""}`
 
     return (
         <div
@@ -165,7 +172,7 @@ function WaterfallPlayingCard({ cardDetails, ruleDetails, flipSettings = { click
                             <footer className={styles["waterfall-card__footer"]}>
                                 {
                                     cardDetails.cardsLeft &&
-                                    <span className={styles["waterfall-card__cardsleft"]}>{cardDetails.cardsLeft+1}</span>
+                                    <span className={styles["waterfall-card__cardsleft"]}>{cardDetails.cardsLeft + 1}</span>
                                 }
                                 {
                                     cardDetails.cardOwner &&
@@ -199,7 +206,9 @@ function WaterfallPlayingCard({ cardDetails, ruleDetails, flipSettings = { click
                             <div className={styles["waterfall-card__special"]}>
                                 <span>{getSpecialInitial(cardDetails.face)}</span>
                             </div>
+
                 }
+                {/* <Image src={Backface} layout="fill" /> */}
             </div>
 
         </div>

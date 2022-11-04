@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Head from '../../node_modules/next/head'
 
 import styles from 'styles/pages/waterfall/home.module.scss';
 import Header from 'components/waterfall/lobby/header';
 import Menu from 'components/waterfall/lobby/menu';
 
-import { IoBeer } from 'react-icons/io5';
+import { IoBeer } from '@react-icons/all-files/io5/IoBeer';
 import LobbyModalWrapper from 'components/waterfall/lobby/modals';
-
-type ModalWrapperProps = {
-    modal?: React.ReactNode,
-    visible: boolean
-}
 
 function WaterfallHome()
 {
@@ -36,7 +31,9 @@ function WaterfallHome()
                 <meta name="og:description" content="Waterfall is a drinking card game that you can play to spice up your drinking sessions with the fun and exciting prompts in the deck" />
             </Head>
 
-            <Header />
+            <header id="waterfall-header" className={styles["waterfall-header"]}>
+                <Header />
+            </header>
 
             <LobbyModalWrapper id={modal} close={setModalId} />
 

@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "redux/store";
 import store from "redux/store";
 import type WaterfallState from "./types";
-import { PayloadNextUser, WaterfallCard, WaterfallDate, WaterfallGame, WaterfallModal, WaterfallPlayer, WaterfallRule } from "./types";
+import { PayloadNextUser, WaterfallAction, WaterfallCard, WaterfallDate, WaterfallGame, WaterfallModal, WaterfallPlayer, WaterfallRule } from "./types";
 
 const initialState: WaterfallState = {
     lobby: {
@@ -64,6 +64,20 @@ export const waterfallSlice = createSlice({
                 return;
 
             state.lobby.readyPlayers = [...state.lobby?.readyPlayers, action.payload]
+        },
+        unready: (state, action: PayloadAction<string>) =>
+        {
+            if (!state.lobby)
+                return;
+
+            let players: string[] = []
+
+            for (let uuid in state.lobby.readyPlayers)
+            {
+                if (state.lobby.readyPlayers[uuid] === action.payload) continue
+                players.push(state.lobby.readyPlayers[uuid])
+            }
+            state.lobby.readyPlayers = players
         },
         start: (state) =>
         {
@@ -173,19 +187,22 @@ export const waterfallSlice = createSlice({
                 }
 
             }
+        }, updateAction: (state, action: PayloadAction<WaterfallAction | undefined>) =>
+        {
+            state.game.action = action.payload
         }
     }
 })
 
 export const
     {
-        lobby, ready, start,
+        lobby, ready, unready, start,
         join, leave, newPlayer,
         removePlayer, nextPlayer,
         nextCard, newDate, newRule,
         removeRule, updateModal, openModal,
         thumbMaster, updateNextTurnButton, kicked,
-        updateSetting
+        updateSetting, updateAction
     } = waterfallSlice.actions;
 
 export const selectLobby = (state: RootState) => state.waterfall.lobby
@@ -193,6 +210,8 @@ export const selectGame = (state: RootState) => state.waterfall.game;
 export const selectCard = (state: RootState) => state.waterfall.card;
 
 export const selectGameName = (state: RootState) => state.waterfall.game.gameName
+export const selectOwnerId = (state: RootState) => state.waterfall.game.ownerId
+
 export const selectStarted = (state: RootState) => state.waterfall.game.started
 export const selectKicked = (state: RootState) => state.waterfall.game.kicked
 
@@ -204,6 +223,7 @@ export const selectHiddenBack = (state: RootState) => state.waterfall.game.mecha
 export const selectRules = (state: RootState) => state.waterfall.game.mechanics.rules
 
 export const selectModal = (state: RootState) => state.waterfall.game.modal
+export const selectAction = (state: RootState) => state.waterfall.game.action
 
 export const selectCurrentPlayer = (state: RootState) => state.waterfall.game.players.current
 export const selectNextPlayer = (state: RootState) => state.waterfall.game.players.next

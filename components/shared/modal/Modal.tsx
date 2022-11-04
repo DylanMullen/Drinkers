@@ -59,7 +59,7 @@ function Modal({ icon, horizontal = false, closeClbck, closeBtn, children, custo
         animate={"shown"}
         exit={"exit"}
         className={styles["modal"] + " " + (horizontal ? styles["modal--horizontal"] : "")}
-        style={customExists ? { backgroundColor: customColors.accent } : undefined}
+        style={customExists ? { background: customColors.accent } : undefined}
         onClick={e => e.stopPropagation()}
 
       >
@@ -67,13 +67,13 @@ function Modal({ icon, horizontal = false, closeClbck, closeBtn, children, custo
         >
           <div className={styles["modal__header__body"]}>
             <div className={styles["modal__header__icon"]}
-              style={customExists ? { backgroundColor: customColors.icon, color: customColors.text } : undefined}>
+              style={customExists ? { background: customColors.icon, color: customColors.text } : undefined}>
               {icon !== undefined ? icon : <WarningIcon />}
             </div>
             {
               horizontal &&
               <h1 className={styles["modal__header__title"]}
-                style={customExists ? { backgroundColor: customColors.icon } : undefined}
+                style={customExists ? { background: customColors.icon } : undefined}
               >{title}</h1>
             }
 
@@ -87,7 +87,7 @@ function Modal({ icon, horizontal = false, closeClbck, closeBtn, children, custo
           {children}
 
         </section>
-        <footer className={styles["modal__footer"]} style={customExists ? { backgroundColor: customColors.accent } : undefined} />
+        <footer className={styles["modal__footer"]} style={customExists ? { background: customColors.accent } : undefined} />
       </m.div>
   )
 }

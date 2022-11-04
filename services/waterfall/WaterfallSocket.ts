@@ -87,7 +87,7 @@ export default class WaterfallSocket
                 break;
             }
             case 20: {
-                this.game.handleReady(json.uuid)
+                this.game.handleReady(json.uuid, json.type)
                 break;
             }
             case 21: {
