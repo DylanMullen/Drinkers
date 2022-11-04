@@ -47,7 +47,7 @@ function getModal(id: number, close: Function)
         case 2:
             return <ProfileModal close={close} />
         case 3:
-            return <CookieModal />
+            return <CookieModal close={close} />
         default:
             return undefined;
     }

@@ -1,0 +1,24 @@
+
+$width: 20rem;
+$height: calc($width * 1.4);
+
+.header
+{
+    padding-top: .5rem;
+}
+
+.creator
+{
+    
+
+    &__card
+    {
+        width: $width;
+        height: $height;
+    }
+
+    &__options
+    {
+
+    }
+}

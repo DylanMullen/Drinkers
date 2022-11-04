@@ -1,6 +1,6 @@
 import React, { useEffect, useId, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'redux/store';
-import { selectLobby, selectOwnerId, selectPlayers, updateModal } from 'redux/waterfall/slice';
+import { selectLobby, selectOwnerId, selectPlayers, selectStarted, updateModal } from 'redux/waterfall/slice';
 import { FiPlusCircle } from 'react-icons/fi'
 
 import styles from './userlist.module.scss';
@@ -22,6 +22,8 @@ function UserList({ lobby = false,  }: Props)
     const owner = useAppSelector(selectOwnerId);
     const players = useAppSelector(selectPlayers).users;
     const readyPlayerList = useAppSelector(selectLobby);
+    let started = useAppSelector(selectStarted)
+
 
     const playerList: React.ReactNode[] = [];
 
@@ -55,7 +57,7 @@ function UserList({ lobby = false,  }: Props)
         )
     }
 
-    if (playerList.length < 8 && owner===user?.uuid)
+    if (playerList.length < 8 && owner===user?.uuid && !started)
         playerList.push(
             <button className={styles["waterfall-userlist__add"]} onClick={showAddPlayer}>
                 <FiPlusCircle />

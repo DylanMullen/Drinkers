@@ -16,6 +16,7 @@
     "@next/bundle-analyzer": "^12.2.3",
     "@react-icons/all-files": "^4.1.0",
     "@reduxjs/toolkit": "^1.8.3",
+    "cloc": "^2.10.0",
     "cookies-next": "^2.1.1",
     "cross-env": "^7.0.3",
     "discord-oauth2": "^2.10.0",

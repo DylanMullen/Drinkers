@@ -11,7 +11,7 @@ import LobbyModalWrapper from 'components/waterfall/lobby/modals';
 function WaterfallHome()
 {
 
-    const [modal, setModalId] = useState(3);
+    const [modal, setModalId] = useState(-1);
 
     return (
         <>
@@ -31,7 +31,9 @@ function WaterfallHome()
                 <meta name="og:description" content="Waterfall is a drinking card game that you can play to spice up your drinking sessions with the fun and exciting prompts in the deck" />
             </Head>
 
-            <Header />
+            <header id="waterfall-header" className={styles["waterfall-header"]}>
+                <Header />
+            </header>
 
             <LobbyModalWrapper id={modal} close={setModalId} />
 

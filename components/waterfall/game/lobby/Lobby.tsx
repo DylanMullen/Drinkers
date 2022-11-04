@@ -33,7 +33,7 @@ function Lobby()
     )
 }
 
-function CardStack()
+export function CardStack()
 {
     const [user, setUser] = useState<User>();
 

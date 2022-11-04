@@ -20,7 +20,6 @@ import styles from 'styles/pages/waterfall/game.module.scss';
 import { getUser, User } from 'utils/UserUtil';
 import Timer from 'components/shared/input/timer';
 
-
 const ModalHandler = lazy(() => import("components/waterfall/game/modals"))
 const Lobby = lazy(() => import("components/waterfall/game/lobby"))
 
@@ -241,9 +240,9 @@ function getWaterfallCard(card: WaterfallCard, hiddenBack: boolean, flipCallback
         cardDetails={{
             face: card.face,
             suite: card.suite,
-            hidden: hiddenBack,
+            hidden: hiddenBack, 
             cardsLeft: card.cardsLeft,
-            cardOwner: cardOwner
+            cardOwner: cardOwner,
         }}
         ruleDetails={{ title: card.details.title, description: card.details.description }}
         flipSettings={{

@@ -5,7 +5,9 @@ import { handleCookieResponse } from 'services/cookies/CookieManager';
 
 import styles from './cookie-modal.module.scss';
 
-type Props = {}
+type Props = {
+    close: Function
+}
 
 const message =
     `
@@ -17,11 +19,11 @@ We are not the cookie monster! Your cookies are yours!
 Still Site Limited
 `
 
-function CookieModal({ }: Props)
+function CookieModal({ close }: Props)
 {
     let gdpr = "https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/"
 
-    const accepted = (accepted: boolean) => handleCookieResponse(accepted);
+    const accepted = (accepted: boolean) => { handleCookieResponse(accepted); close() }
 
     return (
         <Modal
@@ -30,7 +32,7 @@ function CookieModal({ }: Props)
             customColors={{
                 accent: "#84563C",
                 icon: "#a67052",
-                text: "#EFE2B2"
+                text: "white"
             }}
         >
             <div className={styles["cookie-modal"]}>

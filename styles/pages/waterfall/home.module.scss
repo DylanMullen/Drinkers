@@ -13,7 +13,7 @@ $vw-desktop: 1200px;
 {
     width: 100%;
     padding: 0 18vw;
-    margin-top: 6rem;
+    margin-top: 3rem;
 
     display: flex;
     flex-direction: column;
@@ -177,5 +177,16 @@ $vw-desktop: 1200px;
 
     @media (max-width: $vw-tablet) {
         height: fit-content;
+    }
+}
+
+.waterfall-header
+{
+    padding-top: 8rem;
+
+    transition: padding 150ms ease-in;
+
+    @media (max-width: $vw-tablet) {
+        padding-top: 2.75rem;
     }
 }
