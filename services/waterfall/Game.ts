@@ -204,7 +204,9 @@ export default class Game
         store.dispatch(nextPlayer({ current: players.current, next: players.next }))
 
         if (card.details.action)
+        {
             store.dispatch(updateAction(card.details.action))
+        }
     }
 
     handleUpdatePlayers(players: PayloadNextUser)
@@ -239,8 +241,6 @@ export default class Game
     {
         store.dispatch(updateSetting({ setting, value }))
     }
-
-
 
     handleAction()
     {

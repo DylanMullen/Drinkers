@@ -77,7 +77,7 @@ export interface WaterfallCardDetails
 {
     title: string,
     description: string,
-    action?: any | undefined
+    action?: WaterfallAction | undefined
 }
 
 export interface WaterfallModal

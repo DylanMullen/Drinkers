@@ -1,0 +1,21 @@
+.pirate-game
+{
+    width: 100%;
+    height: 70%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__container
+    {
+        width: fit-content;
+        max-width: 40%;
+    }
+
+}
+
+.pirate-footer
+{
+
+}
