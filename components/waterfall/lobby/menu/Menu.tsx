@@ -11,30 +11,16 @@ import { createWaterfallGame } from 'services/waterfall/GameController';
 import { getUser, User } from 'utils/UserUtil';
 
 type Props = {
-    open: Function
+    open: Function,
+
+    create: Function
 }
 
-function Menu({ open }: Props)
+function Menu({ open, create}: Props)
 {
     const [user, setUser] = useState<User>()
 
     const router = useRouter();
-
-    const create = async () =>
-    {
-        let response = await createWaterfallGame({
-            owner: { uuid: user?.uuid ?? "", username: user?.username ?? "", avatar: user?.avatar ?? "" }, settings: {
-                gameName: "Waterfall",
-                hiddenBack: false,
-                maxPlayers: 8,
-                actionsEnabled: true
-            }
-        });
-
-        if (!response) return;
-
-        router.push("/waterfall/" + response);
-    }
 
     useEffect(() =>
     {

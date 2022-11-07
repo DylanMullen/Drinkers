@@ -4,7 +4,7 @@ export const TWITTER_URL: string = "https://twitter.com/StillSite";
 
 //
 
-const DEBUG = false;
+const DEBUG = true;
 
 export const URL: string = DEBUG ? "http://localhost:80" : "https://drinkers.party"
 export const API_URL: string = DEBUG ? "http://localhost:5000" : "https://api.drinkers.party"

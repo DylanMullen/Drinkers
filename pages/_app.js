@@ -3,11 +3,15 @@ import '../styles/globals.css'
 
 import store from 'redux/store';
 import Script from 'next/script';
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps })
 {
   return (
     <>
+      <Head>
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+      </Head>
       <Provider store={store}>
         <Component {...pageProps} />
       </Provider>

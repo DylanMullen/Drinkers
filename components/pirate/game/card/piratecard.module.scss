@@ -5,12 +5,13 @@ $bg: white;
 
 $helpful: #358f80;
 $unhelpful: #F25C54;
+$next: #5e60ce;
 
 $transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 .card
 {
-    width: $width;
+    min-width: $width;
     height: $height;
     position: relative;
 
@@ -92,6 +93,31 @@ $transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         &:focus
         {
             transform: scale(1.1);
+        }
+
+        &:active
+        {
+            transform: scale(0.95);
+        }
+    }
+
+    &__next
+    {
+        padding: .25rem .5rem;
+        font-size: 1.25rem;
+        background-color: transparent;
+        border: 2px solid currentColor;
+        border-radius: .25rem;
+        cursor: pointer;
+
+        transition: transform 150ms $transition;
+
+
+        &:hover,
+        &:focus
+        {
+            transform: scale(1.1);
+            color:$next;
         }
 
         &:active

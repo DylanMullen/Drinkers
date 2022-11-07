@@ -1,7 +1,7 @@
 export default interface Pack
 {
     settings: PackSettings,
-    prompts: PackPrompts[]
+    prompts: PackPrompt[]
 }
 
 export interface PackSettings
@@ -11,9 +11,10 @@ export interface PackSettings
     description: string
 }
 
-export interface PackPrompts
+export interface PackPrompt
 {
     uuid: string
     title: string
     description: string
+    rotation: number
 }

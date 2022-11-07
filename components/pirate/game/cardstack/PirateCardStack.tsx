@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { newPrompt, selectPrompts } from 'redux/pirate/slice'
+import { useAppDispatch, useAppSelector } from 'redux/store'
 import PirateCard, { PirateCardSettings } from '../card/PirateCard'
+import { v4 as uuid } from 'uuid';
+
+
 
 import styles from './card-stack.module.scss'
 
@@ -16,44 +21,37 @@ type StackCardProps = {
 
 function PirateCardStack({ layers, activeCard }: Props)
 {
+    const dispatch = useAppDispatch()
 
-    // const [cards, setCards] = useState<React.ReactNode[]>([])
-    const [number, setNumber] = useState(layers);
+    const prompts = useAppSelector(selectPrompts);
+
+    let cards: React.ReactNode[] = [];
 
     const removeTop = () =>
     {
-        setNumber(prev => prev-1)
+        let rotation = (Math.random() * (Math.random() < .25 ? -1 : 1)) * 7
+        dispatch(newPrompt({ title: "", description: "", rotation: rotation, uuid: uuid() }))
     }
 
-    // if (cards.length === 0)
-    // {
-    //     for (let x = layers; x > 0; x--)
-    //     {
-    //         cards.push(
-
-    //         );
-    //         console.log("re running")
-    //     }
-    // }
-
-    let cards = [];
-
-    for (let x = number; x > 0; x--)
-    {
-        let rotation = (Math.random() * (x % 2 === 0 ? -1 : 1)) * 7;
-        let isLast = x === 1
-        cards.push(<StackCard
-            key={x * Math.random() * 10}
-            style={{ transform: `perspective(1500px) rotate(${isLast ? 0 : rotation}deg) translateY(${x * 4}px)` }}
-            activeCard={isLast ? activeCard : undefined}
-            clickHandler={isLast ? removeTop : () => { }}
-        />)
-    }
+    let keys = Object.keys(prompts).reverse()
 
     return (
         <div className={styles["stack"]}>
             {
-                cards
+                keys.map((e, index) =>
+                {
+                    let isLast = index === keys.length - 1
+                    let prompt = prompts[e];
+                    return (
+
+                        <StackCard
+                            key={index}
+                            style={{ transform: `perspective(1500px) rotate(${isLast ? 0 : prompt.rotation}deg) translateY(${index * -4}px)` }}
+                            activeCard={isLast ? prompts[e] : undefined}
+                            clickHandler={isLast ? removeTop : () => { }}
+                        />
+                    )
+                })
             }
         </div>
     )

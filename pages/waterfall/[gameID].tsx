@@ -124,6 +124,7 @@ function WaterfallGame({ gameID }: Props)
         else
             setLoaded(true);
     }, [gameID, router])
+    
     useEffect(() =>
     {
         connect();

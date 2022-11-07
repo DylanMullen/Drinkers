@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import pirateSlice from './pirate/slice';
 import waterfallSlice from './waterfall/slice';
 
 const store = configureStore({
     reducer: {
-        waterfall: waterfallSlice
+        waterfall: waterfallSlice,
+        pirate: pirateSlice
     }
 });
 
