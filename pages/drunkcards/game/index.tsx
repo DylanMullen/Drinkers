@@ -14,16 +14,17 @@ import { useAppSelector } from 'redux/store';
 import { getFirstPrompt, selectAllPlayers, selectNextPlayer, selectPlayers, selectPrompts } from 'redux/pirate/slice';
 import UserList from 'components/shared/userlist';
 import UserCard from 'components/shared/usercard';
+import Head from 'next/head';
 
 type Props = {
     code: string
 }
-function index({ code }: Props)
+
+function PirateGame({ code }: Props)
 {
     const [user, setUser] = useState<TUser>();
     const [isLoaded, setLoaded] = useState<boolean>(false);
 
-    const prompts = useAppSelector(selectPrompts);
     const players = useAppSelector(selectAllPlayers);
     const next = useAppSelector(selectNextPlayer);
 
@@ -61,7 +62,7 @@ function index({ code }: Props)
 
     useEffect(() =>
     {
-        if (next === "")
+        if (next === "" && isLoaded)
             router.push("/pirate")
     }, [next])
 
@@ -79,18 +80,21 @@ function index({ code }: Props)
             />
         );
     }
+
     return (
         <>
+            <Head>
+                <title>Drunkcards | Drinkers</title>
+                <meta name="robots" content="all" />
+                <meta name="title" content="Drunkcards | Drinkers" />
+            </Head>
             <main className={styles["pirate-game"]}>
                 {
-                    isLoaded && prompts[promptID] !== undefined &&
-                    <PirateCard
-                        settings={{
-                            title: prompts[promptID].title,
-                            description: prompts[promptID].description,
-                            debug: true
-                        }}
-                    />}
+                    isLoaded &&
+                    <AnimatePresence>
+                        <PirateCardStack />
+                    </AnimatePresence>
+                }
             </main>
             <footer className={styles["pirate-footer"]}>
                 <UserList
@@ -113,4 +117,4 @@ export async function getServerSideProps(context: GetServerSidePropsContext)
     }
 }
 
-export default index
+export default PirateGame

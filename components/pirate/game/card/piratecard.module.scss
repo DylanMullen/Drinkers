@@ -11,7 +11,7 @@ $transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 .card
 {
-    min-width: $width;
+    width: $width;
     height: $height;
     position: relative;
 
@@ -20,6 +20,8 @@ $transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     padding: 2rem;
 
     border-radius: .25rem;
+
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.75);
 
     &__contents
     {
@@ -38,6 +40,8 @@ $transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         letter-spacing: 1.5px;
         font-weight: 600;
         font-size: 3rem;
+        text-overflow: ellipsis;
+        text-align: center;
     }
 
     &__description

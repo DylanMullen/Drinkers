@@ -5,7 +5,9 @@ export const TWITTER_URL: string = "https://twitter.com/StillSite";
 //
 
 const DEBUG = true;
+const LOCALHOST = false;
+const LOCAL_IP = LOCALHOST ? "localhost" : "92.236.17.208"
 
-export const URL: string = DEBUG ? "http://localhost:80" : "https://drinkers.party"
-export const API_URL: string = DEBUG ? "http://localhost:5000" : "https://api.drinkers.party"
-export const WEBSOCKET_URL: string = DEBUG ? "ws://localhost:5000" : "wss://api.drinkers.party:8443"
+export const URL: string = DEBUG ? `http://${LOCAL_IP}:80` : "https://drinkers.party"
+export const API_URL: string = DEBUG ? `http://${LOCAL_IP}:5000` : "https://api.drinkers.party"
+export const WEBSOCKET_URL: string = DEBUG ? `ws://${LOCAL_IP}:5000` : "wss://api.drinkers.party:8443"

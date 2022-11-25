@@ -1,7 +1,7 @@
 import PirateGameSocket from "./PirateGameSocket";
 import store from "redux/store";
 import { NextPlayerTurn, PiratePlayer, PiratePrompt } from "redux/pirate/types";
-import { hasPlayer, newPlayer, newPrompt, nextPlayer, removePlayer } from "redux/pirate/slice";
+import { deleteFirstPrompt, hasPlayer, newPlayer, newPrompt, nextPlayer, removePlayer } from "redux/pirate/slice";
 import { User } from "utils/UserUtil";
 
 export default class PirateGame
@@ -65,7 +65,15 @@ export default class PirateGame
     handleNextTurn(nextPlayers: NextPlayerTurn, prompt: PiratePrompt)
     {
         store.dispatch(nextPlayer(nextPlayers))
-        store.dispatch(newPrompt(prompt));
+
+        store.dispatch(deleteFirstPrompt())
+
+        setTimeout(() =>
+        {
+
+            store.dispatch(newPrompt(prompt));
+
+        }, 500)
     }
 
 

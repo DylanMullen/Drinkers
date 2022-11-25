@@ -28,7 +28,7 @@ function PirateHome({ }: Props)
 
         if (!created) return;
 
-        router.push("/pirate/game?code=" + getPirateInstance().joinCode);
+        router.push("/drunkcards/game?code=" + getPirateInstance().joinCode);
     }
 
     useEffect(() =>
@@ -58,19 +58,11 @@ function PirateHome({ }: Props)
                     open={() => { }}
                     create={create}
                 />
-                {/* <footer className={styles["pirate-footer"]}>
-                    <a
-                        href="https://www.buymeacoffee.com/drinkers" target={"_blank"} rel="noreferrer"
-                        className={styles["waterfall-footer__banner"]}
-                        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => e.currentTarget.blur()}
-                    >
-                        <h2 className={styles["waterfall-footer__banner__text"]}>Buy us a drink!</h2>
-                        <span className={styles["waterfall-footer__banner__btn"]}><IoBeer /></span>
-                    </a>
-                </footer> */}
             </main>
         </>
     )
 }
+
+
 
 export default PirateHome

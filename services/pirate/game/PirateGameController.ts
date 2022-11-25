@@ -1,5 +1,5 @@
 import { intial } from "redux/pirate/slice";
-import PirateState, { PiratePlayer } from "redux/pirate/types";
+import PirateState, { PiratePlayer, PiratePrompt } from "redux/pirate/types";
 import store from "redux/store";
 import { API_URL } from "settings/Config";
 import { User } from "utils/UserUtil";
@@ -32,7 +32,20 @@ export async function joinPirateGame(joinCode: string, player: PiratePlayer): Pr
 
     if (res?.body?.error !== undefined) return false;
 
+    console.log(res)
+
+    let promptsIn: { [id: number]: PiratePrompt } = res.game.prompts
+    let promptsOut: { [id: string]: PiratePrompt } = {}
+
+    for (let index = 0; index < Object.keys(promptsIn).length; index++)
+    {
+        const element = promptsIn[parseInt(Object.keys(promptsIn)[index])];
+        promptsOut[element.uuid] = element
+    }
+
+
     let state: PirateState = res;
+    state.game.prompts = promptsOut
     store.dispatch(intial(state))
 
     instance = new PirateGame(state.settings.uuid, state.settings.joinCode)

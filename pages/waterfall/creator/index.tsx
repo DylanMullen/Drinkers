@@ -30,7 +30,7 @@ function Creator({ }: Props)
             </Head>
 
             <header className={styles["header"]}>
-                <Header />
+                {/* <Header /> */}
             </header>
             <main id="creator" className={styles["creator"]}>
                 <div className={styles["creator__card"]}>

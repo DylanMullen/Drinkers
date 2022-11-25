@@ -16,6 +16,7 @@ type Props = {
 export type PirateCardSettings = {
     title: string
     description: string,
+    rotation?: number,
     isDummy?: boolean,
     debug?: boolean
 }
@@ -24,7 +25,7 @@ type PirateCardScheme = {
     background: string
 }
 
-function PirateCard({ settings: { title, description, isDummy = false, debug = false }, scheme }: Props)
+function PirateCard({ settings: { title, description, rotation = 0, isDummy = false, debug = false }, scheme }: Props)
 {
     const [user, setUser] = useState<User>();
 
@@ -33,16 +34,19 @@ function PirateCard({ settings: { title, description, isDummy = false, debug = f
     useEffect(() =>
     {
         setUser(getUser())
-    },[])
+    }, [])
 
-    const click = (e:MouseEvent<HTMLButtonElement>) =>
+    const click = (e: MouseEvent<HTMLButtonElement>) =>
     {
         e.currentTarget.blur()
         getPirateInstance().sendNextTurn(user?.uuid ?? "")
     }
 
     return (
-        <div className={styles["card"]}>
+        <div 
+            className={styles["card"]}
+            style={{ transform: `rotate(${rotation}deg)` }}
+        >
             <div className={styles["card__contents"]}>
                 <h1 className={styles["card__title"]}>{title}</h1>
                 <p className={styles["card__description"]}>{description}</p>

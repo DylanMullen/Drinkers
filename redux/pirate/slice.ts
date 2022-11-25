@@ -4,7 +4,6 @@ import store, { RootState } from "redux/store";
 import { User } from "utils/UserUtil";
 import PirateState, { NextPlayerTurn, PiratePlayer, PiratePrompt } from "./types";
 
-//(Math.random() * (x % 2 === 0 ? -1 : 1)) * 7
 
 const initialState: PirateState = {
     settings: {
@@ -15,7 +14,8 @@ const initialState: PirateState = {
         hasStarted: false
     },
     game: {
-        prompts: {},
+        prompts: {
+        },
         players: {
             current: "",
             next: "",
@@ -31,6 +31,13 @@ export const pirateSlice = createSlice({
     reducers: {
         intial: (state, action: PayloadAction<PirateState>) =>
         {
+            for (const key in action.payload.game.prompts)
+            {
+                const element = action.payload.game.prompts[key];
+                element.rotation = (Math.random()) * 5
+            }
+
+
             return { ...action.payload }
         },
         newPlayer: (state, action: PayloadAction<User>) =>
@@ -51,10 +58,18 @@ export const pirateSlice = createSlice({
         },
         newPrompt: (state, action: PayloadAction<PiratePrompt>) =>
         {
+            let prompt = action.payload;
+
+            prompt.rotation = Math.random() * 7;
+            state.game.prompts[action.payload.uuid] = prompt
+
+        },
+        deleteFirstPrompt: (state) =>
+        {
             let keys = Object.keys(state.game.prompts);
 
             delete state.game.prompts[keys[0]]
-            state.game.prompts[action.payload.uuid] = action.payload
+
         },
         nextPlayer: (state, action: PayloadAction<NextPlayerTurn>) =>
         {
@@ -65,7 +80,7 @@ export const pirateSlice = createSlice({
 })
 
 export const {
-    intial, newPlayer, removePlayer, newPrompt, nextPlayer
+    intial, newPlayer, removePlayer, newPrompt, nextPlayer, deleteFirstPrompt
 
 } = pirateSlice.actions
 
