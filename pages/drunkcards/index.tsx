@@ -10,17 +10,20 @@ import { createPirateGame, getPirateInstance } from 'services/pirate/game/Pirate
 import { getDefaultUser, getUser, User } from 'utils/UserUtil';
 import { useRouter } from 'next/router';
 import { IoBeer } from 'react-icons/io5';
+import { useUser } from 'context/UserContext';
 
 type Props = {}
 
 function PirateHome({ }: Props)
 {
-
-    const [user, setUser] = useState<User>(getDefaultUser());
     const router = useRouter();
+
+    const user = useUser()
 
     const create = async () =>
     {
+        if (user === undefined) return;
+
         let created = await createPirateGame(
             ["3956ceb7-fcdf-4691-bc3b-80db4085c2be", "365097f8-78db-4e8f-b6a8-30490873e706"],
             user
@@ -30,12 +33,6 @@ function PirateHome({ }: Props)
 
         router.push("/drunkcards/game?code=" + getPirateInstance().joinCode);
     }
-
-    useEffect(() =>
-    {
-        setUser(getUser())
-    }, [])
-
 
 
     return (

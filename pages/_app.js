@@ -5,6 +5,8 @@ import store from 'redux/store';
 import Script from 'next/script';
 import Head from 'next/head';
 
+import { UserProvider } from 'context/UserContext.tsx'
+
 function MyApp({ Component, pageProps })
 {
   return (
@@ -12,9 +14,11 @@ function MyApp({ Component, pageProps })
       <Head>
         <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
       </Head>
-      <Provider store={store}>
-        <Component {...pageProps} />
-      </Provider>
+      <UserProvider>
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
+      </UserProvider>
 
       <Script
         strategy="lazyOnload"
