@@ -68,7 +68,6 @@ function WaterfallHome()
                     logo={"/imgs/waterfall.png"}
                 />
             </header>
-
             <main id="waterfall-lobby" className={styles["waterfall-lobby"]}>
                 <Menu gameMode={GameMode.WATERFALL} create={create} />
                 <footer className={styles["waterfall-footer"]}>
