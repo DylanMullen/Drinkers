@@ -1,7 +1,7 @@
 import React, { MouseEvent, useEffect, useState } from 'react'
 
 import { HiOutlineThumbUp, HiOutlineThumbDown } from 'react-icons/hi'
-import { selectNextPlayer } from 'redux/pirate/slice'
+import { selectNextPlayer, selectTurns } from 'redux/pirate/slice'
 import { useAppSelector } from 'redux/store'
 import { getPirateInstance } from 'services/pirate/game/PirateGameController'
 import { getUser, User } from 'utils/UserUtil'
@@ -28,6 +28,7 @@ type PirateCardScheme = {
 function PirateCard({ settings: { title, description, rotation = 0, isDummy = false, debug = false }, scheme }: Props)
 {
     const [user, setUser] = useState<User>();
+    const turns = useAppSelector(selectTurns);
 
     const next = useAppSelector(selectNextPlayer);
 
@@ -43,7 +44,7 @@ function PirateCard({ settings: { title, description, rotation = 0, isDummy = fa
     }
 
     return (
-        <div 
+        <div
             className={styles["card"]}
             style={{ transform: `rotate(${rotation}deg)` }}
         >
@@ -53,21 +54,24 @@ function PirateCard({ settings: { title, description, rotation = 0, isDummy = fa
             </div>
             {
                 !isDummy &&
-                <div className={styles["card__indicators"]}>
-                    {
-                        !debug ?
-                            <>
-                                <button className={`${styles["card__indicator"]} ${styles["card__indicator--helpful"]}`}>
-                                    <HiOutlineThumbUp />
-                                </button>
-                                <button className={`${styles["card__indicator"]} ${styles["card__indicator--unhelpful"]}`}>
-                                    <HiOutlineThumbDown />
-                                </button>
-                            </> :
-                            next === user?.uuid &&
-                            <button className={styles["card__next"]} onClick={click}>Next Turn</button>
-                    }
-                </div>
+                <>
+                    <div className={styles["card__turns"]}>{turns}</div>
+                    <div className={styles["card__indicators"]}>
+                        {
+                            !debug ?
+                                <>
+                                    <button className={`${styles["card__indicator"]} ${styles["card__indicator--helpful"]}`}>
+                                        <HiOutlineThumbUp />
+                                    </button>
+                                    <button className={`${styles["card__indicator"]} ${styles["card__indicator--unhelpful"]}`}>
+                                        <HiOutlineThumbDown />
+                                    </button>
+                                </> :
+                                next === user?.uuid &&
+                                <button className={styles["card__next"]} onClick={click}>Next Turn</button>
+                        }
+                    </div>
+                </>
             }
         </div>
     )

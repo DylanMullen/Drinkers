@@ -11,7 +11,7 @@ $transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 .card
 {
-    width: $width;
+    max-width: $width;
     height: $height;
     position: relative;
 
@@ -48,6 +48,27 @@ $transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     {
         font-size: 1.2rem;
         text-align: center;
+    }
+
+    &__turns
+    {
+        position: absolute;
+        bottom: 1rem;
+        left: 1rem;
+
+        border: 2px solid black;
+        border-radius: 50%;
+
+        min-width: 2rem;
+        min-height: 2rem;
+
+        padding: .35rem;
+
+        aspect-ratio: 1/1;
+
+        display: grid;
+        place-content: center;
+
     }
 
 

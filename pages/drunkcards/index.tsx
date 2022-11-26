@@ -13,6 +13,8 @@ import { IoBeer } from 'react-icons/io5';
 import { useUser } from 'context/UserContext';
 import { useModalContext } from 'context/ModalContext';
 import CookieModal from 'components/waterfall/lobby/modals/cookies';
+import AdModal from 'components/shared/modals/ad';
+import { GameMode } from 'components/waterfall/lobby/modals/join/JoinModal';
 
 type Props = {}
 
@@ -23,22 +25,26 @@ function PirateHome({ }: Props)
     const user = useUser()
     const { update, open, close } = useModalContext()
 
+    const goTo = () =>
+    {
+        close();
+        router.push("/drunkcards/game?code=" + getPirateInstance().joinCode);
+    }
+
     const create = async () =>
     {
         if (user === undefined) return;
+        update(<AdModal adTime={5} callback={goTo} />)
+        open()
 
-        let created = await createPirateGame(
+
+        await createPirateGame(
             ["3956ceb7-fcdf-4691-bc3b-80db4085c2be", "365097f8-78db-4e8f-b6a8-30490873e706"],
             user
         )
 
-        if (!created) return;
-
-        router.push("/drunkcards/game?code=" + getPirateInstance().joinCode);
+        // if (!created) return;
     }
-
-    // update()
-    // open()
 
     return (
         <>
@@ -57,7 +63,7 @@ function PirateHome({ }: Props)
 
             <main id="pirate-main" className={styles["pirate-lobby"]} >
                 <Menu
-                    open={() => { }}
+                    gameMode={GameMode.DRUNKCARDS}
                     create={create}
                 />
             </main>

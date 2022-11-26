@@ -21,6 +21,7 @@ export interface PirateGame
     prompts: {
         [id: string]: PiratePrompt
     }
+    turns: number
     players: {
         current: string,
         next: string,
@@ -49,6 +50,6 @@ export interface PiratePrompt
 
 export interface NextPlayerTurn
 {
-    current:string
-    next:string,
+    current: string
+    next: string,
 }

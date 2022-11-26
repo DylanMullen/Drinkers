@@ -16,6 +16,7 @@ const initialState: PirateState = {
     game: {
         prompts: {
         },
+        turns: 0,
         players: {
             current: "",
             next: "",
@@ -40,6 +41,10 @@ export const pirateSlice = createSlice({
 
             return { ...action.payload }
         },
+        reset: () =>
+        {
+            return initialState
+        },
         newPlayer: (state, action: PayloadAction<User>) =>
         {
             state.game.players.users[Object.keys(state.game.players.users).length] = action.payload
@@ -56,12 +61,13 @@ export const pirateSlice = createSlice({
             }
             delete state.game.players.users[index]
         },
-        newPrompt: (state, action: PayloadAction<PiratePrompt>) =>
+        newPrompt: (state, action: PayloadAction<{ prompt: PiratePrompt, turns:number }>) =>
         {
-            let prompt = action.payload;
+            let { prompt, turns } = action.payload;
 
             prompt.rotation = Math.random() * 7;
-            state.game.prompts[action.payload.uuid] = prompt
+            // state.game.turns = turns
+            state.game.prompts[prompt.uuid] = prompt
 
         },
         deleteFirstPrompt: (state) =>
@@ -75,12 +81,16 @@ export const pirateSlice = createSlice({
         {
             state.game.players.current = action.payload.current
             state.game.players.next = action.payload.next
+        },
+        increaseTurns: (state) =>
+        {
+            state.game.turns = state.game.turns + 1
         }
     }
 })
 
 export const {
-    intial, newPlayer, removePlayer, newPrompt, nextPlayer, deleteFirstPrompt
+    intial, newPlayer, removePlayer, newPrompt, nextPlayer, deleteFirstPrompt, reset, increaseTurns
 
 } = pirateSlice.actions
 
@@ -88,6 +98,7 @@ export const selectGame = (state: RootState) => state.pirate.game;
 export const selectSettings = (state: RootState) => state.pirate.settings;
 
 export const selectPrompts = (state: RootState) => state.pirate.game.prompts;
+export const selectTurns = (state: RootState) => state.pirate.game.turns
 export const selectMechanics = (state: RootState) => state.pirate.game.mechanics
 
 export const selectPlayers = (state: RootState) => state.pirate.game.players;

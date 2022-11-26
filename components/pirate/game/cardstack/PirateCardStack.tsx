@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { deleteFirstPrompt, getFirstPrompt, newPrompt, selectPrompts } from 'redux/pirate/slice'
+import { deleteFirstPrompt, getFirstPrompt, newPrompt, selectCurrentPlayer, selectNextPlayer, selectPrompts } from 'redux/pirate/slice'
 import { useAppDispatch, useAppSelector } from 'redux/store'
 import PirateCard, { } from '../card/PirateCard'
 import { v4 as uuid } from 'uuid';
@@ -8,6 +8,7 @@ import { AnimatePresence, motion, PanInfo, useMotionValue, usePresence, useTrans
 import { PiratePrompt } from 'redux/pirate/types';
 import { getPirateInstance } from 'services/pirate/game/PirateGameController';
 import { getDefaultUser, getUser, User } from 'utils/UserUtil';
+import { useUser } from 'context/UserContext';
 
 const DISTANCE_BETWEEN = 8
 const DRAG_DISTANCE = 250
@@ -15,11 +16,14 @@ const DRAG_DISTANCE = 250
 type StackedCardProps = {
     prompt: PiratePrompt,
     offset: number,
+    canMove: boolean
 }
 
 function PirateCardStack()
 {
     const prompts = useAppSelector(selectPrompts)
+    const nextPlayer = useAppSelector(selectNextPlayer);
+    const user = useUser()
     let keys = Object.keys(prompts)
 
     const cards: React.ReactNode[] = []
@@ -29,7 +33,7 @@ function PirateCardStack()
         let promptID = keys[index]
         let prompt = prompts[promptID];
         cards.push(
-            <StackedCard key={promptID} prompt={prompt} offset={index * DISTANCE_BETWEEN} />
+            <StackedCard key={promptID} canMove={user?.uuid === nextPlayer ?? false} prompt={prompt} offset={index * DISTANCE_BETWEEN} />
         )
     }
 
@@ -92,7 +96,7 @@ const animationVariants: Variants = {
     })
 }
 
-function StackedCard({ prompt, offset }: StackedCardProps)
+function StackedCard({ prompt, canMove, offset }: StackedCardProps)
 {
     const [user, setUser] = useState<User>(getDefaultUser())
     const [direction, setDirection] = useState(Math.random() >= .5 ? 1 : -1);
@@ -133,6 +137,8 @@ function StackedCard({ prompt, offset }: StackedCardProps)
         degreeModifier: degreeModifier
     }
 
+    const isNext = (canMove && isFirst);
+
     return (
         <motion.div
             className={styles["stack__card"]}
@@ -141,11 +147,11 @@ function StackedCard({ prompt, offset }: StackedCardProps)
             animate={["animate", offset === 0 && expand ? "expand" : ""]}
             exit="exit"
             custom={customProps}
-            drag={isFirst && "x"}
+            drag={(isNext) && "x"}
             dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
             onDragEnd={onDrag}
-            whileHover={isFirst && !expand ? { scale: 1.025, cursor: "grab" } : {}}
-            whileTap={isFirst ? { cursor: "grabbing", scale: 1.025 } : {}}
+            whileHover={isFirst && !expand ? { scale: 1.025, cursor: isNext ? "grab" : ""} : {}}
+            whileTap={(isNext) ? { cursor: "grabbing", scale: 1.025 } : {}}
             onAnimationComplete={onAnimationEnd}
             style={{ x: x }}
         >

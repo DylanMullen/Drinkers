@@ -19,6 +19,7 @@ import { URL } from 'settings/Config';
 import styles from 'styles/pages/waterfall/game.module.scss';
 import { getUser, User } from 'utils/UserUtil';
 import Timer from 'components/shared/input/timer';
+import { useUser } from 'context/UserContext';
 
 const ModalHandler = lazy(() => import("components/waterfall/game/modals"))
 const Lobby = lazy(() => import("components/waterfall/game/lobby"))
@@ -48,7 +49,7 @@ function WaterfallGame({ gameID }: Props)
     }
 
     const [isLoaded, setLoaded] = useState(false)
-    const [user, setUser] = useState<User>()
+    const user = useUser()
 
     const dispatch = useAppDispatch();
 
@@ -105,10 +106,8 @@ function WaterfallGame({ gameID }: Props)
 
     const connect = useCallback(async () =>
     {
-        const user = getUser();
-
-        setUser(user);
-
+        if (!user) return;
+        
         let response = await joinWaterfallGame({
             joinCode: gameID,
             player: {
@@ -123,7 +122,7 @@ function WaterfallGame({ gameID }: Props)
         }
         else
             setLoaded(true);
-    }, [gameID, router])
+    }, [gameID, router, user])
     
     useEffect(() =>
     {

@@ -42,6 +42,7 @@ function ProfileModal({ close }: Props)
             avatar: avatar,
             guest: true,
         })
+        close()
     }
 
     useEffect(() =>

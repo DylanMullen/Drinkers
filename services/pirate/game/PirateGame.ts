@@ -1,7 +1,7 @@
 import PirateGameSocket from "./PirateGameSocket";
 import store from "redux/store";
 import { NextPlayerTurn, PiratePlayer, PiratePrompt } from "redux/pirate/types";
-import { deleteFirstPrompt, hasPlayer, newPlayer, newPrompt, nextPlayer, removePlayer } from "redux/pirate/slice";
+import { deleteFirstPrompt, hasPlayer, increaseTurns, newPlayer, newPrompt, nextPlayer, removePlayer } from "redux/pirate/slice";
 import { User } from "utils/UserUtil";
 
 export default class PirateGame
@@ -10,6 +10,8 @@ export default class PirateGame
     gameID: string;
     joinCode: string;
     socket: PirateGameSocket
+
+    deleted: boolean
 
     constructor(gameID: string, joinCode: string)
     {
@@ -21,6 +23,7 @@ export default class PirateGame
     init()
     {
         this.socket = new PirateGameSocket(this)
+        this.deleted = false
     }
 
     getGameOwner()
@@ -46,6 +49,18 @@ export default class PirateGame
 
     }
 
+    delete()
+    {
+        this.socket.close()
+        this.deleted = true
+
+    }
+
+    isDeleted()
+    {
+        return this.deleted
+    }
+
     /* Handlers */
 
     handleNewPlayer(player: User)
@@ -62,17 +77,17 @@ export default class PirateGame
         store.dispatch(removePlayer(uuid));
     }
 
-    handleNextTurn(nextPlayers: NextPlayerTurn, prompt: PiratePrompt)
+    handleNextTurn(nextPlayers: NextPlayerTurn, turns: number, prompt: PiratePrompt)
     {
         store.dispatch(nextPlayer(nextPlayers))
 
         store.dispatch(deleteFirstPrompt())
+        store.dispatch(increaseTurns())
+
 
         setTimeout(() =>
         {
-
-            store.dispatch(newPrompt(prompt));
-
+            store.dispatch(newPrompt({ prompt: prompt, turns: turns }));
         }, 500)
     }
 

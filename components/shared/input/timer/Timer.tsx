@@ -11,8 +11,6 @@ function Timer({ maxTime = 5, callback = () => { } }: Props)
 {
     const [time, setTime] = useState(0);
 
-    const test = () => { console.log("test") }
-
     useEffect(() =>
     {
         let id = setInterval(() =>

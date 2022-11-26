@@ -45,7 +45,7 @@ export default class PirateGameSocket
     listen(event: MessageEvent)
     {
         let json = this.getJSON(event.data)
-        
+
         if (json === undefined) return;
         switch (json.id)
         {
@@ -58,7 +58,7 @@ export default class PirateGameSocket
                 this.game.handleNextTurn({
                     current: json.body.current,
                     next: json.body.next
-                }, json.body.prompt)
+                }, json.body.turns, json.body.prompt)
                 break;
             default:
                 break;
@@ -66,6 +66,10 @@ export default class PirateGameSocket
 
     }
 
+    close()
+    {
+        this.socket.close();
+    }
 
     setConnected(status: boolean)
     {

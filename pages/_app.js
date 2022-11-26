@@ -5,11 +5,24 @@ import store from 'redux/store';
 import Script from 'next/script';
 import Head from 'next/head';
 
-import { UserProvider } from 'context/UserContext.tsx'
 import ModalContextProvider from 'context/ModalContext.tsx'
+
+import { UserProvider } from 'context/UserContext.tsx'
+import { lazy, useEffect } from 'react';
 
 function MyApp({ Component, pageProps })
 {
+  useEffect(() =>
+  {
+    var ads = document.getElementsByClassName("adsbygoogle").length;
+    for (var i = 0; i < ads; i++)
+    {
+      try
+      {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) { }
+    }
+  }, []);
   return (
     <>
       <Head>
@@ -18,7 +31,6 @@ function MyApp({ Component, pageProps })
       <UserProvider>
         <Provider store={store}>
           <ModalContextProvider>
-
             <Component {...pageProps} />
           </ModalContextProvider>
         </Provider>
@@ -28,6 +40,13 @@ function MyApp({ Component, pageProps })
         strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
       />
+
+
+      <Script
+        id="google-ads"
+        async
+        crossOrigin='anonymous'
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2974631546161756" />
 
       <Script id="google-analytics" strategy="lazyOnload">
         {`
@@ -39,6 +58,9 @@ function MyApp({ Component, pageProps })
             });
                 `}
       </Script>
+      {/* <Script>
+        (adsbygoogle = window.adsbygoogle || []).push({ });
+      </Script> */}
     </>
 
 

@@ -1,6 +1,7 @@
+
 import Backdrop from "components/shared/backdrop";
-import CookieModal from "components/waterfall/lobby/modals/cookies";
-import React, { PropsWithChildren, useContext, useState } from "react"
+import { domAnimation, LazyMotion } from "framer-motion";
+import React, { lazy, PropsWithChildren, useContext, useState } from "react"
 
 
 
@@ -21,8 +22,8 @@ const ModalContext = React.createContext<ModalContextProps>(initial)
 
 function ModalContextProvider({ children }: PropsWithChildren)
 {
-    const [show, setShow] = useState(false);
     const [modal, setModal] = useState<React.ReactNode>()
+    const [show, setShow] = useState(false);
 
     const open = () => setShow(true)
     const close = () => setShow(false)
@@ -32,11 +33,13 @@ function ModalContextProvider({ children }: PropsWithChildren)
         <ModalContext.Provider value={{ update: updateModal, open: open, close: close }}>
             {
                 show &&
-                <Backdrop>
-                    {modal}
-                </Backdrop>
-            }
+                <LazyMotion features={domAnimation}>
 
+                    <Backdrop closeCallback={close}>
+                        {modal}
+                    </Backdrop>
+                </LazyMotion>
+            }
             {children}
         </ModalContext.Provider>
     )

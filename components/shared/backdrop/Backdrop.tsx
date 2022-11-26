@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import React, { useCallback, useEffect, useState } from 'react'
 
 import styles from './backdrop.module.scss'
@@ -33,7 +33,7 @@ function Backdrop({ children, closeCallback = () => { } }: Props)
   }
 
   return (
-    <motion.div
+    <m.div
       key={"backdrop"}
       initial={{ backgroundColor: "rgba(0,0,0,0)" }}
       animate={{ backgroundColor: "rgba(0,0,0,.65)" }}
@@ -44,9 +44,10 @@ function Backdrop({ children, closeCallback = () => { } }: Props)
         delayChildren: 5
       }}
       onClick={click}
+
       className={styles["backdrop"]}>
       {children}
-    </motion.div>
+    </m.div>
   )
 }
 

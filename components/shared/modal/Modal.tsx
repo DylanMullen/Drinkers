@@ -1,5 +1,5 @@
 import React from 'react'
-import { motion, Variants } from 'framer-motion';
+import { m , Variants } from 'framer-motion';
 
 import styles from './modal.module.scss';
 
@@ -20,7 +20,6 @@ export type ModalCustomScheme = {
   accent: string,
   icon: string,
   text: string,
-  backdrop?: boolean
 }
 
 const animation: Variants = {
@@ -52,7 +51,7 @@ function Modal({ icon, horizontal = false, closeClbck, closeBtn, children, custo
   const customExists = customColors !== undefined;
 
   return (
-      <motion.div
+      <m.div
         key={"modal"}
         variants={animation}
         initial={"hidden"}
@@ -88,7 +87,7 @@ function Modal({ icon, horizontal = false, closeClbck, closeBtn, children, custo
 
         </section>
         <footer className={styles["modal__footer"]} style={customExists ? { background: customColors.accent } : undefined} />
-      </motion.div>
+      </m.div>
   )
 }
 

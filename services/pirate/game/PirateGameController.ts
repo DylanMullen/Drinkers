@@ -10,7 +10,7 @@ let instance: PirateGame;
 
 export async function createPirateGame(packs: string[], player: User): Promise<Boolean>
 {
-    if (instance !== undefined) return false;
+    if (instance !== undefined && !instance.isDeleted()) return false;
 
     let res = await sendCreateRequest(packs, player)
 
@@ -26,7 +26,7 @@ export async function createPirateGame(packs: string[], player: User): Promise<B
 
 export async function joinPirateGame(joinCode: string, player: PiratePlayer): Promise<Boolean>
 {
-    if (instance !== undefined) return false;
+    if (instance !== undefined && !instance.isDeleted()) return false;
 
     let res = await sendJoinRequest(joinCode, player)
 
@@ -52,6 +52,18 @@ export async function joinPirateGame(joinCode: string, player: PiratePlayer): Pr
     instance.socket.openSocket()
 
     return true;
+}
+
+export async function findPirateGame(joinCode: string, uuid?: string)
+{
+    let res = await sendFindRequest(joinCode, uuid)
+
+    if (res?.body === undefined) return undefined;
+
+    return {
+        playerFound: res.body.playerFound,
+        game: res.body.game
+    }
 }
 
 async function sendCreateRequest(packs: string[], player: User)
@@ -96,8 +108,23 @@ async function sendJoinRequest(joinCode: string, player: User)
         })
 }
 
+async function sendFindRequest(joinCode: string, uuid?: string)
+{
+    return await fetch(API_URL + "/pirate/game/" + joinCode + (uuid ? `?uuid=${uuid}` : ""), {
+        method: "GET"
+    }).then(res => res.json())
+        .catch(err =>
+        {
+            return {
+                body: {
+                    error: err
+                }
+            }
+        })
+}
 
 export function getPirateInstance(): PirateGame
 {
+
     return instance;
 }

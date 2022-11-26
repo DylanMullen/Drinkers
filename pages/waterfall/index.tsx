@@ -9,15 +9,15 @@ import Header from 'components/shared/header';
 import Menu from 'components/waterfall/lobby/menu';
 
 import { IoBeer } from '@react-icons/all-files/io5/IoBeer';
-import LobbyModalWrapper from 'components/waterfall/lobby/modals';
 import { useRouter } from 'next/router';
 import { getUser, User } from 'utils/UserUtil';
 import { createWaterfallGame } from 'services/waterfall/GameController';
+import { GameMode } from 'components/waterfall/lobby/modals/join/JoinModal';
+
+// import x from 
 
 function WaterfallHome()
 {
-
-    const [modal, setModalId] = useState(-1);
     const [user,setUser] = useState<User>();
 
     const router = useRouter();
@@ -64,14 +64,12 @@ function WaterfallHome()
             <header id="waterfall-header" className={styles["waterfall-header"]}>
                 <Header 
                     name='Waterfall'
-                    logo={Logo}
+                    logo={"/imgs/waterfall.png"}
                 />
             </header>
-
-            <LobbyModalWrapper id={modal} close={setModalId} />
-
+W
             <main id="waterfall-lobby" className={styles["waterfall-lobby"]}>
-                <Menu open={setModalId} create={create} />
+                <Menu gameMode={GameMode.WATERFALL} create={create} />
                 <footer className={styles["waterfall-footer"]}>
                     <a
                         href="https://www.buymeacoffee.com/drinkers" target={"_blank"} rel="noreferrer"
