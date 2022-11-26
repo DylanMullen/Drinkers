@@ -1,5 +1,5 @@
 import React from 'react'
-import { m, Variants } from 'framer-motion';
+import { m , Variants } from 'framer-motion';
 
 import styles from './modal.module.scss';
 
@@ -20,7 +20,6 @@ export type ModalCustomScheme = {
   accent: string,
   icon: string,
   text: string,
-  backdrop?: boolean
 }
 
 const animation: Variants = {

@@ -1,9 +1,12 @@
 import SubmitButton from 'components/shared/input/buttons/submit';
 import TextInput from 'components/shared/input/text';
 import Modal from 'components/shared/modal'
+import AdModal from 'components/shared/modals/ad';
+import { useModalContext } from 'context/ModalContext';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { CgProfile as ProfileIcon } from 'react-icons/cg';
+import { joinPirateGame } from 'services/pirate/game/PirateGameController';
 import { getCurrentGame, joinWaterfallGame } from 'services/waterfall/GameController';
 import { getUser, User } from 'utils/UserUtil';
 import Profile from '../../profile';
@@ -12,41 +15,45 @@ import styles from './join-modal.module.scss'
 
 type Props = {
     close: Function
-
+    gameMode: GameMode
+}
+export enum GameMode
+{
+    WATERFALL = "waterfall",
+    DRUNKCARDS = "drunkcards"
 }
 
 export type Error = {
     message: string
 }
 
-function JoinModal({ close }: Props)
+function JoinModal({ close, gameMode }: Props)
 {
-
     const router = useRouter();
+    const { update } = useModalContext()
 
     const [user, setUser] = useState<User>()
     const [error, setError] = useState<Error>();
 
     const [joinCode, setJoinCode] = useState("");
 
-    const click = async () =>
+    const click = () =>
     {
-        if (!user)
-            return;
-
-        let error = await joinWaterfallGame({ joinCode: joinCode, player: user })
-
-        if (!error) return;
-
-        if (error as Error)
+        const callback = async () =>
         {
-            setError(error as Error);
-            return;
+            if (!user)
+                return;
+
+            let error
+            if (gameMode === GameMode.WATERFALL)
+                error = await joinWaterfallGame({ joinCode: joinCode, player: user })
+            else
+                error = await joinPirateGame(joinCode, user)
+
+            router.push(`/${gameMode}/${gameMode === GameMode.DRUNKCARDS ? "game?code=" + joinCode : joinCode}`, "", { shallow: true })
+            close()
         }
-
-
-        router.push("/waterfall/" + getCurrentGame().gameCode, "", { shallow: true })
-
+        update(<AdModal adTime={5} callback={callback} />)
     }
 
     useEffect(() =>

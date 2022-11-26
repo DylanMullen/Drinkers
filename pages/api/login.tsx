@@ -57,7 +57,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       setCookie("user", userDetails, {
         req,
         res,
-        expires: date
+        expires: date,
+        encode: encodeURIComponent,
+        secure: true
       })
 
       res.redirect("/");

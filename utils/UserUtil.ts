@@ -6,26 +6,34 @@ export type User = {
     uuid: string
     username: string
     avatar: string,
+    bot?: boolean,
     guest?: boolean
 }
 
 export function getUser(): User
 {
     if (!hasCookie("user"))
-       return createCookie()
-
+        return createCookie()
 
     return JSON.parse(getCookie("user") as string);
-
 }
 
-export function logout():User
+export function logout(): User
 {
     deleteCookie("user");
     return createCookie();
 }
 
-function createCookie():User
+export function getDefaultUser(): User
+{
+    return {
+        uuid: "",
+        avatar: "",
+        username: ""
+    }
+}
+
+function createCookie(): User
 {
     setCookie("user", {
         uuid: v4(),

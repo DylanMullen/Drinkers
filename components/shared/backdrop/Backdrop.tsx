@@ -1,4 +1,4 @@
-import {  m } from 'framer-motion';
+import { m } from 'framer-motion';
 import React, { useCallback, useEffect, useState } from 'react'
 
 import styles from './backdrop.module.scss'
@@ -28,25 +28,26 @@ function Backdrop({ children, closeCallback = () => { } }: Props)
 
   const click = () =>
   {
-    if(new Date().getTime() - time >= 750)
+    if (new Date().getTime() - time >= 750)
       closeCallback()
   }
 
   return (
-      <m.div
-        key={"backdrop"}
-        initial={{ backgroundColor: "rgba(0,0,0,0)" }}
-        animate={{ backgroundColor: "rgba(0,0,0,.65)" }}
-        exit={{ backgroundColor: "rgba(0,0,0,0)" }}
-        transition={{
-          type: "spring",
-          duration: .5,
-          delayChildren: 5
-        }}
-        onClick={click}
-        className={styles["backdrop"]}>
-        {children}
-      </m.div>
+    <m.div
+      key={"backdrop"}
+      initial={{ backgroundColor: "rgba(0,0,0,0)" }}
+      animate={{ backgroundColor: "rgba(0,0,0,.65)" }}
+      exit={{ backgroundColor: "rgba(0,0,0,0)" }}
+      transition={{
+        type: "spring",
+        duration: .5,
+        delayChildren: 5
+      }}
+      onClick={click}
+
+      className={styles["backdrop"]}>
+      {children}
+    </m.div>
   )
 }
 

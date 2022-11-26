@@ -1,6 +1,6 @@
 import { WaterfallAction } from "redux/waterfall/types";
 import store from "redux/store";
-import { thumbMaster, updateAction, updateModal } from "redux/waterfall/slice";
+import { getWaterfallPlayers, thumbMaster, updateAction, updateModal } from "redux/waterfall/slice";
 import { getUser, User } from "utils/UserUtil";
 
 
@@ -67,13 +67,12 @@ function handleDate(user: User, current: string, content: any)
     if (user.uuid !== current)
         return;
 
-    console.log(content)
-
     store.dispatch(updateModal({
         id: 2,
         show: true,
         content: {
-            dates: store.getState().waterfall.game.mechanics.dates
+            dates: store.getState().waterfall.game.mechanics.dates,
+            players: getWaterfallPlayers()
         }
     }))
 

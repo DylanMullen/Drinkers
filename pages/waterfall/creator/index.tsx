@@ -1,6 +1,6 @@
 import WaterfallCard from 'components/waterfall/game/card/WaterfallCard';
 import { CardStack } from 'components/waterfall/game/lobby/Lobby';
-import Header from 'components/waterfall/lobby/header'
+import Header from 'components/shared/header'
 import Head from 'next/head'
 import React from 'react'
 
@@ -30,7 +30,7 @@ function Creator({ }: Props)
             </Head>
 
             <header className={styles["header"]}>
-                <Header />
+                {/* <Header /> */}
             </header>
             <main id="creator" className={styles["creator"]}>
                 <div className={styles["creator__card"]}>

@@ -29,6 +29,8 @@ function CookieModal({ close }: Props)
         <Modal
             icon={<BiCookie />}
             title='Cookies'
+            closeBtn
+            closeClbck={close}
             customColors={{
                 accent: "#84563C",
                 icon: "#a67052",

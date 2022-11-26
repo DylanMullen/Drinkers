@@ -1,17 +1,47 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from '../../node_modules/next/head'
 
 import styles from 'styles/pages/waterfall/home.module.scss';
-import Header from 'components/waterfall/lobby/header';
+
+
+import Logo from "public/icons/waterfall-icon.svg";
+import Header from 'components/shared/header';
 import Menu from 'components/waterfall/lobby/menu';
 
 import { IoBeer } from '@react-icons/all-files/io5/IoBeer';
-import LobbyModalWrapper from 'components/waterfall/lobby/modals';
+import { useRouter } from 'next/router';
+import { getUser, User } from 'utils/UserUtil';
+import { createWaterfallGame } from 'services/waterfall/GameController';
+import { GameMode } from 'components/waterfall/lobby/modals/join/JoinModal';
+
+// import x from 
 
 function WaterfallHome()
 {
+    const [user,setUser] = useState<User>();
 
-    const [modal, setModalId] = useState(-1);
+    const router = useRouter();
+
+    const create = async () =>
+    {
+        let response = await createWaterfallGame({
+            owner: { uuid: user?.uuid ?? "", username: user?.username ?? "", avatar: user?.avatar ?? "" }, settings: {
+                gameName: "Waterfall",
+                hiddenBack: false,
+                maxPlayers: 8,
+                actionsEnabled: true
+            }
+        });
+
+        if (!response) return;
+
+        router.push("/waterfall/" + response);
+    }
+
+    useEffect(()=>{
+        setUser(getUser())
+    },[])
+
 
     return (
         <>
@@ -32,13 +62,14 @@ function WaterfallHome()
             </Head>
 
             <header id="waterfall-header" className={styles["waterfall-header"]}>
-                <Header />
+                <Header 
+                    name='Waterfall'
+                    logo={"/imgs/waterfall.png"}
+                />
             </header>
-
-            <LobbyModalWrapper id={modal} close={setModalId} />
-
+W
             <main id="waterfall-lobby" className={styles["waterfall-lobby"]}>
-                <Menu open={setModalId} />
+                <Menu gameMode={GameMode.WATERFALL} create={create} />
                 <footer className={styles["waterfall-footer"]}>
                     <a
                         href="https://www.buymeacoffee.com/drinkers" target={"_blank"} rel="noreferrer"

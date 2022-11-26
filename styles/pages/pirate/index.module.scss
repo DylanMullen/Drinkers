@@ -1,0 +1,33 @@
+
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+$vw-desktop: 1200px;
+
+.pirate-header
+{
+    padding-top: 8rem;
+
+    transition: padding 150ms ease-in;
+
+    @media (max-width: $vw-tablet) {
+        padding-top: 2.75rem;
+    }
+}
+.pirate-lobby
+{
+    width: 100%;
+    padding: 0 18vw;
+    margin-top: 3rem;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 1rem;
+
+    @media (max-width: $vw-tablet)
+    {
+        padding: 0 1rem;
+        margin-top: 0;
+    }
+}

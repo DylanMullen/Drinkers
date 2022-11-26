@@ -41,11 +41,11 @@ function DateModal({ players, dates, closeCallback = () => { } }: Props)
 
         dispatch(updateModal(undefined))
     }
+    
     let playerCards = getPlayerCards(addDate, getUndatedPlayers(cookieJSON.uuid, players, dates), cookieJSON.uuid);
 
     let dateColumns = currentDates.length >= 4 ? 4 : currentDates.length;
     let playerColumns = playerCards.length >= 3 ? 3 : playerCards.length
-
 
     return (
         <Modal

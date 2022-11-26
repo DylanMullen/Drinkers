@@ -136,7 +136,6 @@ function WaterfallPlayingCard({ cardDetails, ruleDetails, flipSettings = { click
                 flip(true)
             }, flipSettings.onCreation.delay)
 
-        console.log(Backface)
 
     }, [])
 

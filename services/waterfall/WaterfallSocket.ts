@@ -1,7 +1,6 @@
 import { WEBSOCKET_URL } from "settings/Config";
 import Game from "./Game";
 
-
 export default class WaterfallSocket
 {
 
@@ -27,10 +26,7 @@ export default class WaterfallSocket
         this.socket.onopen = () =>
         {
             connected(true)
-        }
-        this.socket.onerror = (e) =>
-        {
-            console.log(e)
+            console.log("test")
         }
     }
 
