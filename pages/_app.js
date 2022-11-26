@@ -6,6 +6,7 @@ import Script from 'next/script';
 import Head from 'next/head';
 
 import { UserProvider } from 'context/UserContext.tsx'
+import ModalContextProvider from 'context/ModalContext.tsx'
 
 function MyApp({ Component, pageProps })
 {
@@ -16,7 +17,10 @@ function MyApp({ Component, pageProps })
       </Head>
       <UserProvider>
         <Provider store={store}>
-          <Component {...pageProps} />
+          <ModalContextProvider>
+
+            <Component {...pageProps} />
+          </ModalContextProvider>
         </Provider>
       </UserProvider>
 

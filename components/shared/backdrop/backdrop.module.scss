@@ -2,12 +2,12 @@ $z-index: 999;
 
 .backdrop
 {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
 
     max-height: fit-content;
 
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: $z-index;
@@ -17,7 +17,7 @@ $z-index: 999;
 
     &--open
     {
-        background-color: rgba(0,0,0,0.65);
+        background-color: rgba(0, 0, 0, 0.65);
 
     }
 

@@ -11,6 +11,8 @@ import { getDefaultUser, getUser, User } from 'utils/UserUtil';
 import { useRouter } from 'next/router';
 import { IoBeer } from 'react-icons/io5';
 import { useUser } from 'context/UserContext';
+import { useModalContext } from 'context/ModalContext';
+import CookieModal from 'components/waterfall/lobby/modals/cookies';
 
 type Props = {}
 
@@ -19,6 +21,7 @@ function PirateHome({ }: Props)
     const router = useRouter();
 
     const user = useUser()
+    const { update, open, close } = useModalContext()
 
     const create = async () =>
     {
@@ -34,6 +37,8 @@ function PirateHome({ }: Props)
         router.push("/drunkcards/game?code=" + getPirateInstance().joinCode);
     }
 
+    // update()
+    // open()
 
     return (
         <>
