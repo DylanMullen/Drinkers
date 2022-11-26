@@ -18,7 +18,7 @@ import { GameMode } from 'components/waterfall/lobby/modals/join/JoinModal';
 
 function WaterfallHome()
 {
-    const [user,setUser] = useState<User>();
+    const [user, setUser] = useState<User>();
 
     const router = useRouter();
 
@@ -38,9 +38,10 @@ function WaterfallHome()
         router.push("/waterfall/" + response);
     }
 
-    useEffect(()=>{
+    useEffect(() =>
+    {
         setUser(getUser())
-    },[])
+    }, [])
 
 
     return (
@@ -62,12 +63,12 @@ function WaterfallHome()
             </Head>
 
             <header id="waterfall-header" className={styles["waterfall-header"]}>
-                <Header 
+                <Header
                     name='Waterfall'
                     logo={"/imgs/waterfall.png"}
                 />
             </header>
-W
+
             <main id="waterfall-lobby" className={styles["waterfall-lobby"]}>
                 <Menu gameMode={GameMode.WATERFALL} create={create} />
                 <footer className={styles["waterfall-footer"]}>
