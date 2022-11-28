@@ -1,0 +1,81 @@
+$bg-login: linear-gradient(-120deg, rgba(201, 110, 18, 1) 5%, rgba(223, 141, 3, 1) 21%, rgba(236, 157, 0, 1) 39%, rgba(246, 193, 1, 1) 59%, rgba(250, 233, 111, 1) 79%, rgba(255, 248, 151, 1) 100%);
+$bg-register: linear-gradient(120deg, rgba(116, 242, 206, 1) 0%, rgba(170, 246, 131, 1) 100%);
+
+.profile
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+
+    &__content
+    {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    &__avatar
+    {
+        width: 6rem;
+    }
+
+    &__username
+    {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+        text-align: center;
+    }
+
+    &__footer
+    {
+        width: 100%;
+    }
+
+    &__signup
+    {
+        display: flex;
+        gap: 1rem;
+        width: 100%;
+        padding: 0 10%;
+    }
+
+    &__btn
+    {
+        width: 100%;
+        border-radius: .5rem;
+        font-size: 1rem;
+        text-align: center;
+        padding: .5rem;
+        letter-spacing: 2px;
+
+        cursor: pointer;
+        transition: background-position 150ms ease-in-out;
+        
+        &--register
+        {
+            background: $bg-register;
+            background-size: 300%;
+
+            &:hover
+            {
+                background-position: 50%;
+            }
+
+        }
+
+        &--login
+        {
+            background: $bg-login;
+            background-size: 300%;
+
+            &:hover
+            {
+                background-position: 50%;
+            }
+        }
+
+
+    }
+}

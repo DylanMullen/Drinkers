@@ -5,24 +5,25 @@ import store from 'redux/store';
 import Script from 'next/script';
 import Head from 'next/head';
 
-import ModalContextProvider from 'context/ModalContext.tsx'
+import ModalContextProvider from 'context/ModalContext'
 
-import { UserProvider } from 'context/UserContext.tsx'
-import { lazy, useEffect } from 'react';
+import { UserProvider } from 'context/UserContext'
+import Navbar from 'components/shared/navbar';
+import { AppProps } from 'next/app';
 
-function MyApp({ Component, pageProps })
+function MyApp({ Component, pageProps }:AppProps)
 {
-  useEffect(() =>
-  {
-    var ads = document.getElementsByClassName("adsbygoogle").length;
-    for (var i = 0; i < ads; i++)
-    {
-      try
-      {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      } catch (e) { }
-    }
-  }, []);
+  // useEffect(() =>
+  // {
+  //   var ads = document.getElementsByClassName("adsbygoogle").length;
+  //   for (var i = 0; i < ads; i++)
+  //   {
+  //     try
+  //     {
+  //       (adsbygoogle = window.adsbygoogle || []).push({});
+  //     } catch (e) { }
+  //   }
+  // }, []);
   return (
     <>
       <Head>
@@ -31,6 +32,7 @@ function MyApp({ Component, pageProps })
       <UserProvider>
         <Provider store={store}>
           <ModalContextProvider>
+            <Navbar />
             <Component {...pageProps} />
           </ModalContextProvider>
         </Provider>

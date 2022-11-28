@@ -15,7 +15,7 @@ import { getFirstPrompt, reset, selectAllPlayers, selectNextPlayer, selectPlayer
 import UserList from 'components/shared/userlist';
 import UserCard from 'components/shared/usercard';
 import Head from 'next/head';
-import { useUser } from 'context/UserContext';
+import useUser from 'context/UserContext';
 import { join } from 'path';
 import { useModalContext } from 'context/ModalContext';
 import AdModal from 'components/shared/modals/ad';
@@ -59,7 +59,6 @@ function PirateGame({ code }: Props)
     {
         if (!user)
         {
-            console.log("returning")
             return;
         }
         console.log("here")

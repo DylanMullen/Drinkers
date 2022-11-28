@@ -10,7 +10,7 @@ import { createPirateGame, getPirateInstance } from 'services/pirate/game/Pirate
 import { getDefaultUser, getUser, User } from 'utils/UserUtil';
 import { useRouter } from 'next/router';
 import { IoBeer } from 'react-icons/io5';
-import { useUser } from 'context/UserContext';
+import useUser from 'context/UserContext';
 import { useModalContext } from 'context/ModalContext';
 import CookieModal from 'components/waterfall/lobby/modals/cookies';
 import AdModal from 'components/shared/modals/ad';

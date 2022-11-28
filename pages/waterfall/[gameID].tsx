@@ -19,7 +19,7 @@ import { URL } from 'settings/Config';
 import styles from 'styles/pages/waterfall/game.module.scss';
 import { getUser, User } from 'utils/UserUtil';
 import Timer from 'components/shared/input/timer';
-import { useUser } from 'context/UserContext';
+import useUser from 'context/UserContext';
 
 const ModalHandler = lazy(() => import("components/waterfall/game/modals"))
 const Lobby = lazy(() => import("components/waterfall/game/lobby"))
@@ -62,7 +62,7 @@ function WaterfallGame({ gameID }: Props)
 
     let kicked = useAppSelector(selectKicked);
     let nextPlayer = getWaterfallPlayerByUUID(useAppSelector(selectNextPlayer));
-    
+
     let playingCard = getWaterfallCard(card, hiddenBack, () =>
     {
         getCurrentGame().handleAction();
@@ -107,7 +107,7 @@ function WaterfallGame({ gameID }: Props)
     const connect = useCallback(async () =>
     {
         if (!user) return;
-        
+
         let response = await joinWaterfallGame({
             joinCode: gameID,
             player: {
@@ -123,7 +123,7 @@ function WaterfallGame({ gameID }: Props)
         else
             setLoaded(true);
     }, [gameID, router, user])
-    
+
     useEffect(() =>
     {
         connect();
@@ -240,7 +240,7 @@ function getWaterfallCard(card: WaterfallCard, hiddenBack: boolean, flipCallback
         cardDetails={{
             face: card.face,
             suite: card.suite,
-            hidden: hiddenBack, 
+            hidden: hiddenBack,
             cardsLeft: card.cardsLeft,
             cardOwner: cardOwner,
         }}

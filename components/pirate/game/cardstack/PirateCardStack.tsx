@@ -8,7 +8,7 @@ import { AnimatePresence, motion, PanInfo, useMotionValue, usePresence, useTrans
 import { PiratePrompt } from 'redux/pirate/types';
 import { getPirateInstance } from 'services/pirate/game/PirateGameController';
 import { getDefaultUser, getUser, User } from 'utils/UserUtil';
-import { useUser } from 'context/UserContext';
+import useUser from 'context/UserContext';
 
 const DISTANCE_BETWEEN = 8
 const DRAG_DISTANCE = 250
