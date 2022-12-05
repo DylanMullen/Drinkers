@@ -1,0 +1,25 @@
+.creator
+{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+
+    gap: 5rem;
+    padding: 1rem;
+    &__input
+    {
+        height: fit-content;
+        display: grid;
+        place-content: center;
+    }
+
+    &__footer
+    {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+
+        padding: 1rem;
+    }
+}

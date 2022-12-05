@@ -21,9 +21,12 @@ export type PirateCardSettings = {
     debug?: boolean
 }
 
-type PirateCardScheme = {
-    background: string
+export type PirateCardScheme = {
+    background?: string,
+    text?: string,
+    shadow?: string
 }
+
 
 function PirateCard({ settings: { title, description, rotation = 0, isDummy = false, debug = false }, scheme }: Props)
 {
@@ -46,10 +49,10 @@ function PirateCard({ settings: { title, description, rotation = 0, isDummy = fa
     return (
         <div
             className={styles["card"]}
-            style={{ transform: `rotate(${rotation}deg)` }}
+            style={{ transform: `rotate(${rotation}deg)`, background: scheme?.background, boxShadow: `0 0px 5px ${scheme?.shadow}` }}
         >
-            <div className={styles["card__contents"]}>
-                <h1 className={styles["card__title"]}>{title}</h1>
+            <div className={styles["card__contents"]} style={{ color: scheme?.text }}>
+                <h1 className={styles["card__title"]} >{title}</h1>
                 <p className={styles["card__description"]}>{description}</p>
             </div>
             {

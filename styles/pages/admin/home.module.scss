@@ -1,0 +1,18 @@
+.admin
+{
+    &__header
+    {
+        min-height: 20rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__buttons
+    {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+}

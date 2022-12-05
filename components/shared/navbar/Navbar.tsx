@@ -1,10 +1,9 @@
 import CookieModal from 'components/waterfall/lobby/modals/cookies';
 import { useModalContext } from 'context/ModalContext';
 import useUser from 'context/UserContext'
-import Link from 'next/link';
 import React, { useState } from 'react'
-import { AiOutlineClose, AiOutlineDoubleLeft } from 'react-icons/ai';
-import { CgChevronLeft } from 'react-icons/cg';
+import { AiOutlineClose } from 'react-icons/ai';
+import { MdOutlineAdminPanelSettings } from 'react-icons/md'
 import { FaCookieBite, FaDiscord, FaHome, FaMinus, FaPlus, FaTwitter } from 'react-icons/fa';
 import { GiCardRandom, GiHamburgerMenu, GiWaterfall } from 'react-icons/gi';
 import Profile from '../profile';
@@ -16,7 +15,7 @@ type Props = {}
 
 function Navbar({ }: Props)
 {
-    const [open, toggle] = useState(true)
+    const [open, toggle] = useState(false)
     const { open: openModal, close, update } = useModalContext();
 
     const user = useUser();
@@ -67,6 +66,11 @@ function Navbar({ }: Props)
                             text='Drunkcards'
                             icon={<GiCardRandom />}
                             link="/drunkcards"
+                        />
+                        <Navlink
+                            text='Admin'
+                            icon={<MdOutlineAdminPanelSettings />}
+                            link="/admin"
                         />
                     </ul>
                     <div className={styles["navbar__footer"]}>
