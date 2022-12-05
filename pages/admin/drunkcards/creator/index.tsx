@@ -1,14 +1,14 @@
 import Creator from 'components/admin/drunkcards/creator'
+import PromptItem from 'components/admin/drunkcards/creator/prompt-items'
 import PirateCard from 'components/pirate/game/card'
-import { CreatorContextProvider } from 'context/drunkcards/creator/CreatorContext'
+import useCreatorContext, { CreatorContextProvider } from 'context/drunkcards/creator/CreatorContext'
 import Head from 'next/head'
-import React from 'react'
+import React, { createRef, useEffect, useRef } from 'react'
 
 import styles from 'styles/pages/admin/drunkcards/creator.module.scss'
 
-type Props = {}
 
-function PirateCreator({ }: Props)
+function PirateCreator()
 {
   return (
     <>
@@ -21,48 +21,38 @@ function PirateCreator({ }: Props)
           <div className={styles["creator__input"]}>
             <Creator />
           </div>
-          <footer className={styles["creator__footer"]}>
-            <PirateCard
-              settings={{
-                title: "TEst",
-                description: "test"
-              }}
-            />
-            <PirateCard
-              settings={{
-                title: "TEst",
-                description: "test"
-              }}
-            />
-            <PirateCard
-              settings={{
-                title: "TEst",
-                description: "test"
-              }}
-            />
-            <PirateCard
-              settings={{
-                title: "TEst",
-                description: "test"
-              }}
-            />
-            <PirateCard
-              settings={{
-                title: "TEst",
-                description: "test"
-              }}
-            />
-            <PirateCard
-              settings={{
-                title: "TEst",
-                description: "test"
-              }}
-            />
-            
-          </footer>
+
         </main>
+        <Footer />
       </CreatorContextProvider>
     </>
+  )
+}
+
+function Footer()
+{
+  const { prompts: promptInfo } = useCreatorContext();
+
+  let prompts: React.ReactNode[] = Object.keys(promptInfo).map(e =>
+  {
+    let prompt = promptInfo[e]
+
+    return (
+      <PromptItem prompt={prompt} />
+    )
+  })
+
+
+
+  return (
+    <footer id='#footer' className={styles["creator-footer"]}>
+      {
+        prompts.length > 0 &&
+        <div className={styles["creator-footer__items"]}>
+          {prompts}
+        </div>
+      }
+    </footer>
   )
 }
 

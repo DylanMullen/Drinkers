@@ -7,12 +7,14 @@ $height: calc($width / 16 * 8);
 
 .drunkcards-creator
 {
-    height: 30rem;
     display: flex;
-    gap: 2rem;
+    flex-direction: column;
+    gap: 5rem;
 
     justify-content: center;
     align-items: center;
+
+    height: 100%;
 
     &__input
     {
@@ -20,17 +22,18 @@ $height: calc($width / 16 * 8);
         padding: 2rem 3rem;
         display: flex;
         flex-direction: column;
-        height: 75%;
 
         position: relative;
+        width: 30vw;
+        max-width: 30vw;
+        min-height: 20rem;
+        border-radius: .5rem;
     }
 
     &__nav
     {
         position: absolute;
-        left: 0;
         top: 0.75rem;
-        transform: translateX(-100%);
         display: flex;
         flex-direction: column;
         background-color: $nav-bg;
@@ -38,6 +41,21 @@ $height: calc($width / 16 * 8);
 
         padding: .5rem;
 
+        &--left
+        {
+            left: 0;
+            transform: translateX(-100%);
+            border-top-left-radius: .25rem;
+            border-bottom-left-radius: .25rem;
+        }
+
+        &--right
+        {
+            right: 0;
+            transform: translateX(100%);
+            border-top-right-radius: .25rem;
+            border-bottom-right-radius: .25rem;
+        }
     }
 
     &__navitem
@@ -80,6 +98,10 @@ $height: calc($width / 16 * 8);
         background-color: white;
         padding: .25rem 1rem;
         white-space: nowrap;
+        border-radius: .25rem;
+        ;
+
+        box-shadow: 0 2px 10px black;
     }
 
     &__colour
@@ -93,7 +115,7 @@ $height: calc($width / 16 * 8);
 
     :global(.slider-picker)
     {
-        & > div > div
+        &>div>div
         {
             // margin: 0 !important;
         }
@@ -111,6 +133,8 @@ $height: calc($width / 16 * 8);
     {
         display: flex;
         flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
         gap: .5rem;
     }
 
@@ -121,5 +145,25 @@ $height: calc($width / 16 * 8);
         border: 2px solid;
         background: transparent;
         cursor: pointer;
+
+        transition: 150ms scale ease-in-out;
+
+        &--active
+        {
+            border-color: green;
+        }
+
+        &:hover,
+        &:focus
+        {
+            scale: 1.1;
+        }
+    }
+
+    &__graphics
+    {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     }
 }

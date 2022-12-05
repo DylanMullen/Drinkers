@@ -1,8 +1,9 @@
 import { PirateCardScheme } from "components/pirate/game/card/PirateCard"
 import React, { PropsWithChildren, useState } from "react"
+import { v4 as uuid } from 'uuid';
 
 
-type PromptType = {
+export type PromptType = {
 
     settings: {
         uuid: string,
@@ -17,6 +18,7 @@ type Context = {
     addCurrentPrompt: () => void,
     removePrompt: (uuid: string) => void,
     updateCurrent: (prompt: PromptType) => void
+    resetCurrent: () => void
     currentPrompt: PromptType
     prompts: { [id: string]: PromptType }
 }
@@ -25,6 +27,7 @@ const intitial: Context = {
     addCurrentPrompt: () => { },
     removePrompt: () => { },
     updateCurrent: () => { },
+    resetCurrent: () => { },
     currentPrompt: {
         settings: {
             uuid: "",
@@ -34,6 +37,14 @@ const intitial: Context = {
     },
     prompts: {}
 
+}
+
+const initialPrompt: PromptType = {
+    settings: {
+        uuid: "",
+        title: "Title",
+        description: "Description"
+    }
 }
 
 const CreatorContext = React.createContext<Context>(intitial)
@@ -46,13 +57,7 @@ export default function useCreatorContext()
 export function CreatorContextProvider({ children }: PropsWithChildren)
 {
     const [value, setValue] = useState<Context>(intitial);
-    const [current, setCurrent] = useState<PromptType>({
-        settings: {
-            uuid: "",
-            title: "Title",
-            description: "Description"
-        }
-    });
+    const [current, setCurrent] = useState<PromptType>({ ...initialPrompt, settings: { ...initialPrompt.settings, uuid: uuid() } });
 
 
     const removePrompt = (uuid: string) =>
@@ -75,11 +80,17 @@ export function CreatorContextProvider({ children }: PropsWithChildren)
                 ...prev,
                 prompts: temp
             }
-
         })
     }
 
-    const addCurrentPrompt = () => addPrompt(current)
+    const resetCurrentPrompt = () => setCurrent({ ...initialPrompt, settings: { ...initialPrompt.settings, uuid: uuid() } })
+
+
+    const addCurrentPrompt = () =>
+    {
+        addPrompt(current)
+        resetCurrentPrompt()
+    }
 
 
     return (
@@ -87,6 +98,7 @@ export function CreatorContextProvider({ children }: PropsWithChildren)
             addCurrentPrompt: addCurrentPrompt,
             removePrompt: removePrompt,
             updateCurrent: setCurrent,
+            resetCurrent: resetCurrentPrompt,
             currentPrompt: current,
             prompts: value.prompts
         }}>
