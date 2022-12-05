@@ -14,6 +14,7 @@ import { BsCheck2Circle } from 'react-icons/bs'
 import { FiCheckCircle, FiTrash2 } from 'react-icons/fi'
 import { AiOutlineClose } from 'react-icons/ai'
 import Tooltip from 'components/shared/tooltip'
+import { createPack, savePack } from 'services/pirate/creator/CreatorController'
 
 type Props = {}
 
@@ -48,7 +49,15 @@ function Creator({ }: Props)
       removePrompt(currentPrompt.settings.uuid)
     }
 
+    updatePane(<SettingsPane />)
+
     resetCurrent();
+  }
+
+  const save = () =>
+  {
+    let pack = createPack(prompts);
+    savePack(pack)
   }
 
 
@@ -106,7 +115,7 @@ function Creator({ }: Props)
         <div className={styles["drunkcards-creator__pane"]}>
           {pane}
         </div>
-
+        <button className={styles["drunkcards-creator__save"]} onClick={save}>Save Pack</button>
       </div>
     </div>
   )
@@ -115,9 +124,15 @@ function Creator({ }: Props)
 function NavigationItem({ icon, tooltip, callback }: NavItem)
 {
 
+  const click = (e: React.MouseEvent<HTMLButtonElement>) =>
+  {
+    e.currentTarget.blur();
+    callback()
+  }
+
   return (
     <Tooltip text={tooltip.text} direction={tooltip.direction}>
-      <button className={styles["drunkcards-creator__navitem"]} onClick={callback}>
+      <button className={styles["drunkcards-creator__navitem"]} onClick={click}>
         {icon}
       </button>
     </Tooltip>
@@ -133,12 +148,12 @@ function SettingsPane()
       <h2 className={styles["drunkcards-creator__subtitle"]}>Settings</h2>
       <TextInput
         label="Title"
-        placeholder={settings.title}
+        value={settings.title}
         retriever={(title: string) => updateCurrent({ scheme, settings: { ...settings, title: title } })}
       />
       <AreaInput
         label="Description"
-        placeholder={settings.description}
+        value={settings.description}
         callback={(desc) => updateCurrent({ scheme, settings: { ...settings, description: desc } })}
       />
     </>

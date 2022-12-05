@@ -146,19 +146,22 @@ function PirateGame({ code }: Props)
                     <FaLink />
                 </button>
             </div>
-            <main className={styles["pirate-game"]}>
-                {
-                    isLoaded &&
-                    <AnimatePresence>
-                        <PirateCardStack />
-                    </AnimatePresence>
-                }
-            </main>
-            <footer className={styles["pirate-footer"]}>
-                <UserList
-                    users={users}
-                />
-            </footer>
+            <div className={styles["pirate-game__wrapper"]}>
+
+                <main className={styles["pirate-game"]}>
+                    {
+                        isLoaded &&
+                        <AnimatePresence>
+                            <PirateCardStack />
+                        </AnimatePresence>
+                    }
+                </main>
+                <footer className={styles["pirate-footer"]}>
+                    <UserList
+                        users={users}
+                    />
+                </footer>
+            </div>
         </>
     )
 }

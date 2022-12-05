@@ -1,3 +1,5 @@
+import { PirateCardScheme } from "components/pirate/game/card/PirateCard"
+
 export default interface Pack
 {
     settings: PackSettings,
@@ -17,4 +19,5 @@ export interface PackPrompt
     title: string
     description: string
     rotation: number
+    scheme: PirateCardScheme
 }

@@ -180,6 +180,12 @@ $vw-desktop: 1200px;
     position: relative;
     padding: 2rem 0;
 
+    &__wrapper
+    {
+        height: 100vh;
+        min-height: 100vh;
+    }
+
     &__card
     {
         display: flex;

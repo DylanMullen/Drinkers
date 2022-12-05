@@ -1,6 +1,6 @@
 $btn-bg: lightgray;
-$delete-bg: red;
-$edit-bg: orange;
+$delete-bg: #ef233c;
+$edit-bg: #f79d65;
 .prompt-item
 {
     display: flex;
@@ -36,7 +36,7 @@ $edit-bg: orange;
         cursor: pointer;
         padding: .5rem;
 
-        transition: background-color 150ms ease-in-out;
+        transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
         
         svg
         {
@@ -46,6 +46,7 @@ $edit-bg: orange;
         &--delete:hover
         {
             background-color: $delete-bg;
+            color: white;
         }
         &--edit:hover
         {

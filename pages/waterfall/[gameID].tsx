@@ -178,44 +178,47 @@ function WaterfallGame({ gameID }: Props)
                 <RuleToolbarButton />
 
             </div>
-            {
-                !started ?
-                    <Suspense>
-                        <Lobby />
-                    </Suspense> :
-                    <>
-                        <main className={styles["waterfall-game"]} data-color={isRed && started ? "red" : "black"}>
-                            <div className={styles["waterfall-game__card"]}>
-                                <div className={styles["waterfall-game__skip"]}>
-                                    <ControlButton
-                                        icon="🕒"
-                                        text="Skip Turn"
-                                        callback={skip}
-                                    />
-                                </div>
-                                <div className={styles["waterfall-game__card__wrapper"]}>
-                                    {playingCard}
+            <div className={styles["waterfall-game__wrapper"]}>
+
+                {
+                    !started ?
+                        <Suspense>
+                            <Lobby />
+                        </Suspense> :
+                        <>
+                            <main className={styles["waterfall-game"]} data-color={isRed && started ? "red" : "black"}>
+                                <div className={styles["waterfall-game__card"]}>
+                                    <div className={styles["waterfall-game__skip"]}>
+                                        <ControlButton
+                                            icon="🕒"
+                                            text="Skip Turn"
+                                            callback={skip}
+                                        />
+                                    </div>
+                                    <div className={styles["waterfall-game__card__wrapper"]}>
+                                        {playingCard}
+                                    </div>
+
+                                    <div className={styles["waterfall-game__next"]}>
+                                        <ControlButton
+                                            icon="🍺"
+                                            text="Next Turn"
+                                            callback={next}
+                                            disabled={!isNextPlayerEnabled}
+                                        />
+                                    </div>
                                 </div>
 
-                                <div className={styles["waterfall-game__next"]}>
-                                    <ControlButton
-                                        icon="🍺"
-                                        text="Next Turn"
-                                        callback={next}
-                                        disabled={!isNextPlayerEnabled}
-                                    />
-                                </div>
-                            </div>
+                            </main>
+                            <footer className={styles["waterfall-footer"]} data-color={isRed ? "red" : "black"}>
+                                <Suspense>
+                                    <UserList />
+                                </Suspense>
+                            </footer>
+                        </>
+                }
 
-                        </main>
-                        <footer className={styles["waterfall-footer"]} data-color={isRed ? "red" : "black"}>
-                            <Suspense>
-                                <UserList />
-                            </Suspense>
-                        </footer>
-                    </>
-            }
-
+            </div>
 
         </>
     )

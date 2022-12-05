@@ -36,7 +36,7 @@ export default function Home()
         style={{
           display: "grid",
           placeContent: "center",
-          height: "100%"
+          minHeight: "100vh"
         }}
 
       >

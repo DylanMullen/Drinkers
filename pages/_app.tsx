@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }:AppProps)
   return (
     <>
       <Head>
-        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+        <link rel="icon" type="image/png" sizes="96x96" href="/logo.ico" />
       </Head>
       <UserProvider>
         <Provider store={store}>
