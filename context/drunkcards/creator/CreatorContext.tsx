@@ -1,5 +1,6 @@
 import { PirateCardScheme } from "components/pirate/game/card/PirateCard"
-import React, { PropsWithChildren, useState } from "react"
+import React, { PropsWithChildren, useEffect, useState } from "react"
+import { init } from "services/cookies/CookieManager";
 import { v4 as uuid } from 'uuid';
 
 
@@ -19,7 +20,7 @@ export type PackType = {
     packDesc: string,
 }
 
-type Context = {
+type Context = LocalContextStore & {
     updatePackSettings: (settings: PackType) => void,
     updateDefaultScheme: (scheme: PirateCardScheme) => void,
     clearPack: () => void
@@ -28,7 +29,9 @@ type Context = {
     removePrompt: (uuid: string) => void,
     updateCurrent: (prompt: PromptType) => void
     resetCurrent: () => void
+}
 
+type LocalContextStore = {
     packSettings: PackType
     defaultScheme: PirateCardScheme
 
@@ -83,6 +86,12 @@ export default function useCreatorContext()
     return React.useContext(CreatorContext)
 }
 
+
+function getLocal()
+{
+    return localStorage.getItem("drunkCreator");
+}
+
 export function CreatorContextProvider({ children }: PropsWithChildren)
 {
     const [value, setValue] = useState<Context>(intitial);
@@ -94,7 +103,14 @@ export function CreatorContextProvider({ children }: PropsWithChildren)
         let temp = value.prompts;
         delete temp[uuid]
 
-        setValue(prev => { return { ...prev, prompts: temp } })
+        setValue(prev =>
+        {
+            saveToLocal({
+                ...value,
+                prompts: temp
+            })
+            return { ...prev, prompts: temp }
+        })
     }
 
     const addPrompt = (prompt: PromptType) =>
@@ -104,18 +120,27 @@ export function CreatorContextProvider({ children }: PropsWithChildren)
             let temp = prev.prompts;
             temp[prompt.settings.uuid] = prompt;
 
+            saveToLocal({
+                ...value,
+                prompts: temp
+            })
 
             return {
                 ...prev,
                 prompts: temp
             }
         })
+
     }
 
     const updatePackSettings = (pack: PackType) =>
     {
         setValue(prev =>
         {
+            saveToLocal({
+                ...value,
+                packSettings: pack
+            })
             return {
                 ...prev,
                 packSettings: pack
@@ -127,6 +152,10 @@ export function CreatorContextProvider({ children }: PropsWithChildren)
     {
         setValue(prev =>
         {
+            saveToLocal({
+                ...value,
+                defaultScheme: scheme
+            })
             return {
                 ...prev,
                 defaultScheme: scheme
@@ -135,13 +164,34 @@ export function CreatorContextProvider({ children }: PropsWithChildren)
     }
 
     const resetCurrentPrompt = () => setCurrent({ ...initialPrompt, settings: { ...initialPrompt.settings, uuid: uuid() } })
-    const clearPack = () => setValue(prev => { return { ...prev, prompts: {} } })
+    const clearPack = () => setValue(prev =>
+    {
+        saveToLocal({
+            ...value,
+            prompts: {}
+        })
+        return { ...prev, prompts: {} }
+    })
 
     const addCurrentPrompt = () =>
     {
         addPrompt(current)
         resetCurrentPrompt()
     }
+
+    useEffect(() =>
+    {
+        if (getLocal() === undefined) return;
+        let val = JSON.parse(getLocal() as string);
+        setValue(prev =>
+        {
+            return {
+                ...prev,
+                ...val
+            }
+        })
+
+    }, [])
 
     return (
         <CreatorContext.Provider value={{
@@ -160,4 +210,9 @@ export function CreatorContextProvider({ children }: PropsWithChildren)
             {children}
         </CreatorContext.Provider>
     )
+}
+
+function saveToLocal(prompts: LocalContextStore)
+{
+    localStorage.setItem("drunkCreator", JSON.stringify(prompts))
 }

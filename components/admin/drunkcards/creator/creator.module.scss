@@ -161,11 +161,12 @@ $height: calc($width / 16 * 8);
         background: transparent;
         cursor: pointer;
 
-        transition: 150ms scale ease-in-out;
+        transition: 150ms scale ease-in-out, background-color 150ms ease-in-out;
 
         &--active
         {
-            border-color: green;
+            background-color: rgb(104, 99, 99);
+            color: white;
         }
 
         &:hover,
@@ -197,19 +198,22 @@ $height: calc($width / 16 * 8);
             border-top-left-radius: 0;
             border-top-right-radius: 0;
             border: 0;
-
+            
             transition: font-size 150ms $pop;
-
-
+            
+            
             cursor: pointer;
-
+            
             &--save
             {
                 background: linear-gradient(45deg, rgba(116, 242, 206, 1) 0%, rgba(170, 246, 131, 1) 100%);
+                border-bottom-left-radius: .5rem;
             }
             &--clear
             {
                 background: linear-gradient(45deg, rgba(247,157,101,1) 0%, rgba(242,112,89,1) 57%, rgba(242,92,84,1) 100%);
+                border-bottom-right-radius: .5rem;
+
             }
 
             &:hover,
