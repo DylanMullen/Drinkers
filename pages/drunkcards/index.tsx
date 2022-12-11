@@ -6,7 +6,7 @@ import Logo from "public/icons/waterfall-icon.svg";
 import Menu from 'components/waterfall/lobby/menu';
 
 import styles from "styles/pages/pirate/index.module.scss"
-import { createPirateGame, getPirateInstance } from 'services/pirate/game/PirateGameController';
+import { createPirateGame, getAllPiratePacks, getPirateInstance } from 'services/pirate/game/PirateGameController';
 import { getDefaultUser, getUser, User } from 'utils/UserUtil';
 import { useRouter } from 'next/router';
 import { IoBeer } from 'react-icons/io5';
@@ -24,10 +24,10 @@ type Props = {}
 function PirateHome({ }: Props)
 {
     const router = useRouter();
-    const {showNavigationButton} = useNavigation()
+    const { showNavigationButton } = useNavigation()
     showNavigationButton()
 
-    const {user} = useUser()
+    const { user } = useUser()
     const { update, open, close } = useModalContext()
 
     const goTo = () =>
@@ -41,10 +41,11 @@ function PirateHome({ }: Props)
         if (user === undefined) return;
         update(<AdModal adTime={5} callback={goTo} />)
         open()
+        let packIDs = await getAllPiratePacks();
 
 
         await createPirateGame(
-            ["3956ceb7-fcdf-4691-bc3b-80db4085c2be", "365097f8-78db-4e8f-b6a8-30490873e706"],
+            packIDs,
             user
         )
 

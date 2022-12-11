@@ -10,6 +10,9 @@ $nav-body-radius: 1rem;
 
 $nav-link-bg: hsl(275, 88%, 30%);
 
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+
 .navbar
 {
     position: fixed;
@@ -186,7 +189,20 @@ $nav-link-bg: hsl(275, 88%, 30%);
             scale: 1.1;
         }
     }
+    @media (max-width: $vw-mobile)
+    {
+        width: 100%;
 
+        &--open
+        {
+            .navbar__toggle
+            {
+                transform: translateX(-1.5rem);
+                top: 0.75rem;
+                right: -1rem;
+            }
+        }
+    }
 
 }
 
@@ -236,5 +252,5 @@ $nav-link-bg: hsl(275, 88%, 30%);
         }
     }
 
-
+   
 }

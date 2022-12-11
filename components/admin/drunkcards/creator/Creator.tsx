@@ -27,7 +27,7 @@ type NavItem = {
 
 function Creator({ }: Props)
 {
-  const { currentPrompt, prompts, defaultScheme, addCurrentPrompt, resetCurrent, removePrompt, clearPack } = useCreatorContext();
+  const { currentPrompt, prompts, packSettings, defaultScheme, addCurrentPrompt, resetCurrent, removePrompt, clearPack } = useCreatorContext();
   const [pane, updatePane] = useState<React.ReactNode>(<PackPane />);
   const [isShowingRight, setShowingRight] = useState(false);
   const [useDefaultStyling, setDefaultStyling] = useState(currentPrompt.isDefault);
@@ -54,7 +54,7 @@ function Creator({ }: Props)
 
   const save = () =>
   {
-    let pack = createPack(prompts, defaultScheme);
+    let pack = createPack(packSettings, prompts, defaultScheme);
     savePack(pack)
   }
 

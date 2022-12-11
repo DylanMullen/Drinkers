@@ -18,6 +18,6 @@ export interface PackPrompt
     uuid: string
     title: string
     description: string
-    rotation: number
+    rotation?: number
     scheme: PirateCardScheme
 }

@@ -1,3 +1,4 @@
+import { PirateCardScheme } from "components/pirate/game/card/PirateCard"
 import { PackPrompt } from "services/pirate/models/Pack"
 import { User } from "utils/UserUtil"
 
@@ -45,11 +46,19 @@ export interface PiratePrompt
     uuid: string
     title: string,
     description: string,
+    scheme: PirateCardScheme,
     rotation: number
 }
 
 export interface NextPlayerTurn
 {
+    current: string
+    next: string,
+}
+
+export interface PlayerJoined
+{
+    player: User,
     current: string
     next: string,
 }

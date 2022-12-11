@@ -58,15 +58,21 @@ function PirateCard({ settings: { title, description, rotation = 0, isDummy = fa
             {
                 !isDummy &&
                 <>
-                    <div className={styles["card__turns"]}>{turns}</div>
+                    <div
+                        style={{ color: scheme?.text ?? "", borderColor: scheme?.text ?? "" }}
+                        className={styles["card__turns"]}>{turns}</div>
                     <div className={styles["card__indicators"]}>
                         {
                             !debug ?
                                 <>
-                                    <button className={`${styles["card__indicator"]} ${styles["card__indicator--helpful"]}`}>
+                                    <button
+                                        style={{ color: scheme?.text ?? "" }}
+                                        className={`${styles["card__indicator"]} ${styles["card__indicator--helpful"]}`}>
                                         <HiOutlineThumbUp />
                                     </button>
-                                    <button className={`${styles["card__indicator"]} ${styles["card__indicator--unhelpful"]}`}>
+                                    <button
+                                        style={{ color: scheme?.text ?? "" }}
+                                        className={`${styles["card__indicator"]} ${styles["card__indicator--unhelpful"]}`}>
                                         <HiOutlineThumbDown />
                                     </button>
                                 </> :
@@ -79,5 +85,6 @@ function PirateCard({ settings: { title, description, rotation = 0, isDummy = fa
         </div>
     )
 }
+
 
 export default PirateCard
