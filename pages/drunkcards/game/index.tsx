@@ -15,13 +15,15 @@ import { getFirstPrompt, reset, selectAllPlayers, selectNextPlayer, selectPlayer
 import UserList from 'components/shared/userlist';
 import UserCard from 'components/shared/usercard';
 import Head from 'next/head';
-import { useUser } from 'context/UserContext';
+import useUser from 'context/UserContext';
 import { join } from 'path';
 import { useModalContext } from 'context/ModalContext';
 import AdModal from 'components/shared/modals/ad';
 import { getCookie, getCookies } from 'cookies-next';
 import { FaChevronLeft, FaLink } from 'react-icons/fa';
 import { URL } from 'settings/Config';
+import useNavigation from 'context/NavigationContext';
+import Tooltip from 'components/shared/tooltip';
 
 type Props = {
     code: string
@@ -29,7 +31,7 @@ type Props = {
 
 function PirateGame({ code }: Props)
 {
-    const user = useUser()
+    const { user } = useUser()
     const [isLoaded, setLoaded] = useState<boolean>(false);
     const { update, open, close } = useModalContext()
 
@@ -38,6 +40,9 @@ function PirateGame({ code }: Props)
     const next = useAppSelector(selectNextPlayer);
 
     const router = useRouter();
+
+    const { hideNavigationButton, hide } = useNavigation();
+
 
     const back = () =>
     {
@@ -59,10 +64,8 @@ function PirateGame({ code }: Props)
     {
         if (!user)
         {
-            console.log("returning")
             return;
         }
-        console.log("here")
         let joinCode = router.query["code"] as string
 
         const connect = async (joinCode: string, user: TUser) =>
@@ -116,6 +119,12 @@ function PirateGame({ code }: Props)
         connect(joinCode, user)
     }, [user])
 
+    useEffect(() =>
+    {
+        hide()
+        hideNavigationButton()
+    }, [])
+
     let users: React.ReactNode[] = []
 
     for (let index = 0; index < Object.keys(players).length; index++)
@@ -138,28 +147,35 @@ function PirateGame({ code }: Props)
                 <meta name="title" content="Drunkcards | Drinkers" />
             </Head>
             <div className={styles["pirate-toolbar"] + " " + styles["pirate-toolbar--left"]}>
-                <button className={styles["pirate-toolbar__btn"]} onClick={back}>
-                    <FaChevronLeft />
-                </button>
+                <Tooltip text='Go Back' direction='right'>
+                    <button className={styles["pirate-toolbar__btn"]} onClick={back}>
+                        <FaChevronLeft />
+                    </button>
+                </Tooltip>
             </div>
             <div className={styles["pirate-toolbar"] + " " + styles["pirate-toolbar--right"]}>
-                <button className={styles["pirate-toolbar__btn"]} onClick={copyLink}>
-                    <FaLink />
-                </button>
+                <Tooltip text='Copy Link' direction='left'>
+                    <button className={styles["pirate-toolbar__btn"]} onClick={copyLink}>
+                        <FaLink />
+                    </button>
+                </Tooltip>
             </div>
-            <main className={styles["pirate-game"]}>
-                {
-                    isLoaded &&
-                    <AnimatePresence>
-                        <PirateCardStack />
-                    </AnimatePresence>
-                }
-            </main>
-            <footer className={styles["pirate-footer"]}>
-                <UserList
-                    users={users}
-                />
-            </footer>
+            <div className={styles["pirate-game__wrapper"]}>
+
+                <main className={styles["pirate-game"]}>
+                    {
+                        isLoaded &&
+                        <AnimatePresence>
+                            <PirateCardStack />
+                        </AnimatePresence>
+                    }
+                </main>
+                <footer className={styles["pirate-footer"]}>
+                    <UserList
+                        users={users}
+                    />
+                </footer>
+            </div>
         </>
     )
 }

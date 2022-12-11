@@ -1,0 +1,256 @@
+$nav-bg: #490878;
+$nav-header-bg: gray;
+$nav-body-bg: hsl(0, 0%, 90%);
+
+$nav-open-width: 22rem;
+$nav-closed-width: 6rem;
+$nav-header-height: 300px;
+
+$nav-body-radius: 1rem;
+
+$nav-link-bg: hsl(275, 88%, 30%);
+
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+
+.navbar
+{
+    position: fixed;
+    z-index: 1000;
+    transform: translateX(-100%);
+    width: $nav-open-width;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: $nav-bg;
+
+    transition: transform 150ms ease-in-out;
+
+
+    &--open
+    {
+        transform: translateX(0);
+        box-shadow: 2px 0 20px 1px rgba(0, 0, 0, 0.7);
+
+    }
+
+    &__toggle
+    {
+        position: absolute;
+        top: 1.5rem;
+        right: -1.5rem;
+        transform: translate(100%);
+        font-size: 0;
+
+        width: fit-content;
+        height: fit-content;
+        aspect-ratio: 1 / 1;
+        text-align: center;
+        cursor: pointer;
+
+        border: 2px solid white;
+        border-radius: 50%;
+
+        padding: .5rem;
+
+        background-color: transparent;
+        color: white;
+        opacity: 0.5;
+
+        display: grid;
+        place-items: center;
+
+        transition: opacity 150ms ease-in-out, scale 150ms ease-in-out;
+        margin-left: auto;
+
+
+
+        svg
+        {
+            font-size: 1.5rem;
+            margin: .25rem;
+        }
+
+        &:hover,
+        &:focus
+        {
+            opacity: 1;
+        }
+
+        &:active
+        {
+            scale: .95;
+            // transform:  !important;
+        }
+
+    }
+
+    &__profile
+    {
+        width: 100%;
+    }
+
+    &__header
+    {
+        height: $nav-header-height;
+        padding: 0 0.5rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__company
+    {
+        text-align: center;
+        color: hsl(0, 0%, 85%);
+
+        &__name
+        {
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+        }
+    }
+
+    &__body
+    {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding-top: 1rem;
+
+        background-color: $nav-body-bg;
+        box-shadow: 0px -4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    &__links
+    {
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        list-style: none;
+        margin: 0;
+        padding: 0 1.25rem;
+        gap: .5rem;
+        height: 100%;
+
+
+    }
+
+    &__footer
+    {
+        padding: 1.5rem;
+        // background-color: $nav-link-bg;
+        margin: 1rem;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &__social
+    {
+        font-size: 0;
+        border-radius: 50%;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        background-color: $nav-link-bg;
+        color: white;
+        cursor: pointer;
+
+        transition: scale 150ms ease-in-out, color 150ms ease-in-out;
+
+        &--twitter:hover
+        {
+            color: #1DA1F2;
+        }
+
+        &--discord:hover
+        {
+            color: #5865F2;
+        }
+
+        &--cookies:hover
+        {
+            color: hsl(21, 34%, 75%);
+        }
+
+        svg
+        {
+            margin: .75rem;
+            font-size: 1.5rem;
+        }
+
+        &:hover,
+        &:focus
+        {
+            scale: 1.1;
+        }
+    }
+    @media (max-width: $vw-mobile)
+    {
+        width: 100%;
+
+        &--open
+        {
+            .navbar__toggle
+            {
+                transform: translateX(-1.5rem);
+                top: 0.75rem;
+                right: -1rem;
+            }
+        }
+    }
+
+}
+
+.navlink
+{
+    background-color: $nav-link-bg;
+    color: white;
+    padding: .5rem 1rem;
+
+    border-radius: .5rem;
+
+    cursor: pointer;
+
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    transition: scale 150ms ease-in-out;
+
+    &:hover
+    {
+        scale: 1.05;
+
+        .navlink__text
+        {
+            font-weight: 600;
+        }
+    }
+
+
+    &__text
+    {
+        font-size: 1.75rem;
+        font-weight: 500;
+        letter-spacing: 2px;
+    }
+
+    &>svg
+    {
+        font-size: 2rem;
+
+        aspect-ratio: 1/1;
+
+        &::before
+        {
+            content: '';
+        }
+    }
+
+   
+}

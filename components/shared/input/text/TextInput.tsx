@@ -6,16 +6,22 @@ type Props = {
     label: string,
     password?: boolean
     placeholder?: string,
-    retriever?: Function,
+    value?: string,
+    retriever?: (mes: string) => void,
 }
 
-function TextInput({ retriever, label, password = false, placeholder = "" }: Props)
+function TextInput({ retriever = (mes: string) => { }, label, password = false, placeholder = "", value }: Props)
 {
-    const [value, setValue] = useState(placeholder);
+    const [text, setValue] = useState(placeholder);
     const id = useId();
 
     const textChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     {
+        if (value !== undefined)
+        {
+            retriever(e.target.value)
+            return;
+        }
         setValue(() =>
         {
             if (retriever !== undefined)
@@ -29,7 +35,7 @@ function TextInput({ retriever, label, password = false, placeholder = "" }: Pro
         <div className={styles["input-text"]}>
             <label htmlFor={`input-${id}`} className={styles["input-text__label"]}>{label}</label>
             <input id={`input-${id}`} className={styles["input-text__input"]} type={password ? "password" : "text"}
-                value={value} placeholder={placeholder} onChange={textChange} />
+                value={value ?? text} placeholder={placeholder} onChange={textChange} />
         </div>
     )
 }

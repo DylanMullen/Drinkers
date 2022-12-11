@@ -1,9 +1,10 @@
 
-import Backdrop from "components/shared/backdrop";
+// import Backdrop from "components/shared/backdrop";
 import { domAnimation, LazyMotion } from "framer-motion";
-import React, { lazy, PropsWithChildren, useContext, useState } from "react"
+import dynamic from "next/dynamic";
+import React, { lazy, PropsWithChildren, Suspense, useContext, useState } from "react"
 
-
+const Backdrop = dynamic(() => import("components/shared/backdrop"), { suspense: true, ssr: false })
 
 interface ModalContextProps
 {
@@ -34,10 +35,12 @@ function ModalContextProvider({ children }: PropsWithChildren)
             {
                 show &&
                 <LazyMotion features={domAnimation}>
+                    <Suspense fallback="">
+                        <Backdrop closeCallback={close}>
+                            {modal}
+                        </Backdrop>
 
-                    <Backdrop closeCallback={close}>
-                        {modal}
-                    </Backdrop>
+                    </Suspense>
                 </LazyMotion>
             }
             {children}

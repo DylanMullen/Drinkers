@@ -21,7 +21,6 @@ export enum WaterfalActions
 export function sendAction(current: string, action: WaterfallAction)
 {
     const { id, content }: WaterfallAction = action;
-    console.log(action)
     const user = getUser();
 
     switch (id)

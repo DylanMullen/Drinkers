@@ -1,0 +1,54 @@
+$bg: rgb(34, 34, 34);
+
+.tooltip
+{
+    position: absolute;
+    top: 50%;
+    translate: 0% -50%;
+    white-space: nowrap;
+    padding: .25rem .5rem;
+
+    background-color: $bg;
+    color: white;
+    opacity: 0;
+
+    transition: opacity 150ms ease-in-out;
+
+    z-index: 999;
+
+    &--left
+    {
+        left: 0;
+        translate: calc(-100% + .25rem) -50%;
+
+        clip-path: polygon(0% 0%, calc(100% - .5rem) 0%, 100% 50%, calc(100% - .5rem) 100%, 0% 100%);
+        padding-right: .75rem;
+
+    }
+
+    &--right
+    {
+        right: 0;
+        translate: calc(100% + .25rem) -50%;
+        clip-path: polygon(.5rem 0%, 100% 0%, 100% 100%, .5rem 100%, 0% 50%);
+
+        padding-left: .75rem;
+    }
+
+
+
+    &__wrapper
+    {
+        position: relative;
+        width: fit-content;
+        height: fit-content;
+
+        &:hover
+        {
+            .tooltip
+            {
+                opacity: 1;
+            }
+        }
+    }
+}

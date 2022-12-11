@@ -1,6 +1,6 @@
 import PirateGameSocket from "./PirateGameSocket";
 import store from "redux/store";
-import { NextPlayerTurn, PiratePlayer, PiratePrompt } from "redux/pirate/types";
+import { NextPlayerTurn, PiratePlayer, PiratePrompt, PlayerJoined } from "redux/pirate/types";
 import { deleteFirstPrompt, hasPlayer, increaseTurns, newPlayer, newPrompt, nextPlayer, removePlayer } from "redux/pirate/slice";
 import { User } from "utils/UserUtil";
 
@@ -63,11 +63,14 @@ export default class PirateGame
 
     /* Handlers */
 
-    handleNewPlayer(player: User)
+    handleNewPlayer(body: PlayerJoined)
     {
+        let { player } = body;
+
+
         if (hasPlayer(player.uuid)) return;
 
-        store.dispatch(newPlayer(player));
+        store.dispatch(newPlayer(body));
     }
 
     handlePlayerRemoved(uuid: string)

@@ -26,7 +26,6 @@ export default class WaterfallSocket
         this.socket.onopen = () =>
         {
             connected(true)
-            console.log("test")
         }
     }
 

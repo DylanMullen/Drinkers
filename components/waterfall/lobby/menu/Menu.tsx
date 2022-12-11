@@ -1,4 +1,4 @@
-import React, { lazy, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { BiDrink as JoinIcon } from '@react-icons/all-files/bi/BiDrink';
 import { HiOutlinePencilAlt as CreateIcon } from '@react-icons/all-files/hi/HiOutlinePencilAlt'
@@ -53,7 +53,7 @@ function Menu({ create, gameMode }: Props)
         <div className={styles["waterfall-menu"]}>
             <MenuOption text='Join Us' icon={<JoinIcon />} modifier="join" callback={() => openModal(0)} />
             <MenuOption text='New Game' icon={<CreateIcon />} modifier="create" callback={() => create()} />
-            <MenuOption text='Your Profile' icon={<ProfileIcon />} modifier="profile" callback={() => openModal(1)} />
+            {/* <MenuOption text='Your Profile' icon={<ProfileIcon />} modifier="profile" callback={() => openModal(1)} /> */}
         </div>
     )
 }

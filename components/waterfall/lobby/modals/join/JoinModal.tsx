@@ -3,6 +3,7 @@ import TextInput from 'components/shared/input/text';
 import Modal from 'components/shared/modal'
 import AdModal from 'components/shared/modals/ad';
 import { useModalContext } from 'context/ModalContext';
+import useUser from 'context/UserContext';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { CgProfile as ProfileIcon } from 'react-icons/cg';
@@ -31,8 +32,8 @@ function JoinModal({ close, gameMode }: Props)
 {
     const router = useRouter();
     const { update } = useModalContext()
+    const { user } = useUser();
 
-    const [user, setUser] = useState<User>()
     const [error, setError] = useState<Error>();
 
     const [joinCode, setJoinCode] = useState("");
@@ -56,10 +57,6 @@ function JoinModal({ close, gameMode }: Props)
         update(<AdModal adTime={5} callback={callback} />)
     }
 
-    useEffect(() =>
-    {
-        setUser(getUser())
-    }, [])
 
     return (
         <>
@@ -82,8 +79,7 @@ function JoinModal({ close, gameMode }: Props)
                             <Profile
                                 username={user.username}
                                 avatar={user.avatar}
-                                open={() => close(2)}
-
+                                showHelper={user.guest === true}
                             />
 
                             <hr />

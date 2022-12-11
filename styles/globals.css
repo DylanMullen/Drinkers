@@ -1,19 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&display=swap');
 
 html,
-body,h1,h2,h3,h4,h5,h6,p {
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   padding: 0;
   margin: 0;
   font-family: 'Archivo Narrow', sans-serif;
 }
 
-body,html
-{
-  width: 100%;
-  height: 100%;
+body,
+html {
   background: linear-gradient(180deg, #37045c, #430c6a 50%, #440a6e 60%, #2a0643);
   background-repeat: no-repeat;
   background-attachment: fixed;
+
 }
 
 a {
@@ -25,15 +31,19 @@ a {
   box-sizing: border-box;
 }
 
-.rounded
-{
+.rounded {
   border-radius: 50%;
 }
 
-#__next
-{
+#__next {
   width: 100%;
   height: 100%;
   overflow-x: hidden;
   position: relative;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
 }

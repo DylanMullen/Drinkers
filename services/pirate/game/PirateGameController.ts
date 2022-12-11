@@ -32,7 +32,6 @@ export async function joinPirateGame(joinCode: string, player: PiratePlayer): Pr
 
     if (res?.body?.error !== undefined) return false;
 
-    console.log(res)
 
     let promptsIn: { [id: number]: PiratePrompt } = res.game.prompts
     let promptsOut: { [id: string]: PiratePrompt } = {}
@@ -64,6 +63,36 @@ export async function findPirateGame(joinCode: string, uuid?: string)
         playerFound: res.body.playerFound,
         game: res.body.game
     }
+}
+
+export async function getAllPiratePacks(): Promise<string[]>
+{
+    let res = await sendPacksRequest();
+    if (res.body.error !== undefined) return [];
+
+    let packIDs: string[] = [];
+
+    for (let index = 0; index < (res.body.packs as []).length; index++)
+    {
+        packIDs.push(res.body.packs[index].uuid)
+    }
+
+    return packIDs
+}
+
+async function sendPacksRequest()
+{
+    return await fetch(API_URL + "/pirate/packs", {
+        method: "GET",
+    }).then(res => res.json())
+        .catch(err =>
+        {
+            return {
+                body: {
+                    error: err
+                }
+            }
+        })
 }
 
 async function sendCreateRequest(packs: string[], player: User)

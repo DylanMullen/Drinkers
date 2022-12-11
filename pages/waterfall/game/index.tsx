@@ -17,9 +17,9 @@ import { WaterfallCard } from 'redux/waterfall/types';
 import { getCurrentGame, joinWaterfallGame } from 'services/waterfall/GameController';
 import { URL } from 'settings/Config';
 import styles from 'styles/pages/waterfall/game.module.scss';
-import { getUser, User } from 'utils/UserUtil';
-import Timer from 'components/shared/input/timer';
-import { useUser } from 'context/UserContext';
+import useUser from 'context/UserContext';
+import useNavigation from 'context/NavigationContext';
+import Tooltip from 'components/shared/tooltip';
 
 const ModalHandler = lazy(() => import("components/waterfall/game/modals"))
 const Lobby = lazy(() => import("components/waterfall/game/lobby"))
@@ -29,13 +29,14 @@ const UserList = lazy(() => import("components/waterfall/game/userlist"))
 
 
 type Props = {
-    gameID: string
+    code: string
 }
 
-function WaterfallGame({ gameID }: Props)
+function WaterfallGame({ code }: Props)
 {
 
     const router = useRouter();
+    const { hideNavigationButton, hide } = useNavigation();
 
     const back = (): void =>
     {
@@ -49,7 +50,7 @@ function WaterfallGame({ gameID }: Props)
     }
 
     const [isLoaded, setLoaded] = useState(false)
-    const user = useUser()
+    const { user } = useUser()
 
     const dispatch = useAppDispatch();
 
@@ -62,7 +63,7 @@ function WaterfallGame({ gameID }: Props)
 
     let kicked = useAppSelector(selectKicked);
     let nextPlayer = getWaterfallPlayerByUUID(useAppSelector(selectNextPlayer));
-    
+
     let playingCard = getWaterfallCard(card, hiddenBack, () =>
     {
         getCurrentGame().handleAction();
@@ -77,7 +78,7 @@ function WaterfallGame({ gameID }: Props)
     const copyLink = (e: React.MouseEvent<HTMLButtonElement>) =>
     {
         e.currentTarget.blur()
-        let url = URL + "/waterfall/" + getCurrentGame().gameCode + "/";
+        let url = URL + "/waterfall/game?code=" + getCurrentGame().gameCode;
 
         navigator.clipboard.writeText(url)
     }
@@ -107,9 +108,9 @@ function WaterfallGame({ gameID }: Props)
     const connect = useCallback(async () =>
     {
         if (!user) return;
-        
+
         let response = await joinWaterfallGame({
-            joinCode: gameID,
+            joinCode: code,
             player: {
                 uuid: user.uuid,
                 username: user.username,
@@ -122,11 +123,13 @@ function WaterfallGame({ gameID }: Props)
         }
         else
             setLoaded(true);
-    }, [gameID, router, user])
-    
+    }, [code, router, user])
+
     useEffect(() =>
     {
         connect();
+        hideNavigationButton()
+        hide()
     }, [connect])
 
     const next = () =>
@@ -165,7 +168,8 @@ function WaterfallGame({ gameID }: Props)
             </div>
 
             <div className={styles["waterfall-toolbar"] + " " + styles["waterfall-toolbar--right"]}>
-                <button className={styles["waterfall-toolbar__btn"]}
+                <button
+                    className={styles["waterfall-toolbar__btn"]}
                     onClick={(e) => { e.currentTarget.blur(); dispatch(updateModal({ id: 0, show: true, content: {} })) }}
                 >
                     <BsQuestionLg />
@@ -178,44 +182,47 @@ function WaterfallGame({ gameID }: Props)
                 <RuleToolbarButton />
 
             </div>
-            {
-                !started ?
-                    <Suspense>
-                        <Lobby />
-                    </Suspense> :
-                    <>
-                        <main className={styles["waterfall-game"]} data-color={isRed && started ? "red" : "black"}>
-                            <div className={styles["waterfall-game__card"]}>
-                                <div className={styles["waterfall-game__skip"]}>
-                                    <ControlButton
-                                        icon="🕒"
-                                        text="Skip Turn"
-                                        callback={skip}
-                                    />
-                                </div>
-                                <div className={styles["waterfall-game__card__wrapper"]}>
-                                    {playingCard}
+            <div className={styles["waterfall-game__wrapper"]}>
+
+                {
+                    !started ?
+                        <Suspense>
+                            <Lobby />
+                        </Suspense> :
+                        <>
+                            <main className={styles["waterfall-game"]} data-color={isRed && started ? "red" : "black"}>
+                                <div className={styles["waterfall-game__card"]}>
+                                    <div className={styles["waterfall-game__skip"]}>
+                                        <ControlButton
+                                            icon="🕒"
+                                            text="Skip Turn"
+                                            callback={skip}
+                                        />
+                                    </div>
+                                    <div className={styles["waterfall-game__card__wrapper"]}>
+                                        {playingCard}
+                                    </div>
+
+                                    <div className={styles["waterfall-game__next"]}>
+                                        <ControlButton
+                                            icon="🍺"
+                                            text="Next Turn"
+                                            callback={next}
+                                            disabled={!isNextPlayerEnabled}
+                                        />
+                                    </div>
                                 </div>
 
-                                <div className={styles["waterfall-game__next"]}>
-                                    <ControlButton
-                                        icon="🍺"
-                                        text="Next Turn"
-                                        callback={next}
-                                        disabled={!isNextPlayerEnabled}
-                                    />
-                                </div>
-                            </div>
+                            </main>
+                            <footer className={styles["waterfall-footer"]} data-color={isRed ? "red" : "black"}>
+                                <Suspense>
+                                    <UserList />
+                                </Suspense>
+                            </footer>
+                        </>
+                }
 
-                        </main>
-                        <footer className={styles["waterfall-footer"]} data-color={isRed ? "red" : "black"}>
-                            <Suspense>
-                                <UserList />
-                            </Suspense>
-                        </footer>
-                    </>
-            }
-
+            </div>
 
         </>
     )
@@ -240,7 +247,7 @@ function getWaterfallCard(card: WaterfallCard, hiddenBack: boolean, flipCallback
         cardDetails={{
             face: card.face,
             suite: card.suite,
-            hidden: hiddenBack, 
+            hidden: hiddenBack,
             cardsLeft: card.cardsLeft,
             cardOwner: cardOwner,
         }}
@@ -302,11 +309,10 @@ function RuleToolbarButton()
 
 export async function getServerSideProps(context: GetServerSidePropsContext)
 {
-    const { gameID } = context.query
-
+    const { code } = context.query
     return {
         props: {
-            gameID: gameID as string
+            code: code as string
         }
     }
 }

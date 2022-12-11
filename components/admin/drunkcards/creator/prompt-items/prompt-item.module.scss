@@ -1,0 +1,62 @@
+$btn-bg: rgb(247, 247, 247);
+$delete-bg: #ef233c;
+$edit-bg: #f79d65;
+.prompt-item
+{
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    &__buttons
+    {
+        position: absolute;
+        top: 0;
+        right: 0;
+        // background-color: red;
+        z-index: 999;
+
+        transform: translateY(-50%);
+
+        display: flex;
+        gap: .5rem;
+    }
+
+    &__btn
+    {
+        background-color: $btn-bg;
+        border: 0;
+        border-radius: 50%;
+        font-size: 0;
+        aspect-ratio: 1/1;
+        cursor: pointer;
+        padding: .5rem;
+
+        transition: background-color 150ms ease-in-out, color 150ms ease-in-out, scale 150ms ease-in-out;
+        box-shadow: 0 0 10px rgba(0,0,0,0.75);
+        svg
+        {
+            font-size: 1.75rem;
+        }
+
+        &:hover,&:focus{
+            scale: 1.1;
+        }
+
+        &--delete:hover
+        {
+            background-color: $delete-bg;
+            color: white;
+        }
+        &--edit:hover
+        {
+            background-color: $edit-bg;
+            color: white;
+
+        }
+    }
+}

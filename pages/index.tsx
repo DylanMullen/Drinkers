@@ -1,20 +1,30 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react';
 
 import { IoBeer } from 'react-icons/io5'
-import { GiWaterfall } from 'react-icons/gi'
+import { GiCardRandom, GiWaterfall } from 'react-icons/gi'
 
 import MenuOption from 'components/waterfall/lobby/options/MenuOption';
 import Header from 'components/shared/header';
+import useNavigation from 'context/NavigationContext';
 
 export default function Home()
 {
 
   let router = useRouter();
 
+  const { showNavigationButton } = useNavigation()
+
+  // showNavigationButton()
+
   const click = (page: string) => router.push(page)
+
+  useEffect(() =>
+  {
+    showNavigationButton()
+
+  }, [])
 
   return (
     <>
@@ -36,11 +46,11 @@ export default function Home()
         style={{
           display: "grid",
           placeContent: "center",
-          height: "100%"
+          minHeight: "100vh"
         }}
 
       >
-        <Header logo={"/imgs/waterfall.png"} name='Drinkers' />
+        <Header logo={"/drinkers-logo.png"} name='Drinkers' removeIconStyle />
         <div style={{
           display: "flex",
           marginTop: "2rem",
@@ -53,7 +63,7 @@ export default function Home()
             modifier="join" callback={() => click("/waterfall")} />
           <MenuOption
             text='Drunkcards'
-            icon={<IoBeer />}
+            icon={<GiCardRandom />}
             modifier="profile" callback={() => click("/drunkcards")} />
         </div>
       </main>

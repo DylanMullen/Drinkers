@@ -12,20 +12,20 @@ $vw-desktop: 1200px;
 
     @media (max-width: $vw-tablet) {
         display: grid;
-        grid-template-columns: repeat(4,1fr);
+        grid-template-columns: repeat(2,1fr);
         gap: 0;
 
-        >:first-child
-        {
-            grid-column: 1/span 2;
-        }
-        >:nth-child(2)
-        {
-            grid-column: 3/span 2
-        }
-        >:last-child
-        {
-            grid-column: 2 / span 3;
-        }
+        // >:first-child
+        // {
+        //     grid-column: 1/span 2;
+        // }
+        // >:nth-child(2)
+        // {
+        //     grid-column: 3/span 2
+        // }
+        // >:last-child
+        // {
+        //     grid-column: 2 / span 3;
+        // }
     }
 }

@@ -8,10 +8,10 @@ import { AnimatePresence, motion, PanInfo, useMotionValue, usePresence, useTrans
 import { PiratePrompt } from 'redux/pirate/types';
 import { getPirateInstance } from 'services/pirate/game/PirateGameController';
 import { getDefaultUser, getUser, User } from 'utils/UserUtil';
-import { useUser } from 'context/UserContext';
+import useUser from 'context/UserContext';
 
 const DISTANCE_BETWEEN = 8
-const DRAG_DISTANCE = 250
+const DRAG_DISTANCE = 100
 
 type StackedCardProps = {
     prompt: PiratePrompt,
@@ -23,7 +23,7 @@ function PirateCardStack()
 {
     const prompts = useAppSelector(selectPrompts)
     const nextPlayer = useAppSelector(selectNextPlayer);
-    const user = useUser()
+    const {user} = useUser()
     let keys = Object.keys(prompts)
 
     const cards: React.ReactNode[] = []
@@ -40,9 +40,6 @@ function PirateCardStack()
     return (
         <div className={styles["stack"]}>
             <AnimatePresence>
-                {/* {
-                    keys.map((e, index) => )
-                } */}
                 {
                     cards
                 }
@@ -158,7 +155,6 @@ function StackedCard({ prompt, canMove, offset }: StackedCardProps)
             <motion.div
                 style={{ rotate: rotate }}
             >
-
                 <PirateCard
                     settings={{
                         title: prompt.title,
@@ -166,6 +162,7 @@ function StackedCard({ prompt, canMove, offset }: StackedCardProps)
                         rotation: 0,
                         isDummy: offset !== 0
                     }}
+                    scheme={prompt.scheme}
                 />
             </motion.div>
 

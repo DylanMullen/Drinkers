@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { stat } from "fs";
 import store, { RootState } from "redux/store";
 import { User } from "utils/UserUtil";
-import PirateState, { NextPlayerTurn, PiratePlayer, PiratePrompt } from "./types";
+import PirateState, { NextPlayerTurn, PiratePlayer, PiratePrompt, PlayerJoined } from "./types";
 
 
 const initialState: PirateState = {
@@ -45,9 +45,11 @@ export const pirateSlice = createSlice({
         {
             return initialState
         },
-        newPlayer: (state, action: PayloadAction<User>) =>
+        newPlayer: (state, action: PayloadAction<PlayerJoined>) =>
         {
-            state.game.players.users[Object.keys(state.game.players.users).length] = action.payload
+            state.game.players.users[Object.keys(state.game.players.users).length] = action.payload.player
+            state.game.players.current = action.payload.current
+            state.game.players.next = action.payload.next
         },
         removePlayer: (state, action: PayloadAction<string>) =>
         {

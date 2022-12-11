@@ -1,29 +1,42 @@
 import React, { useEffect, useState } from 'react'
 import Head from '../../node_modules/next/head'
-
 import styles from 'styles/pages/waterfall/home.module.scss';
-
-
-import Logo from "public/icons/waterfall-icon.svg";
 import Header from 'components/shared/header';
 import Menu from 'components/waterfall/lobby/menu';
 
 import { IoBeer } from '@react-icons/all-files/io5/IoBeer';
 import { useRouter } from 'next/router';
 import { getUser, User } from 'utils/UserUtil';
-import { createWaterfallGame } from 'services/waterfall/GameController';
+import { createWaterfallGame, getCurrentGame } from 'services/waterfall/GameController';
 import { GameMode } from 'components/waterfall/lobby/modals/join/JoinModal';
+import useNavigation from 'context/NavigationContext';
+import BuyUsBeer from 'components/shared/buyusbeer';
+import useUser from 'context/UserContext';
+import { useModalContext } from 'context/ModalContext';
+import AdModal from 'components/shared/modals/ad';
 
 // import x from 
 
 function WaterfallHome()
 {
-    const [user, setUser] = useState<User>();
+    const { user } = useUser();
+    const { update, open, close } = useModalContext()
 
     const router = useRouter();
+    const { showNavigationButton } = useNavigation()
+
+    // showNavigationButton()
+
+    const goTo = () =>
+    {
+        close();
+        router.push("/waterfall/game?code=" + getCurrentGame().gameCode);
+    }
 
     const create = async () =>
     {
+        if (user === undefined) return;
+
         let response = await createWaterfallGame({
             owner: { uuid: user?.uuid ?? "", username: user?.username ?? "", avatar: user?.avatar ?? "" }, settings: {
                 gameName: "Waterfall",
@@ -32,17 +45,16 @@ function WaterfallHome()
                 actionsEnabled: true
             }
         });
+        if (response === undefined) return;
 
-        if (!response) return;
-
-        router.push("/waterfall/" + response);
+        update(<AdModal adTime={5} callback={goTo} />)
+        open()
     }
 
     useEffect(() =>
     {
-        setUser(getUser())
+        showNavigationButton()
     }, [])
-
 
     return (
         <>
@@ -71,13 +83,7 @@ function WaterfallHome()
             <main id="waterfall-lobby" className={styles["waterfall-lobby"]}>
                 <Menu gameMode={GameMode.WATERFALL} create={create} />
                 <footer className={styles["waterfall-footer"]}>
-                    <a
-                        href="https://www.buymeacoffee.com/drinkers" target={"_blank"} rel="noreferrer"
-                        className={styles["waterfall-footer__banner"]}
-                        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => e.currentTarget.blur()}>
-                        <h2 className={styles["waterfall-footer__banner__text"]}>Buy us a drink!</h2>
-                        <span className={styles["waterfall-footer__banner__btn"]}><IoBeer /></span>
-                    </a>
+                    <BuyUsBeer />
                 </footer>
             </main>
 

@@ -1,0 +1,28 @@
+.creator
+{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+
+    // gap: 5rem;
+    // padding: 1rem;
+    &__input
+    {
+        height: 90vh;
+    }
+
+}
+
+.creator-footer
+{
+    &__items
+    {
+
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        row-gap: 2rem;
+        padding: 5rem;
+    }
+}

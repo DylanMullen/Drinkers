@@ -1,5 +1,7 @@
+import { useModalContext } from 'context/ModalContext'
 import Image from 'next/image'
 import React from 'react'
+import ProfileModal from '../modals/profile'
 
 import styles from './profile.module.scss'
 
@@ -7,11 +9,18 @@ type Props = {
     username: string,
     avatar: string | undefined,
     showHelper?: boolean,
-    open?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-function Profile({ username, avatar, showHelper = true, open = () => { } }: Props)
+function Profile({ username, avatar, showHelper = true }: Props)
 {
+    const { update, open, close } = useModalContext();
+
+    const openProfileModal = () =>
+    {
+        update(<ProfileModal close={close} />)
+        open()
+    }
+
     return (
         <div className={styles["waterfall-profile"]}>
             <div className={styles["waterfall-profile__avatar"]}>
@@ -20,9 +29,9 @@ function Profile({ username, avatar, showHelper = true, open = () => { } }: Prop
             <div className="waterfall-profile__body">
                 <h1 className={styles["waterfall-profile__title"]}>{username}</h1>
                 {
-                    showHelper && open &&
+                    showHelper &&
                     <button
-                        onClick={open}
+                        onClick={openProfileModal}
                         className={styles["waterfall-profile__subtitle"]}>Not you?</button>
                 }
             </div>

@@ -182,7 +182,6 @@ export default class Game
     {
         if (uuid === this.cookie.uuid)
         {
-            console.log("herer")
             this.socket.close();
             store.dispatch(kicked());
             return;

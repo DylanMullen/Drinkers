@@ -39,7 +39,6 @@ function WildcardModal({ cards }: Props)
         cardItems.push(
             <WildcardCardItem card={card} index={i} />
         )
-        console.log(cardItems)
     }
 
     return (
@@ -56,8 +55,7 @@ function WildcardModal({ cards }: Props)
             closeClbck={() => { getCurrentGame().closeModal() }}
         >
             <div className={styles["wildcard-modal"]}>
-                <div className={styles["wildcard-modal__cards"]}
-                >
+                <div className={styles["wildcard-modal__cards"]}>
                     {cardItems}
                 </div>
             </div>

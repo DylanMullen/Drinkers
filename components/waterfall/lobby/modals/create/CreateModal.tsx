@@ -81,7 +81,6 @@ function CreateModal({ close }: Props)
                                 <Profile
                                     username={user?.username ?? "Guest"}
                                     avatar={user?.avatar ?? "https://ca.slack-edge.com/T0266FRGM-U011PLSSMA9-g7e8a6705c42-512"}
-                                    open={() => close(2)}
                                 />
                                 <hr />
                                 <SubmitButton clickCallback={submit} />
