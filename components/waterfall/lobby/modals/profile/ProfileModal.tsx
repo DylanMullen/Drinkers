@@ -1,13 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Modal from 'components/shared/modal/Modal'
 import { CgProfile as ProfileIcon } from 'react-icons/cg';
-import { getCookie, setCookie } from 'cookies-next';
-import Profile from '../../profile';
-import { Sign } from 'crypto';
-import TextInput from 'components/shared/input/text';
-import InputGroup from 'components/shared/input/input-group';
-
-import { FcGoogle } from 'react-icons/fc'
 import { SiDiscord } from 'react-icons/si';
 
 import styles from './modal-profile.module.scss'
@@ -21,12 +14,6 @@ type Props = {
     close: Function
 
 }
-
-type SignedInProps = {
-    user: User,
-    logout: () => void
-}
-
 export const DISCORDURL = "https://discord.com/api/oauth2/authorize?client_id=852274286017249330&redirect_uri=https%3A%2F%2Fdrinkers.party%2Fapi%2Flogin&response_type=code&scope=identify%20email"
 
 function ProfileModal({ close }: Props)
@@ -60,10 +47,6 @@ function ProfileModal({ close }: Props)
                     <div className={styles["profile-modal"]}>
 
                         {
-                            isSignedIn && user &&
-                            <SignedIn user={user} logout={logout} />
-                        }
-                        {
                             !isSignedIn &&
                             <div className={styles["profile-modal__signin"]}>
                                 <ProfileEditor
@@ -93,27 +76,6 @@ function ProfileModal({ close }: Props)
     )
 }
 
-function SignedIn({ user, logout }: SignedInProps)
-{
-
-    return (
-        <div className={styles["profile-modal__logged"]}>
-            <header className={styles["profile-modal__logged__header"]}>
-                <Profile username={user.username} avatar={user.avatar} showHelper={false} />
-            </header>
-            <hr />
-            <div className={styles["profile-modal__logged__body"]}>
-                <InputGroup columns={2}>
-                    <button
-                        onClick={logout}
-                        className={styles["profile-modal__btn"] + " " + styles["profile-modal__btn--login"]}>
-                        Logout
-                    </button>
-                </InputGroup>
-            </div>
-        </div>
-    )
-}
 
 
 export default ProfileModal

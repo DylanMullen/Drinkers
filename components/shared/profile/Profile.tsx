@@ -28,6 +28,8 @@ function Profile({ scheme }: Props)
 
   const onUsernameClick = () =>
   {
+    if(!user?.guest) return;
+
     update(<ProfileModal close={close} />);
     open()
   }
