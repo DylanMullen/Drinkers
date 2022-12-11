@@ -55,7 +55,6 @@ export default class PirateGameSocket
             case Actions.PLAYER_LEFT:
                 break;
             case Actions.NEW_PROMPT:
-                console.log(json.body.prompt)
                 this.game.handleNextTurn({
                     current: json.body.current,
                     next: json.body.next

@@ -4,7 +4,7 @@ export const TWITTER_URL: string = "https://twitter.com/StillSite";
 
 //
 
-const DEBUG = true;
+const DEBUG = false;
 const LOCALHOST = false;
 const LOCAL_IP = LOCALHOST ? "localhost" : "92.236.17.208"
 

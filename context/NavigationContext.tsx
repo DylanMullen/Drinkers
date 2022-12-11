@@ -41,7 +41,6 @@ export function NavigationContextProvider({ children }: PropsWithChildren)
     const showBtn = () => setCtx(prev => { return { ...prev, btnVisible: true } })
     const hideBtn = () => setCtx(prev => { return { ...prev, btnVisible: false } })
 
-    console.log("test")
 
     return (
         <NavigationContext.Provider value={{

@@ -67,7 +67,6 @@ export default class PirateGame
     {
         let { player } = body;
 
-        console.log(body)
 
         if (hasPlayer(player.uuid)) return;
 

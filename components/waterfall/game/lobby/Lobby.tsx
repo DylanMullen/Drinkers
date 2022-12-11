@@ -80,7 +80,6 @@ function Settings()
 
     const updateSetting = (value: any, setting: string) =>
     {
-        console.log("updating")
         getCurrentGame().sendUpdateSetting(setting, value);
     }
 

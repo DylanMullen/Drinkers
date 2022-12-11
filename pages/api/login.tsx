@@ -232,7 +232,6 @@ async function registerDiscordAccount(discordDetails: Discord)
 
 async function updateDiscordAccount(uuid: string, discordDetails: Discord)
 {
-  console.log(uuid)
   let params: UpdateItemCommandInput = {
     TableName: "users",
     Key: {

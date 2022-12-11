@@ -27,7 +27,6 @@ function Navbar({ }: Props)
     {
         e.currentTarget.blur()
 
-        console.log(visible)
 
         if (visible) hide()
         else show();

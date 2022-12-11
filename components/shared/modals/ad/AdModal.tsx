@@ -26,7 +26,6 @@ function AdModal({ adTime, callback = () => { } }: Props)
     {
         let id = setInterval(() =>
         {
-            console.log("incrementing")
 
             setTime(prev =>
             {

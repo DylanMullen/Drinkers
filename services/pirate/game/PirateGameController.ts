@@ -32,7 +32,6 @@ export async function joinPirateGame(joinCode: string, player: PiratePlayer): Pr
 
     if (res?.body?.error !== undefined) return false;
 
-    console.log(res)
 
     let promptsIn: { [id: number]: PiratePrompt } = res.game.prompts
     let promptsOut: { [id: string]: PiratePrompt } = {}

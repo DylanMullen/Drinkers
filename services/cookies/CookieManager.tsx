@@ -30,6 +30,5 @@ export function handleCookieResponse(accepted: boolean)
         askAgain: new Date().getTime() + ASK_DELAY
     }
 
-    console.log(new Date(policy.askAgain as number));
     localStorage.setItem("cookies", JSON.stringify(policy))
 }

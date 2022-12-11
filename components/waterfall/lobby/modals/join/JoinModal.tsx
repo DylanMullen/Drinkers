@@ -57,7 +57,6 @@ function JoinModal({ close, gameMode }: Props)
         update(<AdModal adTime={5} callback={callback} />)
     }
 
-    console.log(user?.guest);
 
     return (
         <>
