@@ -1,6 +1,8 @@
 $bg-login: linear-gradient(-120deg, rgba(201, 110, 18, 1) 5%, rgba(223, 141, 3, 1) 21%, rgba(236, 157, 0, 1) 39%, rgba(246, 193, 1, 1) 59%, rgba(250, 233, 111, 1) 79%, rgba(255, 248, 151, 1) 100%);
 $bg-register: linear-gradient(120deg, rgba(116, 242, 206, 1) 0%, rgba(170, 246, 131, 1) 100%);
 
+$bg-discord: linear-gradient(22deg, rgba(187,123,249,1) 0%, rgba(124,49,217,1) 32%, rgba(121,46,204,1) 54%, rgba(101,39,196,1) 73%, rgba(88,98,219,1) 100%);
+
 .profile
 {
     display: flex;
@@ -25,7 +27,15 @@ $bg-register: linear-gradient(120deg, rgba(116, 242, 206, 1) 0%, rgba(170, 246, 
     {
         font-size: 1.5rem;
         letter-spacing: 2px;
-        text-align: center;
+        // text-align: center;
+        margin-top: 1rem;
+
+        &__wrapper
+        {
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+        }
     }
 
     &__footer
@@ -38,21 +48,35 @@ $bg-register: linear-gradient(120deg, rgba(116, 242, 206, 1) 0%, rgba(170, 246, 
         display: flex;
         gap: 1rem;
         width: 100%;
-        padding: 0 10%;
     }
 
     &__btn
     {
-        width: 100%;
+        width: fit-content;
         border-radius: .5rem;
-        font-size: 1rem;
+        font-size: .85rem;
         text-align: center;
-        padding: .5rem;
+        padding: .25rem .5rem;
+        // padding-left: 2rem;
         letter-spacing: 2px;
+        position: relative;
 
         cursor: pointer;
         transition: background-position 150ms ease-in-out;
+        white-space: nowrap;
         
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        svg
+        {
+            font-size: 1.75rem;
+            // position: absolute;
+            left: 0;
+            top: 0;
+            
+        }
+
         &--register
         {
             background: $bg-register;
@@ -67,9 +91,9 @@ $bg-register: linear-gradient(120deg, rgba(116, 242, 206, 1) 0%, rgba(170, 246, 
 
         &--login
         {
-            background: $bg-login;
+            background: $bg-discord;
             background-size: 300%;
-
+            color: white;
             &:hover
             {
                 background-position: 50%;

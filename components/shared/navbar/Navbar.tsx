@@ -79,7 +79,7 @@ function Navbar({ }: Props)
                         />
                     </ul>
                     <div className={styles["navbar__footer"]}>
-                        <a href={""} rel="noopener noreferrer" target="_blank"
+                        <a href={"https://twitter.com/StillDrinkers"} rel="noopener noreferrer" target="_blank"
                             className={`${styles["navbar__social"]} ${styles["navbar__social--twitter"]}`}>
                             <FaTwitter />
 
