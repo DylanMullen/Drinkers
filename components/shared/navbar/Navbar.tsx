@@ -73,11 +73,11 @@ function Navbar({ }: Props)
                             icon={<GiCardRandom />}
                             link="/drunkcards"
                         />
-                        <Navlink
+                        {/* <Navlink
                             text='Admin'
                             icon={<MdOutlineAdminPanelSettings />}
                             link="/admin"
-                        />
+                        /> */}
                     </ul>
                     <div className={styles["navbar__footer"]}>
                         <a href={"https://twitter.com/StillDrinkers"} rel="noopener noreferrer" target="_blank"

@@ -1,8 +1,10 @@
-import { DISCORDURL } from 'components/waterfall/lobby/modals/profile/ProfileModal';
+import ProfileModal, { DISCORDURL } from 'components/waterfall/lobby/modals/profile/ProfileModal';
+import { useModalContext } from 'context/ModalContext';
+import useNavigation from 'context/NavigationContext';
 import useUser from 'context/UserContext'
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react'
+import React, { useState } from 'react'
 import { FaDiscord } from 'react-icons/fa';
 import { IoMdLogOut } from 'react-icons/io';
 
@@ -20,10 +22,15 @@ type CustomScheme = {
 
 function Profile({ scheme }: Props)
 {
-
-  const {user, logout} = useUser();
+  const { update, open, close } = useModalContext();
+  const { user, logout } = useUser();
   const loading = user === undefined;
 
+  const onUsernameClick = () =>
+  {
+    update(<ProfileModal close={close} />);
+    open()
+  }
 
   return (
     <>
@@ -37,24 +44,29 @@ function Profile({ scheme }: Props)
                   style={{ borderRadius: scheme?.rounded ? "50%" : "inherit" }} />
               </div>
               <div className={styles["profile__username__wrapper"]}>
-                <span className={styles["profile__username"]} style={{ color: scheme?.color }}>{user.username}</span>
-                {
-                  user.guest ?
-                    <div className={styles["profile__signup"]}>
+                <span
+                  className={styles["profile__username"]}
+                  style={{ color: scheme?.color, borderBottom: user.guest ? `2px dotted ${scheme?.color ?? "white"}` : "", cursor: user.guest ? "pointer" : "" }}
+                  onClick={onUsernameClick}
+                >
+                  {user.username}
+                </span>
+                <div className={styles["profile__signup"]}>
+                  {
+                    user.guest ?
                       <a href={DISCORDURL} target={"_blank"} rel={"noreferrer"}>
                         <span className={`${styles["profile__btn"]} ${styles["profile__btn--login"]}`}>
                           <FaDiscord />
                           Login with Discord
                         </span>
                       </a>
-                    </div> :
-                    <div className={styles["profile__signup"]}>
-                        <button className={`${styles["profile__btn"]} ${styles["profile__btn--signout"]}`} onClick={logout}>
-                          <IoMdLogOut />
-                          Sign Out
-                        </button>
-                    </div>
-                }
+                      :
+                      <button className={`${styles["profile__btn"]} ${styles["profile__btn--signout"]}`} onClick={logout}>
+                        <IoMdLogOut />
+                        Sign Out
+                      </button>
+                  }
+                </div>
 
               </div>
             </div>

@@ -3,11 +3,13 @@ import { getUser, logout as logoutUser, User } from "utils/UserUtil";
 
 type Context = {
     user?: User;
+    updateGuest: (name: string) => void
     logout: () => void
 }
 
 const initial: Context = {
-    logout: () => { }
+    logout: () => { },
+    updateGuest: () => { }
 }
 
 const UserContext = React.createContext<Context>(initial)
@@ -37,10 +39,27 @@ export function UserProvider({ children }: PropsWithChildren)
         setUser(prev => { return { ...prev, user: user } })
     }
 
+    const updateGuestName = (name: string) =>
+    {
+        setUser(prev =>
+        {
+            if (prev.user === undefined) return prev;
+
+            return {
+                ...prev,
+                user: {
+                    ...prev.user,
+                    username: name,
+                }
+            }
+        })
+    }
+
     return (
         <UserContext.Provider value={{
             user: user.user,
-            logout: logout
+            logout: logout,
+            updateGuest: updateGuestName
         }}>
             {children}
         </UserContext.Provider>

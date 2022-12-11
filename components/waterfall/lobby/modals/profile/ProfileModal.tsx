@@ -15,6 +15,7 @@ import ProfileEditor from '../../profile-editor';
 import SubmitButton from 'components/shared/input/buttons/submit';
 import { getUser, logout, User } from 'utils/UserUtil';
 import { uuid } from 'uuidv4';
+import useUser from 'context/UserContext';
 
 type Props = {
     close: Function
@@ -23,32 +24,22 @@ type Props = {
 
 type SignedInProps = {
     user: User,
-    setUser: React.Dispatch<React.SetStateAction<User | undefined>>
+    logout: () => void
 }
 
 export const DISCORDURL = "https://discord.com/api/oauth2/authorize?client_id=852274286017249330&redirect_uri=https%3A%2F%2Fdrinkers.party%2Fapi%2Flogin&response_type=code&scope=identify%20email"
 
 function ProfileModal({ close }: Props)
 {
-
-    const [user, setUser] = useState<User>();
+    const { user, updateGuest, logout } = useUser();
     const isSignedIn = !user?.guest;
 
-    const saveUser = (username: string, avatar: string, uuid: string) =>
+    const saveUser = (username: string) =>
     {
-        setCookie("user", {
-            uuid: uuid,
-            username: username,
-            avatar: avatar,
-            guest: true,
-        })
+        updateGuest(username)
         close()
     }
 
-    useEffect(() =>
-    {
-        setUser(getUser())
-    }, [])
 
     return (
         <>
@@ -70,12 +61,12 @@ function ProfileModal({ close }: Props)
 
                         {
                             isSignedIn && user &&
-                            <SignedIn user={user} setUser={setUser} />
+                            <SignedIn user={user} logout={logout} />
                         }
                         {
                             !isSignedIn &&
                             <div className={styles["profile-modal__signin"]}>
-                                <ProfileEditor 
+                                <ProfileEditor
                                     hydrate
                                     callback={saveUser}
                                 />
@@ -102,13 +93,8 @@ function ProfileModal({ close }: Props)
     )
 }
 
-function SignedIn({ user, setUser }: SignedInProps)
+function SignedIn({ user, logout }: SignedInProps)
 {
-
-    const click = () =>
-    {
-        setUser(logout())
-    }
 
     return (
         <div className={styles["profile-modal__logged"]}>
@@ -119,7 +105,7 @@ function SignedIn({ user, setUser }: SignedInProps)
             <div className={styles["profile-modal__logged__body"]}>
                 <InputGroup columns={2}>
                     <button
-                        onClick={click}
+                        onClick={logout}
                         className={styles["profile-modal__btn"] + " " + styles["profile-modal__btn--login"]}>
                         Logout
                     </button>

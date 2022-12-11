@@ -23,6 +23,7 @@ import { getCookie, getCookies } from 'cookies-next';
 import { FaChevronLeft, FaLink } from 'react-icons/fa';
 import { URL } from 'settings/Config';
 import useNavigation from 'context/NavigationContext';
+import Tooltip from 'components/shared/tooltip';
 
 type Props = {
     code: string
@@ -30,7 +31,7 @@ type Props = {
 
 function PirateGame({ code }: Props)
 {
-    const {user} = useUser()
+    const { user } = useUser()
     const [isLoaded, setLoaded] = useState<boolean>(false);
     const { update, open, close } = useModalContext()
 
@@ -142,14 +143,18 @@ function PirateGame({ code }: Props)
                 <meta name="title" content="Drunkcards | Drinkers" />
             </Head>
             <div className={styles["pirate-toolbar"] + " " + styles["pirate-toolbar--left"]}>
-                <button className={styles["pirate-toolbar__btn"]} onClick={back}>
-                    <FaChevronLeft />
-                </button>
+                <Tooltip text='Go Back' direction='right'>
+                    <button className={styles["pirate-toolbar__btn"]} onClick={back}>
+                        <FaChevronLeft />
+                    </button>
+                </Tooltip>
             </div>
             <div className={styles["pirate-toolbar"] + " " + styles["pirate-toolbar--right"]}>
-                <button className={styles["pirate-toolbar__btn"]} onClick={copyLink}>
-                    <FaLink />
-                </button>
+                <Tooltip text='Copy Link' direction='left'>
+                    <button className={styles["pirate-toolbar__btn"]} onClick={copyLink}>
+                        <FaLink />
+                    </button>
+                </Tooltip>
             </div>
             <div className={styles["pirate-game__wrapper"]}>
 

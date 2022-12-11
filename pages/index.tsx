@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react';
 
 import { IoBeer } from 'react-icons/io5'
-import { GiWaterfall } from 'react-icons/gi'
+import { GiCardRandom, GiWaterfall } from 'react-icons/gi'
 
 import MenuOption from 'components/waterfall/lobby/options/MenuOption';
 import Header from 'components/shared/header';
@@ -58,7 +58,7 @@ export default function Home()
             modifier="join" callback={() => click("/waterfall")} />
           <MenuOption
             text='Drunkcards'
-            icon={<IoBeer />}
+            icon={<GiCardRandom />}
             modifier="profile" callback={() => click("/drunkcards")} />
         </div>
       </main>

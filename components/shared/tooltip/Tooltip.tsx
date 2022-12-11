@@ -5,7 +5,7 @@ import styles from './tooltip.module.scss'
 type Props = {
     children: React.ReactNode,
     text: string
-    direction: "left" | "right"
+    direction: "left" | "right",
 }
 
 function Tooltip({ children, text, direction = "right" }: Props)

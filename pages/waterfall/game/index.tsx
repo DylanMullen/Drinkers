@@ -17,10 +17,9 @@ import { WaterfallCard } from 'redux/waterfall/types';
 import { getCurrentGame, joinWaterfallGame } from 'services/waterfall/GameController';
 import { URL } from 'settings/Config';
 import styles from 'styles/pages/waterfall/game.module.scss';
-import { getUser, User } from 'utils/UserUtil';
-import Timer from 'components/shared/input/timer';
 import useUser from 'context/UserContext';
 import useNavigation from 'context/NavigationContext';
+import Tooltip from 'components/shared/tooltip';
 
 const ModalHandler = lazy(() => import("components/waterfall/game/modals"))
 const Lobby = lazy(() => import("components/waterfall/game/lobby"))
@@ -30,10 +29,10 @@ const UserList = lazy(() => import("components/waterfall/game/userlist"))
 
 
 type Props = {
-    gameID: string
+    code: string
 }
 
-function WaterfallGame({ gameID }: Props)
+function WaterfallGame({ code }: Props)
 {
 
     const router = useRouter();
@@ -51,7 +50,7 @@ function WaterfallGame({ gameID }: Props)
     }
 
     const [isLoaded, setLoaded] = useState(false)
-    const {user} = useUser()
+    const { user } = useUser()
 
     const dispatch = useAppDispatch();
 
@@ -79,7 +78,7 @@ function WaterfallGame({ gameID }: Props)
     const copyLink = (e: React.MouseEvent<HTMLButtonElement>) =>
     {
         e.currentTarget.blur()
-        let url = URL + "/waterfall/" + getCurrentGame().gameCode + "/";
+        let url = URL + "/waterfall/game?code=" + getCurrentGame().gameCode;
 
         navigator.clipboard.writeText(url)
     }
@@ -111,7 +110,7 @@ function WaterfallGame({ gameID }: Props)
         if (!user) return;
 
         let response = await joinWaterfallGame({
-            joinCode: gameID,
+            joinCode: code,
             player: {
                 uuid: user.uuid,
                 username: user.username,
@@ -124,7 +123,7 @@ function WaterfallGame({ gameID }: Props)
         }
         else
             setLoaded(true);
-    }, [gameID, router, user])
+    }, [code, router, user])
 
     useEffect(() =>
     {
@@ -168,7 +167,8 @@ function WaterfallGame({ gameID }: Props)
             </div>
 
             <div className={styles["waterfall-toolbar"] + " " + styles["waterfall-toolbar--right"]}>
-                <button className={styles["waterfall-toolbar__btn"]}
+                <button
+                    className={styles["waterfall-toolbar__btn"]}
                     onClick={(e) => { e.currentTarget.blur(); dispatch(updateModal({ id: 0, show: true, content: {} })) }}
                 >
                     <BsQuestionLg />
@@ -308,11 +308,10 @@ function RuleToolbarButton()
 
 export async function getServerSideProps(context: GetServerSidePropsContext)
 {
-    const { gameID } = context.query
-
+    const { code } = context.query
     return {
         props: {
-            gameID: gameID as string
+            code: code as string
         }
     }
 }

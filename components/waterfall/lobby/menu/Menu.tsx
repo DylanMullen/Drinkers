@@ -53,7 +53,7 @@ function Menu({ create, gameMode }: Props)
         <div className={styles["waterfall-menu"]}>
             <MenuOption text='Join Us' icon={<JoinIcon />} modifier="join" callback={() => openModal(0)} />
             <MenuOption text='New Game' icon={<CreateIcon />} modifier="create" callback={() => create()} />
-            <MenuOption text='Your Profile' icon={<ProfileIcon />} modifier="profile" callback={() => openModal(1)} />
+            {/* <MenuOption text='Your Profile' icon={<ProfileIcon />} modifier="profile" callback={() => openModal(1)} /> */}
         </div>
     )
 }

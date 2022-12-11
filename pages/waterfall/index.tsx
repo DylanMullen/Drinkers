@@ -35,7 +35,7 @@ function WaterfallHome()
 
         if (!response) return;
 
-        router.push("/waterfall/" + response);
+        router.push("/waterfall/game?code=" + response);
     }
 
     useEffect(() =>

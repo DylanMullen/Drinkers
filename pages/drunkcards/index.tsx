@@ -16,6 +16,7 @@ import CookieModal from 'components/waterfall/lobby/modals/cookies';
 import AdModal from 'components/shared/modals/ad';
 import { GameMode } from 'components/waterfall/lobby/modals/join/JoinModal';
 import useNavigation from 'context/NavigationContext';
+import { GiCardRandom } from 'react-icons/gi';
 
 type Props = {}
 
@@ -46,7 +47,6 @@ function PirateHome({ }: Props)
             user
         )
 
-        // if (!created) return;
     }
 
 
