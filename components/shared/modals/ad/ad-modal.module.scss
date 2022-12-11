@@ -33,7 +33,10 @@
     {
         display: flex;
         place-content: center;
-        
+        padding: 2rem;
+        padding-bottom: 2.5rem;
+        background: linear-gradient(180deg, #37045c, #430c6a 50%, #440a6e 60%, #2a0643);
+        border-radius: .25rem;
         &>ins
         {
             width: 100%;

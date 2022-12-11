@@ -17,6 +17,7 @@ import AdModal from 'components/shared/modals/ad';
 import { GameMode } from 'components/waterfall/lobby/modals/join/JoinModal';
 import useNavigation from 'context/NavigationContext';
 import { GiCardRandom } from 'react-icons/gi';
+import BuyUsBeer from 'components/shared/buyusbeer';
 
 type Props = {}
 

@@ -1,4 +1,5 @@
 import Advert from 'components/shared/ads/Advert'
+import BuyUsBeer from 'components/shared/buyusbeer'
 import ProgressBar from 'components/shared/input/progress'
 import Modal from 'components/shared/modal/Modal'
 import React, { useEffect, useState } from 'react'
@@ -72,7 +73,8 @@ function AdModal({ adTime, callback = () => { } }: Props)
                     />
                 </div>
                 <aside className={`${styles["admodal__advert"]}`}>
-                    <Advert type='banner' />
+                    {/* <Advert type='banner' /> */}
+                    <BuyUsBeer />
                 </aside>
             </section>
 
