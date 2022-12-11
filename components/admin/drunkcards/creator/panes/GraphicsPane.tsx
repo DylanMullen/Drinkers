@@ -1,11 +1,12 @@
 import useCreatorContext from 'context/drunkcards/creator/CreatorContext';
 import React, { useState } from 'react'
-import { CirclePicker, Color, ColorResult, SliderPicker } from 'react-color';
+
+import { HexColorPicker } from "react-colorful";
 
 import styles from '../creator.module.scss'
 
 
-enum Graphics
+export enum Graphics
 {
     BACKGROUND,
     TEXT,
@@ -18,80 +19,84 @@ type BtnProps = {
     callback: () => void
 }
 
+type PaneSettingsProps = React.PropsWithChildren & {
+    currentColour: string,
+    onColourChange: (col: string) => void
+
+}
+
 function GraphicsPane()
 {
-    const { currentPrompt: { settings, scheme }, updateCurrent } = useCreatorContext();
+    const { currentPrompt: { settings, scheme, isDefault }, updateCurrent } = useCreatorContext();
     const [selected, setSelected] = useState<Graphics>(Graphics.BACKGROUND);
-    const [currentCol, setCurrent] = useState<Color>("#FFFFFF")
+    const [currentCol, setCurrent] = useState<string>("#FFFFFF")
 
-    const onColourChange = (e: ColorResult) =>
+    const onColourChange = (e: string) =>
     {
         switch (selected)
         {
             case Graphics.BACKGROUND:
-                updateCurrent({ settings, scheme: { ...scheme, background: e.hex } })
+                updateCurrent({ settings, scheme: { ...scheme, background: e }, isDefault: false })
                 break;
             case Graphics.TEXT:
-                updateCurrent({ settings, scheme: { ...scheme, text: e.hex } })
+                updateCurrent({ settings, scheme: { ...scheme, text: e }, isDefault: false })
                 break;
             case Graphics.SHADOW:
-                updateCurrent({ settings, scheme: { ...scheme, shadow: e.hex } })
+                updateCurrent({ settings, scheme: { ...scheme, shadow: e }, isDefault: false })
                 break;
             default:
                 break;
         }
-        setCurrent(e.hex)
+        setCurrent(e)
+    }
+
+    const switchButtons = (e: Graphics) =>
+    {
+        setSelected(e)
+        if (scheme === undefined) return;
+        switch (e)
+        {
+            case Graphics.TEXT: setCurrent(scheme.text ?? "#FFFFFF"); break;
+            case Graphics.BACKGROUND: setCurrent(scheme.background ?? "#FFFFFF"); break;
+            case Graphics.SHADOW: setCurrent(scheme.shadow ?? "#FFFFFF"); break;
+        }
     }
 
     return (
         <>
-            <div className={styles["drunkcards-creator__graphics"]}>
+            <div className={styles["graphics-pane"]}>
                 <h2 className={styles["drunkcards-creator__subtitle"]}>Graphics</h2>
-                <div className={styles["drunkcards-creator__buttons"]}>
-                    <GraphicsBtn
-                        text='Background'
-                        callback={() => setSelected(Graphics.BACKGROUND)}
-                        active={selected === Graphics.BACKGROUND}
-                    />
-                    <GraphicsBtn
-                        text='Text Colour'
-                        callback={() => setSelected(Graphics.TEXT)}
-                        active={selected === Graphics.TEXT}
-                    />
-                    <GraphicsBtn
-                        text='Shadow Colour'
-                        callback={() => setSelected(Graphics.SHADOW)}
-                        active={selected === Graphics.SHADOW}
-                    />
-
-                </div>
-                <div className={styles["drunkcards-creator__colour"]}>
-                    <SliderPicker
-                        onChange={onColourChange}
-                        color={currentCol}
-                    />
-                    <CirclePicker
-                        onChange={onColourChange}
-                        circleSize={25}
-                        color={currentCol}
-                        circleSpacing={0}
-                        styles={{
-                            default: {
-                                card: {
-                                    gap: "0.25rem",
-                                    columnGap: ".5rem",
-                                    width: "100%"
-                                }
-                            }
-                        }}
-                    />
-                </div>
+                <GraphicsPaneSettings
+                    currentColour={currentCol}
+                    onColourChange={onColourChange}
+                >
+                    <GraphicsBtn active={selected === Graphics.TEXT} text='Text Colour' callback={() => switchButtons(Graphics.TEXT)} />
+                    <GraphicsBtn active={selected === Graphics.BACKGROUND} text='Background' callback={() => switchButtons(Graphics.BACKGROUND)} />
+                    <GraphicsBtn active={selected === Graphics.SHADOW} text='Shadow Colour' callback={() => switchButtons(Graphics.SHADOW)} />
+                </GraphicsPaneSettings>
             </div>
         </>
     )
 }
 
-function GraphicsBtn({ text, active, callback }: BtnProps)
+export function GraphicsPaneSettings({ currentColour, onColourChange, children }: PaneSettingsProps)
+{
+    return (
+        <div className={styles["graphics-pane__wrapper"]}>
+            <div className={styles["graphics-pane__options"]}>
+                {children}
+            </div>
+            <div className={`${styles["graphics-pane__colour"]} ${styles["graphics-pane__colour--center"]}`}>
+                <HexColorPicker
+                    color={currentColour}
+                    onChange={onColourChange}
+                />
+            </div>
+        </div>
+    )
+}
+
+export function GraphicsBtn({ text, active, callback }: BtnProps)
 {
 
     const click = (e: React.MouseEvent<HTMLButtonElement>) =>

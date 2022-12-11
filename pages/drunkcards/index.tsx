@@ -15,12 +15,15 @@ import { useModalContext } from 'context/ModalContext';
 import CookieModal from 'components/waterfall/lobby/modals/cookies';
 import AdModal from 'components/shared/modals/ad';
 import { GameMode } from 'components/waterfall/lobby/modals/join/JoinModal';
+import useNavigation from 'context/NavigationContext';
 
 type Props = {}
 
 function PirateHome({ }: Props)
 {
     const router = useRouter();
+    const {showNavigationButton} = useNavigation()
+    showNavigationButton()
 
     const user = useUser()
     const { update, open, close } = useModalContext()
@@ -45,6 +48,7 @@ function PirateHome({ }: Props)
 
         // if (!created) return;
     }
+
 
     return (
         <>

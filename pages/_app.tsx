@@ -10,8 +10,9 @@ import ModalContextProvider from 'context/ModalContext'
 import { UserProvider } from 'context/UserContext'
 import Navbar from 'components/shared/navbar';
 import { AppProps } from 'next/app';
+import { NavigationContextProvider } from 'context/NavigationContext';
 
-function MyApp({ Component, pageProps }:AppProps)
+function MyApp({ Component, pageProps }: AppProps)
 {
   // useEffect(() =>
   // {
@@ -31,10 +32,12 @@ function MyApp({ Component, pageProps }:AppProps)
       </Head>
       <UserProvider>
         <Provider store={store}>
-          <ModalContextProvider>
-            <Navbar />
-            <Component {...pageProps} />
-          </ModalContextProvider>
+          <NavigationContextProvider>
+            <ModalContextProvider>
+              <Navbar />
+              <Component {...pageProps} />
+            </ModalContextProvider>
+          </NavigationContextProvider>
         </Provider>
       </UserProvider>
 
@@ -42,7 +45,6 @@ function MyApp({ Component, pageProps }:AppProps)
         strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
       />
-
 
       <Script
         id="google-ads"

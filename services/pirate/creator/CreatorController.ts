@@ -2,9 +2,10 @@ import Pack, { PackPrompt } from "../models/Pack";
 
 import { v4 as uuid } from 'uuid';
 import { PromptType } from "context/drunkcards/creator/CreatorContext";
+import { PirateCardScheme } from "components/pirate/game/card/PirateCard";
 
 
-export function createPack(promptTypes: { [id: string]: PromptType }): Pack
+export function createPack(promptTypes: { [id: string]: PromptType }, defaultScheme: PirateCardScheme): Pack
 {
     let prompts: PackPrompt[] = Object.keys(promptTypes).map(e =>
     {
@@ -13,7 +14,7 @@ export function createPack(promptTypes: { [id: string]: PromptType }): Pack
             uuid: settings.uuid,
             title: settings.title,
             description: settings.description,
-            scheme: scheme ?? {},
+            scheme: scheme ?? defaultScheme,
             rotation: 0
         }
     })

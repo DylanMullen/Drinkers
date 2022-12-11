@@ -8,11 +8,16 @@ import { GiWaterfall } from 'react-icons/gi'
 
 import MenuOption from 'components/waterfall/lobby/options/MenuOption';
 import Header from 'components/shared/header';
+import useNavigation from 'context/NavigationContext';
 
 export default function Home()
 {
 
   let router = useRouter();
+
+  const { showNavigationButton } = useNavigation()
+
+  showNavigationButton()
 
   const click = (page: string) => router.push(page)
 

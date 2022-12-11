@@ -10,6 +10,7 @@ import Profile from '../profile';
 
 import styles from './navbar.module.scss'
 import Navlink from './navlink';
+import useNavigation from 'context/NavigationContext';
 
 type Props = {}
 
@@ -17,6 +18,7 @@ function Navbar({ }: Props)
 {
     const [open, toggle] = useState(false)
     const { open: openModal, close, update } = useModalContext();
+    const { isShown } = useNavigation();
 
     const user = useUser();
     const loading = user === undefined;
@@ -37,11 +39,14 @@ function Navbar({ }: Props)
     return (
         <>
             <nav className={`${styles["navbar"]} ${styles[`navbar--${open ? "open" : "closed"}`]}`}>
-                <button className={styles["navbar__toggle"]} onClick={toggleMenu}>
-                    {
-                        !open ? <GiHamburgerMenu /> : <AiOutlineClose />
-                    }
-                </button>
+                {
+                    isShown &&
+                    <button className={styles["navbar__toggle"]} onClick={toggleMenu}>
+                        {
+                            !open ? <GiHamburgerMenu /> : <AiOutlineClose />
+                        }
+                    </button>
+                }
 
                 <div className={styles["navbar__header"]}>
                     <div className={styles["navbar__profile"]}>

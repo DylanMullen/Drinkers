@@ -11,31 +11,59 @@ export type PromptType = {
         description: string,
     }
     scheme?: PirateCardScheme
+    isDefault: boolean
+}
 
+export type PackType = {
+    packName: string,
+    packDesc: string,
 }
 
 type Context = {
+    updatePackSettings: (settings: PackType) => void,
+    updateDefaultScheme: (scheme: PirateCardScheme) => void,
+    clearPack: () => void
+
     addCurrentPrompt: () => void,
     removePrompt: (uuid: string) => void,
     updateCurrent: (prompt: PromptType) => void
     resetCurrent: () => void
+
+    packSettings: PackType
+    defaultScheme: PirateCardScheme
+
     currentPrompt: PromptType
     prompts: { [id: string]: PromptType }
 }
 
 const intitial: Context = {
+    updatePackSettings: () => { },
+    updateDefaultScheme: () => { },
+    clearPack: () => { },
+
     addCurrentPrompt: () => { },
     removePrompt: () => { },
     updateCurrent: () => { },
     resetCurrent: () => { },
+
+    packSettings: {
+        packName: "Default Pack",
+        packDesc: "Default Pack Description. Change me please."
+    },
     currentPrompt: {
         settings: {
             uuid: "",
             title: "Title",
             description: "Description"
-        }
+        },
+        isDefault: true
     },
-    prompts: {}
+    prompts: {},
+    defaultScheme: {
+        background: "white",
+        text: "black",
+        shadow: "rgba(0, 0, 0, 0.75)"
+    }
 
 }
 
@@ -44,7 +72,8 @@ const initialPrompt: PromptType = {
         uuid: "",
         title: "Title",
         description: "Description"
-    }
+    },
+    isDefault: true
 }
 
 const CreatorContext = React.createContext<Context>(intitial)
@@ -83,8 +112,30 @@ export function CreatorContextProvider({ children }: PropsWithChildren)
         })
     }
 
-    const resetCurrentPrompt = () => setCurrent({ ...initialPrompt, settings: { ...initialPrompt.settings, uuid: uuid() } })
+    const updatePackSettings = (pack: PackType) =>
+    {
+        setValue(prev =>
+        {
+            return {
+                ...prev,
+                packSettings: pack
+            }
+        })
+    }
 
+    const updateDefaultScheme = (scheme: PirateCardScheme) =>
+    {
+        setValue(prev =>
+        {
+            return {
+                ...prev,
+                defaultScheme: scheme
+            }
+        })
+    }
+
+    const resetCurrentPrompt = () => setCurrent({ ...initialPrompt, settings: { ...initialPrompt.settings, uuid: uuid() } })
+    const clearPack = () => setValue(prev => { return { ...prev, prompts: {} } })
 
     const addCurrentPrompt = () =>
     {
@@ -92,15 +143,19 @@ export function CreatorContextProvider({ children }: PropsWithChildren)
         resetCurrentPrompt()
     }
 
-
     return (
         <CreatorContext.Provider value={{
+            updatePackSettings: updatePackSettings,
+            updateDefaultScheme: updateDefaultScheme,
             addCurrentPrompt: addCurrentPrompt,
             removePrompt: removePrompt,
             updateCurrent: setCurrent,
             resetCurrent: resetCurrentPrompt,
+            clearPack: clearPack,
+            packSettings: value.packSettings,
             currentPrompt: current,
-            prompts: value.prompts
+            prompts: value.prompts,
+            defaultScheme: value.defaultScheme
         }}>
             {children}
         </CreatorContext.Provider>

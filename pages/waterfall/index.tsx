@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import { getUser, User } from 'utils/UserUtil';
 import { createWaterfallGame } from 'services/waterfall/GameController';
 import { GameMode } from 'components/waterfall/lobby/modals/join/JoinModal';
+import useNavigation from 'context/NavigationContext';
 
 // import x from 
 
@@ -21,6 +22,9 @@ function WaterfallHome()
     const [user, setUser] = useState<User>();
 
     const router = useRouter();
+    const {showNavigationButton} = useNavigation()
+    
+    showNavigationButton()
 
     const create = async () =>
     {

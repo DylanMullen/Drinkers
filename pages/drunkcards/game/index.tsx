@@ -22,6 +22,7 @@ import AdModal from 'components/shared/modals/ad';
 import { getCookie, getCookies } from 'cookies-next';
 import { FaChevronLeft, FaLink } from 'react-icons/fa';
 import { URL } from 'settings/Config';
+import useNavigation from 'context/NavigationContext';
 
 type Props = {
     code: string
@@ -38,6 +39,10 @@ function PirateGame({ code }: Props)
     const next = useAppSelector(selectNextPlayer);
 
     const router = useRouter();
+
+    const { hideNavigationButton } = useNavigation();
+    hideNavigationButton()
+
 
     const back = () =>
     {

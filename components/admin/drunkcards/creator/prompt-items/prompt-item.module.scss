@@ -1,4 +1,4 @@
-$btn-bg: lightgray;
+$btn-bg: rgb(247, 247, 247);
 $delete-bg: #ef233c;
 $edit-bg: #f79d65;
 .prompt-item
@@ -36,11 +36,15 @@ $edit-bg: #f79d65;
         cursor: pointer;
         padding: .5rem;
 
-        transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
-        
+        transition: background-color 150ms ease-in-out, color 150ms ease-in-out, scale 150ms ease-in-out;
+        box-shadow: 0 0 10px rgba(0,0,0,0.75);
         svg
         {
             font-size: 1.75rem;
+        }
+
+        &:hover,&:focus{
+            scale: 1.1;
         }
 
         &--delete:hover
@@ -51,6 +55,8 @@ $edit-bg: #f79d65;
         &--edit:hover
         {
             background-color: $edit-bg;
+            color: white;
+
         }
     }
 }

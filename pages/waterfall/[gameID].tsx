@@ -20,6 +20,7 @@ import styles from 'styles/pages/waterfall/game.module.scss';
 import { getUser, User } from 'utils/UserUtil';
 import Timer from 'components/shared/input/timer';
 import useUser from 'context/UserContext';
+import useNavigation from 'context/NavigationContext';
 
 const ModalHandler = lazy(() => import("components/waterfall/game/modals"))
 const Lobby = lazy(() => import("components/waterfall/game/lobby"))
@@ -36,6 +37,7 @@ function WaterfallGame({ gameID }: Props)
 {
 
     const router = useRouter();
+    const { hideNavigationButton } = useNavigation();
 
     const back = (): void =>
     {
@@ -127,6 +129,7 @@ function WaterfallGame({ gameID }: Props)
     useEffect(() =>
     {
         connect();
+        hideNavigationButton()
     }, [connect])
 
     const next = () =>

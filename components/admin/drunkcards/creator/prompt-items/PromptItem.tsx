@@ -13,7 +13,7 @@ type Props = {
 
 function PromptItem({ prompt }: Props)
 {
-    const { updateCurrent, removePrompt } = useCreatorContext();
+    const { updateCurrent, removePrompt, defaultScheme } = useCreatorContext();
 
 
     const edit = () =>
@@ -40,7 +40,7 @@ function PromptItem({ prompt }: Props)
             </div>
             <PirateCard
                 settings={{ ...prompt.settings, isDummy: true }}
-                scheme={prompt.scheme}
+                scheme={prompt.scheme ?? defaultScheme}
             />
         </div>
     )

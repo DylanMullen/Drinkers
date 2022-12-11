@@ -2,19 +2,17 @@ import PirateCard from 'components/pirate/game/card'
 import TextInput from 'components/shared/input/text'
 import AreaInput from 'components/shared/input/textarea'
 import useCreatorContext from 'context/drunkcards/creator/CreatorContext'
-import { CirclePicker, Color, ColorResult, HuePicker, SliderPicker, TwitterPicker } from 'react-color'
 import React, { useState } from 'react'
 
 import styles from './creator.module.scss'
-import { FaCog } from 'react-icons/fa'
+import { FaSave } from 'react-icons/fa'
 import { IoMdBrush } from 'react-icons/io'
-import { title } from 'process'
 import GraphicsPane from './panes/GraphicsPane'
-import { BsCheck2Circle } from 'react-icons/bs'
-import { FiCheckCircle, FiTrash2 } from 'react-icons/fi'
-import { AiOutlineClose } from 'react-icons/ai'
+import { FiCheckCircle, FiPackage, FiTrash2 } from 'react-icons/fi'
+import { AiOutlineClose, AiOutlinePlus, AiOutlinePlusCircle } from 'react-icons/ai'
 import Tooltip from 'components/shared/tooltip'
 import { createPack, savePack } from 'services/pirate/creator/CreatorController'
+import PackPane from './panes/PackPane'
 
 type Props = {}
 
@@ -27,12 +25,12 @@ type NavItem = {
   callback: () => void
 }
 
-
-
 function Creator({ }: Props)
 {
-  const { currentPrompt, prompts, addCurrentPrompt, resetCurrent, removePrompt } = useCreatorContext();
-  const [pane, updatePane] = useState<React.ReactNode>(<SettingsPane />);
+  const { currentPrompt, prompts, defaultScheme, addCurrentPrompt, resetCurrent, removePrompt, clearPack } = useCreatorContext();
+  const [pane, updatePane] = useState<React.ReactNode>(<PackPane />);
+  const [isShowingRight, setShowingRight] = useState(false);
+  const [useDefaultStyling, setDefaultStyling] = useState(currentPrompt.isDefault);
 
   const editing = prompts[currentPrompt.settings.uuid] !== undefined;
 
@@ -56,8 +54,15 @@ function Creator({ }: Props)
 
   const save = () =>
   {
-    let pack = createPack(prompts);
+    let pack = createPack(prompts, defaultScheme);
     savePack(pack)
+  }
+
+  const movePane = (pane: React.ReactNode, defaultStyling: boolean) =>
+  {
+    setDefaultStyling(defaultStyling);
+    setShowingRight(!defaultStyling)
+    updatePane(pane)
   }
 
 
@@ -70,18 +75,26 @@ function Creator({ }: Props)
             description: currentPrompt.settings.description,
             isDummy: true
           }}
-          scheme={currentPrompt.scheme}
+          scheme={(useDefaultStyling || currentPrompt.scheme === undefined) ? defaultScheme : currentPrompt.scheme}
         />
       </div>
       <div className={styles["drunkcards-creator__input"]}>
         <nav className={`${styles["drunkcards-creator__nav"]} ${styles["drunkcards-creator__nav--left"]}`}>
           <NavigationItem
-            icon={<FaCog />}
+            icon={<FiPackage />}
+            tooltip={{
+              text: "Pack Settings",
+              direction: "left"
+            }}
+            callback={() => movePane(<PackPane />, true)}
+          />
+          <NavigationItem
+            icon={<AiOutlinePlusCircle />}
             tooltip={{
               text: "Settings",
               direction: "left"
             }}
-            callback={() => updatePane(<SettingsPane />)}
+            callback={() => movePane(<SettingsPane />, false)}
           />
           <NavigationItem
             icon={<IoMdBrush />}
@@ -89,33 +102,39 @@ function Creator({ }: Props)
               text: "Graphics",
               direction: "left"
             }}
-            callback={() => updatePane(<GraphicsPane />)}
+            callback={() => movePane(<GraphicsPane />, false)}
           />
         </nav>
-
-        <nav className={`${styles["drunkcards-creator__nav"]} ${styles["drunkcards-creator__nav--right"]}`}>
-          <NavigationItem
-            icon={<FiCheckCircle />}
-            tooltip={{
-              text: "Add To Pack",
-              direction: "right"
-            }}
-            callback={add} />
-          <NavigationItem
-            icon={!editing ? <AiOutlineClose /> : <FiTrash2 />}
-            tooltip={{
-              text: !editing ? "Clear Prompt" : "Delete Prompt",
-              direction: "right"
-            }}
-            callback={clear} />
-        </nav>
+        {
+          isShowingRight &&
+          <nav className={`${styles["drunkcards-creator__nav"]} ${styles["drunkcards-creator__nav--right"]}`}>
+            <NavigationItem
+              icon={!editing ? <FiCheckCircle /> : <FaSave />}
+              tooltip={{
+                text: !editing ? "Add To Pack" : "Save Prompt",
+                direction: "right"
+              }}
+              callback={add} />
+            <NavigationItem
+              icon={!editing ? <AiOutlineClose /> : <FiTrash2 />}
+              tooltip={{
+                text: !editing ? "Clear Prompt" : "Delete Prompt",
+                direction: "right"
+              }}
+              callback={clear} />
+          </nav>
+        }
 
         <h1 className={styles["drunkcards-creator__title"]}>{!editing ? "New Prompt" : "Edit Prompt"}</h1>
 
         <div className={styles["drunkcards-creator__pane"]}>
           {pane}
         </div>
-        <button className={styles["drunkcards-creator__save"]} onClick={save}>Save Pack</button>
+        <div className={styles["drunkcards-creator__footer"]}>
+          <button className={`${styles["drunkcards-creator__footer__btn"]} ${styles["drunkcards-creator__footer__btn--save"]}`} onClick={save}>Save Pack</button>
+          <button className={`${styles["drunkcards-creator__footer__btn"]} ${styles["drunkcards-creator__footer__btn--clear"]}`} onClick={clearPack}>Clear Pack</button>
+
+        </div>
       </div>
     </div>
   )
@@ -141,7 +160,7 @@ function NavigationItem({ icon, tooltip, callback }: NavItem)
 
 function SettingsPane()
 {
-  const { currentPrompt: { settings, scheme }, updateCurrent } = useCreatorContext();
+  const { currentPrompt: { settings, scheme, isDefault }, updateCurrent } = useCreatorContext();
 
   return (
     <>
@@ -149,12 +168,12 @@ function SettingsPane()
       <TextInput
         label="Title"
         value={settings.title}
-        retriever={(title: string) => updateCurrent({ scheme, settings: { ...settings, title: title } })}
+        retriever={(title: string) => updateCurrent({ scheme, settings: { ...settings, title: title }, isDefault })}
       />
       <AreaInput
         label="Description"
         value={settings.description}
-        callback={(desc) => updateCurrent({ scheme, settings: { ...settings, description: desc } })}
+        callback={(desc) => updateCurrent({ scheme, settings: { ...settings, description: desc }, isDefault })}
       />
     </>
   )
