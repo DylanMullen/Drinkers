@@ -23,7 +23,7 @@ function PirateCardStack()
 {
     const prompts = useAppSelector(selectPrompts)
     const nextPlayer = useAppSelector(selectNextPlayer);
-    const user = useUser()
+    const {user} = useUser()
     let keys = Object.keys(prompts)
 
     const cards: React.ReactNode[] = []

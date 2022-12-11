@@ -45,7 +45,7 @@ export default function Home()
         }}
 
       >
-        <Header logo={"/imgs/waterfall.png"} name='Drinkers' />
+        <Header logo={"/drinkers-logo.png"} name='Drinkers' removeIconStyle/>
         <div style={{
           display: "flex",
           marginTop: "2rem",

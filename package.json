@@ -27,6 +27,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
     "react-redux": "^8.0.2",
+    "react-snowfall": "^1.2.1",
     "redux": "^4.2.0",
     "sharp": "^0.30.7",
     "uuidv4": "^6.2.13"

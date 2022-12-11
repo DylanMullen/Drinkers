@@ -51,7 +51,7 @@ function WaterfallGame({ gameID }: Props)
     }
 
     const [isLoaded, setLoaded] = useState(false)
-    const user = useUser()
+    const {user} = useUser()
 
     const dispatch = useAppDispatch();
 

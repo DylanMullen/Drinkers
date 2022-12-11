@@ -30,7 +30,7 @@ type Props = {
 
 function PirateGame({ code }: Props)
 {
-    const user = useUser()
+    const {user} = useUser()
     const [isLoaded, setLoaded] = useState<boolean>(false);
     const { update, open, close } = useModalContext()
 

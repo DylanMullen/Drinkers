@@ -25,7 +25,7 @@ function PirateHome({ }: Props)
     const {showNavigationButton} = useNavigation()
     showNavigationButton()
 
-    const user = useUser()
+    const {user} = useUser()
     const { update, open, close } = useModalContext()
 
     const goTo = () =>

@@ -49,15 +49,16 @@ $vw-desktop: 1200px;
         display: grid;
         place-items: center;
         box-shadow: 0 0 2rem .25rem $icon-shadow;
-        // margin: 3rem;
+        margin: 3rem;
         width: 11rem;
         aspect-ratio: 1/1;
 
         & span
         {
-            border-radius: 50%;
+            border-radius: inherit;
             padding: $icon-padding  !important;
             margin: $icon-margin  !important;
+            // overflow: visible !important;
         }
 
     }

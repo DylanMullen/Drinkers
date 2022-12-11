@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 import { FaDiscord } from 'react-icons/fa';
+import { IoMdLogOut } from 'react-icons/io';
 
 import styles from './profile.module.scss'
 
@@ -20,7 +21,7 @@ type CustomScheme = {
 function Profile({ scheme }: Props)
 {
 
-  const user = useUser();
+  const {user, logout} = useUser();
   const loading = user === undefined;
 
 
@@ -46,7 +47,13 @@ function Profile({ scheme }: Props)
                           Login with Discord
                         </span>
                       </a>
-                    </div> : ""
+                    </div> :
+                    <div className={styles["profile__signup"]}>
+                        <button className={`${styles["profile__btn"]} ${styles["profile__btn--signout"]}`} onClick={logout}>
+                          <IoMdLogOut />
+                          Sign Out
+                        </button>
+                    </div>
                 }
 
               </div>

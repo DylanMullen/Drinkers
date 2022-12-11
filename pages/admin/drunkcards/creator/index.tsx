@@ -38,7 +38,7 @@ function Footer()
     let prompt = promptInfo[e]
 
     return (
-      <PromptItem prompt={prompt} />
+      <PromptItem key={prompt.settings.uuid} prompt={prompt} />
     )
   })
 

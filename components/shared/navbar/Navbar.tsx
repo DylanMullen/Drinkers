@@ -20,7 +20,7 @@ function Navbar({ }: Props)
     const { open: openModal, close, update } = useModalContext();
     const { isShown } = useNavigation();
 
-    const user = useUser();
+    const {user} = useUser();
     const loading = user === undefined;
 
     const toggleMenu = (e: React.MouseEvent<HTMLButtonElement>) =>
