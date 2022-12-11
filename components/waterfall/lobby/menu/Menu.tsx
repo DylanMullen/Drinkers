@@ -1,4 +1,4 @@
-import React, { lazy, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { BiDrink as JoinIcon } from '@react-icons/all-files/bi/BiDrink';
 import { HiOutlinePencilAlt as CreateIcon } from '@react-icons/all-files/hi/HiOutlinePencilAlt'

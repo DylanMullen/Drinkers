@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Head from '../../node_modules/next/head'
-
 import styles from 'styles/pages/waterfall/home.module.scss';
-
-
-import Logo from "public/icons/waterfall-icon.svg";
 import Header from 'components/shared/header';
 import Menu from 'components/waterfall/lobby/menu';
 

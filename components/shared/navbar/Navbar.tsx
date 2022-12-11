@@ -4,8 +4,9 @@ import useUser from 'context/UserContext'
 import React, { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai';
 import { MdOutlineAdminPanelSettings } from 'react-icons/md'
-import { FaCookieBite, FaDiscord, FaHome, FaMinus, FaPlus, FaTwitter } from 'react-icons/fa';
+import { FaCookieBite, FaDiscord, FaHome,  FaTwitter } from 'react-icons/fa';
 import { GiCardRandom, GiHamburgerMenu, GiWaterfall } from 'react-icons/gi';
+
 import Profile from '../profile';
 
 import styles from './navbar.module.scss'
