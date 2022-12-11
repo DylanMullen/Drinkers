@@ -36,7 +36,7 @@ function WaterfallGame({ code }: Props)
 {
 
     const router = useRouter();
-    const { hideNavigationButton } = useNavigation();
+    const { hideNavigationButton, hide } = useNavigation();
 
     const back = (): void =>
     {
@@ -129,6 +129,7 @@ function WaterfallGame({ code }: Props)
     {
         connect();
         hideNavigationButton()
+        hide()
     }, [connect])
 
     const next = () =>

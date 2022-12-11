@@ -41,8 +41,7 @@ function PirateGame({ code }: Props)
 
     const router = useRouter();
 
-    const { hideNavigationButton } = useNavigation();
-    hideNavigationButton()
+    const { hideNavigationButton, hide } = useNavigation();
 
 
     const back = () =>
@@ -67,7 +66,6 @@ function PirateGame({ code }: Props)
         {
             return;
         }
-        console.log("here")
         let joinCode = router.query["code"] as string
 
         const connect = async (joinCode: string, user: TUser) =>
@@ -120,6 +118,12 @@ function PirateGame({ code }: Props)
         }
         connect(joinCode, user)
     }, [user])
+
+    useEffect(() =>
+    {
+        hide()
+        hideNavigationButton()
+    }, [])
 
     let users: React.ReactNode[] = []
 

@@ -25,7 +25,6 @@ function PirateHome({ }: Props)
 {
     const router = useRouter();
     const { showNavigationButton } = useNavigation()
-    showNavigationButton()
 
     const { user } = useUser()
     const { update, open, close } = useModalContext()
@@ -50,6 +49,12 @@ function PirateHome({ }: Props)
         )
 
     }
+
+    useEffect(() =>
+    {
+        showNavigationButton()
+
+    }, [])
 
 
     return (

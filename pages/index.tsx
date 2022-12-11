@@ -16,9 +16,15 @@ export default function Home()
 
   const { showNavigationButton } = useNavigation()
 
-  showNavigationButton()
+  // showNavigationButton()
 
   const click = (page: string) => router.push(page)
+
+  useEffect(() =>
+  {
+    showNavigationButton()
+
+  }, [])
 
   return (
     <>
@@ -44,7 +50,7 @@ export default function Home()
         }}
 
       >
-        <Header logo={"/drinkers-logo.png"} name='Drinkers' removeIconStyle/>
+        <Header logo={"/drinkers-logo.png"} name='Drinkers' removeIconStyle />
         <div style={{
           display: "flex",
           marginTop: "2rem",

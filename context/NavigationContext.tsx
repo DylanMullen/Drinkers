@@ -5,17 +5,25 @@ type Props = {}
 
 interface Navigation
 {
-    isShown: boolean
+    btnVisible: boolean,
+    visible: boolean,
     showNavigationButton: () => void
     hideNavigationButton: () => void
+    show: () => void
+    hide: () => void
+}
+
+const initial: Navigation = {
+    btnVisible: true,
+    visible: false,
+    showNavigationButton: () => { },
+    hideNavigationButton: () => { },
+    show: () => { },
+    hide: () => { }
 }
 
 
-const NavigationContext = React.createContext<Navigation>({
-    isShown: true,
-    hideNavigationButton: () => { },
-    showNavigationButton: () => { }
-})
+const NavigationContext = React.createContext<Navigation>(initial)
 
 function useNavigation()
 {
@@ -25,14 +33,26 @@ function useNavigation()
 
 export function NavigationContextProvider({ children }: PropsWithChildren)
 {
-    const [shown, setShown] = useState(true);
-    const router = useRouter()
+    const [ctx, setCtx] = useState<Navigation>(initial);
 
-    const show = () => setShown(true);
-    const hide = () => setShown(false);
+    const show = () => setCtx(prev => { return { ...prev, visible: true } })
+    const hide = () => setCtx(prev => { return { ...prev, visible: false } })
+
+    const showBtn = () => setCtx(prev => { return { ...prev, btnVisible: true } })
+    const hideBtn = () => setCtx(prev => { return { ...prev, btnVisible: false } })
+
+    console.log("test")
 
     return (
-        <NavigationContext.Provider value={{ isShown: shown, showNavigationButton: show, hideNavigationButton: hide }}>
+        <NavigationContext.Provider value={{
+            btnVisible: ctx.btnVisible,
+            visible: ctx.visible,
+            show: show,
+            hide: hide,
+            showNavigationButton: showBtn,
+            hideNavigationButton: hideBtn
+        }}
+        >
             {children}
         </NavigationContext.Provider>
     )

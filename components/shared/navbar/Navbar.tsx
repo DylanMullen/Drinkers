@@ -4,7 +4,7 @@ import useUser from 'context/UserContext'
 import React, { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai';
 import { MdOutlineAdminPanelSettings } from 'react-icons/md'
-import { FaCookieBite, FaDiscord, FaHome,  FaTwitter } from 'react-icons/fa';
+import { FaCookieBite, FaDiscord, FaHome, FaTwitter } from 'react-icons/fa';
 import { GiCardRandom, GiHamburgerMenu, GiWaterfall } from 'react-icons/gi';
 
 import Profile from '../profile';
@@ -17,17 +17,20 @@ type Props = {}
 
 function Navbar({ }: Props)
 {
-    const [open, toggle] = useState(false)
     const { open: openModal, close, update } = useModalContext();
-    const { isShown } = useNavigation();
+    const { btnVisible, visible, show, hide } = useNavigation();
 
-    const {user} = useUser();
+    const { user } = useUser();
     const loading = user === undefined;
 
     const toggleMenu = (e: React.MouseEvent<HTMLButtonElement>) =>
     {
         e.currentTarget.blur()
-        toggle(prev => !prev)
+
+        console.log(visible)
+
+        if (visible) hide()
+        else show();
     }
 
     const openCookies = (e: React.MouseEvent<HTMLButtonElement>) =>
@@ -39,12 +42,12 @@ function Navbar({ }: Props)
 
     return (
         <>
-            <nav className={`${styles["navbar"]} ${styles[`navbar--${open ? "open" : "closed"}`]}`}>
+            <nav className={`${styles["navbar"]} ${styles[`navbar--${visible ? "open" : "closed"}`]}`}>
                 {
-                    isShown &&
+                    btnVisible &&
                     <button className={styles["navbar__toggle"]} onClick={toggleMenu}>
                         {
-                            !open ? <GiHamburgerMenu /> : <AiOutlineClose />
+                            !visible ? <GiHamburgerMenu /> : <AiOutlineClose />
                         }
                     </button>
                 }
@@ -73,11 +76,6 @@ function Navbar({ }: Props)
                             icon={<GiCardRandom />}
                             link="/drunkcards"
                         />
-                        {/* <Navlink
-                            text='Admin'
-                            icon={<MdOutlineAdminPanelSettings />}
-                            link="/admin"
-                        /> */}
                     </ul>
                     <div className={styles["navbar__footer"]}>
                         <a href={"https://twitter.com/StillDrinkers"} rel="noopener noreferrer" target="_blank"

@@ -25,7 +25,7 @@ function WaterfallHome()
     const router = useRouter();
     const { showNavigationButton } = useNavigation()
 
-    showNavigationButton()
+    // showNavigationButton()
 
     const goTo = () =>
     {
@@ -51,6 +51,10 @@ function WaterfallHome()
         open()
     }
 
+    useEffect(() =>
+    {
+        showNavigationButton()
+    }, [])
 
     return (
         <>
