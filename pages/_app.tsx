@@ -32,6 +32,27 @@ function MyApp({ Component, pageProps }: AppProps)
       <Head>
         <link rel="icon" type="image/png" sizes="96x96" href="/logo.ico" />
       </Head>
+      <Script
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+      />
+
+      <Script
+        id="google-ads"
+        async
+        crossOrigin='anonymous'
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2974631546161756" />
+
+      <Script id="google-analytics" strategy="lazyOnload">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-63461F15RT', {
+            page_path: window.location.pathname,
+          });
+              `}
+      </Script>
       <UserProvider>
         <Provider store={store}>
           <NavigationContextProvider>
@@ -53,28 +74,6 @@ function MyApp({ Component, pageProps }: AppProps)
           </NavigationContextProvider>
         </Provider>
       </UserProvider>
-      <Script
-        strategy="lazyOnload"
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-      />
-
-      <Script
-        id="google-ads"
-        async
-        crossOrigin='anonymous'
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2974631546161756" />
-
-      <Script id="google-analytics" strategy="lazyOnload">
-        {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-63461F15RT', {
-              page_path: window.location.pathname,
-            });
-                `}
-      </Script>
-
 
     </>
 
