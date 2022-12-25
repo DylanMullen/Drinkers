@@ -14,7 +14,7 @@ $height: calc($width / 16 * 8);
     flex-direction: column;
     gap: 5rem;
 
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
 
     height: 100%;
@@ -29,7 +29,7 @@ $height: calc($width / 16 * 8);
 
         position: relative;
         min-width: 36rem;
-        min-height: 20rem;
+        // min-height: 20rem;
         border-radius: .5rem;
 
 
@@ -247,7 +247,7 @@ $height: calc($width / 16 * 8);
         // flex-direction: column;
         gap: .5rem;
         justify-content: center;
-        align-items: baseline;
+        align-items: center;
         flex-wrap: wrap;
     }
 

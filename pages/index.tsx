@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { IoBeer } from 'react-icons/io5'
 import { GiCardRandom, GiWaterfall } from 'react-icons/gi'
@@ -46,9 +46,8 @@ export default function Home()
         style={{
           display: "grid",
           placeContent: "center",
-          minHeight: "100vh"
+          minHeight: "100vh",
         }}
-
       >
         <Header logo={"/drinkers-logo.png"} name='Drinkers' removeIconStyle />
         <div style={{

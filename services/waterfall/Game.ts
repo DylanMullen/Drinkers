@@ -1,4 +1,5 @@
 import { getCookie } from "cookies-next";
+import { getPlayer } from "redux/pirate/slice";
 import store from "redux/store";
 import { getWaterfallPlayerByUUID, getWaterfallPlayerIndex, getWaterfallPlayers, kicked, lobby, newDate, newPlayer, newRule, nextCard, nextPlayer, ready, removePlayer, start, thumbMaster, unready, updateAction, updateModal, updateSetting } from "redux/waterfall/slice";
 import { PayloadNextUser, WaterfallCard, WaterfallDate, WaterfallModal, WaterfallPlayer, WaterfallRule } from "redux/waterfall/types";
@@ -244,13 +245,15 @@ export default class Game
     handleAction()
     {
         const action = store.getState().waterfall.game.action;
+        const owner = store.getState().waterfall.game.ownerId;
         const current = store.getState().waterfall.game.players.current
+        const player = getWaterfallPlayerByUUID(current)
 
-        if (!action || !store.getState().waterfall.game.mechanics.actions)
-            return;
+        if (!action || !store.getState().waterfall.game.mechanics.actions) return;
+        if (player === undefined) return;
 
 
-        sendAction(current, action)
+        sendAction(owner, player, action)
     }
 
 

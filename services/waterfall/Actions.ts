@@ -1,7 +1,8 @@
-import { WaterfallAction } from "redux/waterfall/types";
+import { WaterfallAction, WaterfallPlayer } from "redux/waterfall/types";
 import store from "redux/store";
 import { getWaterfallPlayers, thumbMaster, updateAction, updateModal } from "redux/waterfall/slice";
 import { getUser, User } from "utils/UserUtil";
+import { IoSnow } from "react-icons/io5";
 
 
 
@@ -18,10 +19,11 @@ export enum WaterfalActions
 
 }
 
-export function sendAction(current: string, action: WaterfallAction)
+export function sendAction(owner: string, current: WaterfallPlayer, action: WaterfallAction)
 {
     const { id, content }: WaterfallAction = action;
     const user = getUser();
+    const isOwner = user.uuid === owner;
 
     switch (id)
     {
@@ -30,7 +32,7 @@ export function sendAction(current: string, action: WaterfallAction)
             break;
         }
         case WaterfalActions.DATES: {
-            handleDate(user, current, content)
+            handleDate(user, current, isOwner, content)
             break;
         }
         case WaterfalActions.THUMBMASTER: {
@@ -38,11 +40,11 @@ export function sendAction(current: string, action: WaterfallAction)
             break;
         }
         case WaterfalActions.RULES: {
-            handleRuleMaster(user, current, content)
+            handleRuleMaster(user, current, isOwner, content)
             break;
         }
         case WaterfalActions.WILDCARD: {
-            handleWildcard(user, current, content)
+            handleWildcard(user, current, isOwner, content)
             break;
         }
         default: {
@@ -61,10 +63,9 @@ function handleWaterfall()
     }))
 }
 
-function handleDate(user: User, current: string, content: any)
+function handleDate(user: User, current: WaterfallPlayer, isOwner:boolean, content: any)
 {
-    if (user.uuid !== current)
-        return;
+    if (user.uuid !== current.uuid && (!isOwner && current.offline)) return;
 
     store.dispatch(updateModal({
         id: 2,
@@ -77,29 +78,29 @@ function handleDate(user: User, current: string, content: any)
 
 }
 
-function handleThumbmaster(current: string)
+function handleThumbmaster(current: WaterfallPlayer)
 {
-    store.dispatch(thumbMaster(current))
+    store.dispatch(thumbMaster(current.uuid))
 }
 
-function handleRuleMaster(user: User, current: string, content: any)
+function handleRuleMaster(user: User, current: WaterfallPlayer, isOwner:boolean,content: any)
 {
-    if (user.uuid !== current)
-        return;
+    if (user.uuid !== current.uuid && (!isOwner && current.offline)) return;
 
-    store.dispatch(updateModal({
-        id: 3,
-        show: true,
-        content: content
-    }))
+        store.dispatch(updateModal({
+            id: 3,
+            show: true,
+            content: content
+        }))
 
 }
 
 
-function handleWildcard(user: User, current: string, content: any)
+function handleWildcard(user: User, current: WaterfallPlayer, isOwner:boolean, content: any)
 {
-    if (user.uuid !== current)
-        return;
+    // if (user.uuid !== current.uuid || !isOwner && current.offline) return;
+
+    if (user.uuid !== current.uuid && (!isOwner && current.offline)) return;
 
     store.dispatch(updateModal({
         id: 4,

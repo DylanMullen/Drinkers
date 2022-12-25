@@ -1,0 +1,94 @@
+.input-gradient
+{
+    display: flex;
+    flex-direction: column;
+    gap: 2.25em;
+
+    &__controls
+    {
+        display: grid;
+        place-content: center;
+        :global(.react-colorful__saturation-pointer){
+            width: 1rem;
+            height: 1rem;
+            // height: inherit;
+            box-shadow: 0px 0px 3px black;
+        }
+
+    }
+}
+
+.gradient-slider
+{
+    width: 100%;
+    height: 4.25rem;
+    position: relative;
+}
+
+.gradient-thumb
+{
+    position: absolute;
+    width: 1rem;
+    height: 110%;
+    top: -5%;
+    border-radius: 500px;
+    cursor: grab;
+
+    padding: 0 .25rem;
+
+    background-color: white;
+    border: 2px solid black;
+
+    transform: translateX(-50%);
+
+    transition: left 150ms linear, height 150ms linear, top 150ms linear;
+
+    &--selected
+    {
+        height: 120%;
+        top: -10%;
+        width: 1.25rem;
+        background-color: rgb(219, 219, 219);
+    }
+
+    &:hover
+    {
+        .gradient-thumb__delete
+        {
+            display: block;
+        }
+    }
+
+    &__inner
+    {
+        position: absolute;
+        width: 8px;
+        height: 80%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border: 2px solid black;
+        border-radius: 500px;
+    }
+
+    &__delete
+    {
+        position: absolute;
+        display: none;
+        bottom: -2rem;
+        left: 50%;
+        transform: translate(-50%);
+        cursor: pointer;
+        font-size: 0;
+        // aspect-ratio: 1/1;
+        padding: .25rem;
+        margin: 0;
+        border: 0;
+        background: transparent;
+        svg
+        {
+            font-size: 1.5rem;
+
+        }
+    }
+}

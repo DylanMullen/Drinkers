@@ -1,3 +1,5 @@
+import { getGradientCSS, GradientPosition, GradientSetting } from 'components/shared/input/gradient/slider/GradientSlider'
+import SwitchInput from 'components/shared/input/switch'
 import TextInput from 'components/shared/input/text'
 import AreaInput from 'components/shared/input/textarea'
 import useCreatorContext from 'context/drunkcards/creator/CreatorContext'
@@ -16,16 +18,27 @@ function PackPane({ }: Props)
     const [selected, setSelected] = useState<Graphics>(Graphics.TEXT)
 
 
+    const [useGradient, setUseGradient] = useState(false)
+    const [gradient, setGradient] = useState<GradientSetting>({
+        angle: 45,
+        type: "linear-gradient",
+        gradients: {
+            "test": {
+                percentage: 0,
+                colour: "#FE02FA",
+                uuid: "test"
+            },
+            "yee": {
+                percentage: 100,
+                colour: "#ED043A",
+                uuid: "test"
+            }
+        }
+    });
+
     const switchButtons = (e: Graphics) =>
     {
         setSelected(e)
-        // if (defaultScheme === undefined) return;
-        // switch (e)
-        // {
-        //     case Graphics.TEXT: setCurrent(defaultScheme.text ?? "#FFFFFF"); break;
-        //     case Graphics.BACKGROUND: setCurrent(defaultScheme.background ?? "#FFFFFF"); break;
-        //     case Graphics.SHADOW: setCurrent(defaultScheme.shadow ?? "#FFFFFF"); break;
-        // }
     }
 
 
@@ -38,6 +51,19 @@ function PackPane({ }: Props)
             case Graphics.SHADOW: updateDefaultScheme({ ...defaultScheme, shadow: color }); break;
         }
     }
+
+    const onGradientChange = (grads: { [id: string]: GradientPosition }) =>
+    {
+        setGradient(prev =>
+        {
+            let temp: GradientSetting = { ...prev, gradients: grads }
+            updateDefaultScheme({ ...defaultScheme, background: getGradientCSS(temp) })
+            return temp
+        })
+    }
+
+
+    const shouldUseGradient = useGradient && selected === Graphics.BACKGROUND
 
     return (
         <div className={styles["pack-pane"]}>
@@ -61,10 +87,17 @@ function PackPane({ }: Props)
                 <GraphicsPaneSettings
                     currentColour='#FFF'
                     onColourChange={onColourChange}
+                    onGradientChange={onGradientChange}
+                    defaultGradient={gradient}
+                    type={shouldUseGradient ? "gradient" : "colour"}
                 >
                     <GraphicsBtn active={selected === Graphics.TEXT} text='Text Colour' callback={() => switchButtons(Graphics.TEXT)} />
                     <GraphicsBtn active={selected === Graphics.BACKGROUND} text='Background' callback={() => switchButtons(Graphics.BACKGROUND)} />
                     <GraphicsBtn active={selected === Graphics.SHADOW} text='Shadow Colour' callback={() => switchButtons(Graphics.SHADOW)} />
+                    {
+                        selected === Graphics.BACKGROUND &&
+                        <SwitchInput label='' changeCallback={() => setUseGradient(prev => !prev)} defaultValue={useGradient} />
+                    }
                 </GraphicsPaneSettings>
             </div>
         </div>
