@@ -6,6 +6,8 @@
 
     &__controls
     {
+        display: grid;
+        place-content: center;
         :global(.react-colorful__saturation-pointer){
             width: 1rem;
             height: 1rem;

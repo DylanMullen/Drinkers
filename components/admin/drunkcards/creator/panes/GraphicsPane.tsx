@@ -86,8 +86,6 @@ function GraphicsPane()
             console.log(getGradientCSS(temp))
             return temp
         })
-
-
     }
 
     const switchButtons = (e: Graphics) =>
