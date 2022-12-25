@@ -1,14 +1,10 @@
 import React, { createRef, Ref, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-import { motion } from 'framer-motion'
-
 import { v4 as uuid } from 'uuid';
 
 
 import styles from '../gradient-input.module.scss';
 import GradientThumb from '../thumb/GradientThumb';
-import { current } from '@reduxjs/toolkit';
-import { GradientContextProvider } from 'context/GradientContext';
 
 type Props = {
     settings: GradientSetting,
@@ -138,6 +134,7 @@ function GradientSlider({ settings, colour, clickCallback = () => { }, dragCallb
         {
             return (
                 <GradientThumb
+                    key={e.uuid}
                     selected={e.uuid === selected}
                     gradient={e}
                     width={ref?.current?.getBoundingClientRect().width ?? 0}
