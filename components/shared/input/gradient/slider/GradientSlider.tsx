@@ -8,6 +8,7 @@ import { v4 as uuid } from 'uuid';
 import styles from '../gradient-input.module.scss';
 import GradientThumb from '../thumb/GradientThumb';
 import { current } from '@reduxjs/toolkit';
+import { GradientContextProvider } from 'context/GradientContext';
 
 type Props = {
     settings: GradientSetting,
@@ -28,7 +29,8 @@ export type GradientPosition = {
     uuid: string
     percentage: number,
     colour: string,
-    thumb?: GradientThumbSettings
+    thumb?: GradientThumbSettings,
+    selected?: boolean
 }
 
 type GradientThumbSettings = {
@@ -61,10 +63,14 @@ function GradientSlider({ settings, colour, clickCallback = () => { }, dragCallb
     const [set, setSettings] = useState(settings);
     const [thumbs, setThumbs] = useState<React.ReactNode[]>([]);
 
+    const [selected, setSelected] = useState("");
+
     const addGradient = (grad: GradientPosition) =>
     {
         setSettings(prev =>
         {
+            grad.selected = true;
+            setSelected(grad.uuid)
             return {
                 ...prev,
                 gradients: {
@@ -80,8 +86,27 @@ function GradientSlider({ settings, colour, clickCallback = () => { }, dragCallb
         let temp = set.gradients;
         temp[uuid].percentage = percentage;
 
-        dragCallback(uuid,percentage,temp[uuid].colour)
+        dragCallback(uuid, percentage, temp[uuid].colour)
 
+        setSettings(prev => { return { ...prev, gradients: temp } })
+    }
+
+    const updateColour = (uuid: string, colour: string) =>
+    {
+
+        let temp = set.gradients;
+        temp[uuid].colour = colour;
+
+        dragCallback(uuid, temp[uuid].percentage, temp[uuid].colour)
+
+        setSettings(prev => { return { ...prev, gradients: temp } })
+    }
+
+    const setSelectedGradient = (uuid: string) =>
+    {
+        let temp = set.gradients;
+        temp[uuid].selected = !temp[uuid].selected;
+        setSelected(prev => prev === uuid ? "" : uuid)
         setSettings(prev => { return { ...prev, gradients: temp } })
     }
 
@@ -92,32 +117,47 @@ function GradientSlider({ settings, colour, clickCallback = () => { }, dragCallb
         let percentage = (x / width) * 100
 
         let id = uuid();
-        let col = getColour(percentage, width, toArray(set.gradients).sort(sort));
 
         addGradient({ colour: colour, percentage: percentage, uuid: id })
-        clickCallback(id,percentage,colour)
+        clickCallback(id, percentage, colour)
     }
 
     const drag = (id: string, percentage: number, width: number) =>
     {
         updatePercentage(id, percentage);
     }
+
+    const select = (uuid: string) =>
+    {
+        setSelectedGradient(uuid)
+    }
+
     useEffect(() =>
     {
         setThumbs(toArray(set.gradients).map((e) =>
         {
             return (
                 <GradientThumb
+                    selected={e.uuid === selected}
                     gradient={e}
                     width={ref?.current?.getBoundingClientRect().width ?? 0}
                     callback={drag}
+                    onClick={select}
                 />
             )
         }))
-    }, [ref.current?.getBoundingClientRect, set.gradients])
+    }, [ref.current?.getBoundingClientRect, set.gradients, selected])
+
+    useEffect(() =>
+    {
+        if (selected.length === 0) return;
+        let hasSelected = Object.keys(settings.gradients).includes(selected)
+
+        hasSelected && updateColour(selected, colour)
+    }, [colour])
 
     return (
-        <div ref={ref} className={styles["gradient-slider"]} style={{ background: getGradientCSS({...set, angle: 90}) }} onClick={click}>
+        <div ref={ref} className={styles["gradient-slider"]} style={{ background: getGradientCSS({ ...set, angle: 90 }) }} onClick={click}>
             {thumbs}
         </div>
     )

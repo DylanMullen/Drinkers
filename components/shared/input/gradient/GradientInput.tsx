@@ -5,6 +5,7 @@ import { GradientPosition, GradientSetting, INITIAL_GRADIENT } from './slider/Gr
 
 import styles from './gradient-input.module.scss';
 import { HexColorPicker } from 'react-colorful';
+import { GradientContextProvider } from 'context/GradientContext';
 
 type Props = {
     sliderSettings?: GradientSetting
@@ -43,12 +44,14 @@ function GradientInput({ sliderSettings = INITIAL_GRADIENT, onChange = () => { }
     return (
         <div className={styles["input-gradient"]}>
             <div className={styles["input-gradient__slider"]}>
-                <GradientSlider
-                    colour={color}
-                    settings={settings}
-                    clickCallback={onColourChange}
-                    dragCallback={onColourChange}
-                />
+                <GradientContextProvider grads={settings.gradients}>
+                    <GradientSlider
+                        colour={color}
+                        settings={settings}
+                        clickCallback={onColourChange}
+                        dragCallback={onColourChange}
+                    />
+                </GradientContextProvider>
             </div>
             <div className={styles["input-gradient__controls"]}>
                 <HexColorPicker

@@ -9,7 +9,8 @@
     // padding: 1rem;
     &__input
     {
-        height: 90vh;
+        min-height: 90vh;
+        padding: 1rem;
     }
 
 }
