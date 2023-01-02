@@ -63,9 +63,9 @@ function handleWaterfall()
     }))
 }
 
-function handleDate(user: User, current: WaterfallPlayer, isOwner:boolean, content: any)
+function handleDate(user: User, current: WaterfallPlayer, isOwner: boolean, content: any)
 {
-    if (user.uuid !== current.uuid && (!isOwner && current.offline)) return;
+    if (!isValid(user.uuid, current.uuid, isOwner, current.offline ?? false)) return;
 
     store.dispatch(updateModal({
         id: 2,
@@ -83,24 +83,24 @@ function handleThumbmaster(current: WaterfallPlayer)
     store.dispatch(thumbMaster(current.uuid))
 }
 
-function handleRuleMaster(user: User, current: WaterfallPlayer, isOwner:boolean,content: any)
+function handleRuleMaster(user: User, current: WaterfallPlayer, isOwner: boolean, content: any)
 {
-    if (user.uuid !== current.uuid && (!isOwner && current.offline)) return;
+    if (!isValid(user.uuid, current.uuid, isOwner, current.offline ?? false)) return;
 
-        store.dispatch(updateModal({
-            id: 3,
-            show: true,
-            content: content
-        }))
+    store.dispatch(updateModal({
+        id: 3,
+        show: true,
+        content: content
+    }))
 
 }
 
 
-function handleWildcard(user: User, current: WaterfallPlayer, isOwner:boolean, content: any)
+function handleWildcard(user: User, current: WaterfallPlayer, isOwner: boolean, content: any)
 {
     // if (user.uuid !== current.uuid || !isOwner && current.offline) return;
 
-    if (user.uuid !== current.uuid && (!isOwner && current.offline)) return;
+    if (!isValid(user.uuid, current.uuid, isOwner, current.offline ?? false)) return;
 
     store.dispatch(updateModal({
         id: 4,
@@ -108,4 +108,11 @@ function handleWildcard(user: User, current: WaterfallPlayer, isOwner:boolean, c
         content: content
     }))
 
+}
+
+function isValid(userUUID: string, currentUUID: string, isOwner: boolean, isBot: boolean)
+{
+    if (userUUID === currentUUID) return true;
+    else if (isOwner && isBot) return true;
+    else return false;
 }
