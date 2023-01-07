@@ -35,7 +35,12 @@ type DiscordUser = {
 }
 
 const discord = new OAuth();
-const dynamo = new DynamoDBClient({ region: "eu-west-2", credentials: { accessKeyId: "AKIA5AK7PPREGR5PVWMW", secretAccessKey: "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" } });
+const dynamo = new DynamoDBClient({
+  region: "eu-west-2", credentials: {
+    accessKeyId: process.env.AWS_CREDIENTIALS_ACCESS ?? "",
+    secretAccessKey: process.env.AWS_CREDIENTIALS_SECRET ?? ""
+  }
+});
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse)
 {
@@ -142,13 +147,14 @@ async function getDiscord(code: string): Promise<Discord | undefined>
 async function authDiscord(code: string): Promise<DiscordAuth>
 {
   let response = await discord.tokenRequest({
-    clientId: "852274286017249330",
-    clientSecret: "chrso7QY82dIOnrt2XcywvrqDuiTyFTN",
+    clientId: process.env.DISCORD_APP_ID,
+    clientSecret: process.env.DISCORD_APP_SECRET,
     code: code,
     scope: "identify",
     grantType: "authorization_code",
     redirectUri: API_URL.replace("api.", "") + "/api/login"
   })
+  
   return {
     accessToken: response.access_token,
     refreshToken: response.refresh_token,

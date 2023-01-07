@@ -6,6 +6,14 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     domains: ['ca.slack-edge.com', 'cdn.discordapp.com', "upload.wikimedia.org"],
   },
+  env: {
+    AWS_CREDIENTIALS_ACCESS: process.env.AWS_CREDIENTIALS_ACCESS ?? "",
+    AWS_CREDIENTIALS_SECRET: process.env.AWS_CREDIENTIALS_SECRET ?? "",
+    USE_LOCAL: process.env.USE_LOCAL ?? "false",
+    LOCAL_IP: process.env.LOCAL_IP ?? "localhost",
+    DISCORD_APP_ID: process.env.DISCORD_APP_ID ?? "",
+    DISCORD_APP_SECRET: process.env.DISCORD_APP_SECRET ?? ""
+  }
 }
 
 // const withBundleAnalyzer = require('@next/bundle-analyzer')({

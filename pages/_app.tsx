@@ -12,21 +12,13 @@ import { UserProvider } from 'context/UserContext'
 import { AppProps } from 'next/app';
 import { NavigationContextProvider } from 'context/NavigationContext';
 // import Snowfall from 'react-snowfall';
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
-
-const Snowfall = lazy(async () => await import("react-snowfall"));
 
 const Navbar = dynamic(() => import("components/shared/navbar"), { ssr: true, suspense: false })
 
 function MyApp({ Component, pageProps }: AppProps)
 {
-  const [isSnowing, setSnowing] = useState(false)
-  useEffect(() =>
-  {
-    setSnowing(true)
-  }, [])
-
   return (
     <>
       <Head>
@@ -57,13 +49,6 @@ function MyApp({ Component, pageProps }: AppProps)
         <Provider store={store}>
           <NavigationContextProvider>
             <ModalContextProvider>
-              {
-                isSnowing &&
-                <Snowfall
-                  speed={[0.5, 1]}
-                  wind={[-.5, 0.5]}
-                />
-              }
               <Suspense fallback="">
                 <Navbar />
               </Suspense>
