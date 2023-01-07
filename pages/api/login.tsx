@@ -37,8 +37,8 @@ type DiscordUser = {
 const discord = new OAuth();
 const dynamo = new DynamoDBClient({
   region: "eu-west-2", credentials: {
-    accessKeyId: process.env.AWS_CREDIENTIALS_ACCESS ?? "",
-    secretAccessKey: process.env.AWS_CREDIENTIALS_SECRET ?? ""
+    accessKeyId: process.env.DB_CREDIENTIALS_ACCESS ?? "",
+    secretAccessKey: process.env.DB_CREDIENTIALS_SECRET ?? ""
   }
 });
 
@@ -154,7 +154,7 @@ async function authDiscord(code: string): Promise<DiscordAuth>
     grantType: "authorization_code",
     redirectUri: API_URL.replace("api.", "") + "/api/login"
   })
-  
+
   return {
     accessToken: response.access_token,
     refreshToken: response.refresh_token,
