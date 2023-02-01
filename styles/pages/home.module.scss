@@ -1,0 +1,84 @@
+.header
+{
+    height: 50rem;
+    width: 100vw;
+    // background-color: red;
+
+    padding-top: 5rem;
+
+
+
+    &__icons
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        // padding-right: 10rem;
+        translate: -3%;
+    }
+
+    &__icon-text
+    {
+        position: relative;
+        &__subtext
+        {
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.75);
+            font-weight: 600;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+    }
+}
+
+.section
+{
+    width: 100%;
+    background-color: white;
+    min-height: fit-content;
+
+    position: relative;
+    height: 25rem;
+
+
+    &--games
+    {
+        height: 25rem;
+    }
+
+    &--about
+    {
+        background-color: red;
+    }
+}
+
+.footer
+{
+    height: 25rem;
+    // background-color: ;
+}
+
+.wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.wave svg {
+    position: relative;
+    display: block;
+    width: calc(151% + 1.3px);
+    height: 150px;
+}
+
+.wave .shape-fill {
+    fill: white;
+}

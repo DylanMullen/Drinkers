@@ -1,0 +1,33 @@
+$padding-sides: 10rem;
+$padding-vertical: 2.5rem;
+$gap:.5rem;
+
+.home-section
+{
+    width: 100%;
+    // background-color: white;
+    // background: 
+
+    min-height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    gap: $gap;
+
+    padding: $padding-vertical $padding-sides;
+
+    
+    &__title
+    {
+        text-align: center;
+        font-size: 4rem;
+        letter-spacing: 1px;
+
+        font-weight: 500;
+        text-transform: capitalize;
+
+        font-family: 'Sugar Snow', 'Archivo Narrow', sans-serif;
+        letter-spacing: 3px;
+        padding: .75rem 0;
+    }
+}
