@@ -1,5 +1,6 @@
 import GameSelector from 'components/home/game-selector'
 import HomeHeader from 'components/home/header'
+import AboutUs from 'components/home/about-us'
 import Section from 'components/home/section'
 import Footer from 'components/shared/footer'
 import Image from 'next/image'
@@ -23,14 +24,7 @@ function home({ }: Props)
                 >
                     <GameSelector />
                 </Section>
-                <Section id='' title='Join Us'
-                    scheme={{
-                        background: "blue",
-                        transformY: "150px",
-
-                    }}
-                >
-                </Section>
+                <AboutUs />
             </main>
             {/* <Footer /> */}
         </>

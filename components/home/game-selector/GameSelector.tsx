@@ -62,8 +62,8 @@ function GameSelector()
             <div className={styles["game-selector__footer"]}>
                 <svg id="visual" viewBox="0 0 900 150" width="100%" height="150px" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" version="1.1">
                     <defs>
-                        <filter id="shadow">
-                            <feDropShadow dx="0.2" dy="0.4" stdDeviation="10" floodColor={"rgba(0,0,0,0.5)"}/>
+                        <filter id="shadow"  filterUnits="userSpaceOnUse">
+                            <feDropShadow dx="0.2" dy="0.4" stdDeviation="8" floodColor={"rgba(0,0,0,0.5)"}/>
                         </filter>
                     </defs>
 
