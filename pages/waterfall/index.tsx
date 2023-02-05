@@ -62,16 +62,15 @@ function WaterfallHome()
             <Head>
                 <title>Waterfall | Drinkers</title>
                 <meta name="robots" content="all" />
-                <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
                 <meta name="title" content="Waterfall | Drinkers" />
                 <meta name="description" content="Waterfall is a drinking card game that you can play to spice up your drinking sessions with the fun and exciting prompts in the deck" />
-                <meta name="keywords" content="waterfall, kings cup, drinking, drinking games, still site, the still site, card game, cards, playing cards, alcohol" />
-                <meta name="url" content="https://drinkers.beer/waterfall" />
+                <meta name="keywords" content="waterfall, kings cup, drinking, drinking games, still site, the still site, card game, cards, playing cards, alcohol. shots" />
+                <meta name="url" content="https://drinkers.party/waterfall" />
 
                 <meta name="og:title" content="Waterfall | Drinkers" />
-                <meta name="og:site_name" content="Drinkers Beer" />
+                <meta name="og:site_name" content="Drinkers" />
                 <meta name="og:type" content="website" />
-                <meta name="og:url" content="https://drinkers.beer/waterfall" />
+                <meta name="og:url" content="https://drinkers.party/waterfall" />
                 <meta name="og:description" content="Waterfall is a drinking card game that you can play to spice up your drinking sessions with the fun and exciting prompts in the deck" />
             </Head>
 

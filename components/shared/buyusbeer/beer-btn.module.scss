@@ -26,13 +26,15 @@ $vw-desktop: 1200px;
     {
         font-size: 2.5rem;
         font-weight: 500;
-        letter-spacing: 2px;
+        letter-spacing: 5px;
 
         color: white;
 
         transition: letter-spacing 150ms ease-in-out, font-weight 150ms ease-in-out;
 
         position: relative;
+
+        font-family: 'Sugar Snow', sans-serif;
 
 
         &::after
@@ -86,7 +88,7 @@ $vw-desktop: 1200px;
 
         .beer-btn__text
         {
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             font-weight: 600;
 
             &::after

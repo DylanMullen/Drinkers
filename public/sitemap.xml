@@ -2,13 +2,18 @@
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://drinkers.beer/</loc>
-        <lastmod>2022-07-22</lastmod>
+        <loc>https://drinkers.party/</loc>
+        <lastmod>2023-02-05</lastmod>
         <changefreq>monthly</changefreq>
     </url>
     <url>
-        <loc>https://drinkers.beer/waterfall/</loc>
-        <lastmod>2022-07-22</lastmod>
+        <loc>https://drinkers.party/waterfall/</loc>
+        <lastmod>2023-02-05</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://drinkers.party/drunkcards/</loc>
+        <lastmod>2023-02-05</lastmod>
         <changefreq>weekly</changefreq>
     </url>
 </urlset>

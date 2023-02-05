@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }: AppProps)
         <link rel="icon" type="image/png" sizes="96x96" href="/logo.ico" />
       </Head>
       <Script
-        strategy="lazyOnload"
+        strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
       />
 
@@ -33,17 +33,18 @@ function MyApp({ Component, pageProps }: AppProps)
         id="google-ads"
         async
         crossOrigin='anonymous'
+        strategy='afterInteractive'
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2974631546161756" />
 
-      <Script id="google-analytics" strategy="lazyOnload">
-        {`
-          window.dataLayer = window.dataLayer || [];
+      <Script id="google-analytics" strategy="afterInteractive">
+        {
+          `window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'G-63461F15RT', {
             page_path: window.location.pathname,
-          });
-              `}
+          });`
+        }
       </Script>
       <UserProvider>
         <Provider store={store}>

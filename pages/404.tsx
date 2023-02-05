@@ -9,7 +9,7 @@ function Custom404()
 
     useEffect(() =>
     {
-        router.push("/waterfall")
+        router.push("/")
     }, [])
 
     return (

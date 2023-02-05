@@ -63,12 +63,21 @@ function PirateHome({ }: Props)
                 <title>Drunkcards | Drinkers</title>
                 <meta name="robots" content="all" />
                 <meta name="title" content="Drunkcards | Drinkers" />
+                <meta name="description" content="Drunkcards is an endless game of many possibilities to get you very drunk. Read your prompt, get lucky and drink. Simple. Dare to play?" />
+                <meta name="keywords" content="waterfall, kings cup, drinking, drinking games, drunkcards, drunk pirate, drunk cards, drunk, card game, cards, playing cards, alcohol. shots" />
+                <meta name="url" content="https://drinkers.party/drunkcards" />
+
+                <meta name="og:title" content="Drunkcards | Drinkers" />
+                <meta name="og:site_name" content="Drinkers" />
+                <meta name="og:type" content="website" />
+                <meta name="og:url" content="https://drinkers.party/drunkcards" />
+                <meta name="og:description" content="Drunkcards is an endless game of many possibilities to get you very drunk. Read your prompt, get lucky and drink. Simple. Dare to play?" />
             </Head>
 
             <header id="pirate-header" className={styles["pirate-header"]}>
                 <Header
                     name='Drunkcards'
-                    logo={<GiCardRandom/>}
+                    logo={<GiCardRandom />}
                 />
             </header>
 
