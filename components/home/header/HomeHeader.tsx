@@ -7,13 +7,10 @@ import styles from './home-header.module.scss'
 
 function HomeHeader()
 {
-    const width = 359*1.2;
-    const height = width / 1.447;
-
     return (
         <header id='#header' className={styles["header"]}>
             <div className={styles["header__content"]}>
-                <Image src={Logo} className={styles["header__logo"]} />
+                <Image src={Logo} className={styles["header__logo"]} alt="Logo for Drinkers."/>
             </div>
             <div className={styles["header__footer"]}>
                 <div className={styles["header__footer--top"]}>
