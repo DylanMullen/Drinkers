@@ -1,9 +1,13 @@
 $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-$test: #4b4949;
+
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+
 .footer
 {
     position: relative;
-    height: 15rem;
+    min-height: 15rem;
     background-color: #2a2a2a;
 
 
@@ -13,19 +17,16 @@ $test: #4b4949;
         position: absolute;
         width: 100%;
 
-        top: calc(-100% - 35px);
-
-        svg
-        {
-            transform: translateY(5px);
-        }
+        top: calc(-100%);
+        height: 250px;
     }
 
     &__branding
     {
         padding: 2rem;
+        font-size: 0;
     }
-    
+
     &__logo
     {
         position: relative;
@@ -35,6 +36,7 @@ $test: #4b4949;
     &__social
     {
         padding: 1rem;
+
         &__list
         {
             margin: auto 0;
@@ -63,6 +65,33 @@ $test: #4b4949;
 
         list-style: none;
     }
+
+    @media (max-width: $vw-laptops)
+    {
+
+        &__logo
+        {
+            min-width: 348px;
+            min-height: 127px;
+        }
+
+        &__branding
+        {
+            padding: 0;
+        }
+
+        &__divider
+        {
+            // top: calc(0);
+            top: -250px;
+        }
+
+        &__content
+        {
+            grid-template-columns: 1fr;
+            padding: 0 1rem;
+        }
+    }
 }
 
 .footer-btn
@@ -73,9 +102,12 @@ $test: #4b4949;
 
     border-radius: .5rem;
     align-items: center;
-    width: 50%;
+    width: 100%;
+
+    max-width: 20rem;
 
     transition: scale 150ms $pop;
+
     &__icon
     {
         font-size: 0;
@@ -88,7 +120,7 @@ $test: #4b4949;
             font-size: 1.75rem;
         }
     }
-    
+
     &__text
     {
         font-size: 1.25rem;
@@ -99,7 +131,7 @@ $test: #4b4949;
 
     &--discord
     {
-        background-color: #454FBF ;
+        background-color: #454FBF;
         color: white;
     }
 
@@ -116,7 +148,8 @@ $test: #4b4949;
 
     }
 
-    &:hover,&:focus
+    &:hover,
+    &:focus
     {
         scale: 1.05;
     }
@@ -124,5 +157,12 @@ $test: #4b4949;
     &:active
     {
         scale: 0.95;
+    }
+
+    @media (max-width: $vw-laptops)
+    {
+        width: 100%;
+        max-width: 30rem;
+        margin: 0 auto;
     }
 }

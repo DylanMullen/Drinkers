@@ -1,9 +1,16 @@
 $bg: rgb(32, 30, 29);
 
-$bg-footer: linear-gradient(90deg, rgba(231,111,81,1) 13%, rgba(244,162,97,1) 86%);;
-$bg-btn: linear-gradient(22deg, rgba(187,123,249,1) 0%, rgba(124,49,217,1) 32%, rgba(121,46,204,1) 54%, rgba(101,39,196,1) 73%, rgba(88,98,219,1) 100%);
+$bg-footer: linear-gradient(90deg, rgba(231, 111, 81, 1) 13%, rgba(244, 162, 97, 1) 86%);
+;
+$bg-btn: linear-gradient(22deg, rgba(187, 123, 249, 1) 0%, rgba(124, 49, 217, 1) 32%, rgba(121, 46, 204, 1) 54%, rgba(101, 39, 196, 1) 73%, rgba(88, 98, 219, 1) 100%);
 
 $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+$width: calc(359px*1.75);
+$height: calc($width/1.447);
+
+$vw-mobile: 480px;
+
 
 .header
 {
@@ -32,26 +39,28 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     &__content
     {
-        padding-top: 7%;
         // padding-bottom: 8%;
-        height: fit-content;
+        padding-top: 8rem;
         display: flex;
         flex-direction: column;
 
-        &:first-child
-        {
-            scale: 1.75;
-            position: relative;
-        }
-
         span
         {
-            text-align: center;
-            color: white;
-            font-weight: 700;
-            letter-spacing: 2px;
-
+            width: $width !important;
+            height: $height !important;
         }
+
+        @media (max-width: calc($vw-mobile + 120px))
+        {
+            padding-top: 10rem;
+
+            span
+            {
+                width: 359px !important;
+                height: 248px !important;
+            }
+        }
+
     }
 
 
@@ -71,10 +80,8 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
         margin-top: auto;
 
-        // margin-bottom: 1500;
-        // z-index: 1;
-
-        &--top,&--bottom
+        &--top,
+        &--bottom
         {
             position: absolute;
             left: 0;
@@ -85,6 +92,14 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
             // background: $bg-footer;
 
             z-index: -1;
+            height: 150px;
+            
+            
+            @media (max-width: calc($vw-mobile + 120px))
+            {
+                height: 75px;
+                
+            }
 
         }
 
@@ -94,15 +109,24 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
             transform: rotateX(180deg) scaleX(-1);
 
-            filter:  drop-shadow(0 0px 5px rgba(0, 0, 0, .5));
+            filter: drop-shadow(0 0px 5px rgba(0, 0, 0, .5));
 
+            @media (max-width: calc($vw-mobile + 120px))
+            {
+                top: -75px;
+            }
         }
 
         &--bottom
         {
             bottom: -150px;
-
+            
             filter: drop-shadow(0 0px 1px rgba(0, 0, 0, .5)) drop-shadow(0 0px 10px rgba(0, 0, 0, .5));
+            @media (max-width: calc($vw-mobile + 120px))
+            {
+                
+                bottom: -75px;
+            }
         }
 
         svg
@@ -121,11 +145,16 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
             align-items: center;
             position: relative;
             padding: 3rem 5rem;
+            margin: 0 1rem;
 
-            // background-color: rgba(255,255,255,0.25);
             border-radius: 1rem;
 
-            border: 2px dashed rgba(255,255,255,0.5);
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+
+            @media (max-width: calc($vw-mobile + 120px))
+            {
+                padding: 3rem 2.5rem;
+            }
         }
 
         &__title
@@ -136,6 +165,7 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
             font-size: 2.5rem;
             font-family: 'Sugar Snow';
             letter-spacing: 3px;
+            text-align: center;
         }
 
         &__btn
@@ -155,7 +185,8 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
             color: white;
 
-            &:hover,&:focus
+            &:hover,
+            &:focus
             {
                 background-position: 50%;
 
@@ -163,7 +194,8 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
             }
 
-            &:active{
+            &:active
+            {
                 transform: scale(0.95);
             }
         }

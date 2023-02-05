@@ -92,8 +92,6 @@ function SectionWrapper({ right = false, children }: Props)
   {
     if (inView)
       control.start("visible");
-    else
-      control.start(right ? "init--right" : "init")
   }, [control, inView]);
 
 

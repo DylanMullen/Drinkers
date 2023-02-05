@@ -28,7 +28,7 @@ function GameSelectorItem({ name, description, icon, color, link, delay }: Props
                 <h2 className={styles["selector-item__name"]}>{name}</h2>
                 <p className={styles["selector-item__desc"]} >{description}</p>
                 <Link href={link}>
-                    <button className={styles["selector-item__btn"]}>Play Now</button>
+                    <span className={styles["selector-item__btn"]}>Play Now</span>
                 </Link>
             </div>
         </li>

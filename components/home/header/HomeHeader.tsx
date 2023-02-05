@@ -13,11 +13,11 @@ function HomeHeader()
     return (
         <header id='#header' className={styles["header"]}>
             <div className={styles["header__content"]}>
-                <Image src={Logo} className={styles["header__logo"]} width={width} height={height}/>
+                <Image src={Logo} className={styles["header__logo"]} />
             </div>
             <div className={styles["header__footer"]}>
                 <div className={styles["header__footer--top"]}>
-                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 250" preserveAspectRatio="none">
                         <defs>
                             <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
                                 <stop offset="13%" style={{ stopColor: "rgba(244,162,97,1)", stopOpacity: 1 }} />
@@ -32,7 +32,7 @@ function HomeHeader()
                     <button className={styles["header__footer__btn"]}>Play Now</button>
                 </div>
                 <div className={styles["header__footer--bottom"]}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" width={"100%"}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 250" preserveAspectRatio="none" width={"100%"}>
                         <defs>
                             <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
                                 <stop offset="13%" style={{ stopColor: "rgba(231,111,81,1)", stopOpacity: 1 }} />

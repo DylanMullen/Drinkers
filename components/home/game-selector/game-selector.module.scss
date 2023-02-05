@@ -1,16 +1,63 @@
 $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+
 
 .game-selector
 {
     width: 100%;
     height: fit-content;
-    padding: 0 10rem;
 
     display: flex;
     flex-direction: column;
     gap: 2rem;
     position: relative;
+
+    padding: 0 10rem;
+
+    @media (max-width: calc($vw-mobile + 120px))
+    {
+        padding: 0 1rem;
+
+        &__games
+        {
+            grid-template-columns: 1fr !important;
+            padding: 0 !important;
+
+        }
+
+        &__soon
+        {
+            grid-column-start: span 1 !important;
+
+        }
+    }
+
+    @media (min-width: calc($vw-mobile + 120px)) and (max-width: calc($vw-tablet + 200px)) {
+        padding: 0 1rem;
+
+        &__games
+        {
+            grid-template-columns: 1fr 1fr !important;
+            padding: 0 !important;
+        }
+
+        &__soon
+        {
+            grid-column-start: span 2!important;
+        }
+    }
+
+    @media  (min-width: calc($vw-tablet + 200px)) and (max-width: calc($vw-laptops + 400px)) {
+        padding: 0 0rem !important;
+
+        &__games
+        {
+            padding: 0 5rem !important;
+        }
+    }
 
     &__text
     {
@@ -32,6 +79,9 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         display: grid;
         place-items: center;
         gap: 1.25rem;
+
+        margin: 0;
+        padding: 0 10rem;
 
         &[data-columns="1"]
         {
@@ -81,7 +131,7 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
         &::after
         {
-            content: '';
+            // content: '';
 
             position: absolute;
             width: 30%;

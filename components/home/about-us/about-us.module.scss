@@ -1,15 +1,18 @@
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+
 .about-us
 {
     display: flex;
     flex-direction: column;
     gap: 8rem;
 
-    // width: 70%;
     align-items: center;
 
     margin-top: 5rem;
 
-    padding-bottom: 7rem;
+    padding-bottom: 10rem;
     &__section
     {
         display: flex;
@@ -77,5 +80,14 @@
             letter-spacing: 1px;
             text-align: center;
         }
+        @media (max-width: $vw-laptops) {
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+        }
+    }
+
+    @media (max-width: $vw-laptops) {
+        gap: 2.5rem;
     }
 }
