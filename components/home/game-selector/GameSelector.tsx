@@ -10,7 +10,9 @@ export type FeaturedGame = {
     description: string,
     icon: React.ReactNode,
     color: string,
-    link: string
+    link: string,
+    disabled?:boolean
+
 }
 
 const FeaturedGames: { [id: number]: FeaturedGame } = {
@@ -33,7 +35,8 @@ const FeaturedGames: { [id: number]: FeaturedGame } = {
         description: "Guess what the next number is. Are you lucky? Test your luck. Coming Soon!",
         icon: <BsGraphUp />,
         color: "#ccff33",
-        link: "/"
+        link: "/",
+        disabled:true
     }
 }
 

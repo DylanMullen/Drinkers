@@ -107,8 +107,6 @@ $vw-laptops: 1024px;
     &__soon
     {
         width: 100%;
-        // height: ;
-
         text-align: center;
 
         font-size: 2.5rem;
@@ -280,6 +278,13 @@ $vw-laptops: 1024px;
         &:active
         {
             transform: scale(0.95);
+        }
+
+        &--disabled
+        {
+            background: linear-gradient(0deg, rgba(242,50,50,1) 0%, rgba(255,100,100,1) 45%, rgba(255,86,86,1) 100%);
+            color: white;
+            cursor: not-allowed;
         }
     }
 

@@ -14,6 +14,7 @@ import BuyUsBeer from 'components/shared/buyusbeer';
 import useUser from 'context/UserContext';
 import { useModalContext } from 'context/ModalContext';
 import AdModal from 'components/shared/modals/ad';
+import { GiWaterfall } from 'react-icons/gi';
 
 // import x from 
 
@@ -77,7 +78,7 @@ function WaterfallHome()
             <header id="waterfall-header" className={styles["waterfall-header"]}>
                 <Header
                     name='Waterfall'
-                    logo={"/imgs/waterfall.png"}
+                    logo={<GiWaterfall />}
                 />
             </header>
             <main id="waterfall-lobby" className={styles["waterfall-lobby"]}>

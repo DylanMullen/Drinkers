@@ -16,7 +16,7 @@ import CookieModal from 'components/waterfall/lobby/modals/cookies';
 import AdModal from 'components/shared/modals/ad';
 import { GameMode } from 'components/waterfall/lobby/modals/join/JoinModal';
 import useNavigation from 'context/NavigationContext';
-import { GiCardRandom } from 'react-icons/gi';
+import { GiCardRandom, GiWaterfall } from 'react-icons/gi';
 import BuyUsBeer from 'components/shared/buyusbeer';
 
 type Props = {}
@@ -68,7 +68,7 @@ function PirateHome({ }: Props)
             <header id="pirate-header" className={styles["pirate-header"]}>
                 <Header
                     name='Drunkcards'
-                    logo={Logo}
+                    logo={<GiCardRandom/>}
                 />
             </header>
 
