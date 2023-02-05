@@ -1,71 +1,34 @@
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import React, { useEffect } from 'react';
+import GameSelector from 'components/home/game-selector'
+import HomeHeader from 'components/home/header'
+import AboutUs from 'components/home/about-us'
+import Section from 'components/home/section'
+import Image from 'next/image'
+import React from 'react'
 
-import { IoBeer } from 'react-icons/io5'
-import { GiCardRandom, GiWaterfall } from 'react-icons/gi'
+import styles from 'styles/pages/home.module.scss'
+import Footer from 'components/home/footer'
 
-import MenuOption from 'components/waterfall/lobby/options/MenuOption';
-import Header from 'components/shared/header';
-import useNavigation from 'context/NavigationContext';
+type Props = {}
 
-export default function Home()
+function home({ }: Props)
 {
-
-  let router = useRouter();
-
-  const { showNavigationButton } = useNavigation()
-
-  // showNavigationButton()
-
-  const click = (page: string) => router.push(page)
-
-  useEffect(() =>
-  {
-    showNavigationButton()
-
-  }, [])
-
-  return (
-    <>
-      <Head>
-        <title>Home | Drinkers</title>
-        <meta name="robots" content="all" />
-        <meta name="title" content="Home | Drinkers" />
-        <meta name="description" content="Waterfall is a drinking card game that you can play to spice up your drinking sessions with the fun and exciting prompts in the deck" />
-        <meta name="keywords" content="waterfall, kings cup, drinking, drinking games, still site, the still site, card game, cards, playing cards, alcohol" />
-        <meta name="url" content="https://drinkers.party/" />
-
-        <meta name="og:title" content="Home | Drinkers" />
-        <meta name="og:site_name" content="Drinkers" />
-        <meta name="og:type" content="website" />
-        <meta name="og:url" content="https://drinkers.party/" />
-        <meta name="og:description" content="Waterfall is a drinking card game that you can play to spice up your drinking sessions with the fun and exciting prompts in the deck" />
-      </Head>
-      <main
-        style={{
-          display: "grid",
-          placeContent: "center",
-          minHeight: "100vh",
-        }}
-      >
-        <Header logo={"/drinkers-logo.png"} name='Drinkers' removeIconStyle />
-        <div style={{
-          display: "flex",
-          marginTop: "2rem",
-          marginBottom: "10rem",
-          justifyContent: "center"
-        }}>
-          <MenuOption
-            text='Waterfall'
-            icon={<GiWaterfall />}
-            modifier="join" callback={() => click("/waterfall")} />
-          <MenuOption
-            text='Drunkcards'
-            icon={<GiCardRandom />}
-            modifier="profile" callback={() => click("/drunkcards")} />
-        </div>
-      </main>
-    </>
-  )
+    return (
+        <>
+            <HomeHeader />
+            <main className="content">
+                <Section id='' title='Featured Games'
+                    scheme={{
+                        background: "rgba(62,62,62,1);",
+                        transformY: "150px",
+                    }}
+                >
+                    <GameSelector />
+                </Section>
+                <AboutUs />
+            </main>
+            <Footer />
+        </>
+    )
 }
+
+export default home

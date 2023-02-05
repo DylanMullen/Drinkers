@@ -9,7 +9,8 @@ export type FeaturedGame = {
     name: string,
     description: string,
     icon: React.ReactNode,
-    color: string
+    color: string,
+    link: string
 }
 
 const FeaturedGames: { [id: number]: FeaturedGame } = {
@@ -17,19 +18,22 @@ const FeaturedGames: { [id: number]: FeaturedGame } = {
         name: "Waterfall",
         description: "Our version of Kings Cup. 52 Cards, 52 Possibilities to drink! Got time to burn?",
         icon: <GiWaterfall />,
-        color: "#bde0fe"
+        color: "#bde0fe",
+        link: "/waterfall"
     },
     1: {
-        name: "DrunkCards",
+        name: "Drunkcards",
         description: "An infinite number of cards from our custom packs. Do you dare?",
         icon: <GiCardRandom />,
-        color: "#aaf683"
+        color: "#aaf683",
+        link: "/drunkcards"
     },
     2: {
         name: "Higher N' Lower",
         description: "Guess what the next number is. Are you lucky? Test your luck. Coming Soon!",
         icon: <BsGraphUp />,
-        color: "#ccff33"
+        color: "#ccff33",
+        link: "/"
     }
 }
 
@@ -40,12 +44,15 @@ function GameSelector()
 
     let games: React.ReactNode[] = []
 
+    let delay = 0;
+
     for (let index = 0; index < Object.keys(FeaturedGames).length; index++)
     {
         const element = FeaturedGames[index];
         games.push(
-            <GameSelectorItem {...element} />
+            <GameSelectorItem {...element} delay={delay} />
         )
+        delay += 0.25
     }
 
     return (
@@ -62,8 +69,8 @@ function GameSelector()
             <div className={styles["game-selector__footer"]}>
                 <svg id="visual" viewBox="0 0 900 150" width="100%" height="150px" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" version="1.1">
                     <defs>
-                        <filter id="shadow"  filterUnits="userSpaceOnUse">
-                            <feDropShadow dx="0.2" dy="0.4" stdDeviation="8" floodColor={"rgba(0,0,0,0.5)"}/>
+                        <filter id="shadow" filterUnits="userSpaceOnUse">
+                            <feDropShadow dx="0.2" dy="0.4" stdDeviation="8" floodColor={"rgba(0,0,0,0.5)"} />
                         </filter>
                     </defs>
 

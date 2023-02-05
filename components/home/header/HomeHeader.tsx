@@ -1,15 +1,19 @@
 import Image from 'next/image'
 import React from 'react'
 
+import Logo from 'public/weblogo.svg';
+
 import styles from './home-header.module.scss'
 
 function HomeHeader()
 {
+    const width = 359*1.2;
+    const height = width / 1.447;
+
     return (
         <header id='#header' className={styles["header"]}>
             <div className={styles["header__content"]}>
-                <Image src={"/imgs/text logo.png"} loading='eager' width={512} height={135} alt={`Drinkers.Beer - Waterfall`} unoptimized />
-                <span>Home of Drinking</span>
+                <Image src={Logo} className={styles["header__logo"]} width={width} height={height}/>
             </div>
             <div className={styles["header__footer"]}>
                 <div className={styles["header__footer--top"]}>

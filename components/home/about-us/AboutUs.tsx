@@ -76,7 +76,7 @@ const variants: Variants = {
     opacity: 1,
     transition: {
       delay: .25,
-      duration: .25
+      duration: .5
       // type: "tween",
       // ease: "easeInOut"
     }
