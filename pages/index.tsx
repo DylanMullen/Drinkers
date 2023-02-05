@@ -1,13 +1,13 @@
-import GameSelector from 'components/home/game-selector'
-import HomeHeader from 'components/home/header'
-import AboutUs from 'components/home/about-us'
-import Section from 'components/home/section'
-import Image from 'next/image'
 import React from 'react'
 
-import styles from 'styles/pages/home.module.scss'
-import Footer from 'components/home/footer'
 import Head from 'next/head'
+import dynamic from 'next/dynamic'
+
+const GameSelector = dynamic(() => import('components/home/game-selector'))
+const AboutUs = dynamic(() => import("components/home/about-us"))
+const Footer = dynamic(() => import("components/home/footer"))
+const HomeHeader = dynamic(() => import('components/home/header'))
+
 
 type Props = {}
 
@@ -31,14 +31,7 @@ function home({ }: Props)
             </Head>
             <HomeHeader />
             <main className="content">
-                <Section id='' title='Featured Games'
-                    scheme={{
-                        background: "rgba(62,62,62,1);",
-                        transformY: "150px",
-                    }}
-                >
-                    <GameSelector />
-                </Section>
+                <GameSelector />
                 <AboutUs />
             </main>
             <Footer />

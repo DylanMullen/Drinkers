@@ -82,7 +82,7 @@ function Footer()
 function FooterButton({ icon, link, text, modifier }: Props)
 {
     return (
-        <a href={link} target="_blank" referrerPolicy='no-referrer' className={`${styles["footer-btn"]} ${modifier ? styles[`footer-btn--${modifier}`] : ""}`}>
+        <a href={link} target="_blank" rel='noreferrer' className={`${styles["footer-btn"]} ${modifier ? styles[`footer-btn--${modifier}`] : ""}`}>
             <div className={styles["footer-btn__icon"]}>
                 {icon}
             </div>

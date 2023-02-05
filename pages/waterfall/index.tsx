@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import Head from '../../node_modules/next/head'
 import styles from 'styles/pages/waterfall/home.module.scss';
-import Header from 'components/shared/header';
-import Menu from 'components/waterfall/lobby/menu';
 
-import { IoBeer } from '@react-icons/all-files/io5/IoBeer';
 import { useRouter } from 'next/router';
-import { getUser, User } from 'utils/UserUtil';
 import { createWaterfallGame, getCurrentGame } from 'services/waterfall/GameController';
 import { GameMode } from 'components/waterfall/lobby/modals/join/JoinModal';
 import useNavigation from 'context/NavigationContext';
-import BuyUsBeer from 'components/shared/buyusbeer';
 import useUser from 'context/UserContext';
 import { useModalContext } from 'context/ModalContext';
-import AdModal from 'components/shared/modals/ad';
 import { GiWaterfall } from 'react-icons/gi';
+import dynamic from 'next/dynamic';
 
-// import x from 
+
+const Header = dynamic(()=>import('components/shared/header'))
+const Menu = dynamic(()=>import('components/waterfall/lobby/menu'))
+const AdModal = dynamic(()=>import('components/shared/modals/ad'))
+const BuyUsBeer = dynamic(()=> import('components/shared/buyusbeer'));
+
 
 function WaterfallHome()
 {
@@ -25,8 +25,6 @@ function WaterfallHome()
 
     const router = useRouter();
     const { showNavigationButton } = useNavigation()
-
-    // showNavigationButton()
 
     const goTo = () =>
     {
@@ -87,7 +85,7 @@ function WaterfallHome()
                 </footer>
             </main>
 
-
+            
         </>
     )
 }
