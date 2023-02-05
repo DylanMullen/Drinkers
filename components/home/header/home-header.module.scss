@@ -1,0 +1,203 @@
+$bg: rgb(32, 30, 29);
+
+$bg-footer: linear-gradient(90deg, rgba(231, 111, 81, 1) 13%, rgba(244, 162, 97, 1) 86%);
+;
+$bg-btn: linear-gradient(22deg, rgba(187, 123, 249, 1) 0%, rgba(124, 49, 217, 1) 32%, rgba(121, 46, 204, 1) 54%, rgba(101, 39, 196, 1) 73%, rgba(88, 98, 219, 1) 100%);
+
+$pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+$width: calc(359px*1.75);
+$height: calc($width/1.447);
+
+$vw-mobile: 480px;
+
+
+.header
+{
+    width: 100%;
+
+    min-height: 50rem;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+
+    align-items: center;
+
+    position: relative;
+    z-index: 10;
+
+    // background-color: $bg;
+
+    // background: rgb(129,90,192);
+    // background: linear-gradient(333deg, rgb(53, 8, 126) 13%, rgb(108, 48, 163) 86%); 
+
+    margin-bottom: 150px;
+
+    font-family: 'Sugar Snow';
+
+    &__content
+    {
+        // padding-bottom: 8%;
+        padding-top: 8rem;
+        display: flex;
+        flex-direction: column;
+
+        span
+        {
+            width: $width !important;
+            height: $height !important;
+        }
+
+        @media (max-width: calc($vw-mobile + 120px))
+        {
+            padding-top: 10rem;
+
+            span
+            {
+                width: 359px !important;
+                height: 248px !important;
+            }
+        }
+
+    }
+
+
+    &__footer
+    {
+
+        position: relative;
+        background: $bg-footer;
+
+        width: 100%;
+
+        display: grid;
+        place-content: center;
+
+        padding: 2.5rem 0;
+        padding-bottom: 3rem;
+
+        margin-top: auto;
+
+        &--top,
+        &--bottom
+        {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+
+            // background: $bg-footer;
+
+            z-index: -1;
+            height: 150px;
+            
+            
+            @media (max-width: calc($vw-mobile + 120px))
+            {
+                height: 75px;
+                
+            }
+
+        }
+
+        &--top
+        {
+            top: -150px;
+
+            transform: rotateX(180deg) scaleX(-1);
+
+            filter: drop-shadow(0 0px 5px rgba(0, 0, 0, .5));
+
+            @media (max-width: calc($vw-mobile + 120px))
+            {
+                top: -75px;
+            }
+        }
+
+        &--bottom
+        {
+            bottom: -150px;
+            
+            filter: drop-shadow(0 0px 1px rgba(0, 0, 0, .5)) drop-shadow(0 0px 10px rgba(0, 0, 0, .5));
+            @media (max-width: calc($vw-mobile + 120px))
+            {
+                
+                bottom: -75px;
+            }
+        }
+
+        svg
+        {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 150px;
+        }
+
+        &__content
+        {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            position: relative;
+            padding: 3rem 5rem;
+            margin: 0 1rem;
+
+            border-radius: 1rem;
+
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+
+            @media (max-width: calc($vw-mobile + 120px))
+            {
+                padding: 3rem 2.5rem;
+            }
+        }
+
+        &__title
+        {
+            font-weight: 500;
+            color: white;
+
+            font-size: 2.5rem;
+            font-family: 'Sugar Snow';
+            letter-spacing: 3px;
+            text-align: center;
+        }
+
+        &__btn
+        {
+            padding: 0.75rem 1rem;
+            width: 60%;
+            cursor: pointer;
+            font-size: 1.25rem;
+            letter-spacing: 2px;
+            border-radius: .5rem;
+            outline: 0;
+            border: 0;
+            background: $bg-btn ;
+            background-size: 300%;
+
+            transition: background-position 150ms ease-in-out, transform 150ms $pop;
+
+            color: white;
+
+            &:hover,
+            &:focus
+            {
+                background-position: 50%;
+
+                transform: scale(1.1);
+
+            }
+
+            &:active
+            {
+                transform: scale(0.95);
+            }
+        }
+    }
+}

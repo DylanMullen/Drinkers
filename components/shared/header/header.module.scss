@@ -17,7 +17,9 @@ $vw-desktop: 1200px;
     justify-content: center;
 
     padding: 1.5rem 0;
-    gap: 3rem;
+    gap: 1rem;
+
+    margin-bottom: 3rem;
 
     &__logo
     {
@@ -33,6 +35,7 @@ $vw-desktop: 1200px;
                 letter-spacing: 5px;
                 font-weight: 600;
 
+
                 &::after
                 {
                     width: 100%;
@@ -45,13 +48,15 @@ $vw-desktop: 1200px;
     &__icon
     {
         border-radius: 50%;
-        background: linear-gradient(180deg, rgba(201, 110, 18, 1) 5%, rgba(223, 141, 3, 1) 21%, rgba(236, 157, 0, 1) 39%, rgba(246, 193, 1, 1) 59%, rgba(250, 233, 111, 1) 79%, rgba(255, 248, 151, 1) 100%);
-        display: grid;
-        place-items: center;
-        box-shadow: 0 0 2rem .25rem $icon-shadow;
-        margin: 3rem;
-        width: 11rem;
+        // background: linear-gradient(180deg, rgba(201, 110, 18, 1) 5%, rgba(223, 141, 3, 1) 21%, rgba(236, 157, 0, 1) 39%, rgba(246, 193, 1, 1) 59%, rgba(250, 233, 111, 1) 79%, rgba(255, 248, 151, 1) 100%);
+        // box-shadow: 0 0 2rem .25rem $icon-shadow;
+        // width: 11rem;
         aspect-ratio: 1/1;
+        font-size: 0;
+        padding: 1.5rem;
+
+        border: 2px solid lightgray;
+        color: white;
 
         & span
         {
@@ -59,6 +64,11 @@ $vw-desktop: 1200px;
             padding: $icon-padding  !important;
             margin: $icon-margin  !important;
             // overflow: visible !important;
+        }
+
+        svg
+        {
+            font-size: 6rem;
         }
 
     }
@@ -70,8 +80,11 @@ $vw-desktop: 1200px;
         font-weight: 500;
         letter-spacing: 2px;
         text-transform: uppercase;
-        color: lightgray;
+        color: white;
         transition: letter-spacing 150ms $pop, font-weight 150ms $pop;
+
+        font-family: 'Sugar Snow', sans-serif;
+        letter-spacing: 5px;
 
         &::after
         {
