@@ -1,0 +1,129 @@
+{
+  "settings": {
+    "uuid": "365097f8-78db-4e8f-b6a8-30490873e706",
+    "name": "Truth Or Drink",
+    "description": "Default description"
+  },
+  "prompts": [
+    {
+      "uuid": "87afed59-bb46-4247-8063-3c0cb868b088",
+      "title": "Sleepover",
+      "description": "Which person in the group would you like to sleep with?"
+    },
+    {
+      "title": "Diamond in the rough",
+      "description": "Name the worst quality about someone in the group.",
+      "uuid": "d5fecbfe-a717-42c8-905c-d4ec885825d8"
+    },
+    {
+      "title": "Cry me a river",
+      "description": "When was the last time you cried and why?",
+      "uuid": "f89125eb-6087-4c86-aeeb-082368522b32"
+    },
+    {
+      "title": "Swindler",
+      "description": "Have you ever cheated on someone?",
+      "uuid": "e0eba28a-b520-4a8e-afc3-2f044afefd2c"
+    },
+    {
+      "title": "Glorious mystery",
+      "description": "What's something the group doesn't know about you?",
+      "uuid": "2b9fb486-cec1-4f55-8c4a-502bbfb12754"
+    },
+    {
+      "title": "Delinquent",
+      "description": "Have you ever broken the law? If so, how?",
+      "uuid": "a50edd8d-64e0-4fb2-9bcb-b135db406832"
+    },
+    {
+      "title": "Deception",
+      "description": "What was the worst lie you've told someone?",
+      "uuid": "2907e625-7dc9-46ad-ba5d-32790ccf5994"
+    },
+    {
+      "title": "Superhuman",
+      "description": "What's the weirdest superpower you'd like to have?",
+      "uuid": "fc0e43c2-b379-4c80-8d7c-0e9a9fdaf98c"
+    },
+    {
+      "title": "The more the merrier",
+      "description": "What's your bodycount?",
+      "uuid": "8b9db346-9a91-4209-b420-b00f65fc60e9"
+    },
+    {
+      "title": "Simp City",
+      "description": "What's the simpiest thing you've done for someone?",
+      "uuid": "34a6bab0-f1a5-422f-8b85-d0411892ac08"
+    },
+    {
+      "title": "Kinky kylie",
+      "description": "What's your weirdest fetish?",
+      "uuid": "714944d1-830a-4203-bd71-7da65771b1f0"
+    },
+    {
+      "title": "Built different",
+      "description": "In what way do you think you're better than most people?",
+      "uuid": "e6f83d5d-7bb1-47b3-b191-eba1cd0b11ca"
+    },
+    {
+      "title": "Escobar",
+      "description": "What's the most hardcore drug you've taken?",
+      "uuid": "4087eeb2-5891-41cb-9005-84711d97c00f"
+    },
+    {
+      "title": "I am you",
+      "description": "Which person in the group would you like to be for a day?",
+      "uuid": "fde2ce05-9bc9-4972-9094-88771a333267"
+    },
+    {
+      "title": "Back to the future",
+      "description": "If there's a moment in your life you'd do differently, what would it be?",
+      "uuid": "e338b5de-3f12-4781-b51a-9254f5a575dd"
+    },
+    {
+      "title": "Nail biter",
+      "description": "What's your weird guilty pleasure?",
+      "uuid": "fac2dbb1-5113-4c33-9b25-481f90838205"
+    },
+    {
+      "title": "Karenisms",
+      "description": "What's your worst personality trait?",
+      "uuid": "89791eb7-1ec2-4450-8d96-979eb11dfe23"
+    },
+    {
+      "title": "Romantic Evening",
+      "description": "What's your ideal fantasy?",
+      "uuid": "fd86c212-b304-4559-87db-326062f54d8c"
+    },
+    {
+      "title": "God",
+      "description": "If you had the power to change one thing in the world, what would it be?",
+      "uuid": "39ac858f-01fc-42a5-bf15-e5243d9d015a"
+    },
+    {
+      "title": "Gender swap",
+      "description": "If you switched genders, what's the first thing you'd do?",
+      "uuid": "a9d11e78-0374-40cb-94ce-4d207b55b30f"
+    },
+    {
+      "title": "Lucky charm",
+      "description": "What's your most prized possession?",
+      "uuid": "04f7c5f4-6e7e-4022-bdb8-c77c0d9a01f4"
+    },
+    {
+      "title": "It's over",
+      "description": "How did things with your ex come to an end?",
+      "uuid": "0f3911e1-9642-4f52-a327-50c069277b5f"
+    },
+    {
+      "title": "1%",
+      "description": "How would you spend a million dollars?",
+      "uuid": "26f6b24f-e869-4416-a65b-48a09bf71e7d"
+    },
+    {
+      "title": "Hey baby",
+      "description": "What's your favourite pickup line you've used or received?",
+      "uuid": "f8c6771d-d878-49db-ae79-bf0e9dd3d9a9"
+    }
+  ]
+}

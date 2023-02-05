@@ -1,0 +1,403 @@
+{
+    "id": "5da6b61e-5e1d-45ba-a977-516def324189",
+    "owner": null,
+    "information": {
+        "name": "Default",
+        "price": 0.00,
+        "public": true
+    },
+    "cards": {
+        "0": {
+            "value": "Ace",
+            "modifiers": true,
+            "details": {
+                "default": {
+                    "title": "Waterfall",
+                    "description": "When you start drinking, everyone must continue drinking until you stop.",
+                    "action": {
+                        "id": 0
+                    }
+                },
+                "red": {
+                    "title": "Waterfall",
+                    "description": "When you start drinking, everyone must continue drinking until you stop. Minimum of 5 seconds.",
+                    "action": {
+                        "id": 0
+                    }
+                },
+                "black": {
+                    "title": "Waterfall",
+                    "description": "When %rplayer starts drinking, everyone must continue drinking until they stop.",
+                    "action": {
+                        "id": 0
+                    }
+                }
+            }
+        },
+        "1": {
+            "value": "Two",
+            "modifiers": true,
+            "details": {
+                "default": {
+                    "title": "Nursery",
+                    "description": "Everyone younger than you must drink."
+                },
+                "red": {
+                    "title": "Charity",
+                    "description": "Feel charitable and give out 2 drinks to the group."
+                },
+                "black": {
+                    "title": "Drink Miser",
+                    "description": "Take 2 drinks for being such a hoarder."
+                }
+            }
+        },
+        "2": {
+            "value": "Three",
+            "modifiers": true,
+            "details": {
+                "default": {
+                    "title": "Nursing Home",
+                    "description": "Everyone older than you must drink."
+                },
+                "red": {
+                    "title": "Charity",
+                    "description": "Feel charitable and give out 3 drinks to the group."
+                },
+                "black": {
+                    "title": "Drink Miser",
+                    "description": "Take 3 drinks for being such a hoarder."
+                }
+            }
+        },
+        "3": {
+            "value": "Four",
+            "modifiers": true,
+            "details": {
+                "default": {
+                    "title": "Loose Women",
+                    "description": "Girls loosen up! It's time to drink up."
+                },
+                "red": {
+                    "title": "Loose Women",
+                    "description": "Girls loosen up! It's time to drink up."
+                },
+                "black": {
+                    "title": "Picky Choosers",
+                    "description": "Girls in the group, vote on the lad who needs to drink."
+                }
+            }
+        },
+        "4": {
+            "value": "Five",
+            "modifiers": false,
+            "details": {
+                "default": {
+                    "title": "Socialise",
+                    "description": "Share your pain! Everyone drink up!"
+                },
+                "red": {
+                    "title": "Socialise",
+                    "description": "Share your pain! Everyone drink up!"
+                },
+                "black": {
+                    "title": "Socialise",
+                    "description": "Share your pain! Everyone drink up!"
+                }
+            }
+        },
+        "5": {
+            "value": "Six",
+            "modifiers": true,
+            "details": {
+                "default": {
+                    "title": "Dads Army!",
+                    "description": "Lads loosen up! It's time to drink up."
+                },
+                "red": {
+                    "title": "Dads Army!",
+                    "description": "Lads loosen up! It's time to drink up."
+                },
+                "black": {
+                    "title": "Picky Choosers",
+                    "description": "Lads in the group, vote on the girl who needs to drink."
+                }
+            }
+        },
+        "6": {
+            "value": "Seven",
+            "modifiers": true,
+            "details": {
+                "default": {
+                    "title": "Heaven",
+                    "description": "Everyone point to the sky! Last one to point, drinks up."
+                },
+                "red": {
+                    "title": "Heaven",
+                    "description": "Everyone point to the sky! Last one to point, drinks up."
+                },
+                "black": {
+                    "title": "Hell",
+                    "description": "Everyone point to the ground! Last one to point, drinks up."
+                }
+            }
+        },
+        "7": {
+            "value": "Eight",
+            "modifiers": false,
+            "details": {
+                "default": {
+                    "title": "Date",
+                    "description": "Pick someone to drink with you for the rest of the game.",
+                    "action": {
+                        "id": 3
+                    }
+                },
+                "red": {
+                    "title": "Date",
+                    "description": "Pick someone to drink with you for the rest of the game.",
+                    "action": {
+                        "id": 3
+                    }
+                },
+                "black": {
+                    "title": "Date",
+                    "description": "Pick someone to drink with you for the rest of the game.",
+                    "action": {
+                        "id": 3
+                    }
+                }
+            }
+        },
+        "8": {
+            "value": "Nine",
+            "modifiers": true,
+            "details": {
+                "default": {
+                    "title": "Rhyme",
+                    "description": "Pick a word to rhyme. Go around the group and rhyme with it. First to fail, drinks."
+                },
+                "red": {
+                    "title": "Democracy",
+                    "description": "Everyone vote on who to drink. Person with the most votes, drinks.",
+                    "action": {
+                        "id": 1
+                    }
+                },
+                "black": {
+                    "title": "Wildcard",
+                    "description": "Pick a random card to play.\nMercy? Never.",
+                    "action": {
+                        "id": 7
+                    }
+                }
+            }
+        },
+        "9": {
+            "value": "Ten",
+            "modifiers": false,
+            "details": {
+                "default": {
+                    "title": "Categories",
+                    "description": "Pick a category to riff off.\nHesitate, you drink.",
+                    "action": {
+                        "id": 2
+                    }
+                },
+                "red": {
+                    "title": "Categories",
+                    "description": "Pick a category to riff off.\nHesitate, you drink.",
+                    "action": {
+                        "id": 2
+                    }
+                },
+                "black": {
+                    "title": "Categories",
+                    "description": "Pick a category to riff off.\nHesitate, you drink.",
+                    "action": {
+                        "id": 2
+                    }
+                }
+            }
+        },
+        "10": {
+            "value": "Jack",
+            "modifiers": false,
+            "details": {
+                "default": {
+                    "title": "Thumb Master",
+                    "description": "Whenever you put your thumb up, everyone must do the same. Last to do so, drinks.",
+                    "action": {
+                        "id": 4
+                    }
+                },
+                "red": {
+                    "title": "Thumb Master",
+                    "description": "Whenever you put your thumb up, everyone must do the same. Last to do so, drinks.",
+                    "action": {
+                        "id": 4
+                    }
+                },
+                "black": {
+                    "title": "Thumb Master",
+                    "description": "Whenever you put your thumb up, everyone must do the same. Last to do so, drinks.",
+                    "action": {
+                        "id": 4
+                    }
+                }
+            }
+        },
+        "11": {
+            "value": "Queen",
+            "modifiers": false,
+            "details": {
+                "default": {
+                    "title": "Question Master",
+                    "description": "Ask people questions until you are dethroned\nFailure to answer is a drink.",
+                    "action": {
+                        "id": 5
+                    }
+                },
+                "red": {
+                    "title": "Question Master",
+                    "description": "Ask people questions until you are dethroned\nFailure to answer is a drink.",
+                    "action": {
+                        "id": 5
+                    }
+                },
+                "black": {
+                    "title": "Question Master",
+                    "description": "Ask people questions until you are dethroned\nFailure to answer is a drink.",
+                    "action": {
+                        "id": 5
+                    }
+                }
+            }
+        },
+        "12": {
+            "value": "King",
+            "modifiers": false,
+            "details": {
+                "default": {
+                    "title": "Rule Master",
+                    "description": "Make a new rule for the group.\nAnyone that breaks it drinks.",
+                    "action": {
+                        "id": 6
+                    }
+                },
+                "red": {
+                    "title": "Rule Master",
+                    "description": "Make a new rule for the group.\nAnyone that breaks it drinks.",
+                    "action": {
+                        "id": 6
+                    }
+                },
+                "black": {
+                    "title": "Rule Master",
+                    "description": "Make a new rule for the group.\nAnyone that breaks it drinks.",
+                    "action": {
+                        "id": 6
+                    }
+                }
+            }
+        }
+    },
+    "rules": [
+        {
+            "title": "Tap your Head",
+            "description": "Before you drink, you must tap your head"
+        },
+        {
+            "title": "Mr. Worldwide",
+            "description": "For the rest of the game, everyone must talk in a accent"
+        },
+        {
+            "title": "Forced Marriage",
+            "description": "Dates are now reversible. If they drink, you drink."
+        },
+        {
+            "title": "2 Shots of Vodka",
+            "description": "After completing a waterfall, pick someone to drink for an extra 5 seconds."
+        },
+        {
+            "title": "Trust Excercise",
+            "description": "Pick a buzzword. If anyone else but you says it, everyone drinks."
+        },
+        {
+            "title": "Double",
+            "description": "Drinks are now doubled to a max of 4 drinks."
+        },
+        {
+            "title": "Christian Server",
+            "description": "No swearing on my christian Minecraft server!"
+        },
+        {
+            "title": "Even Numbers",
+            "description": "If you have to drink on an even card, you drink double."
+        },
+        {
+            "title": "Odd Numbers",
+            "description": "If you have to drink on an odd card, you drink double."
+        },
+        {
+            "title": "SAS",
+            "description": "Give each other a nickname. If you refer to them with their name, you drink."
+        },
+        {
+            "title": "Mystic Meg",
+            "description": "Before picking your next card, predict the cards colour. If you get it wrong, you drink, otherwise pick someone to drink."
+        },
+        {
+            "title": "Hummingbirds",
+            "description": "During waterfall, everyone must hum a tune whilst drinking."
+        }
+    ],
+    "categories": [
+        "Colours",
+        "Types of Alcohol",
+        "Countries",
+        "Continents",
+        "Alcohol Brands",
+        "Pokemon from Gen 1",
+        "Pokemon from Gen 2",
+        "Pokemon from Gen 3",
+        "Pokemon from Gen 4",
+        "Cocktails",
+        "Capital Cities",
+        "Car Brands",
+        "Types of Trees",
+        "Former Colonies of Britain",
+        "USA States",
+        "Countries in Europe",
+        "Countries in Asia",
+        "Male Actors",
+        "Female Actors",
+        "Fizzy Drink Brands",
+        "Fast Food Brands",
+        "Disney Movies",
+        "Disney+ Shows",
+        "Netflix Original Shows",
+        "Star Wars Characters",
+        "Star Trek Characters",
+        "Solar System Planets",
+        "Country Currencies"
+    ],
+    "truthdare": {
+        "truths": [
+            "Which player do you like the most?",
+            "Who do you hate the most in group?",
+            "What is a dirty secret about you?",
+            "How much drink have you had?",
+            "What drink do you hate?",
+            "What drink do you love?",
+            "What#s a controversial opinion you have?",
+            "Have you ever lied to smoeone in the group and who?",
+            "Have you ever cheated?",
+            "Have you ever lied about your age?",
+            "What is your greatest fear in a relationship?"
+        ],
+        "dares": [
+            ""
+        ]
+    }
+}

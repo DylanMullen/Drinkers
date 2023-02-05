@@ -1,0 +1,294 @@
+{
+	"id": "5da6b61e-5e1d-45ba-a977-516def324189",
+	"owner": null,
+	"information": {
+		"name": "Default",
+		"price": 0.00,
+		"public": true
+	},
+	"cards": {
+		"0": {
+			"rule": {
+				"title": "Waterfall",
+				"description": "Everyone drinks till you stop!\nMercy? Never."
+			},
+			"modifiers": {
+				"enabled": true,
+				"red": {
+					"title": "Waterfall",
+					"description": "Everyone drinks till you stop!\nMinimum of 5 seconds"
+				},
+				"black": {
+					"title": "Waterfall",
+					"description": "Everyone drinks till you stop!"
+				}
+			}
+		},
+		"1": {
+			"rule": {
+				"title": "Council of Drinks",
+				"description": "Everyone nominate someone to drink.\nI love democracy"
+			},
+			"modifiers": {
+				"enabled": true,
+				"red": {
+					"title": "Drinks Miser",
+					"description": "Take 2 drinks for being such a hoarder"
+				},
+				"black": {
+					"title": "Charity Time",
+					"description": "Give out 2 drinks to people.\nCharity is nice, isn't it?"
+				}
+			}
+		},
+		"2": {
+			"rule": {
+				"title": "Nursery",
+				"description": "Everyone below your age, drinks.\nIf you're the youngest, you take a drink."
+			},
+			"modifiers": {
+				"enabled": true,
+				"red": {
+					"title": "Drinks Miser",
+					"description": "Take 3 drinks for being such a hoarder"
+				},
+				"black": {
+					"title": "Charity Ball",
+					"description": "Give out 3 drinks to people.\nCharity is nice, isn't it?"
+				}
+			}
+		},
+		"3": {
+			"rule": {
+				"title": "Loose Women!",
+				"description": "Drink up ladies.\nDust off that wine glass."
+			},
+			"modifiers": {
+				"enabled": false,
+				"red": {
+					"title": "Waterfall",
+					"description": "Everyone drinks till you stop!\nMercy? Never."
+				},
+				"black": {
+					"title": "Waterfall",
+					"description": "Everyone drinks till you stop!\nMercy? Never."
+				}
+			}
+		},
+		"4": {
+			"rule": {
+				"title": "Socialise",
+				"description": "Share your pain, everyone drinks."
+			},
+			"modifiers": {
+				"enabled": false,
+				"red": {
+					"title": "Waterfall",
+					"description": "Everyone drinks till you stop!\nMercy? Never."
+				},
+				"black": {
+					"title": "Waterfall",
+					"description": "Everyone drinks till you stop!\nMercy? Never."
+				}
+			}
+		},
+		"5": {
+			"rule": {
+				"title": "Dads Army",
+				"description": "Drink up Lads."
+			},
+			"modifiers": {
+				"enabled": false,
+				"red": {
+					"title": "Waterfall",
+					"description": "Everyone drinks till you stop!\nMercy? Never."
+				},
+				"black": {
+					"title": "Waterfall",
+					"description": "Everyone drinks till you stop!\nMercy? Never."
+				}
+			}
+		},
+		"6": {
+			"rule": {
+				"title": "Heavens Gateway",
+				"description": "Shoot your hand straight up.\nReach for the gates."
+			},
+			"modifiers": {
+				"enabled": false,
+				"red": {
+					"title": "Waterfall",
+					"description": "Everyone drinks till you stop!\nMercy? Never."
+				},
+				"black": {
+					"title": "Waterfall",
+					"description": "Everyone drinks till you stop!\nMercy? Never."
+				}
+			}
+		},
+		"7": {
+			"rule": {
+				"title": "Date",
+				"description": "Pick someone to drink with you forever.\nIt gets lonely, doesn't it?",
+				"action": {
+					"id": 3
+				}
+			},
+			"modifiers": {
+				"enabled": false,
+				"red": {
+					"title": "Waterfall",
+					"description": "Everyone drinks till you stop!\nMercy? Never."
+				},
+				"black": {
+					"title": "Waterfall",
+					"description": "Everyone drinks till you stop!\nMercy? Never."
+				}
+			}
+		},
+		"8": {
+			"rule": {
+				"title": "Wildcard",
+				"description": "Pick a random card to play.\nMercy? Never.",
+				"action":{
+					"id": 7
+				}
+			},
+			"modifiers": {
+				"enabled": false,
+				"red": {
+					"title": "Little Secret",
+					"description": "Go around and say a secret.\nHesitation is weakness!"
+				},
+				"black": {
+					"title": "Wildcard",
+					"description": "Pick a random card to play.\nMercy? Never."
+				}
+			}
+		},
+		"9": {
+			"rule": {
+				"title": "Categories",
+				"description": "Pick a category to riff off.\nHesitate, you drink."
+			},
+			"modifiers": {
+				"enabled": false,
+				"red": {
+					"title": "Waterfall",
+					"description": "Everyone drinks till you stop!\nMercy? Never."
+				},
+				"black": {
+					"title": "Waterfall",
+					"description": "Everyone drinks till you stop!\nMercy? Never."
+				}
+			}
+		},
+		"10": {
+			"rule": {
+				"title": "Thumb Master",
+				"description": "Put your thumb up to drink!\nLast to put it up drinks!",
+				"action": {
+					"id": 4
+				}
+			},
+			"modifiers": {
+				"enabled": false,
+				"red": {
+					"title": "Waterfall",
+					"description": "Everyone drinks till you stop!\nMercy? Never."
+				},
+				"black": {
+					"title": "Waterfall",
+					"description": "Everyone drinks till you stop!\nMercy? Never."
+				}
+			}
+		},
+		"11": {
+			"rule": {
+				"title": "Question Master",
+				"description": "Ask people questions until you are dethroned\nFailure to answer is a drink."
+			},
+			"modifiers": {
+				"enabled": true,
+				"red": {
+					"title": "Question Master",
+					"description": "Go around the group and ask a question.\nFailure to answer is a drink.\nIf everyone answers, you drink 3 times."
+				},
+				"black": {
+					"title": "Never Have I Ever",
+					"description": "Anyone that has done it, drink up!"
+				}
+			}
+		},
+		"12": {
+			"rule": {
+				"title": "Rule Master",
+				"description": "Make a new rule for the group.\nAnyone that breaks it drinks.",
+				"action": {
+					"id": 6
+				}
+			},
+			"modifiers": {
+				"enabled": false,
+				"red": {
+					"title": "Waterfall",
+					"description": "Everyone drinks till you stop!\nMercy? Never."
+				},
+				"black": {
+					"title": "Waterfall",
+					"description": "Everyone drinks till you stop!\nMercy? Never."
+				}
+			}
+		}
+	},
+	"rules": {
+		"0": {
+			"title": "Tap your head",
+			"description": "Before every drink, you must tap your head. Failure to do so, adds another drink to the tally"
+		},
+		"1": {
+			"title": "ATTENTION!",
+			"description": "Stand at attention when you take your drink. Nobody should be sitting for Popcorn Sutton."
+		},
+		"2": {
+			"title": "Hummingbirds",
+			"description": "During a waterfall, hum a tune as you drink. Let that voice box fight the booze."
+		},
+		"3": {
+			"title": "Mexican Wave",
+			"description": "At a social drink, everyone must be in time for a mexican wave. Failure is a tally mark to drink"
+		},
+		"4": {
+			"title": "Mr Worldwide",
+			"description": "Everyone must talk in an accent. Anyone that screws it up, drinks."
+		},
+		"5": {
+			"title": "Marriage",
+			"description": "You and your dates have gotten married. If they drink, so do you."
+		},
+		"6": {
+			"title": "Parrot",
+			"description": "Before you start your sentence, say the last word said before."
+		},
+		"7": {
+			"title": "DOUBLE",
+			"description": "Drink twice as much as you are supposed to. Dates apply."
+		},
+		"8": {
+			"title": "2 Shots of Vodka",
+			"description": "After a waterfall, nominate someone to take a 5 second chug"
+		},
+		"9": {
+			"title": "Trust Excercise",
+			"description": "Make a buzzword. Anyone can say it, but everyone has to drink once it's said."
+		},
+		"10": {
+			"title": "Christian Server",
+			"description": "No swearing on this christian server."
+		},
+		"11": {
+			"title": "Even Numbers",
+			"description": "Every even number is double the drinks"
+		}
+	}
+}

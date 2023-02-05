@@ -1,0 +1,359 @@
+{
+  "settings": {
+    "uuid": "fbde702a-b209-43c7-b13c-30545c21874d",
+    "name": "Anya Pack",
+    "description": "Pack of Anya"
+  },
+  "prompts": [
+    {
+      "uuid": "be9ef785-2bf7-48ef-8745-cea3f25d7d90",
+      "title": "Harvey Wallbanger",
+      "description": "Name a cocktail. Everyone guesses an ingredient until someone messes up. Person who messes up, drinks.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "1c05a8f7-d765-421b-aeb1-83362b3ff97f",
+      "title": "Primark",
+      "description": "Who ever is wearing the same colour shirt/top, drinks",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "0e3026d8-9924-46fe-8bf6-c55f605b65a8",
+      "title": "Big Brother",
+      "description": "Tell the group the last thing you searched up. Refusal is a drink.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "45c9cae0-895a-43fe-825a-6ebd43a49507",
+      "title": "Disappoint the Sailor",
+      "description": "No one curses for a round.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "f8520f1c-4f2a-476f-ae07-db6b6d36c840",
+      "title": "Humilation",
+      "description": "What is your most embarrassing thing you've done recently? Drink, you are going to need it",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "1065cf39-e321-48ed-b894-13fb42c43136",
+      "title": "Gym Bro's",
+      "description": "Flex and Drink.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "75db8c2f-6be3-4706-b57c-b0408e20bbd3",
+      "title": "Shots, Shots, Shots",
+      "description": "Pick someone to take a shot.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "0c12bb75-7598-4c2d-9d9e-ab0b9a43cddc",
+      "title": "2 Girls, 1 Cup",
+      "description": "What is the grossest thing you have done. 3 Drinks if you refuse.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "1e48d3d8-d856-4de9-bd91-49d1df3aacaf",
+      "title": "Helen Keller",
+      "description": "Hum a song. First to get it, chooses someone to take a drink.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "2fba01dd-f1cc-42d0-a2bc-4c918dae55c6",
+      "title": "Truth be Told",
+      "description": "Say something about yourself. The group guesses if it is true or false. People wrong have to drink.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "2b5b32f6-bb05-4b2f-8ebf-9c9a7176c672",
+      "title": "Walk of Shame",
+      "description": "Whats your biggest regret. After, drink up.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "733e910d-6efb-4410-96bb-89fe5158f598",
+      "title": "Amy Schumer",
+      "description": "Tell a joke. If anyone laughs, they take a drink. If no one laughs, you take 3 drinks.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "06b51bef-f748-43f8-a742-66f906f657e7",
+      "title": "Group Therapy",
+      "description": "The group goes around and compliments you. After, take as many drinks as there are people.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "7554dc15-b994-4755-9369-fabac46fb1a2",
+      "title": "Shut up and Dance",
+      "description": "Do a dance or take a shot.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "0ab79d26-4548-48e3-b1a8-a087604b2a00",
+      "title": "Roll Call",
+      "description": "Go around naming everyone's full names. If you mess up, you drink.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "0be1ffe9-1845-49b0-8568-d77e03846476",
+      "title": "Clockblocked",
+      "description": "What time is it currently? Take as many drinks as the hour hand shows.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "92b37dcd-fef6-48e3-a6d0-55cfba7490c1",
+      "title": "Fox Hunting",
+      "description": "Everyone has to fancy talk for one round. Mess ups are a drink.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "4b97f0f7-18bc-4914-90cd-7fcad7e302a9",
+      "title": "The Great Debate",
+      "description": "Pineapples on pizza? Minority drinks.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "e9c17463-5a22-4751-8a35-bafb85c1ae9b",
+      "title": "You Come Here Often?",
+      "description": "Use a pickup line on the player before you. If it works, they drink. If not, you drink.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "f4b647cd-6034-4498-9d4c-59799f509ff0",
+      "title": ";)",
+      "description": "The group goes around revealing their last text. Worst text, drinks.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "7ea455e1-3609-41e0-9a0a-812781ded9a8",
+      "title": "Happeniss",
+      "description": "What's the best thing that happened to you this year?",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "67ae2b14-0ae8-4ff4-9c8a-c885dcfd90c4",
+      "title": "Glasses Up",
+      "description": "Make a toast, everyone drinks.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "822562c3-ea40-4de2-aa9c-2f52d99c2c75",
+      "title": "Most Likely",
+      "description": "Play a round of most likely. ",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "2284385b-64e1-407f-b196-09ec7421b405",
+      "title": "Silence Wench!",
+      "description": "Stay silent for an entire round.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "3bb87c82-f0c2-4a9a-b3fd-f87cace4ce6a",
+      "title": "Thirsty?",
+      "description": "We haven't seen a drink touch your lips in a while. Take a shot.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "5448cf0b-a521-43fa-8d85-1dba74621c88",
+      "title": "Naughty Naughty",
+      "description": "The group comes up with something to send to someone. If you refuse to send, you finish your drink. If you send it, the group finishes their drink.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "dfac2a42-4344-40b5-bb14-7f3cdd63c738",
+      "title": "Piss Baby",
+      "description": "Suck your thumb for one round. ",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "d76ea9f5-d71c-4795-b342-41b9e3630716",
+      "title": "Wedding Bells",
+      "description": "Passionately tell the person before you, you love them. Cheers to the happy couple, both of you drink.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "3ccb8519-9214-4897-ba8c-38033b3f2f3c",
+      "title": "Why would you say that?",
+      "description": "Tell the group your most controversial opinion. ",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "91dc7c28-a3d8-4c1d-ba4c-8942d8d94908",
+      "title": "Monster Munch",
+      "description": "If you have eaten this game, drink up.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "03158cec-31b8-4ff0-951f-a8da1ef3a118",
+      "title": "Egg Heads",
+      "description": "Ask the player after you a general knowledge question. If they answer correctly, you drink. If not, they drink.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "c99598e7-40a0-43f3-9cd2-9b87c0d80162",
+      "title": "No Hablo Inglés",
+      "description": "You cannot speak English for one round.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "ef9e1fd7-74bf-4d53-809f-297368636dc5",
+      "title": "Mr Worldwide",
+      "description": "Speak with an accent for one round.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "4eca8388-9697-4749-bcc1-32bbc26408bd",
+      "title": "Twos Company",
+      "description": "Choose someone to drink double for one round.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    },
+    {
+      "uuid": "b4221acc-8cef-4678-937a-9dc1c44c170d",
+      "title": "Chug Master",
+      "description": "You can yell the word \"chug\" at any point at the game. Everyone must chug their drink till it's finished. Only to be used once.",
+      "scheme": {
+        "background": "#bd39c8",
+        "text": "#ffffff",
+        "shadow": "#ffffff"
+      }
+    }
+  ]
+}

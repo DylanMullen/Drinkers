@@ -1,0 +1,389 @@
+{
+  "settings": {
+    "uuid": "1208e60d-2035-4640-9085-34a2d25755df",
+    "name": "Default pack",
+    "description": "This is the default pack.\n"
+  },
+  "prompts": [
+    {
+      "uuid": "0a4391a2-5e1c-4075-9c91-d28995d42043",
+      "title": "One and done",
+      "description": "Have a drink to get things going.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "53789942-28da-4fac-9dbc-16106e38751b",
+      "title": "Two for you",
+      "description": "Two drinks for looking too sober. Cheers!",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "dc7d3a6c-d16f-45c9-bde3-93baef4b54da",
+      "title": "Three's a breeze",
+      "description": "Three healthy sips for you.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "09c9a035-72d9-409e-97ad-3b26942d78c4",
+      "title": "Chug",
+      "description": "Finish your drink immediately! Hope you haven't poured out a new one!",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "1c8dde0c-6568-43f6-ac0d-2e88b8eee8e2",
+      "title": "Guardian Angel",
+      "description": "Someone above is looking out for you! Safe from drinking for an entire round.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "3cc707e3-7991-4ae7-88a5-aac7218563db",
+      "title": "Shots! Shots! Shots!",
+      "description": "Time for some fun! Everyone take a shot!",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "ecab6942-de72-4726-8c4c-d59e9b05394e",
+      "title": "Drinksgiving",
+      "description": "Time to share your love with another player! Pick another player to have a drink without you!",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "453265b2-eafb-463a-9267-0f1daae4090d",
+      "title": "You there!",
+      "description": "Will you be a merciful chooser? Pick one player to take a drink!",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "a73f2d14-d843-4ce2-879f-e5a9b05825fd",
+      "title": "Plea the fifth",
+      "description": "Let's face it, you've said enough already. Stay silent for one round, every time you speak you must take a drink as punishment.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "7d0326ad-4ebe-4b9f-89e4-e5f44e599797",
+      "title": "Sober time",
+      "description": "You're looking worse for wear. Take a drink of water/mixer.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "46923a5a-b0b5-46c1-bcdb-c4dca18b7601",
+      "title": "Full House",
+      "description": "Take as many drinks as there are players including you.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "df13f086-0160-4bbd-bfd4-765e586fbf1b",
+      "title": "Go woke, go broke",
+      "description": "Tell a controversial opinion then take a drink.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "69084f7b-3453-4198-8a4b-658a1bf81843",
+      "title": "Four eyes.",
+      "description": "You probably wish you had 20/20 now! People who wear glasses take a drink.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "92ccec10-9014-4269-b5de-83cd07bf153d",
+      "title": "Comedy night",
+      "description": "Why did the chicken cross the road? Tell your best joke or take 3 drinks, players who laugh will have to drink.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "383d5492-046c-4b31-83f8-9e158957b99f",
+      "title": "Tipsy bartender",
+      "description": "Name a mixed drink, everyone has to guess the ingredients of that drink. The player who gets the least ingredients right has to drink.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "93855410-25bf-4926-8fca-77ed23b62196",
+      "title": "Chug jug",
+      "description": "Chugga chugga choo choo! Everyone chugs their drinks for 10 seconds.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "e6864fcd-c67a-4319-a9dd-07cbad8e295b",
+      "title": "Just Dance!",
+      "description": "Everyone shows of their best dance moves and whoever gets voted for worst dancing must take a healthy sip.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "e11fdd3f-67b4-4610-9516-64aa646f41a9",
+      "title": "Slim Shady",
+      "description": "Time to bust out the sick rhymes. First player says a word the next player has to rhyme with it. Whoever fails to rhyme must take a drink.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "47520653-9442-4ae3-aec1-7a565870f6cd",
+      "title": "Encyclopaedia",
+      "description": "Hope you have some book smarts with you. Go around telling your most interesting fact! Most boring fact has to take a drink.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "ab54905f-c1f1-4ed0-9c3e-0d03c74b3a98",
+      "title": "No hoes?",
+      "description": "Sorry for this one. Virgins drink!",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "91df7853-b5e4-4ba5-971e-f42070ae427b",
+      "title": "Tequila!",
+      "description": "Woop woop! Everyone drinks!",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "be4d6738-9d77-4176-acd6-eeb06b10418e",
+      "title": "Thumbs up!",
+      "description": "At any point during the game you can raise your thumb. The last person to follow suit has to drink!",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "7fa210a7-a9b4-4017-9174-b4be9c710cf6",
+      "title": "U up?",
+      "description": "Let's get chatty! Send a message to a person outside the group, if that person does not answer back within an X amount of time, you drink. If they do, everyone else drinks.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "ade8a26b-46c6-42b1-8455-2af31cd9ef82",
+      "title": "5head",
+      "description": "Let that big ol' forehead get some love. Biggest forehead takes a drink.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "fb56a6d6-544d-470e-bac2-28a2fb760691",
+      "title": "Baby face",
+      "description": "Keeping it smooth I see. People without facial hair drinks.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "fefecfee-dac6-467a-9b5c-b68b563c0a78",
+      "title": "[Insert long name here]",
+      "description": "You can't pin this one on us. Player with the longest name drinks.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "e2548c11-1dcb-4cbe-8dfa-518d4f102688",
+      "title": "Sober Steve",
+      "description": "Being frugal has cost you. Player with the most amount of drink in their glass has to take a drink.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "a483e258-6a78-484e-a1f4-b88c57f9fee5",
+      "title": "Selfie time!",
+      "description": "Put on those smiley faces! Take a selfie with the group and take a drink!",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "f0fd99c2-e267-44dc-b5fb-dcf842036840",
+      "title": "Truth or drink",
+      "description": "Ask someone a truth or date. If they don't want to answer or do the dare, they must drink.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "e5fe5c07-51e9-4ef6-a625-e876fad5e4bc",
+      "title": "States the facts",
+      "description": "Hope you paid attention in class! Name US states until one of you is unable to, whoever fails has to drink.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "76fc274d-a7b6-4813-a2e4-2627cd12233e",
+      "title": "Heisenberg",
+      "description": "Jesse! Jesse!. Name chemistry elements until one of you is unable to, loser drinks.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "e285eb51-4c1e-4c90-bd87-74e9c9378f4a",
+      "title": "I'm shy :(",
+      "description": "Tell the group and embarrassing story of yourself, if you don’t want to, drink 3 times.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "a04817d5-06cf-4968-89db-5ae10cba863e",
+      "title": "Breaking the seal",
+      "description": "Your tiny bladder shall be your downfall. The next person to use the toilet must finish their drink.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "799ce323-baff-450e-a918-95231c649699",
+      "title": "Woof! Woof!",
+      "description": "You wanna treat boy? Bark like a dog for a whole round. Failure to bark or respond to another player with a bark results in a drink.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "a009de20-1017-4bb1-8fb6-a7049058cb0f",
+      "title": "Look mom, no hands!",
+      "description": "Let's see how skilled you are! Everyone drinks without using their hands!",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "1ad763dd-e2a4-4324-a9ac-039471dadb55",
+      "title": "Arrr mateys",
+      "description": "Ahoy there mateys! Talk like a pirate for 3 rounds.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "9bf3ef47-8829-43f1-b4fd-7ffbe075c723",
+      "title": "Double trouble",
+      "description": "Each drink is doubled.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    },
+    {
+      "uuid": "cfcf452d-044e-40d1-9267-aa548620fe13",
+      "title": "Meooooooooww",
+      "description": "Meow like a cat for a whole round. Failure to meow or respond to another player with a meow results in a drink.",
+      "scheme": {
+        "background": "#06547c",
+        "text": "#ffffff",
+        "shadow": "#0a0b0c"
+      }
+    }
+  ]
+}

@@ -1,0 +1,210 @@
+{
+  "settings": {
+    "uuid": "3956ceb7-fcdf-4691-bc3b-80db4085c2be",
+    "name": "Default",
+    "disabled": true,
+    "description": "The Default Experience. Have fun!"
+  },
+  "prompts": [
+    {
+      "uuid": "8cdc66dd-efff-42a0-9177-1fdc11b3e6f6",
+      "title": "One for the road.",
+      "description": "Have a drink to get things going."
+    },
+    {
+      "title": "Two for two",
+      "description": "Two drinks for looking too sober. Cheers!",
+      "uuid": "fc643a63-f6c7-4b31-ad43-5f3c33b9a390"
+    },
+    {
+      "title": "Three's a breeze.",
+      "description": "Three healthy sips for you.",
+      "uuid": "42c6b3b7-9288-428f-a15e-b9b26d09531e"
+    },
+    {
+      "title": "Chugging time",
+      "description": "Finish your drink immediately! Hope you haven't poured out a new one!",
+      "uuid": "3bb3f591-af2b-42a9-b876-05d1360b85f0"
+    },
+    {
+      "title": "Guardian Angel",
+      "description": "Someone above is looking out for you! Safe from drinking for an entire round.",
+      "uuid": "a9fbe45b-21b3-4b9b-9834-6358e57dc941"
+    },
+    {
+      "title": "Shots! Shots! Shots!",
+      "description": "It's that time again! Take a shot!",
+      "uuid": "8fef43c3-a851-44be-bc92-7b876a07d253"
+    },
+    {
+      "title": "Drinksgiving!",
+      "description": "Time to share your love with another player! Pick another person to have a drink with you!",
+      "uuid": "ac3ec0ce-5e7a-4d6f-b8ec-ce79d09dcaf9"
+    },
+    {
+      "title": "You there!",
+      "description": "Will you be a merciful chooser? Pick one player to take a drink!",
+      "uuid": "2918e211-39e3-4149-a143-fc8e7aa484be"
+    },
+    {
+      "title": "Plea the fifth",
+      "description": "Let's face it, you've said enough already. Stay silent for the entire round, each time you speak results in a drink.",
+      "uuid": "98dc566a-fcf8-4aab-93cb-82204c66c8f5"
+    },
+    {
+      "title": "Sober time",
+      "description": "You're looking worse for wear. Take a drink of water/mixer.",
+      "uuid": "08f9be72-7352-4f5b-8878-d56ed2f41fcc"
+    },
+    {
+      "title": "Full house",
+      "description": "Take as many drinks as there are players playing including you\n",
+      "uuid": "2b13df3b-11a1-43a3-93fd-7333691ceecc"
+    },
+    {
+      "title": "Go woke, go broke",
+      "description": "Tell a controversial opinion, then drink once.",
+      "uuid": "490ecf65-66d7-492c-96e8-73e695536f9e"
+    },
+    {
+      "title": "Four eyes",
+      "description": "People who wear glasses drink.",
+      "uuid": "992cd870-e62f-43a2-95cb-2fa560cd2fc9"
+    },
+    {
+      "title": "Comedy night",
+      "description": "Tell your best joke or take a drink, players who laugh will have to drink.",
+      "uuid": "8440e048-9f6a-472a-82fb-9c124cb7f181"
+    },
+    {
+      "title": "Tipsy bartender",
+      "description": "Name a mixed drink, everyone has to guess the ingredients of that drink. The player who gets the least ingredients right has to drink.\n",
+      "uuid": "9cb5a897-9551-455e-9630-6f1dd81e13be"
+    },
+    {
+      "title": "Chug jug",
+      "description": "Everyone chugs their drinks for 10 seconds.",
+      "uuid": "64e020b2-2bf9-46b2-9c5c-aa11fd6b7c8f"
+    },
+    {
+      "title": "Just dance!",
+      "description": "Everyone shows their best dance moves, and the player who gets the least votes drinks.",
+      "uuid": "2eadce5f-a484-4045-a630-d30e4ffaa582"
+    },
+    {
+      "title": "Slim Shady",
+      "description": "It's time to bust out the rhymes. First player says a word and the next has to rhyme with it. Whoever fails the rhyme has to take a drink.",
+      "uuid": "7f54731c-6b1b-4123-a0f0-f0ce73a46f1d"
+    },
+    {
+      "title": "Encyclopaedia",
+      "description": "Hope you have some book smarts with you. Go around telling your most interesting fact! Most boring fact has to take a drink.",
+      "uuid": "9d6e9166-d527-405e-a36f-b582d949a5bd"
+    },
+    {
+      "title": "No hoes?",
+      "description": "Sorry for this one. Virgins drink!",
+      "uuid": "cef19785-769b-4adb-a463-5b8353b9ea4b"
+    },
+    {
+      "title": "Tequila",
+      "description": "Woop woop! Everyone drinks!",
+      "uuid": "4e8e46ca-0762-4a0e-9f67-405bbfea5da7"
+    },
+    {
+      "title": "Seal of approval",
+      "description": "Thumbs up! At any point during the game you can raise your thumb. The last person to follow suit has to drink!",
+      "uuid": "a73dfad5-8414-4c9d-96ce-4e6e969c41ca"
+    },
+    {
+      "title": "Mexican wave",
+      "description": "Start doing a Mexican wave. Whoever fails must drink!",
+      "uuid": "f2d9c0d1-2e68-4ba4-ae47-7e00ddc3c0c9"
+    },
+    {
+      "title": "U up?",
+      "description": "Let's get chatty! Send a message to a person outside the group, if that person does not answer back within an X amount of time, you drink. If they do, everyone else drinks.",
+      "uuid": "d19dc19f-91ee-48d1-9cef-a5141e21ea37"
+    },
+    {
+      "title": "5head",
+      "description": "Let that big ol' forehead get some love. Biggest forehead takes a drink.",
+      "uuid": "9721b6db-3db7-4b4d-a2be-aeaa7966f80b"
+    },
+    {
+      "title": "Baby face",
+      "description": "Keeping it smooth I see. People without facial hair drinks.",
+      "uuid": "a0b52865-a4bc-4cff-8f08-c3a747084290"
+    },
+    {
+      "title": "Long Boi",
+      "description": "You can't pin this one on us. Player with the longest name drinks.",
+      "uuid": "a9997a0d-3f09-4345-a7fa-ac645afb0b62"
+    },
+    {
+      "title": "Sober Steve",
+      "description": "Being frugal has cost you. Player with the most amount of drink in their glass has to take a drink.",
+      "uuid": "a47b1ccc-d238-456b-8493-ac02d8f2c766"
+    },
+    {
+      "title": "Giraffe",
+      "description": "We respect your life choices, you respect the drink. Vegans take a drink.",
+      "uuid": "419bb3e2-dd68-4820-9df5-21e1af83dad1"
+    },
+    {
+      "title": "Selfie time!",
+      "description": "Put on those smiley faces! Take a selfie with the group and take a drink",
+      "uuid": "1875fb0f-2d36-461c-a7c3-ed610ef8817f"
+    },
+    {
+      "title": "Truth or drink?",
+      "description": "Ask truth or dare from someone, if the don't want to answer or do the dare, they must drink.",
+      "uuid": "f08a4ada-3124-418a-b8ef-f71b26b4154d"
+    },
+    {
+      "title": "States the facts",
+      "description": "Hope you paid attention in class! Name US states until one of you is unable to, whoever fails has to drink.",
+      "uuid": "1ed1435a-cd78-4f19-b616-2dc5aae6b4ce"
+    },
+    {
+      "title": "Heisenberg",
+      "description": "Jesse! Jesse!. Name chemistry elements until one of you is unable to, loser drinks.",
+      "uuid": "ff1e5f40-5ce7-4223-90d1-37974cfc91dc"
+    },
+    {
+      "title": "I'm shy :(",
+      "description": "Tell your most embarrassing moment to the group, if you don’t want to, drink 3 times.",
+      "uuid": "9644d20d-4e7c-4288-b748-8dbb3d67f417"
+    },
+    {
+      "title": "Breaking the seal",
+      "description": "Your tiny bladder shall be your downfall. The next person to use the toilet must finish their drink.",
+      "uuid": "6c75ecd0-bff8-4337-a00f-898ffa35e874"
+    },
+    {
+      "title": "Woof! Woof!",
+      "description": "You wanna treat? Bark like a dog for a whole round.",
+      "uuid": "06384948-79eb-4176-8dec-114f2db8d8c3"
+    },
+    {
+      "title": "Look mom, no hands!",
+      "description": "Let's see how skilled you are! Everyone drinks without using the hands.",
+      "uuid": "c26294e0-e0ec-42e6-aaad-2df75f5d3b3c"
+    },
+    {
+      "title": "Arrr",
+      "description": "Ahoy there mateys! Talk like a pirate for 3 rounds.\n",
+      "uuid": "ae192bb8-245e-4439-a98b-afe46ca2eef0"
+    },
+    {
+      "title": "Double trouble",
+      "description": "Each drink is doubled.",
+      "uuid": "4ed775f9-b55a-45cc-b4b2-c3f53570d500"
+    },
+    {
+      "title": "Meooooooooww",
+      "description": "Meow like a cat for a whole round.",
+      "uuid": "21d02470-35df-4720-a1d4-48e731404359"
+    }
+  ]
+}
