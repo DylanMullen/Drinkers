@@ -1,5 +1,6 @@
 import CasinoBoard from 'components/higher-lower/board/CasinoBoard';
 import Footer from 'components/higher-lower/footer';
+import ProgressBar from 'components/shared/input/progress';
 import PlayingCard from 'components/shared/playing-card';
 import { CardStyle } from 'components/shared/playing-card/PlayingCard';
 import WaterfallCard from 'components/waterfall/game/card/WaterfallCard';
@@ -30,7 +31,6 @@ function index({ }: Props)
             <main className={styles["game"]}>
                 <CasinoBoard boardName='Hi-Lo'>
                     <Cards />
-
                 </CasinoBoard>
             </main>
             <Footer />
@@ -75,12 +75,19 @@ function Cards()
                     suite: 0,
                     face: 9
                 }}
+                flipSettings={{
+                    clickable: false
+                }}
                 cardStyles={{ red: cardStyles[0], black: cardStyles[1] }}
             />
             <PlayingCard
                 settings={{
                     suite: 3,
                     face: 9
+                }}
+                flipSettings={{
+                    clickable: false,
+                    defaultFlipped: true
                 }}
                 cardStyles={{ red: cardStyles[0], black: cardStyles[1] }}
             />

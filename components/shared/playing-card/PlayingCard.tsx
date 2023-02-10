@@ -4,6 +4,9 @@ import { LazyMotion, domAnimation, m, Variants, useAnimation } from 'framer-moti
 import { GiDiamonds, GiHearts, GiClubs, GiSpades } from 'react-icons/gi'
 
 import styles from './playing-card.module.scss'
+import Image from 'next/image'
+import TextLogo from 'public/weblogo-text.svg'
+
 
 
 
@@ -17,7 +20,8 @@ type Props = {
         black: CardStyle
     }
     flipSettings?: {
-
+        defaultFlipped?: boolean,
+        clickable?: boolean
     }
 }
 
@@ -93,9 +97,10 @@ const variants: Variants = {
     }
 }
 
-function PlayingCard({ settings = { face: 9, suite: 2 }, cardStyles }: Props)
+function PlayingCard({ settings = { face: 9, suite: 2 }, flipSettings = { clickable: true }, cardStyles }: Props)
 {
-    const [flipped, setFlipped] = useState(false)
+    const [flipped, setFlipped] = useState(flipSettings?.defaultFlipped ?? false)
+    const [isCooldown, setCooldown] = useState(false);
     const control = useAnimation();
 
     let pips: React.ReactNode[] = []
@@ -117,20 +122,26 @@ function PlayingCard({ settings = { face: 9, suite: 2 }, cardStyles }: Props)
 
     const onClick = () =>
     {
+        if (!flipSettings.clickable || isCooldown)
+            return;
+
+        setCooldown(true)
+
         control.start(flipped ? "flip-rev" : "flip").then(() =>
         {
             control.start(flipped ? "init" : "flipped")
         }).then(() =>
         {
             setFlipped(prev => !prev)
+            setCooldown(false)
         })
     }
 
     return (
         <LazyMotion features={domAnimation}>
             <m.div className={styles["playing-card"]} data-value={settings.face}
-                onClick={onClick} variants={variants} animate={control} initial="init"
-                style={{width: colorStyle?.card?.width, height:colorStyle?.card?.height}}
+                onClick={onClick} variants={variants} animate={control} initial={flipped ? "flipped" : "init"}
+                style={{ width: colorStyle?.card?.width, height: colorStyle?.card?.height }}
             >
                 <div className={styles["playing-card__front"]} style={cardStyle}>
                     <ul className={styles["playing-card__pips"]}>
@@ -138,7 +149,13 @@ function PlayingCard({ settings = { face: 9, suite: 2 }, cardStyles }: Props)
                     </ul>
                 </div>
                 <div className={styles["playing-card__back"]} style={cardStyle}>
-
+                    <Image
+                        src={TextLogo}
+                        style={{
+                            // rotate: "-45deg"
+                        }}
+                        layout="responsive"
+                    />
                 </div>
             </m.div>
         </LazyMotion>
