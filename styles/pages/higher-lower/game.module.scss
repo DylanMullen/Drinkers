@@ -1,0 +1,78 @@
+.game
+{
+    position: relative;
+    // background: #000;
+    width: 100%;
+    height: 100vh;
+
+    background-color: #1a1a1a;
+
+    &__board
+    {
+        height: 100%;
+        background-color: green;
+        position: relative;
+
+        perspective: 1500px;
+
+
+        h1
+        {
+            // position: absolute;
+            bottom: 40%;
+            left: 50%;
+            font-size: 5rem;
+            
+            transform: translate(-50%) rotateX(45deg);
+            
+        }
+    }
+
+    &__cards
+    {
+        display: flex;
+        gap: 5rem;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+
+        min-height: fit-content;
+    }
+
+    &__card
+    {
+
+        $width: 15rem;
+        width: $width ;
+        height: calc($width *1.4);
+        background-color: red;
+
+        border-radius: .75rem;
+
+        &--left
+        {
+            background-color: orange;
+        }
+
+        &--right
+        {
+
+        }
+    }
+}
+
+.game-header
+{
+    position: absolute;
+    width: calc(100% - 5rem);
+    height: 25%;
+    // background-color: yellow;
+
+    top: 1rem;
+    left: 50%;
+
+
+    translate: -50%;
+    z-index: 20;
+}

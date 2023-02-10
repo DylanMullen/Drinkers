@@ -1,0 +1,38 @@
+.casino-board
+{
+
+    left: 0;
+
+    transform: rotateX(35deg) translateY(-5rem);
+    width: 100%;
+    height: 100%;
+    background-color: #2A2A2a;
+    border-radius: .75rem;
+
+    // border-radius: 10%;
+
+    position: relative;
+
+    border: 5px solid white;
+    padding: 1rem;
+
+    min-height: fit-content;
+
+    box-shadow: inset 0px 0px 2rem 1rem rgba(0,0,0,0.75);
+
+    &__title
+    {
+        font-family: 'Sugar Snow', sans-serif;
+        font-size: 10rem;
+    }
+
+    &__wrapper
+    {
+        width: 100%;
+        height: 100%;
+
+        perspective: 1500px;
+        padding: 2rem 10rem;
+
+    }
+}
