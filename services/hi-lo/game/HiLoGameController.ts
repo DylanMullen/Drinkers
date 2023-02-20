@@ -62,3 +62,8 @@ function isResponse(res: any)
 {
     return (res !== undefined && res.id !== undefined && res.body !== undefined);
 }
+
+export function getHigherLowerInstance()
+{
+    return instance;
+}

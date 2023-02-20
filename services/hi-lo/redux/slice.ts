@@ -50,9 +50,9 @@ export const hiloSlice = createSlice({
             if (index !== -1)
                 delete state.gameplay.players.players[index]
         },
-        nextTurn: (state, { payload: { currentNumber, player, streak } }: PayloadAction<NextTurnUpdate>) =>
+        nextTurn: (state, { payload: { number, player, streak } }: PayloadAction<NextTurnUpdate>) =>
         {
-            state.gameplay.currentNumber = currentNumber;
+            state.gameplay.currentNumber = number;
             state.gameplay.players.current = player;
         },
         updatePlayerPositions: (state, { payload: { current, next } }: PayloadAction<PlayerPositionUpdate>) =>

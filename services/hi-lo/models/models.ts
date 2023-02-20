@@ -32,7 +32,7 @@ export type HigherLowerPlayer = User & {
 
 export type NextTurnUpdate = {
     player: string,
-    currentNumber: number,
+    number: number,
     streak: number
 }
 

@@ -1,5 +1,7 @@
+import useUser from 'context/UserContext';
 import React from 'react'
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { getHigherLowerInstance } from 'services/hi-lo/game/HiLoGameController';
 
 import styles from './hilo-card.module.scss';
 
@@ -9,21 +11,18 @@ type Props = React.PropsWithChildren & {
 
 function HiLoCard({ showButtons, children }: Props)
 {
-    const higher = (e: React.MouseEvent<HTMLButtonElement>) =>
+    const { user } = useUser();
+    const action = (action: "higher" | "lower", e: React.MouseEvent<HTMLButtonElement>) =>
     {
         e.currentTarget.blur()
-    }
-
-    const lower = (e: React.MouseEvent<HTMLButtonElement>) =>
-    {
-        e.currentTarget.blur()
+        getHigherLowerInstance().sendNextTurn(action, user?.uuid ?? "")
     }
 
     return (
         <div className={styles["hilo-card"]}>
             {
                 showButtons &&
-                <button className={`${styles["hilo-card__btn"]} ${styles["hilo-card__btn--higher"]}`} onClick={higher}>
+                <button className={`${styles["hilo-card__btn"]} ${styles["hilo-card__btn--higher"]}`} onClick={e => action("higher", e)}>
                     <FaChevronUp />
                 </button>
             }
@@ -34,7 +33,7 @@ function HiLoCard({ showButtons, children }: Props)
 
             {
                 showButtons &&
-                <button className={`${styles["hilo-card__btn"]} ${styles["hilo-card__btn--lower"]}`} onClick={lower}>
+                <button className={`${styles["hilo-card__btn"]} ${styles["hilo-card__btn--lower"]}`} onClick={e => action("lower", e)}>
                     <FaChevronDown />
                 </button>
             }
