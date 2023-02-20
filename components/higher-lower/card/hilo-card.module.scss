@@ -1,0 +1,58 @@
+$pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+
+.hilo-card
+{
+    position: relative;
+    &__btn
+    {
+        font-size: 0;
+        aspect-ratio: 1/1;
+        padding: 1rem;
+
+        position: absolute;
+        left: 50%;
+
+        border-radius: 50%;
+
+        background-color: transparent;
+        border: 2px solid white;
+
+        color: white;
+        cursor: pointer;
+
+        opacity: 0.5;
+
+        transition: scale 150ms $pop, opacity 150ms $pop;
+        transform-origin: 0%;
+
+        svg
+        {
+            font-size: 1.25rem;
+        }
+
+        &--higher
+        {
+            top: 0;
+
+            transform: translate(-50%, calc(-100% - 1rem));
+        }
+
+        &--lower
+        {
+            bottom: 0;
+            transform: translate(-50%, calc(100% + 1rem));
+        }
+
+        &:focus,&:hover
+        {
+            opacity: .95;
+            scale: 1.05;
+        }
+
+        &:active
+        {
+            scale: 0.9;
+        }
+    }
+}

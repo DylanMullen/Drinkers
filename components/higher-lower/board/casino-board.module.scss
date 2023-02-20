@@ -6,8 +6,10 @@
     transform: rotateX(35deg) translateY(-5rem);
     width: 100%;
     height: 100%;
-    background-color: #2A2A2a;
-    border-radius: .75rem;
+    background-color: #2A2A2A;
+    // background-color: green;
+    background-image: url(../../../public/grunge.png);
+    border-radius: 150px;
 
     // border-radius: 10%;
 
@@ -18,7 +20,31 @@
 
     min-height: fit-content;
 
-    box-shadow: inset 0px 0px 2rem 1rem rgba(0,0,0,0.75);
+    box-shadow: inset 0px 0px 2rem .1rem rgba(0,0,0,0.75);
+
+    position: relative;
+
+    overflow: hidden;
+
+
+    &::after
+    {
+        content: '';
+        width: 150%;
+        height: 200%;
+        position: absolute;
+        left: -25%;
+        top: -50%;
+        background-size: 30%;
+        // opacity: 0.05;
+        background-image: url(../../../public/drinkers_watermark2.png);
+
+        // background-color: red;
+
+        opacity: .1;
+        z-index: -1;
+        transform: rotateZ(45DEG);
+    }
 
     &__title
     {
@@ -33,6 +59,8 @@
 
         perspective: 1500px;
         padding: 2rem 10rem;
-
+        position: relative;
+        
     }
+
 }

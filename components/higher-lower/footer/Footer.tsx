@@ -19,6 +19,8 @@ function Footer({ }: Props)
         <UserCard user={user} />
         <UserCard user={user} />
         <UserCard user={user} />
+        <UserCard user={user} />
+        <UserCard user={user} />
 
       </div>
     </footer>

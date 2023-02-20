@@ -1,4 +1,5 @@
 import CasinoBoard from 'components/higher-lower/board/CasinoBoard';
+import HiLoCards from 'components/higher-lower/cards';
 import Footer from 'components/higher-lower/footer';
 import ProgressBar from 'components/shared/input/progress';
 import PlayingCard from 'components/shared/playing-card';
@@ -30,7 +31,9 @@ function index({ }: Props)
             </Head>
             <main className={styles["game"]}>
                 <CasinoBoard boardName='Hi-Lo'>
-                    <Cards />
+                    <div className={styles["game__cards"]}>
+                        <HiLoCards />
+                    </div>
                 </CasinoBoard>
             </main>
             <Footer />

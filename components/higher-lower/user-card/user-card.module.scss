@@ -2,18 +2,39 @@
 {
     position: relative;
 
-    padding: 2rem 2.5rem;
 
     padding-top: 5rem;
 
-    background: rgba(235, 240, 255, 0.35);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10.2px);
-    -webkit-backdrop-filter: blur(10.2px);
-    border: 1px solid rgba(235, 240, 255, 0.3);
+    // background: rgba(235, 240, 255, 0.35);
+    // border-radius: 16px;
+    // box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    // backdrop-filter: blur(10.2px);
+    // -webkit-backdrop-filter: blur(10.2px);
+    // border: 1px solid rgba(235, 240, 255, 0.3);
 
+    width: 100%;
+
+    background-color: #1c1c1c;
+
+    padding: 1rem 1rem;
+    padding-top: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: .75rem;
+
+    border: 5px solid #1e1e1e;
     
+    
+    transform: rotateX(10deg) ;
+    
+    &--selected
+    {
+        translate: 0 -.5rem;
+    }
     &__avatar
     {
         font-size: 0;
@@ -21,16 +42,17 @@
         aspect-ratio: 1/1;
         border-radius: 50%;
         overflow: hidden;
-        position: absolute;
+        // position: absolute;
 
         left: 50%;
         top: -25%;
 
-        transform: translate(-50%);
+        transform: translate(0, -25%);
         width: 6rem;
 
         border: 1px solid rgba(235, 240, 255, 0.3);
     }
+
 
     &__username
     {
