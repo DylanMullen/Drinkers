@@ -25,7 +25,7 @@ export default class GameSocket
         this.handler = handler;
     }
 
-    openSocket()
+    async openSocket()
     {
         this.socket = new WebSocket(this.url)
 

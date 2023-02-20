@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import store, { RootState } from "redux/store";
+import HiLoGameState from "../models/models";
 import HiLoGame, { HigherLowerPlayer, NextTurnUpdate, PlayerPositionUpdate } from "../models/models";
 
 
-const initialState: HiLoGame = {
+const initialState: HiLoGameState = {
     settings: {
         gameID: "",
         ownerID: "",
+        joinCode: "",
         type: "CARD",
         started: false,
     },
