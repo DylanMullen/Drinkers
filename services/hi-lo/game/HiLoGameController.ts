@@ -31,6 +31,7 @@ async function create(user: User, type: "DICE" | "CARD")
     instance = new HiLoGame((<HiLoGameState>res.body).settings.gameID)
     instance.socket.openSocket()
     store.dispatch(HiLoActions.init(res.body))
+    return instance.gameID
 }
 
 async function join(user: User, joinCode: string)

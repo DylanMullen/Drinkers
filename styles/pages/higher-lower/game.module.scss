@@ -5,27 +5,15 @@
     width: 100%;
     height: 100vh;
 
-    background-color: #1a1a1a;
+    display: grid;
+    place-content: center;
+
+    // background-color: #1a1a1a;
 
     &__board
     {
-        height: 100%;
-        background-color: green;
-        position: relative;
-
-        perspective: 1500px;
-
-
-        h1
-        {
-            // position: absolute;
-            bottom: 40%;
-            left: 50%;
-            font-size: 5rem;
-            
-            transform: translate(-50%) rotateX(45deg);
-            
-        }
+        padding-bottom: 5rem;
+        
     }
 
     &__cards
@@ -59,19 +47,4 @@
 
         }
     }
-}
-
-.game-header
-{
-    position: absolute;
-    width: calc(100% - 5rem);
-    height: 25%;
-    // background-color: yellow;
-
-    top: 1rem;
-    left: 50%;
-
-
-    translate: -50%;
-    z-index: 20;
 }

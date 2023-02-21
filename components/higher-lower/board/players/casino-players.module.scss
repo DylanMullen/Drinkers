@@ -1,0 +1,111 @@
+
+.casino-players
+{
+    // background-color: red;
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    z-index: 1;
+
+    list-style: none;
+
+    perspective: 1500px;
+
+    pointer-events: none;
+}
+
+.casino-player
+{
+    width: 10rem;
+    aspect-ratio: 1/1;
+
+    position: absolute;
+
+    z-index: 10;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    transform-style: preserve-3d;
+
+    transform: rotateX(-10deg) ;
+
+    z-index: 100;
+
+    &__avatar
+    {
+        font-size: 0;
+        width: fit-content;
+        height: fit-content;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    &__username
+    {
+        color: white;
+        font-size: 1.75rem;
+    }
+    &[data-spot="1"]
+    {
+        top: 1rem;
+        left: -8rem;
+
+    }
+
+    &[data-spot="2"]
+    {
+        left: -6.75rem;
+        top: 20rem;
+    }
+
+    &[data-spot="3"]
+    {
+        left: 4rem;
+        top: 37rem;
+
+    }
+
+    &[data-spot="4"]
+    {
+
+        left: 25rem;
+        top: 45.5rem;
+    }
+
+    &[data-spot="5"]
+    {
+        right: 25rem;
+        top: 45.5rem;
+    }
+
+    &[data-spot="6"]
+    {
+
+        right: 4rem;
+        top: 37rem;
+    }
+
+    &[data-spot="7"]
+    {
+        right: -6.75rem;
+        top: 20rem;
+
+    }
+
+    &[data-spot="8"]
+    {
+        top: 1rem;
+        right: -8rem;
+    }
+}

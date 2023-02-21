@@ -10,8 +10,9 @@ type Props = {}
 function Footer({ }: Props)
 {
   const players = useAppSelector(HiLoSelectors.users)
+  const current = useAppSelector(HiLoSelectors.currentUser)
 
-  let userCards: ReactNode[] = players.map(e => <UserCard user={e} />)
+  let userCards: ReactNode[] = players.map(e => <UserCard user={e} selected={current === e.uuid} />)
 
   return (
     <footer className={styles["casino-footer"]}>

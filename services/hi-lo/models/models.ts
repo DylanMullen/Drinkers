@@ -31,9 +31,10 @@ export type HigherLowerPlayer = User & {
 }
 
 export type NextTurnUpdate = {
-    player: string,
+    current: string,
     number: number,
-    streak: number
+    streak: number,
+    next:string
 }
 
 export type NewPlayer = PlayerPositionUpdate & {

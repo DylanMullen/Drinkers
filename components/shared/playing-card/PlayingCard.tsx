@@ -7,9 +7,6 @@ import styles from './playing-card.module.scss'
 import Image from 'next/image'
 import TextLogo from 'public/weblogo-text.svg'
 
-
-
-
 type Props = {
     settings?: {
         suite: number,
@@ -21,13 +18,10 @@ type Props = {
     }
     flipSettings?: {
         defaultFlipped?: boolean,
-        clickable?: boolean
+        clickable?: boolean,
+        flipAnimation?: Variants,
+        flipCallback?: () => void
     }
-}
-
-type Suite = {
-    name: string,
-    icon: React.ReactNode
 }
 
 export type CardStyle = {
@@ -39,34 +33,21 @@ export type CardStyle = {
     },
     pips?: {
         color?: string,
-        size?: string
+        size?: string,
+        special?: string
     }
 }
-
-const Suites: Suite[] = [
-    {
-        name: "Hearts",
-        icon: <GiHearts />
-    },
-    {
-        name: "Diamonds",
-        icon: <GiDiamonds />
-    },
-    {
-        name: "Clubs",
-        icon: <GiClubs />
-    },
-    {
-        name: "Spades",
-        icon: <GiSpades />
-    }
-]
-
 const variants: Variants = {
     "init": {
         translateY: 0,
         scale: 1,
-        rotateY: 0
+        rotateY: 0,
+        transition: {
+            translateY: {
+                type: "tween",
+                ease: "easeInOut",
+            }
+        }
     },
     "flip": {
         translateY: "-10rem",
@@ -76,7 +57,7 @@ const variants: Variants = {
             rotateY: {
                 duration: .3,
                 delay: .2
-            }
+            },
         }
     },
     "flip-rev": {
@@ -87,17 +68,23 @@ const variants: Variants = {
             rotateY: {
                 duration: .3,
                 delay: .2
-            }
+            },
         }
     },
     "flipped": {
         translateY: 0,
         scale: 1,
-        rotateY: 180
+        rotateY: 180,
+        transition: {
+            translateY: {
+                type: "tween",
+                ease: "easeInOut",
+            }
+        }
     }
 }
 
-function PlayingCard({ settings = { face: 9, suite: 2 }, flipSettings = { clickable: true }, cardStyles }: Props)
+function PlayingCard({ settings = { face: -1, suite: 2 }, flipSettings = { clickable: true, flipCallback: () => { } }, cardStyles }: Props)
 {
     const [flipped, setFlipped] = useState(flipSettings?.defaultFlipped ?? false)
     const [isCooldown, setCooldown] = useState(false);
@@ -108,10 +95,11 @@ function PlayingCard({ settings = { face: 9, suite: 2 }, flipSettings = { clicka
     const isRed = settings?.suite == 0 || settings?.suite == 1
     const colorStyle = isRed ? cardStyles?.red : cardStyles?.black;
 
-    for (let index = 0; index < settings?.face; index++)
-    {
-        pips.push(<Pip icon={<PipIcon suite={settings.suite ?? 0} size={colorStyle?.pips?.size} />} color={colorStyle?.pips?.color} />)
-    }
+    if (!isSpecial(settings.face))
+        for (let index = 0; index < settings?.face + 1; index++)
+        {
+            pips.push(<Pip icon={<PipIcon suite={settings.suite ?? 0} size={colorStyle?.pips?.size} />} color={colorStyle?.pips?.color} />)
+        }
 
     const cardStyle: React.CSSProperties = {
         background: colorStyle?.card?.cardBackground,
@@ -132,6 +120,9 @@ function PlayingCard({ settings = { face: 9, suite: 2 }, flipSettings = { clicka
             control.start(flipped ? "init" : "flipped")
         }).then(() =>
         {
+            if (flipSettings.flipCallback)
+                flipSettings.flipCallback()
+                
             setFlipped(prev => !prev)
             setCooldown(false)
         })
@@ -140,13 +131,21 @@ function PlayingCard({ settings = { face: 9, suite: 2 }, flipSettings = { clicka
     return (
         <LazyMotion features={domAnimation}>
             <m.div className={styles["playing-card"]} data-value={settings.face}
-                onClick={onClick} variants={variants} animate={control} initial={flipped ? "flipped" : "init"}
+                onClick={onClick} variants={flipSettings.flipAnimation ?? variants} animate={control} initial={flipped ? "flipped" : "init"}
                 style={{ width: colorStyle?.card?.width, height: colorStyle?.card?.height }}
             >
                 <div className={styles["playing-card__front"]} style={cardStyle}>
-                    <ul className={styles["playing-card__pips"]}>
-                        {pips}
-                    </ul>
+                    {
+                        isSpecial(settings.face) ?
+                            <span className={styles["playing-card__special"]}
+                                style={{ fontSize: colorStyle?.pips?.special, color: colorStyle?.pips?.color, borderColor: colorStyle?.pips?.color }}>
+                                {getSpecialInitial(settings.face)}
+                            </span>
+                            :
+                            <ul className={styles["playing-card__pips"]}>
+                                {pips}
+                            </ul>
+                    }
                 </div>
                 <div className={styles["playing-card__back"]} style={cardStyle}>
                     <Image
@@ -197,6 +196,23 @@ function PipIcon({ suite, size }: { suite: number, size?: string })
             {icon}
         </>
     )
+}
+
+function isSpecial(face: number)
+{
+    return face === 0 || face >= 10
+}
+
+function getSpecialInitial(face: number): string
+{
+    switch (face)
+    {
+        case 0: return "A"
+        case 10: return "J"
+        case 11: return "Q"
+        case 12: return "K"
+        default: return ""
+    }
 }
 
 export default PlayingCard

@@ -24,6 +24,8 @@ function HiLoCard({ showButtons, children }: Props)
                 showButtons &&
                 <button className={`${styles["hilo-card__btn"]} ${styles["hilo-card__btn--higher"]}`} onClick={e => action("higher", e)}>
                     <FaChevronUp />
+                    <span className={`${styles["hilo-card__btn__text"]}`}>Higher</span>
+
                 </button>
             }
 
@@ -35,6 +37,7 @@ function HiLoCard({ showButtons, children }: Props)
                 showButtons &&
                 <button className={`${styles["hilo-card__btn"]} ${styles["hilo-card__btn--lower"]}`} onClick={e => action("lower", e)}>
                     <FaChevronDown />
+                    <span className={`${styles["hilo-card__btn__text"]}`}>Lower</span>
                 </button>
             }
         </div>

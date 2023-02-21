@@ -4,6 +4,12 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 .hilo-card
 {
     position: relative;
+
+    border: 5px double white;
+    padding: .5rem;
+
+    border-radius: .65rem;
+
     &__btn
     {
         font-size: 0;
@@ -36,18 +42,49 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
             top: 0;
 
             transform: translate(-50%, calc(-100% - 1rem));
+
+            >.hilo-card__btn__text
+            {
+                left: 50%;
+                transform: translateX(-50%) translateY(-3.25rem);
+            }
         }
 
         &--lower
         {
             bottom: 0;
             transform: translate(-50%, calc(100% + 1rem));
+            
+            >.hilo-card__btn__text
+            {
+                left: 50%;
+                transform: translateX(-50%) translateY(3.25rem);
+            }
+        }
+
+        &__text
+        {
+            font-size: 1.75rem;
+            position: absolute;
+
+            font-family: 'Sugar Snow', sans-serif;
+
+
+            opacity: 0;
+
+            transition: opacity 150ms ease-in-out;
+
         }
 
         &:focus,&:hover
         {
             opacity: .95;
             scale: 1.05;
+
+            .hilo-card__btn__text
+            {
+                opacity: 1;
+            }
         }
 
         &:active
