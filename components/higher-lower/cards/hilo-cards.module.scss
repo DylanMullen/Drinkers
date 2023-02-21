@@ -2,4 +2,11 @@
 {
     display: flex;
     gap: 1rem;
+
+    position: relative;
+
+    &__stacked
+    {
+        position: absolute;
+    }
 }

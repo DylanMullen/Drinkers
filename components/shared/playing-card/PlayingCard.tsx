@@ -1,5 +1,5 @@
-import React, { lazy, useContext, useId, useState } from 'react'
-import { LazyMotion, domAnimation, m, Variants, useAnimation } from 'framer-motion'
+import React, { lazy, useContext, useEffect, useId, useState } from 'react'
+import { LazyMotion, domAnimation, m, Variants, useAnimation, AnimationControls } from 'framer-motion'
 
 import { GiDiamonds, GiHearts, GiClubs, GiSpades } from 'react-icons/gi'
 
@@ -20,7 +20,8 @@ type Props = {
         defaultFlipped?: boolean,
         clickable?: boolean,
         flipAnimation?: Variants,
-        flipCallback?: () => void
+        flipCallback?: () => void,
+        reset?: boolean
     }
 }
 
@@ -122,15 +123,28 @@ function PlayingCard({ settings = { face: -1, suite: 2 }, flipSettings = { click
         {
             if (flipSettings.flipCallback)
                 flipSettings.flipCallback()
-                
+
             setFlipped(prev => !prev)
             setCooldown(false)
         })
     }
 
+    useEffect(() =>
+    {
+        if (flipSettings.reset !== true)
+            return;
+
+        let init = (flipSettings?.defaultFlipped ?? false) ? "flipped" : "init"
+
+
+        control.start(init, { duration: 0 })
+        setFlipped(flipSettings?.defaultFlipped ?? false)
+        setCooldown(false)
+    }, [flipSettings.reset])
+
     return (
         <LazyMotion features={domAnimation}>
-            <m.div className={styles["playing-card"]} data-value={settings.face}
+            <m.div className={styles["playing-card"]} data-value={settings.face+1}
                 onClick={onClick} variants={flipSettings.flipAnimation ?? variants} animate={control} initial={flipped ? "flipped" : "init"}
                 style={{ width: colorStyle?.card?.width, height: colorStyle?.card?.height }}
             >
