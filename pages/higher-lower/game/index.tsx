@@ -2,7 +2,13 @@ import CasinoBoard from 'components/higher-lower/board/CasinoBoard';
 import CasinoPlayers from 'components/higher-lower/board/players/CasinoPlayers';
 import HiLoCards from 'components/higher-lower/cards';
 import Footer from 'components/higher-lower/footer';
+import ModalHandler from 'components/higher-lower/modals/ModalHandler';
+import NextTurn from 'components/higher-lower/modals/next-turn';
+import WelcomeModal from 'components/higher-lower/modals/welcome';
 import Ribbon from 'components/shared/ribbon';
+import JoinModal from 'components/waterfall/lobby/modals/join';
+import { GameMode } from 'components/waterfall/lobby/modals/join/JoinModal';
+import { useModalContext } from 'context/ModalContext';
 import useNavigation from 'context/NavigationContext';
 import useUser from 'context/UserContext';
 import { GetServerSidePropsContext } from 'next';
@@ -22,6 +28,8 @@ function HigherLowerGame({ code }: Props)
     const { user } = useUser()
     const { hideNavigationButton, hide } = useNavigation();
 
+    const { update, open, close } = useModalContext();
+
     useEffect(() =>
     {
         if (user === undefined)
@@ -31,7 +39,6 @@ function HigherLowerGame({ code }: Props)
 
         hide();
         hideNavigationButton()
-
     }, [user])
 
     return (
@@ -39,6 +46,7 @@ function HigherLowerGame({ code }: Props)
             <Head>
                 <title>Higher Lower</title>
             </Head>
+            <ModalHandler />
             <main className={styles["game"]}>
                 <div className={styles["game__board"]}>
 
@@ -64,5 +72,6 @@ function getCasinoPlayers()
         />
     )
 }
+
 
 export default HigherLowerGame

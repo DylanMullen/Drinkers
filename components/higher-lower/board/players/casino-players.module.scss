@@ -38,11 +38,20 @@
 
     transform-style: preserve-3d;
 
-    transform: rotateX(-10deg);
-
     z-index: 100;
 
     pointer-events: all;
+
+    &--next
+    {
+        .casino-player__avatar
+        {
+            animation-name: nextTurn;
+            animation-duration: 500ms;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+    }
 
     &__avatar
     {
@@ -51,12 +60,15 @@
         height: fit-content;
         border-radius: 50%;
         overflow: hidden;
+
+
     }
 
     &__username
     {
         color: white;
         font-size: 1.75rem;
+
     }
 
     &__new
@@ -146,5 +158,15 @@
     {
         top: 1rem;
         right: -8rem;
+    }
+}
+
+@keyframes nextTurn {
+    0% {
+        scale: 0.95;
+    }
+    100% {
+        scale: 1.05;
+
     }
 }

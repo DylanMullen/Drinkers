@@ -2,6 +2,8 @@ import useUser from 'context/UserContext'
 import Image from 'next/image'
 import React, { ReactNode } from 'react'
 import { FaPlus } from 'react-icons/fa'
+import { useAppSelector } from 'redux/store'
+import { HiLoSelectors } from 'services/hi-lo/redux/slice'
 import { User } from 'utils/UserUtil'
 
 import styles from './casino-players.module.scss'
@@ -13,44 +15,19 @@ type Props = {
 type PlayerProps = {
     user?: User,
     position: number,
+    isNext?:boolean
 }
-
-// const positions = [
-//     [4],
-//     [4, 5],
-//     [3, 4, 5],
-//     [3, 4, 5, 6],
-//     [2, 3, 4, 5, 6],
-//     [2, 3, 4, 5, 6, 7],
-//     [1, 2, 3, 4, 5, 6, 7],
-//     [1, 2, 3, 4, 5, 6, 7, 8]
-// ]
-
-// const pos1 = [
-//     [4],
-//     [4, 5,3],
-//     [4,5,3,6],
-//     [4,5,3,6,2],
-//     [4,5,3,6,2,7],
-//     [4,5,3,6,2,7,1],
-//     [4,5,3,6,2,7,1,8]
-// ]
 
 const pos2 = [4, 5, 3, 6, 2, 7, 1, 8]
 
 function CasinoPlayers({ users }: Props)
 {
+    let nextPlayer = useAppSelector(HiLoSelectors.nextUser)
     let players: ReactNode[] = []
     for (let index = 0; index < 8; index++)
     {
-        players.push(<CasinoPlayer user={users[index]} position={pos2[index]} />)
+        players.push(<CasinoPlayer user={users[index]} position={pos2[index]} isNext={users[index]?.uuid === nextPlayer ?? false} />)
     }
-
-    // for (let index = 0; index < 8; index++)
-    // {
-    //     if (users.length > index) continue;
-    //     players.push(<CasinoPlayer user={undefined} position={pos2[index]} />)
-    // }
 
     return (
         <ul className={styles["casino-players"]}>
@@ -59,10 +36,10 @@ function CasinoPlayers({ users }: Props)
     )
 }
 
-function CasinoPlayer({ user, position }: PlayerProps)
+function CasinoPlayer({ user, position, isNext }: PlayerProps)
 {
     return (
-        <li className={`${styles["casino-player"]}`} data-spot={position}>
+        <li className={`${styles["casino-player"]} ${isNext ? styles["casino-player--next"] : ""}`} data-spot={position}>
             {
                 user ?
                     <>
