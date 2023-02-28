@@ -13,7 +13,7 @@ const initialState: HiLoGameState = {
         started: false,
     },
     gameplay: {
-        currentNumber: 0,
+        currentNumber: -1,
         players: {
             current: "",
             next: "",
@@ -21,7 +21,11 @@ const initialState: HiLoGameState = {
         },
         rounds: {
             currentRound: 0,
-            maxRounds: -1
+            maxRounds: -1,
+        },
+        controls: {
+            canShowButtons: true,
+            wasWinner: false
         }
     }
 }
@@ -30,9 +34,20 @@ export const hiloSlice = createSlice({
     name: "higher-lower",
     initialState,
     reducers: {
-        init: (_, action: PayloadAction<HiLoGame>) =>
+        init: (state, action: PayloadAction<HiLoGame>) =>
         {
-            return { ...action.payload }
+            return {
+                ...action.payload,
+                gameplay: {
+                    ...action.payload.gameplay,
+                    rounds: {
+                        ...action.payload.gameplay.rounds,
+                    },
+                    controls: {
+                        ...state.gameplay.controls
+                    }
+                }
+            }
         },
         addPlayer: (state, action: PayloadAction<HigherLowerPlayer>) =>
         {
@@ -50,11 +65,12 @@ export const hiloSlice = createSlice({
             if (index !== -1)
                 delete state.gameplay.players.players[index]
         },
-        nextTurn: (state, { payload: { number, current, next, streak } }: PayloadAction<NextTurnUpdate>) =>
+        nextTurn: (state, { payload: { number, current, next, winner, streak } }: PayloadAction<NextTurnUpdate>) =>
         {
             state.gameplay.currentNumber = number;
             state.gameplay.players.current = current;
             state.gameplay.players.next = next;
+            state.gameplay.controls.wasWinner = winner
         },
         updatePlayerPositions: (state, { payload: { current, next } }: PayloadAction<PlayerPositionUpdate>) =>
         {
@@ -68,6 +84,14 @@ export const hiloSlice = createSlice({
         updateOwner: (state, action: PayloadAction<string>) =>
         {
             state.settings.ownerID = action.payload
+        },
+        updateWinner: (state, action: PayloadAction<boolean>) =>
+        {
+            state.gameplay.controls.wasWinner = action.payload
+        },
+        updateShowButtons: (state, action: PayloadAction<boolean>) =>
+        {
+            state.gameplay.controls.canShowButtons = action.payload
         }
     }
 })
@@ -83,7 +107,9 @@ export const HiLoActions = {
     nextTurn: hiloSlice.actions.nextTurn,
     updatePlayerPositions: hiloSlice.actions.updatePlayerPositions,
     updateGameState: hiloSlice.actions.updateGameState,
-    updateOwner: hiloSlice.actions.updateOwner
+    updateOwner: hiloSlice.actions.updateOwner,
+    updateWinner: hiloSlice.actions.updateWinner,
+    updateButtons: hiloSlice.actions.updateShowButtons
 }
 
 export const HiLoSelectors = {
@@ -94,7 +120,8 @@ export const HiLoSelectors = {
     nextUser: (state: RootState) => state.hilo.gameplay.players.next,
     currentNumber: (state: RootState) => state.hilo.gameplay.currentNumber,
     rounds: (state: RootState) => state.hilo.gameplay.rounds,
-
+    wasWinner: (state: RootState) => state.hilo.gameplay.controls.wasWinner,
+    canShowButtons: (state:RootState)=>state.hilo.gameplay.controls.canShowButtons,
     getUser: (uuid: string) =>
     {
         return store.getState().hilo.gameplay.players.players.find(e => e.uuid === uuid)

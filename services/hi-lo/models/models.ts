@@ -20,6 +20,10 @@ export default interface HiLoGameState
             next: string,
             players: HigherLowerPlayer[]
         }
+        controls: {
+            canShowButtons:boolean,
+            wasWinner: boolean
+        }
     }
 
 }
@@ -34,7 +38,8 @@ export type NextTurnUpdate = {
     current: string,
     number: number,
     streak: number,
-    next:string
+    winner: boolean,
+    next: string
 }
 
 export type NewPlayer = PlayerPositionUpdate & {

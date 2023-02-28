@@ -5,8 +5,29 @@
 
     position: relative;
 
+    z-index: 1;
+
     &__stacked
     {
         position: absolute;
+    }
+
+    &__ribbon
+    {
+        position: absolute;
+        left: -.5rem;
+        top: 1rem;
+    }
+}
+
+.hilo-wrapper
+{
+    position: relative;
+
+    &__ribbon
+    {
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 }

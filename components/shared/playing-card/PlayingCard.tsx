@@ -20,8 +20,9 @@ type Props = {
         defaultFlipped?: boolean,
         clickable?: boolean,
         flipAnimation?: Variants,
-        flipCallback?: () => void,
+        shouldFlip?: boolean,
         reset?: boolean
+        flipCallback?: () => void,
     }
 }
 
@@ -109,12 +110,11 @@ function PlayingCard({ settings = { face: -1, suite: 2 }, flipSettings = { click
         height: colorStyle?.card?.height,
     }
 
-    const onClick = () =>
+    const flip = async() =>
     {
-        if (!flipSettings.clickable || isCooldown)
-            return;
-
+        if (isCooldown) return;
         setCooldown(true)
+
 
         control.start(flipped ? "flip-rev" : "flip").then(() =>
         {
@@ -126,7 +126,15 @@ function PlayingCard({ settings = { face: -1, suite: 2 }, flipSettings = { click
 
             setFlipped(prev => !prev)
             setCooldown(false)
+
         })
+    }
+
+    const onClick = () =>
+    {
+        if (!flipSettings.clickable)
+            return;
+        flip()
     }
 
     useEffect(() =>
@@ -142,9 +150,15 @@ function PlayingCard({ settings = { face: -1, suite: 2 }, flipSettings = { click
         setCooldown(false)
     }, [flipSettings.reset])
 
+    useEffect(() =>
+    {
+        if (!flipSettings.shouldFlip) return;
+        flip()
+    }, [settings])
+
     return (
         <LazyMotion features={domAnimation}>
-            <m.div className={styles["playing-card"]} data-value={settings.face+1}
+            <m.div className={styles["playing-card"]} data-value={settings.face + 1}
                 onClick={onClick} variants={flipSettings.flipAnimation ?? variants} animate={control} initial={flipped ? "flipped" : "init"}
                 style={{ width: colorStyle?.card?.width, height: colorStyle?.card?.height }}
             >

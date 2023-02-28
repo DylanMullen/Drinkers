@@ -92,8 +92,8 @@ export default class HiLoGame extends Game
 
     handleNextTurn(nextTurn: NextTurnUpdate)
     {
-        console.log(nextTurn)
         store.dispatch(HiLoActions.nextTurn(nextTurn))
+        store.dispatch(HiLoActions.updateButtons(false))
     }
 
     handleNewPlayer(join: NewPlayer)

@@ -1,19 +1,20 @@
 import PlayingCard, { CardStyle } from 'components/shared/playing-card/PlayingCard';
 import { AnimatePresence, AnimationControls, Variants } from 'framer-motion';
-import React, { ReactNode, useState } from 'react'
-import { useAppSelector } from 'redux/store';
-import { HiLoSelectors } from 'services/hi-lo/redux/slice';
+import React, { ReactNode, useEffect, useState } from 'react'
+import { useAppDispatch, useAppSelector } from 'redux/store';
+import { HiLoActions, HiLoSelectors, hiloSlice } from 'services/hi-lo/redux/slice';
 import HiLoCard from '../card/HiLoCard'
-import { v4 as uuid } from 'uuid';
 
 import styles from './hilo-cards.module.scss'
+import useUser from 'context/UserContext';
+import Ribbon from 'components/shared/ribbon';
 
 const width = 10;
 
 const cardStyles: CardStyle[] = [
     {
         card: {
-            cardBackground: "#2c2c2c",
+            cardBackground: "#1b1b1b",
             width: `${width}rem`,
             height: `${width * 1.4}rem`
         },
@@ -97,25 +98,30 @@ const variants: (flipped: boolean) => Variants = (flipped: boolean) =>
     )
 }
 
-type CardState = {
-    [id: string]: ReactNode
-}
-
 function HiLoCards()
 {
-    let currentNumber = useAppSelector(HiLoSelectors.currentNumber)
+    const currentNumber = useAppSelector(HiLoSelectors.currentNumber)
+    const nextPlayer = useAppSelector(HiLoSelectors.nextUser)
+    const canShowButtons = useAppSelector(HiLoSelectors.canShowButtons);
+    const wasWinner = useAppSelector(HiLoSelectors.wasWinner)
 
-    const [cards, setCards] = useState<CardState>({})
+    const { user } = useUser();
+
+    const [previous, setPrevious] = useState(-1);
+    const [shouldFlip, setFlip] = useState(false);
     const [reset, setReset] = useState(false);
 
-    const [previous, setPrevious] = useState(5);
+    const dispatch = useAppDispatch()
 
-    const callback = (uuid: string) =>
+
+    const callback = () =>
     {
         setTimeout(() =>
         {
-            setPrevious(currentNumber)
+            if (previous !== -1)
+                setPrevious(currentNumber)
             setReset(true)
+            dispatch(HiLoActions.updateButtons(true))
             setTimeout(() =>
             {
                 setReset(false)
@@ -123,9 +129,22 @@ function HiLoCards()
         }, 500)
     }
 
+    useEffect(() =>
+    {
+        setFlip(true)
+        setTimeout(() =>
+        {
+            if (previous === -1)
+                setPrevious(currentNumber)
+            setFlip(false)
+        }, 750)
+    }, [currentNumber])
+
+
+    let showButtons = user?.uuid === nextPlayer && canShowButtons && !wasWinner;
+
     return (
         <div className={styles["hilo-cards"]}>
-
             <HiLoCard showButtons={false}>
                 <PlayingCard
                     settings={{
@@ -135,16 +154,13 @@ function HiLoCards()
                     cardStyles={{ red: cardStyles[0], black: cardStyles[1] }}
                     flipSettings={{ clickable: false, defaultFlipped: false, flipAnimation: variants(false), flipCallback: () => { } }}
                 />
+
             </HiLoCard>
-            <HiLoCard showButtons={false}>
+            <HiLoCard showButtons={showButtons}>
                 <div className={styles["hilo-cards__stacked"]}>
                     <PlayingCard
-                        settings={{
-                            face: currentNumber,
-                            suite: 0
-                        }}
                         cardStyles={{ red: cardStyles[0], black: cardStyles[1] }}
-                        flipSettings={{ clickable: false, defaultFlipped: true, flipAnimation: variants(true), reset: reset, flipCallback: () => { callback("") } }}
+                        flipSettings={{ clickable: false, defaultFlipped: true }}
                     />
 
                 </div>
@@ -154,11 +170,56 @@ function HiLoCards()
                         suite: 0
                     }}
                     cardStyles={{ red: cardStyles[0], black: cardStyles[1] }}
-                    flipSettings={{ clickable: true, defaultFlipped: true, flipAnimation: variants(true), reset: reset, flipCallback: () => { callback("") } }}
+                    flipSettings={{
+                        clickable: false,
+                        defaultFlipped: true,
+                        flipAnimation: variants(true),
+                        reset: reset,
+                        shouldFlip: shouldFlip,
+                        flipCallback: () => { callback() }
+                    }}
                 />
             </HiLoCard>
         </div>
     )
 }
 
-export default HiLoCards
+function HiLoCardsWrapper()
+{
+    const wasWinner = useAppSelector(HiLoSelectors.wasWinner)
+    const [showWinner, setWinner] = useState(false);
+
+    const dispatch = useAppDispatch();
+
+    useEffect(() =>
+    {
+        if (!wasWinner) return;
+
+        setTimeout(() =>
+        {
+            setWinner(true);
+            setTimeout(() =>
+            {
+                setWinner(false)
+            }, 2000)
+        }, 750)
+    }, [wasWinner])
+
+    const updateWinner = () =>
+    {
+        dispatch(HiLoActions.updateWinner(false))
+    }
+
+    return (
+        <>
+            <div className={styles["hilo-wrapper"]}>
+                <div className={styles["hilo-wrapper__ribbon"]}>
+                    <Ribbon text='Winner Winner' show={showWinner} callback={updateWinner} />
+                </div>
+                <HiLoCards />
+            </div>
+        </>
+    )
+}
+
+export default HiLoCardsWrapper

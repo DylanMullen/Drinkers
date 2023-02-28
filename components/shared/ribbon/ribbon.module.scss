@@ -1,0 +1,62 @@
+.ribbon
+{
+    display: grid;
+    width: fit-content;
+    grid-auto-rows: 60px;
+    font-size: 3em;
+
+    font-family: 'Sugar Snow';
+
+    color: white;
+
+    overflow: hidden;
+
+    padding: 1rem 0;
+
+    &__empty
+    {
+        background-color: #C60F0F;
+        line-height: 60px;
+        text-align: center;
+        transform: skewY(20deg);
+        // translate: 0 -25px;
+
+        // border-bottom-left-radius: .75rem;
+        // border-top-right-radius: .75rem;
+
+        // translate: 0 -20px;
+
+    }
+
+    &__segment
+    {
+        background-color: #FE4E00;
+        transform: skewY(-10deg);
+        line-height: 60px;
+        text-align: center;
+
+        z-index: 1;
+
+        padding: 0 1rem;
+
+        // translate: 0 -30px;
+
+        // border-radius: .75rem;
+
+    }
+
+    // &__empty,&__segment
+    // {
+    //     translate: 0 -25px;
+    // }
+
+    
+    // > :nth-child(odd)
+    // {
+    //     translate: 0 -10px;
+    // }
+    // >:first-child
+    // {
+    //     translate: 0 10px;
+    // }
+}

@@ -1,12 +1,16 @@
 import CasinoBoard from 'components/higher-lower/board/CasinoBoard';
+import CasinoPlayers from 'components/higher-lower/board/players/CasinoPlayers';
 import HiLoCards from 'components/higher-lower/cards';
 import Footer from 'components/higher-lower/footer';
+import Ribbon from 'components/shared/ribbon';
 import useNavigation from 'context/NavigationContext';
 import useUser from 'context/UserContext';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head'
 import React, { useEffect } from 'react'
+import { useAppSelector } from 'redux/store';
 import { HiLoController } from 'services/hi-lo/game/HiLoGameController';
+import { HiLoSelectors } from 'services/hi-lo/redux/slice';
 
 import styles from 'styles/pages/higher-lower/game.module.scss'
 import { User } from 'utils/UserUtil';
@@ -25,8 +29,6 @@ function HigherLowerGame({ code }: Props)
 
         HiLoController.create(user, "CARD")
 
-        console.log(code)
-
         hide();
         hideNavigationButton()
 
@@ -40,39 +42,27 @@ function HigherLowerGame({ code }: Props)
             <main className={styles["game"]}>
                 <div className={styles["game__board"]}>
 
-                    <CasinoBoard boardName='Hi-Lo'>
+                    <CasinoBoard players={getCasinoPlayers()}>
                         <div className={styles["game__cards"]}>
                             <HiLoCards />
                         </div>
                     </CasinoBoard>
                 </div>
             </main>
-            {/* <Footer /> */}
         </>
     )
 }
 
-// export async function getServerSideProps(context: GetServerSidePropsContext)
-// {
-//     let { create, code} = context.query
-
-//     const cookie = context.req.cookies.user;
-
-//     const user:User = JSON.parse(cookie);
-
-//     if(create === "true" && user)
-//     {
-//         HiLoController.create(user, "CARD")
-//         code = getHigherLowerInstance().gameID
-//     }
+function getCasinoPlayers()
+{
+    const players = useAppSelector(HiLoSelectors.users);
 
 
-
-//     return {
-//         props: {
-//             // code: code
-//         }
-//     }
-// }
+    return (
+        <CasinoPlayers
+            users={players}
+        />
+    )
+}
 
 export default HigherLowerGame
