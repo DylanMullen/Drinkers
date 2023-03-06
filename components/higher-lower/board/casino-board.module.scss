@@ -45,8 +45,26 @@ $border-colour: #181817;
         width: 100%;
         height: 100%;
         border-radius: inherit;
+    }
 
+    &__children
+    {
+        height: 100%;
+        border-radius: inherit;
 
+        padding: 0 4.75rem;
+        padding-bottom: 7rem;
+        padding-top: 2rem;
+
+        position: relative;
+
+        z-index: 0;
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 2rem;
     }
 
     &__watermark
@@ -121,7 +139,7 @@ $border-colour: #181817;
 
     &__wrapper
     {
-        width: 116rem;
+        width: 95vw;
         // height: 100%;
         height: 55rem;
 

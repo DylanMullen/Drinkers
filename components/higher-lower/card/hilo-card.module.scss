@@ -10,17 +10,23 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     border-radius: .65rem;
 
+    &__controls
+    {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        right: 0;
+        top: 50%;
 
+        transform: translate(calc(100% + 1.5rem), -50%);
+    }
 
     &__btn
     {
         font-size: 0;
         aspect-ratio: 1/1;
         padding: 1rem;
-
-        position: absolute;
-        left: 50%;
-
         border-radius: 50%;
 
         background-color: transparent;
@@ -29,45 +35,27 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         color: white;
         cursor: pointer;
 
-        opacity: 0.5;
+        // opacity: 0.5;
 
         transition: scale 150ms $pop, opacity 150ms $pop;
         transform-origin: 0%;
 
+        display: flex;
+        align-items: center;
+        
         svg
         {
             font-size: 1.25rem;
         }
 
-        &--higher
-        {
-            top: 0;
-
-            transform: translate(-50%, calc(-100% - 1rem));
-
-            >.hilo-card__btn__text
-            {
-                left: 50%;
-                transform: translateX(-50%) translateY(-3.25rem);
-            }
-        }
-
-        &--lower
-        {
-            bottom: 0;
-            transform: translate(-50%, calc(100% + 1rem));
-            
-            >.hilo-card__btn__text
-            {
-                left: 50%;
-                transform: translateX(-50%) translateY(3.25rem);
-            }
-        }
 
         &__text
         {
             font-size: 1.75rem;
             position: absolute;
+            right: 0;
+
+            transform: translate(calc(100% + 1rem));
 
             font-family: 'Sugar Snow', sans-serif;
 
@@ -80,7 +68,7 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
         &:focus,&:hover
         {
-            opacity: .95;
+            opacity: 1;
             scale: 1.05;
 
             .hilo-card__btn__text

@@ -30,7 +30,7 @@ export default class HiLoGame extends Game
         let nextPlayer = HiLoSelectors.getUser(store.getState().hilo.gameplay.players.next)
         let owner = store.getState().hilo.settings.ownerID
 
-        if(nextPlayer?.uuid === sender || (nextPlayer?.bot && owner === sender))
+        if (nextPlayer?.uuid === sender || (nextPlayer?.bot && owner === sender))
         {
             this.send({
                 id: 3,
@@ -107,6 +107,7 @@ export default class HiLoGame extends Game
     handleNextTurn(nextTurn: NextTurnUpdate)
     {
         store.dispatch(HiLoActions.nextTurn(nextTurn))
+        store.dispatch(HiLoActions.updateCard(true))
         store.dispatch(HiLoActions.updateButtons(false))
     }
 

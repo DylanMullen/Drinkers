@@ -64,7 +64,7 @@
         border-radius: 50%;
 
         scale: 1;
-
+        position: relative;
         span
         {
             border-radius: 50%;
@@ -85,6 +85,63 @@
     {
         color: white;
         font-size: 1.75rem;
+    }
+
+    &__admin-btn
+    {
+        font-size: 0;
+
+        aspect-ratio: 1/1;
+        border: 0;
+        outline: 0;
+        padding: .5rem;
+
+        border-radius: 50%;
+        position: absolute;
+
+        right: -0.5rem;
+        bottom: -0.5rem;
+        z-index: 10;
+
+      
+
+        // box-shadow: 0px 0px 5px 2px rgba(42, 42, 42, 1);
+
+        cursor: pointer;
+        svg
+        {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        &--admin
+        {
+            background-color: #ff8800;
+            background: linear-gradient(0deg, rgba(209,87,8,1) 0%, rgba(255,136,0,1) 100%);
+        }
+
+        &--kick
+        {
+            transform: translateX(calc(100% + 0.25rem)) translateY(0.3rem);
+            background: rgb(172,11,31);
+            background: linear-gradient(0deg, rgba(172,11,31,1) 0%, rgba(224,30,55,1) 100%); 
+
+            svg
+            {
+                font-size: 1rem;
+            }
+        }
+        &--promote
+        {
+            transform: translateY(calc(100% + 0.25rem)) translateX(0.3rem) ;
+
+            svg
+            {
+                font-size: 1rem;
+            }
+
+            background: linear-gradient(90deg, rgba(114,81,181,1) 0%, rgba(160,108,213,1) 100%);;
+        }
     }
 
     &__new
@@ -128,6 +185,7 @@
         top: 1rem;
         left: -8rem;
         color: red;
+
     }
 
     &[data-spot="2"]

@@ -22,7 +22,8 @@ export default interface HiLoGameState
         }
         controls: {
             canShowButtons:boolean,
-            wasWinner: boolean
+            wasWinner: boolean,
+            flipCard:boolean
         }
     }
 

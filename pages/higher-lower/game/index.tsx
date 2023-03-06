@@ -13,6 +13,7 @@ import useNavigation from 'context/NavigationContext';
 import useUser from 'context/UserContext';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head'
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react'
 import { useAppSelector } from 'redux/store';
 import { HiLoController } from 'services/hi-lo/game/HiLoGameController';
@@ -28,18 +29,32 @@ function HigherLowerGame({ code }: Props)
     const { user } = useUser()
     const { hideNavigationButton, hide } = useNavigation();
 
-    const { update, open, close } = useModalContext();
+    const router = useRouter()
+
+    const join = async (code: string, user: User) =>
+    {
+        let status = await HiLoController.join(user, code)
+        if (!status)
+        {
+            code = await HiLoController.create(user, "CARD") ?? ""
+        }
+
+        router.push(code === "" ? "/higher-lower" : "/higher-lower/game?code=" + code, undefined, {
+            shallow: code !== ""
+        })
+    }
 
     useEffect(() =>
     {
+        hide();
+        hideNavigationButton()
         if (user === undefined)
             return;
 
-        HiLoController.create(user, "CARD")
+        if (code === undefined) return;
 
-        hide();
-        hideNavigationButton()
-    }, [user])
+        // join(code, user)
+    }, [user, code])
 
     return (
         <>
@@ -49,11 +64,11 @@ function HigherLowerGame({ code }: Props)
             <ModalHandler />
             <main className={styles["game"]}>
                 <div className={styles["game__board"]}>
-
                     <CasinoBoard players={getCasinoPlayers()}>
                         <div className={styles["game__cards"]}>
                             <HiLoCards />
                         </div>
+                        {/* <Controls /> */}
                     </CasinoBoard>
                 </div>
             </main>
@@ -73,5 +88,20 @@ function getCasinoPlayers()
     )
 }
 
+export async function getServerSideProps(context: GetServerSidePropsContext)
+{
+    let { code } = context.query
+
+    let user: User = JSON.parse(context.req.cookies["user"])
+
+    if (!code)
+        code = await HiLoController.createDummy(user)
+
+    return {
+        props: {
+            code: code as string
+        }
+    }
+}
 
 export default HigherLowerGame

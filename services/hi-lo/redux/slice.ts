@@ -25,7 +25,8 @@ const initialState: HiLoGameState = {
         },
         controls: {
             canShowButtons: true,
-            wasWinner: false
+            wasWinner: false,
+            flipCard: false
         }
     }
 }
@@ -92,6 +93,10 @@ export const hiloSlice = createSlice({
         updateShowButtons: (state, action: PayloadAction<boolean>) =>
         {
             state.gameplay.controls.canShowButtons = action.payload
+        },
+        updateCard: (state, action: PayloadAction<boolean>) =>
+        {
+            state.gameplay.controls.flipCard = action.payload
         }
     }
 })
@@ -109,7 +114,8 @@ export const HiLoActions = {
     updateGameState: hiloSlice.actions.updateGameState,
     updateOwner: hiloSlice.actions.updateOwner,
     updateWinner: hiloSlice.actions.updateWinner,
-    updateButtons: hiloSlice.actions.updateShowButtons
+    updateButtons: hiloSlice.actions.updateShowButtons,
+    updateCard: hiloSlice.actions.updateCard
 }
 
 export const HiLoSelectors = {
@@ -121,7 +127,8 @@ export const HiLoSelectors = {
     currentNumber: (state: RootState) => state.hilo.gameplay.currentNumber,
     rounds: (state: RootState) => state.hilo.gameplay.rounds,
     wasWinner: (state: RootState) => state.hilo.gameplay.controls.wasWinner,
-    canShowButtons: (state:RootState)=>state.hilo.gameplay.controls.canShowButtons,
+    canShowButtons: (state: RootState) => state.hilo.gameplay.controls.canShowButtons,
+    shouldFlip: (state: RootState) => state.hilo.gameplay.controls.flipCard,
     getUser: (uuid: string) =>
     {
         return store.getState().hilo.gameplay.players.players.find(e => e.uuid === uuid)

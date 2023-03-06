@@ -21,7 +21,9 @@ function CasinoBoard({ players, style, children }: Props)
           <div className={styles["casino-board__watermark__wrapper"]}>
             <div className={styles["casino-board__watermark"]} />
           </div>
-          {children}
+          <div className={styles["casino-board__children"]}>
+            {children}
+          </div>
         </div>
       </div>
     </div>

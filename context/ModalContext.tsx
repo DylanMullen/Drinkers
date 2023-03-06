@@ -65,4 +65,4 @@ export function useModalContext()
     return useContext(ModalContext)
 }
 
-export default ModalContextProvider
+export default React.memo(ModalContextProvider)

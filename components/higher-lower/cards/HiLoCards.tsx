@@ -101,6 +101,7 @@ const variants: (flipped: boolean) => Variants = (flipped: boolean) =>
 function HiLoCards()
 {
     const currentNumber = useAppSelector(HiLoSelectors.currentNumber)
+    const flip = useAppSelector(HiLoSelectors.shouldFlip)
     const settings = useAppSelector(HiLoSelectors.settings)
     const nextPlayerUUID = useAppSelector(HiLoSelectors.nextUser)
     const canShowButtons = useAppSelector(HiLoSelectors.canShowButtons);
@@ -125,6 +126,7 @@ function HiLoCards()
                 setPrevious(currentNumber)
             setReset(true)
             dispatch(HiLoActions.updateButtons(true))
+            dispatch(HiLoActions.updateCard(false))
             setTimeout(() =>
             {
                 setReset(false)
@@ -134,6 +136,7 @@ function HiLoCards()
 
     useEffect(() =>
     {
+        if (!flip) return;
         setFlip(true)
         setTimeout(() =>
         {
@@ -141,8 +144,18 @@ function HiLoCards()
                 setPrevious(currentNumber)
             setFlip(false)
         }, 750)
-    }, [currentNumber])
+    }, [flip])
 
+    useEffect(()=>{
+        if(previous !== -1)return;
+        setFlip(true)
+        setTimeout(() =>
+        {
+            if (previous === -1)
+                setPrevious(currentNumber)
+            setFlip(false)
+        }, 750)
+    },[currentNumber])
 
     let showButtons = ((user?.uuid === nextPlayerUUID || (nextPlayer?.bot === true && user?.uuid === settings.ownerID)) && canShowButtons && !wasWinner);
 
@@ -165,7 +178,6 @@ function HiLoCards()
                         cardStyles={{ red: cardStyles[0], black: cardStyles[1] }}
                         flipSettings={{ clickable: false, defaultFlipped: true }}
                     />
-
                 </div>
                 <PlayingCard
                     settings={{

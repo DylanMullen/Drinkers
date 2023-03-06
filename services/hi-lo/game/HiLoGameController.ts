@@ -14,6 +14,7 @@ type Response = {
 
 export const HiLoController = {
     create: create,
+    createDummy:createDummy,
     join: join
 }
 
@@ -27,26 +28,39 @@ async function create(user: User, type: "DICE" | "CARD")
     })
 
     if (res === undefined) return;
-
     instance = new HiLoGame((<HiLoGameState>res.body).settings.gameID)
     instance.socket.openSocket()
     store.dispatch(HiLoActions.init(res.body))
-    return instance.gameID
+    return (<HiLoGameState>res.body).settings.joinCode
 }
 
-async function join(user: User, joinCode: string)
+async function createDummy(user:User)
 {
-    if (instance !== undefined) return;
+    let res = await sendRequest("create", "POST", <CreateRequest>{
+        owner: user,
+        type: "CARD",
+    })
+
+    if (res === undefined) return;
+    return (<HiLoGameState>res.body).settings.joinCode
+}
+
+async function join(user: User, joinCode: string):Promise<boolean>
+{
+    if (instance !== undefined) return false;
     
     let res = await sendRequest("join", "POST", <JoinRequest>{
         joinCode,
         player: user
     })
 
-    if (res === undefined) return;
+    if (res === undefined || res.body.settings === undefined) return false;
+
+
     instance = new HiLoGame((<HiLoGameState>res.body).settings.gameID)
     instance.socket.openSocket()
     store.dispatch(HiLoActions.init(res.body))
+    return true
 }
 
 async function sendRequest(url: string, method: string, data: any): Promise<Response | undefined>
