@@ -35,12 +35,12 @@ function HiLoCard({ showButtons = false, showCard = true, callback = () => { }, 
                 <div className={styles["hilo-card__controls"]}>
                     <button className={`${styles["hilo-card__btn"]} ${styles["hilo-card__btn--higher"]}`} onClick={e => action("higher", e)}>
                         <FaChevronUp />
-                        <span className={`${styles["hilo-card__btn__text"]}`}>Higher</span>
+                        {/* <span className={`${styles["hilo-card__btn__text"]}`}>Higher</span> */}
 
                     </button>
                     <button className={`${styles["hilo-card__btn"]} ${styles["hilo-card__btn--lower"]}`} onClick={e => action("lower", e)}>
                         <FaChevronDown />
-                        <span className={`${styles["hilo-card__btn__text"]}`}>Lower</span>
+                        {/* <span className={`${styles["hilo-card__btn__text"]}`}>Lower</span> */}
                     </button>
                 </div>
             }

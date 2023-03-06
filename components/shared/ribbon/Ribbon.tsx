@@ -33,7 +33,7 @@ const variants: (delay: number) => Variants = (delay: number) =>
       translateY: 0,
       transition: {
         delay: delay,
-        duration: .5,
+        duration: .1,
 
         type: {
           type: "tween",
@@ -47,7 +47,7 @@ const variants: (delay: number) => Variants = (delay: number) =>
       translateY: "50%",
       transition: {
         delay: delay,
-        duration: .25,
+        duration: .05,
 
         type: {
           type: "tween",
@@ -61,7 +61,7 @@ const variants: (delay: number) => Variants = (delay: number) =>
       translateY: "100%",
       transition: {
         delay: delay,
-        duration: .25,
+        duration: .05,
         type: {
           type: "tween",
           ease: "circInOut",
@@ -93,11 +93,11 @@ function Ribbon({ text, show = true, callback = ()=>{}}: Props)
     if (index !== split.length - 1)
       elements.push(
         <motion.span key={uuid()} className={styles["ribbon__empty"]}
-          variants={variants(delay + 0.5)}
+          variants={variants(delay + 0.25)}
           initial="initLeft" animate="animate" exit={"exitLeft"}
         />
       )
-    delay++;
+    delay+=.5;
   }
 
   return (

@@ -13,73 +13,89 @@
     &__board
     {
         padding-bottom: 5rem;
-
     }
 
     overflow: hidden;
 
-    // &::after
-    // {
-    //     content: '';
-    //     width: 100%;
-    //     height: 100%;
-    //     position: absolute;
-
-    //     background-color: red;
-
-    //     // background: repeating-linear-gradient(
-    //     //     -45deg,
-    //     //     transparent,
-    //     //     #606dbc 50px,
-    //     //     #465298 50px,
-    //     //     #465298 50px
-    //     //   );;
-
-    //     background: repeating-linear-gradient(-35deg, transparent, transparent 25px,
-    //             /* gap */
-    //             #2a2a2a 0px,
-    //             /* overall width incluing gap */
-    //             #3C3C3C 100px);
-    //     left: 0;
-    //     top: 0;
-    //     // transform: translate(-100%, 0) scale(1.2);
-
-    //     transition: transform 500ms ease-in-out;
+    &__logo
+    {
+        height: 30%;
+        width: 100%;
 
 
-    // }
+        display: flex;
+        justify-content: center;
+        position: relative;
+
+        margin-top: 3rem;
+    }
 
     &__cards
     {
         display: flex;
-        height: 100%;
         justify-content: center;
         align-items: center;
 
         min-height: fit-content;
         position: relative;
-        &__ribbon
-        {
 
+
+    }
+
+
+}
+
+.theme-selector
+{
+    display: flex;
+    gap: .5rem;
+
+    position: absolute;
+
+    bottom: 1rem;
+    right: 1rem;
+
+    padding: .5rem;
+    border-radius: 500px;
+    background-color: rgb(31, 31, 31);
+
+    &__btn
+    {
+        border-radius: 50%;
+
+        width: 2.5rem;
+        aspect-ratio: 1/1;
+
+        border: 0;
+
+        cursor: pointer;
+
+        background: conic-gradient(
+            from 90deg,
+            violet,
+            indigo,
+            blue,
+            green,
+            yellow,
+            orange,
+            red,
+            violet
+          ); ;
+
+        &:focus,&:hover
+        {
+            scale: 1.05;
         }
     }
 
-    &__card
+
+
+    &__editor
     {
+        position: absolute;
+        top: 0;
+        left: 50%;
 
-        $width: 15rem;
-        width: $width ;
-        height: calc($width *1.4);
-        background-color: red;
-
-        border-radius: .75rem;
-
-        &--left
-        {
-            background-color: orange;
-        }
-
-        &--right
-        {}
+        transform: translate(-50%, calc(-100% - 1rem));
     }
 }

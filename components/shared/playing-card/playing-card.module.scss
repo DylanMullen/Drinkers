@@ -48,7 +48,7 @@ $bg: rgb(252, 252, 252);
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(7, 1fr);
-        
+
         list-style: none;
         margin: 0;
         padding: 0;
@@ -85,17 +85,19 @@ $bg: rgb(252, 252, 252);
             content: '';
             width: 200%;
             height: 200%;
-            mask: url(../../../public/watermark.svg);
-            mask-size: 60%;
+            // mask: url(../../../public/watermark.svg);
+
+            background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
+            opacity: .5;
             rotate: 40deg;
             transform: translateX(-50%) translateY(-25%);
-            background-color: rgba(255,255,255,0.25);
             position: absolute;
             left: 0;
             right: 0;
             z-index: -1;
         }
     }
+
     &__special
     {
         border: 5px solid white;

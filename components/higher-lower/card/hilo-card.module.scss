@@ -5,8 +5,8 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 {
     position: relative;
 
-    border: 5px double white;
-    padding: .5rem;
+    // border: 5px double white;
+    // padding: .5rem;
 
     border-radius: .65rem;
 
@@ -19,7 +19,7 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         right: 0;
         top: 50%;
 
-        transform: translate(calc(100% + 1.5rem), -50%);
+        transform: translate(calc(100% + 2.5rem), -50%);
     }
 
     &__btn

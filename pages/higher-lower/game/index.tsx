@@ -5,6 +5,7 @@ import Footer from 'components/higher-lower/footer';
 import ModalHandler from 'components/higher-lower/modals/ModalHandler';
 import NextTurn from 'components/higher-lower/modals/next-turn';
 import WelcomeModal from 'components/higher-lower/modals/welcome';
+import PirateCard from 'components/pirate/game/card';
 import Ribbon from 'components/shared/ribbon';
 import JoinModal from 'components/waterfall/lobby/modals/join';
 import { GameMode } from 'components/waterfall/lobby/modals/join/JoinModal';
@@ -14,7 +15,7 @@ import useUser from 'context/UserContext';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head'
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppSelector } from 'redux/store';
 import { HiLoController } from 'services/hi-lo/game/HiLoGameController';
 import { HiLoSelectors } from 'services/hi-lo/redux/slice';
@@ -22,12 +23,21 @@ import { HiLoSelectors } from 'services/hi-lo/redux/slice';
 import styles from 'styles/pages/higher-lower/game.module.scss'
 import { User } from 'utils/UserUtil';
 
+import TextLogo from 'public/weblogo-text.svg'
+import Image from 'next/image';
+import { HexColorPicker } from 'react-colorful';
+
 type Props = { code: string }
+
+const poolTable = ["#008eba", "#137547", "#800080"]
 
 function HigherLowerGame({ code }: Props)
 {
     const { user } = useUser()
     const { hideNavigationButton, hide } = useNavigation();
+
+    const [color, setColor] = useState(poolTable[Math.floor(Math.random() * poolTable.length)])
+    const [showEditor, setShowEditor] = useState(false);
 
     const router = useRouter()
 
@@ -64,14 +74,42 @@ function HigherLowerGame({ code }: Props)
             <ModalHandler />
             <main className={styles["game"]}>
                 <div className={styles["game__board"]}>
-                    <CasinoBoard players={getCasinoPlayers()}>
+                    <CasinoBoard players={getCasinoPlayers()}
+                        casinoStyle={{
+                            tableTop: color
+                        }}
+                    >
+                        <div className={styles["game__logo"]}>
+                            <Image
+                                src={TextLogo}
+                                layout="fill"
+                                objectFit='contain'
+                            />
+                        </div>
                         <div className={styles["game__cards"]}>
                             <HiLoCards />
                         </div>
-                        {/* <Controls /> */}
                     </CasinoBoard>
                 </div>
             </main>
+
+            <aside className={styles["theme-selector"]}>
+                {
+                    poolTable.map(e =>
+                    {
+                        return (
+                            <button className={styles["theme-selector__btn"]} style={{ background: e }} onClick={() => setColor(e)} />
+                        )
+                    })
+                }
+                {
+                    showEditor &&
+                    <div className={styles["theme-selector__editor"]}>
+                        <HexColorPicker color={color} onChange={(col)=>setColor(col)} onBlur={()=>setShowEditor(false)}/>
+                    </div>
+                }
+                <button className={styles["theme-selector__btn"]} onClick={()=>setShowEditor(prev=>!prev)}/>
+            </aside>
         </>
     )
 }

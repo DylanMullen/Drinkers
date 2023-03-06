@@ -8,7 +8,7 @@ $border-colour: #181817;
     transform:  rotateX(35deg)translateY(-3rem);
     width: 100%;
     height: 100%;
-    background-color: #137547;
+    background-color: #800080;
     border-radius: .75rem;
 
     border-bottom-left-radius: 45% 60%;
@@ -19,11 +19,20 @@ $border-colour: #181817;
 
     min-height: fit-content;
 
-    box-shadow: inset 10px -100px 8rem .25rem rgba(0,0,0,0.75);
 
     position: relative;
+
+    transition: background-color 150ms ease-in-out;
     
     // scale: ;
+
+    // box-shadow:
+    // inset 1px -1.5rem 0px .75rem darken($border-colour, 2%),
+    // inset 1px -4rem 3px 2rem $border-colour,
+    // inset -2rem -2rem 3px 2rem $border-colour,
+    // inset 2rem -2rem 3px 2rem $border-colour,
+    // inset 10px -100px 8rem .25rem rgba(0,0,0,0.75),
+    // ;
 
     &__body
     {
@@ -36,6 +45,20 @@ $border-colour: #181817;
         // z-index: 3;
 
         
+    }
+
+    &__edges
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+
+        top: 0;
+        z-index: 10;
+
+        pointer-events: none;
+
     }
 
     &__content
@@ -64,7 +87,7 @@ $border-colour: #181817;
 
         align-items: center;
 
-        gap: 2rem;
+        gap: 4rem;
     }
 
     &__watermark
@@ -74,10 +97,12 @@ $border-colour: #181817;
         position: absolute;
         // left: -50%;
         // top: -100%;
-        mask: url(../../../public/watermark2.svg);
-        mask-size: 35%;
-        background-color: darken(#137547, 20%);
-        opacity: .25;
+        // mask: url(../../../public/watermark2.svg);
+        
+        // mask-size: 35%;
+        background-image:  url("https://www.transparenttextures.com/patterns/pool-table.png"), url("https://www.transparenttextures.com/patterns/cartographer.png"), ;;
+        // opacity: .75;
+        // background-size: 35%;
         transform: rotateZ(35DEG) translateX(-30%) translateY(-10%);
         overflow: hidden;
         z-index: -10;
@@ -101,11 +126,7 @@ $border-colour: #181817;
         width: 100%;
         height: 100%;
         border-radius: inherit;
-        box-shadow:
-            inset 1px -1.5rem 0px .75rem darken($border-colour, 2%),
-            inset 1px -4rem 3px 2rem $border-colour,
-            inset -2rem -2rem 3px 2rem $border-colour,
-            inset 2rem -2rem 3px 2rem $border-colour ;
+
 
 
 

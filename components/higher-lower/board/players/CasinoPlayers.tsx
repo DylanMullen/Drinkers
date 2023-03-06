@@ -1,9 +1,10 @@
 import InviteModal from 'components/higher-lower/modals/invite'
 import Tooltip from 'components/shared/tooltip'
 import { useModalContext } from 'context/ModalContext'
+import { motion } from 'framer-motion'
 import useUser from 'context/UserContext'
 import Image from 'next/image'
-import React, { ReactNode, useState } from 'react'
+import React, { MouseEvent, ReactNode, useState } from 'react'
 import { FaCrown, FaPlus } from 'react-icons/fa'
 import { GiBootKick } from 'react-icons/gi'
 import { IoPersonRemove, IoShieldCheckmark } from 'react-icons/io5'
@@ -73,14 +74,22 @@ function CasinoPlayer({ player, position, isNext, hasAdmin = false }: PlayerProp
         open()
     }
 
-    const kick = () =>
+    const adminClick = (e: MouseEvent<HTMLButtonElement>) =>
     {
+        e.currentTarget.blur()
+        setAdminOpen(prev => !prev)
+    }
+
+    const kick = (e: MouseEvent<HTMLButtonElement>) =>
+    {
+        e.currentTarget.blur()
         if (!user || !player) return;
         getHigherLowerInstance().sendKickRequest(player.uuid, user.uuid)
     }
 
-    const promote = () =>
+    const promote = (e: MouseEvent<HTMLButtonElement>) =>
     {
+        e.currentTarget.blur()
         if (!user || !player) return;
         getHigherLowerInstance().sendPromotionRequest(player.uuid, user.uuid)
     }
@@ -95,19 +104,27 @@ function CasinoPlayer({ player, position, isNext, hasAdmin = false }: PlayerProp
                             {
                                 hasAdmin &&
                                 <>
-                                    <button className={`${styles["casino-player__admin-btn"]} ${styles["casino-player__admin-btn--admin"]}`} onClick={() => setAdminOpen(prev => !prev)}>
+                                    <button className={`${styles["casino-player__admin-btn"]} ${styles["casino-player__admin-btn--admin"]}`} onClick={adminClick}>
                                         <IoShieldCheckmark />
                                     </button>
                                     {
                                         admin &&
                                         <>
-
-                                            <button className={`${styles["casino-player__admin-btn"]} ${styles["casino-player__admin-btn--kick"]}`} onClick={kick}>
+                                            <motion.button className={`${styles["casino-player__admin-btn"]} ${styles["casino-player__admin-btn--kick"]}`} onClick={kick}
+                                                initial={{ scale: 0 }}
+                                                animate={{ scale: 1, translateX: "calc(100% + 0.25rem)", translateY: !player.bot ? ".3rem" : "1rem" }}
+                                            >
                                                 <IoPersonRemove />
-                                            </button>
-                                            <button className={`${styles["casino-player__admin-btn"]} ${styles["casino-player__admin-btn--promote"]}`} onClick={promote}>
-                                                <FaCrown />
-                                            </button>
+                                            </motion.button>
+                                            {
+                                                !player.bot &&
+                                                <motion.button className={`${styles["casino-player__admin-btn"]} ${styles["casino-player__admin-btn--promote"]}`} onClick={promote}
+                                                    initial={{ scale: 0 }}
+                                                    animate={{ scale: 1, translateY: "calc(100% + 0.25rem)", translateX: ".3rem" }}
+                                                >
+                                                    <FaCrown />
+                                                </motion.button>
+                                            }
                                         </>
                                     }
                                 </>

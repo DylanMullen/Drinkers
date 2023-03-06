@@ -1,9 +1,11 @@
 import PlayingCard, { CardStyle } from 'components/shared/playing-card/PlayingCard';
-import { AnimatePresence, AnimationControls, Variants } from 'framer-motion';
+import { animate, AnimatePresence, AnimationControls, Variants } from 'framer-motion';
 import React, { ReactNode, useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'redux/store';
 import { HiLoActions, HiLoSelectors, hiloSlice } from 'services/hi-lo/redux/slice';
 import HiLoCard from '../card/HiLoCard'
+
+import {motion} from 'framer-motion'
 
 import styles from './hilo-cards.module.scss'
 import useUser from 'context/UserContext';
@@ -42,7 +44,7 @@ const variants: (flipped: boolean) => Variants = (flipped: boolean) =>
         {
             "init": {
                 translateY: 0,
-                translateX: flipped ? "-12.6rem" : undefined,
+                translateX: flipped ? "calc(-100% - 1rem)" : undefined,
                 scale: 1,
                 rotateY: 0,
                 transition: {
@@ -67,7 +69,7 @@ const variants: (flipped: boolean) => Variants = (flipped: boolean) =>
             },
             "flip-rev": {
                 translateY: "-10rem",
-                translateX: "-12.6rem",
+                translateX: "calc(-100% - 1rem)",
                 scale: 1.2,
                 rotateY: 0,
                 transition: {
@@ -138,6 +140,7 @@ function HiLoCards()
     {
         if (!flip) return;
         setFlip(true)
+        new Audio("/flip.mp3").play()
         setTimeout(() =>
         {
             if (previous === -1)
@@ -148,13 +151,7 @@ function HiLoCards()
 
     useEffect(()=>{
         if(previous !== -1)return;
-        setFlip(true)
-        setTimeout(() =>
-        {
-            if (previous === -1)
-                setPrevious(currentNumber)
-            setFlip(false)
-        }, 750)
+        setPrevious(currentNumber)
     },[currentNumber])
 
     let showButtons = ((user?.uuid === nextPlayerUUID || (nextPlayer?.bot === true && user?.uuid === settings.ownerID)) && canShowButtons && !wasWinner);
@@ -213,10 +210,11 @@ function HiLoCardsWrapper()
         setTimeout(() =>
         {
             setWinner(true);
+            new Audio("/win.wav").play()
             setTimeout(() =>
             {
                 setWinner(false)
-            }, 2000)
+            }, 1250)
         }, 750)
     }, [wasWinner])
 
@@ -227,12 +225,14 @@ function HiLoCardsWrapper()
 
     return (
         <>
-            <div className={styles["hilo-wrapper"]}>
+            <motion.div className={styles["hilo-wrapper"]}>
                 <div className={styles["hilo-wrapper__ribbon"]}>
                     <Ribbon text='Winner Winner' show={showWinner} callback={updateWinner} />
                 </div>
+                <motion.div initial={{scale:0.75, opacity:0}} animate={{scale:1, opacity:1, transition:{ duration: 1}}}>
                 <HiLoCards />
-            </div>
+                </motion.div>
+            </motion.div>
         </>
     )
 }

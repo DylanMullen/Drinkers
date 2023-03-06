@@ -18,6 +18,10 @@ function ModalHandler({ }: Props)
 
         close()
         update(<NextTurn username={user.username} callbacks={{end:()=>close()}}/>, false)
+        setTimeout(()=>{
+
+            new Audio("/nextPlayer.mp3").play()
+        },500)
         open()
     }, [nextPlayer])
 
