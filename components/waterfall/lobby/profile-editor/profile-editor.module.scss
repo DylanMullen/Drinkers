@@ -14,8 +14,6 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         flex-direction: column;
     }
 
-
-
     &__avatar
     {
         display: flex;
@@ -42,11 +40,17 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         {
             display: flex;
             gap: .5rem;
+
+            background-color: #c7bcbc;
+            padding: .25rem;
+            border-radius: 500px;
+
+            // border: 2px solid #2a2a2a;
         }
 
         &__option
         {
-            width: 1.75rem;
+            width: 2.5rem;
             aspect-ratio: 1 / 1;
             font-size: 0;
             padding: 0;

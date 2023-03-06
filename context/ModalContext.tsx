@@ -17,7 +17,10 @@ const initial: ModalContextProps = {
     update: () => { },
     close: () => { },
     open: () => { },
+
 }
+
+
 
 const ModalContext = React.createContext<ModalContextProps>(initial)
 

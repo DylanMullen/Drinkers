@@ -18,6 +18,11 @@ export function getUser(): User
     return JSON.parse(getCookie("user") as string);
 }
 
+export function saveUser(user: User)
+{
+    setCookie("user", user)
+}
+
 export function logout(): User
 {
     deleteCookie("user");

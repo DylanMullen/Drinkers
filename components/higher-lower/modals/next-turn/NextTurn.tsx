@@ -4,15 +4,19 @@ import React, { ReactNode } from 'react'
 import styles from './next-turn.module.scss'
 
 type Props = {
-    username: string
+    username: string,
+    callbacks?: {
+        end?: () => void
+    }
 }
 
 type SideBitsProps = {
     index: number,
-    delay:number
+    delay: number,
+    callback?: () => void
 }
 
-function NextTurn({ username }: Props)
+function NextTurn({ username, callbacks = { end: () => { } } }: Props)
 {
     let bits: ReactNode[] = []
 
@@ -21,7 +25,7 @@ function NextTurn({ username }: Props)
     for (let index = 1; index < 11; index++)
     {
 
-        bits.push(<SideBits index={index} delay={delay}/>)
+        bits.push(<SideBits index={index} delay={delay} callback={index === 10 ? callbacks.end : () => { }} />)
         delay += index > 5 ? 0.15 : 0.1
     }
 
@@ -55,25 +59,27 @@ const variants: (speed: number) => Variants = (speed: number) =>
             translateX: ["100vw", "100vw"]
         },
         animateText: {
-            translateX: ["100vw", "0%", "0%", "-100vw"],
+            translateX: ["100vw", "-10%", "-10%", "-120%"],
             transition: {
                 duration: 1.75,
                 ease: "easeInOut",
-                times: [0, 0.35, 0.9, 1],
+                times: [0, 0.3, 0.65, 1],
                 delay: 0.25
             }
         }
     }
 }
 
-function SideBits({ index, delay }: SideBitsProps)
+function SideBits({ index, delay, callback }: SideBitsProps)
 {
     return (
         <motion.div className={styles["next-turn__sides"]}
             initial="init"
             animate="animate"
             variants={variants(delay)}
-            data-key={index} />
+            data-key={index}
+            onAnimationComplete={callback}
+        />
     )
 }
 

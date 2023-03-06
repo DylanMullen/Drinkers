@@ -1,3 +1,5 @@
+import InviteModal from 'components/higher-lower/modals/invite'
+import { useModalContext } from 'context/ModalContext'
 import useUser from 'context/UserContext'
 import Image from 'next/image'
 import React, { ReactNode } from 'react'
@@ -38,6 +40,13 @@ function CasinoPlayers({ users }: Props)
 
 function CasinoPlayer({ user, position, isNext }: PlayerProps)
 {
+    const { open, update, close } = useModalContext();
+
+    const click = ()=>{
+        update(<InviteModal />)
+        open()
+    }
+
     return (
         <li className={`${styles["casino-player"]} ${isNext ? styles["casino-player--next"] : ""}`} data-spot={position}>
             {
@@ -50,7 +59,7 @@ function CasinoPlayer({ user, position, isNext }: PlayerProps)
                     </>
                     :
                     <>
-                        <button className={styles["casino-player__new"]}>
+                        <button className={styles["casino-player__new"]} onClick={click}>
                             <FaPlus />
                         </button>
                     </>

@@ -14,14 +14,11 @@ function ModalHandler({ }: Props)
     useEffect(() =>
     {
         let user = HiLoSelectors.getUser(nextPlayer)
-
         if (!user) return;
 
         close()
-        update(<NextTurn username={user.username} />, false)
+        update(<NextTurn username={user.username} callbacks={{end:()=>close()}}/>, false)
         open()
-
-        setTimeout(()=>close(), 2000)
     }, [nextPlayer])
 
     return (

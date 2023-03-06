@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    domains: ['ca.slack-edge.com', 'cdn.discordapp.com', "upload.wikimedia.org"],
+    domains: ['ca.slack-edge.com', 'cdn.discordapp.com', "upload.wikimedia.org", "source.boringavatars.com"],
   },
   env: {
     DB_CREDIENTIALS_ACCESS: process.env.DB_CREDIENTIALS_ACCESS ?? "",

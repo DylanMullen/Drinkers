@@ -58,8 +58,20 @@
         font-size: 0;
         width: fit-content;
         height: fit-content;
+
+        box-shadow: 0 0 2rem 0.1rem rgba(0,0,0,0.5);
+
         border-radius: 50%;
-        overflow: hidden;
+        span
+        {
+            border-radius: 50%;
+            // overflow: hidden;
+
+            position: relative;
+
+            z-index: 10;
+
+        }
 
 
     }
@@ -68,7 +80,6 @@
     {
         color: white;
         font-size: 1.75rem;
-
     }
 
     &__new
@@ -111,19 +122,22 @@
     {
         top: 1rem;
         left: -8rem;
-
+        color: red;
     }
 
     &[data-spot="2"]
     {
         left: -6.75rem;
         top: 20rem;
+        color: red;
+
     }
 
     &[data-spot="3"]
     {
         left: 4rem;
         top: 37rem;
+        color: red;
 
     }
 
@@ -132,12 +146,16 @@
 
         left: 25rem;
         top: 45.5rem;
+        color: rgb(194, 53, 53);
+
     }
 
     &[data-spot="5"]
     {
         right: 25rem;
         top: 45.5rem;
+        color: red;
+
     }
 
     &[data-spot="6"]
@@ -145,12 +163,16 @@
 
         right: 4rem;
         top: 37rem;
+        color: red;
+
     }
 
     &[data-spot="7"]
     {
         right: -6.75rem;
         top: 20rem;
+        color: red;
+
 
     }
 
@@ -158,6 +180,8 @@
     {
         top: 1rem;
         right: -8rem;
+        color: red;
+
     }
 }
 
