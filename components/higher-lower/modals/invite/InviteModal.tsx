@@ -9,16 +9,17 @@ import { URL } from 'settings/Config'
 
 import styles from './invite-modal.module.scss'
 import { IoClose } from 'react-icons/io5'
+import { getHigherLowerInstance } from 'services/hi-lo/game/HiLoGameController'
 
 type Props = {}
 
 const variants:Variants = {
     "init": {
-        scaleX: 0.5,
+        scale: 0.5,
         translateY: "5rem"
     },
     "animate": {
-        scaleX: 1,
+        scale: 1,
         translateY: "0rem",
         transition: {
             scaleX: {
@@ -43,7 +44,8 @@ function InviteModal({ }: Props)
         close()
     }
 
-    const addBot = ()=>{
+    const addBot = (username:string, avatar:string, uuid:string)=>{
+        getHigherLowerInstance().sendBotRequest("", {uuid, avatar,username, highestStreak: 0, streak: 0, bot:true})
         close()
     }
 

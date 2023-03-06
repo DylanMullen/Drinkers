@@ -101,7 +101,8 @@ const variants: (flipped: boolean) => Variants = (flipped: boolean) =>
 function HiLoCards()
 {
     const currentNumber = useAppSelector(HiLoSelectors.currentNumber)
-    const nextPlayer = useAppSelector(HiLoSelectors.nextUser)
+    const settings = useAppSelector(HiLoSelectors.settings)
+    const nextPlayerUUID = useAppSelector(HiLoSelectors.nextUser)
     const canShowButtons = useAppSelector(HiLoSelectors.canShowButtons);
     const wasWinner = useAppSelector(HiLoSelectors.wasWinner)
 
@@ -110,6 +111,8 @@ function HiLoCards()
     const [previous, setPrevious] = useState(-1);
     const [shouldFlip, setFlip] = useState(false);
     const [reset, setReset] = useState(false);
+
+    const nextPlayer = HiLoSelectors.getUser(nextPlayerUUID)
 
     const dispatch = useAppDispatch()
 
@@ -141,7 +144,7 @@ function HiLoCards()
     }, [currentNumber])
 
 
-    let showButtons = user?.uuid === nextPlayer && canShowButtons && !wasWinner;
+    let showButtons = ((user?.uuid === nextPlayerUUID || (nextPlayer?.bot === true && user?.uuid === settings.ownerID)) && canShowButtons && !wasWinner);
 
     return (
         <div className={styles["hilo-cards"]}>

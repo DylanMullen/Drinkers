@@ -1,5 +1,5 @@
 
-const AVATAR_SERVICE = "https://source.boringavatars.com/beam/120/Drinkers-"
+const AVATAR_SERVICE = "https://source.boringavatars.com/beam/512/Drinkers-"
 
 const PREFIXES: string[] = [
     "Drunk",

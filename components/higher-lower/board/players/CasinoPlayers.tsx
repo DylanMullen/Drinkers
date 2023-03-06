@@ -53,7 +53,7 @@ function CasinoPlayer({ user, position, isNext }: PlayerProps)
                 user ?
                     <>
                         <span className={styles["casino-player__avatar"]}>
-                            <Image src={user?.avatar} width="100%" height={"100%"} />
+                            <Image src={user?.avatar} width="100%" height="100%" />
                         </span>
                         <span className={styles["casino-player__username"]}>{user?.username}</span>
                     </>

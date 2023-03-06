@@ -1,8 +1,8 @@
 import store from "redux/store"
 import Game from "services/game/Game"
 import { GameResponse } from "services/game/GameSocket"
-import { NewPlayer, NextTurnUpdate } from "../models/models"
-import { HiLoActions, hiloSlice } from "../redux/slice"
+import { HigherLowerPlayer, NewPlayer, NextTurnUpdate } from "../models/models"
+import { HiLoActions, HiLoSelectors, hiloSlice } from "../redux/slice"
 
 export default class HiLoGame extends Game
 {
@@ -13,7 +13,6 @@ export default class HiLoGame extends Game
 
     handle(data: GameResponse): void
     {
-        console.log(data)
         switch (data.id)
         {
             case 0: this.handleGameState(data.body.started); break;
@@ -28,14 +27,29 @@ export default class HiLoGame extends Game
 
     sendNextTurn(type: string, sender: string)
     {
-        if (store.getState().hilo.gameplay.players.next !== sender)
-            return;
+        let nextPlayer = HiLoSelectors.getUser(store.getState().hilo.gameplay.players.next)
+        let owner = store.getState().hilo.settings.ownerID
 
+        if(nextPlayer?.uuid === sender || (nextPlayer?.bot && owner === sender))
+        {
+            this.send({
+                id: 3,
+                sender,
+                content: {
+                    action: type
+                }
+            })
+        }
+    }
+
+    sendBotRequest(sender: string, bot: HigherLowerPlayer)
+    {
         this.send({
-            id: 3,
+            id: 1,
             sender,
             content: {
-                action: type
+                joinCode: "",
+                player: bot
             }
         })
     }
