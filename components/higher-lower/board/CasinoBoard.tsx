@@ -15,9 +15,10 @@ function CasinoBoard({ players, style, children }: Props)
 {
   return (
     <div className={styles["casino-board__wrapper"]}>
+      {players}
+
       <div className={styles["casino-board"]} style={style}>
         <div className={styles["casino-board__content"]}>
-          {players}
           <div className={styles["casino-board__watermark__wrapper"]}>
             <div className={styles["casino-board__watermark"]} />
           </div>

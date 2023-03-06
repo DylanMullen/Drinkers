@@ -36,7 +36,7 @@
     align-items: center;
     gap: 1rem;
 
-    transform-style: preserve-3d;
+    // transform-style: preserve-3d;
 
     z-index: 100;
 
@@ -59,7 +59,7 @@
         width: fit-content;
         height: fit-content;
 
-        box-shadow: 0 0 2rem 0.1rem rgba(0,0,0,0.5);
+        box-shadow: 0 0 2rem .75rem rgba(22, 22, 22, 0.2);
 
         border-radius: 50%;
 
@@ -182,24 +182,50 @@
 
     &[data-spot="1"]
     {
-        top: 1rem;
-        left: -8rem;
+        top: 10%;
+        left: 8%;
         color: red;
+        // transform: translate(100%);
+    }
+
+    &[data-spot="8"]
+    {
+        top: 10%;
+        right: 8%;
 
     }
 
     &[data-spot="2"]
     {
-        left: -6.75rem;
-        top: 20rem;
+        left: 5%;
+        top: 40%;
         color: red;
 
     }
 
+
+    &[data-spot="7"]
+    {
+        right: 5%;
+        top: 20rem;
+        color: red;
+
+
+    }
+
+
     &[data-spot="3"]
     {
-        left: 4rem;
-        top: 37rem;
+        left: 13%;
+        bottom: 15%;
+        color: red;
+
+    }
+    &[data-spot="6"]
+    {
+
+        right: 13%;
+        bottom: 15%;
         color: red;
 
     }
@@ -207,45 +233,23 @@
     &[data-spot="4"]
     {
 
-        left: 25rem;
-        top: 45.5rem;
+        left: 35%;
+        bottom: 1%;
         color: rgb(194, 53, 53);
 
     }
 
     &[data-spot="5"]
     {
-        right: 25rem;
-        top: 45.5rem;
+        right: 35%;
+        bottom: 1%;
         color: red;
 
     }
 
-    &[data-spot="6"]
-    {
+  
 
-        right: 4rem;
-        top: 37rem;
-        color: red;
-
-    }
-
-    &[data-spot="7"]
-    {
-        right: -6.75rem;
-        top: 20rem;
-        color: red;
-
-
-    }
-
-    &[data-spot="8"]
-    {
-        top: 1rem;
-        right: -8rem;
-        color: red;
-
-    }
+ 
 }
 
 @keyframes nextTurn {
