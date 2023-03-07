@@ -1,7 +1,7 @@
 import store from "redux/store"
 import Game from "services/game/Game"
 import { GameResponse } from "services/game/GameSocket"
-import { HigherLowerPlayer, NewPlayer, NextTurnUpdate } from "../models/models"
+import { HigherLowerPlayer, NewPlayer, NextTurnUpdate, Prompt } from "../models/models"
 import { HiLoActions, HiLoSelectors, hiloSlice } from "../redux/slice"
 
 export default class HiLoGame extends Game
@@ -21,6 +21,7 @@ export default class HiLoGame extends Game
             case 3: this.handleNextTurn(data.body); break;
             case 4: this.handleLeave(data.body.uuid); break;
             case 5: this.handlePromoted(data.body.uuid); break;
+            case 6: this.handlePrompt(data.body); break;
             default: break;
         }
     }
@@ -130,6 +131,12 @@ export default class HiLoGame extends Game
     handleGameState(started: boolean)
     {
         store.dispatch(HiLoActions.updateGameState(started))
+    }
+
+    handlePrompt(prompt: Prompt | undefined)
+    {
+        console.log(prompt)
+        store.dispatch(HiLoActions.updatePrompt(prompt))
     }
 
     isOwner(uuid: string)

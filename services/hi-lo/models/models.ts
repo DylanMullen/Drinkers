@@ -19,11 +19,12 @@ export default interface HiLoGameState
             current: string,
             next: string,
             players: HigherLowerPlayer[]
-        }
+        },
+        prompt?: Prompt,
         controls: {
-            canShowButtons:boolean,
+            canShowButtons: boolean,
             wasWinner: boolean,
-            flipCard:boolean
+            flipCard: boolean
         }
     }
 
@@ -62,4 +63,11 @@ export type CreateRequest = {
 export type JoinRequest = {
     joinCode: string,
     player: HigherLowerPlayer
+}
+
+export type Prompt = {
+    owner: string,
+    title: string,
+    description: string,
+    time?: number
 }

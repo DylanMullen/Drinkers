@@ -5,6 +5,8 @@ import useUser from 'context/UserContext'
 import { Variants, motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import React, { PropsWithChildren, useEffect, useState } from 'react'
+import { useAppDispatch } from 'redux/store'
+import { HiLoActions } from 'services/hi-lo/redux/slice'
 import { User } from 'utils/UserUtil'
 
 import styles from './prompt-modal.module.scss'
@@ -103,6 +105,8 @@ function PromptModal({ promptOwner, timeOut, text: { title, description } = { ti
     const [shouldEnd, setShouldEnd] = useState(false);
     const [show, setShow] = useState(true);
 
+    const dispatch = useAppDispatch()
+
     useEffect(() =>
     {
         if (!shouldEnd) return;
@@ -113,6 +117,7 @@ function PromptModal({ promptOwner, timeOut, text: { title, description } = { ti
             setTimeout(() =>
             {
                 update(undefined)
+                dispatch(HiLoActions.updatePrompt(undefined))
                 close()
             }, 1000)
         }, timeOut ?? 1000)

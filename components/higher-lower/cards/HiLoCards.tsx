@@ -108,6 +108,7 @@ function HiLoCards()
     const nextPlayerUUID = useAppSelector(HiLoSelectors.nextUser)
     const canShowButtons = useAppSelector(HiLoSelectors.canShowButtons);
     const wasWinner = useAppSelector(HiLoSelectors.wasWinner)
+    const prompt = useAppSelector(HiLoSelectors.prompt);
 
     const { user } = useUser();
 
@@ -118,7 +119,6 @@ function HiLoCards()
     const nextPlayer = HiLoSelectors.getUser(nextPlayerUUID)
 
     const dispatch = useAppDispatch()
-
 
     const callback = () =>
     {
@@ -154,7 +154,7 @@ function HiLoCards()
         setPrevious(currentNumber)
     },[currentNumber])
 
-    let showButtons = ((user?.uuid === nextPlayerUUID || (nextPlayer?.bot === true && user?.uuid === settings.ownerID)) && canShowButtons && !wasWinner);
+    let showButtons = ((user?.uuid === nextPlayerUUID || (nextPlayer?.bot === true && user?.uuid === settings.ownerID)) && canShowButtons && !wasWinner) && !prompt ;
 
     return (
         <div className={styles["hilo-cards"]}>

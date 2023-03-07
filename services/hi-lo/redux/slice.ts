@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import store, { RootState } from "redux/store";
-import HiLoGameState from "../models/models";
+import HiLoGameState, { Prompt } from "../models/models";
 import HiLoGame, { HigherLowerPlayer, NextTurnUpdate, PlayerPositionUpdate } from "../models/models";
 
 
@@ -73,6 +73,10 @@ export const hiloSlice = createSlice({
             state.gameplay.players.next = next;
             state.gameplay.controls.wasWinner = winner
         },
+        updatePrompt: (state, action: PayloadAction<Prompt | undefined>) =>
+        {
+            state.gameplay.prompt = action.payload
+        },
         updatePlayerPositions: (state, { payload: { current, next } }: PayloadAction<PlayerPositionUpdate>) =>
         {
             state.gameplay.players.current = current;
@@ -115,7 +119,8 @@ export const HiLoActions = {
     updateOwner: hiloSlice.actions.updateOwner,
     updateWinner: hiloSlice.actions.updateWinner,
     updateButtons: hiloSlice.actions.updateShowButtons,
-    updateCard: hiloSlice.actions.updateCard
+    updateCard: hiloSlice.actions.updateCard,
+    updatePrompt: hiloSlice.actions.updatePrompt
 }
 
 export const HiLoSelectors = {
@@ -129,6 +134,7 @@ export const HiLoSelectors = {
     wasWinner: (state: RootState) => state.hilo.gameplay.controls.wasWinner,
     canShowButtons: (state: RootState) => state.hilo.gameplay.controls.canShowButtons,
     shouldFlip: (state: RootState) => state.hilo.gameplay.controls.flipCard,
+    prompt: (state: RootState) => state.hilo.gameplay.prompt,
     getUser: (uuid: string) =>
     {
         return store.getState().hilo.gameplay.players.players.find(e => e.uuid === uuid)

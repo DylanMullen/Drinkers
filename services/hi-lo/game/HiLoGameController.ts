@@ -47,7 +47,7 @@ async function createDummy(user:User)
 
 async function join(user: User, joinCode: string):Promise<boolean>
 {
-    if (instance !== undefined) return false;
+    if (instance !== undefined) return true;
     
     let res = await sendRequest("join", "POST", <JoinRequest>{
         joinCode,

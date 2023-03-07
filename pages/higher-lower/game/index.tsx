@@ -44,10 +44,9 @@ function HigherLowerGame({ code }: Props)
     const join = async (code: string, user: User) =>
     {
         let status = await HiLoController.join(user, code)
+
         if (!status)
-        {
             code = await HiLoController.create(user, "CARD") ?? ""
-        }
 
         router.push(code === "" ? "/higher-lower" : "/higher-lower/game?code=" + code, undefined, {
             shallow: code !== ""
@@ -61,9 +60,9 @@ function HigherLowerGame({ code }: Props)
         if (user === undefined)
             return;
 
-        if (code === undefined) return;
+        if (!code) return;
 
-        // join(code, user)
+        join(code, user)
     }, [user, code])
 
     return (
@@ -105,10 +104,10 @@ function HigherLowerGame({ code }: Props)
                 {
                     showEditor &&
                     <div className={styles["theme-selector__editor"]}>
-                        <HexColorPicker color={color} onChange={(col)=>setColor(col)} onBlur={()=>setShowEditor(false)}/>
+                        <HexColorPicker color={color} onChange={(col) => setColor(col)} onBlur={() => setShowEditor(false)} />
                     </div>
                 }
-                <button className={styles["theme-selector__btn"]} onClick={()=>setShowEditor(prev=>!prev)}/>
+                <button className={styles["theme-selector__btn"]} onClick={() => setShowEditor(prev => !prev)} />
             </aside>
         </>
     )
@@ -136,8 +135,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext)
         code = await HiLoController.createDummy(user)
 
     return {
+        redirect: !code ? {
+            permanent: false,
+            destination: "/higher-lower"
+        } : undefined,
         props: {
-            code: code as string
+            code: code ?? null
         }
     }
 }

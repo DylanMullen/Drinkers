@@ -17,6 +17,7 @@ type Props = {}
 function ModalHandler({ }: Props)
 {
     const nextPlayer = useAppSelector(HiLoSelectors.nextUser);
+    const prompt = useAppSelector(HiLoSelectors.prompt)
     const { open, update, close } = useModalContext();
 
     const { user } = useUser()
@@ -35,6 +36,26 @@ function ModalHandler({ }: Props)
         }, 500)
         open()
     }, [nextPlayer])
+
+    useEffect(() =>
+    {
+        if (!prompt) {
+            console.log(prompt);
+            return;
+        };
+
+        let user = HiLoSelectors.getUser(prompt.owner)
+        if(!user) return;
+
+        update(
+            <PromptModal 
+                promptOwner={user}
+                text={{title:prompt.title, description:prompt.description}}
+            />,
+            false
+        )
+        open()
+    }, [prompt])
 
     const nextTurn = () =>
     {
