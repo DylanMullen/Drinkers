@@ -107,6 +107,7 @@ $border-colour: #181817;
         overflow: hidden;
         z-index: -10;
 
+        filter: grayscale(100%);
 
         &__wrapper
         {

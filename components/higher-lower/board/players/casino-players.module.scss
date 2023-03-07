@@ -68,6 +68,7 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
         scale: 1;
         position: relative;
+
         span
         {
             border-radius: 50%;
@@ -83,6 +84,7 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 
     }
+
 
     &__username
     {
@@ -106,13 +108,14 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         bottom: -0.5rem;
         z-index: 10;
 
-      
+
 
         // box-shadow: 0px 0px 5px 2px rgba(42, 42, 42, 1);
 
         transition: scale 150ms $pop;
 
         cursor: pointer;
+
         svg
         {
             font-size: 1.5rem;
@@ -122,7 +125,7 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         &--admin
         {
             background-color: #ff8800;
-            background: linear-gradient(0deg, rgba(209,87,8,1) 0%, rgba(255,136,0,1) 100%);
+            background: linear-gradient(0deg, rgba(209, 87, 8, 1) 0%, rgba(255, 136, 0, 1) 100%);
 
 
         }
@@ -130,27 +133,30 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         &--kick
         {
             transform: translateX(calc(100% + 0.25rem)) translateY(0.3rem);
-            background: rgb(172,11,31);
-            background: linear-gradient(0deg, rgba(172,11,31,1) 0%, rgba(224,30,55,1) 100%); 
+            background: rgb(172, 11, 31);
+            background: linear-gradient(0deg, rgba(172, 11, 31, 1) 0%, rgba(224, 30, 55, 1) 100%);
 
             svg
             {
                 font-size: 1rem;
             }
         }
+
         &--promote
         {
-            transform: translateY(calc(100% + 0.25rem)) translateX(0.3rem) ;
+            transform: translateY(calc(100% + 0.25rem)) translateX(0.3rem);
 
             svg
             {
                 font-size: 1rem;
             }
 
-            background: linear-gradient(90deg, rgba(114,81,181,1) 0%, rgba(160,108,213,1) 100%);;
+            background: linear-gradient(90deg, rgba(114, 81, 181, 1) 0%, rgba(160, 108, 213, 1) 100%);
+            ;
         }
 
-        &:hover,&:focus
+        &:hover,
+        &:focus
         {
             scale: 1.05;
         }
@@ -181,12 +187,14 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
         opacity: .5;
         cursor: pointer;
+
         svg
         {
             font-size: 2rem;
         }
 
-        &:hover,&:focus
+        &:hover,
+        &:focus
         {
             scale: 1.05;
             opacity: 1;
@@ -242,6 +250,7 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         color: red;
 
     }
+
     &[data-spot="6"]
     {
 
@@ -268,16 +277,20 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     }
 
-  
 
- 
+
+
 }
 
-@keyframes nextTurn {
-    0% {
+@keyframes nextTurn
+{
+    0%
+    {
         scale: 0.95;
     }
-    100% {
+
+    100%
+    {
         scale: 1.05;
 
     }

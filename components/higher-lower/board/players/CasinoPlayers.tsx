@@ -1,10 +1,10 @@
 import InviteModal from 'components/higher-lower/modals/invite'
 import Tooltip from 'components/shared/tooltip'
 import { useModalContext } from 'context/ModalContext'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import useUser from 'context/UserContext'
 import Image from 'next/image'
-import React, { MouseEvent, ReactNode, useState } from 'react'
+import React, { MouseEvent, ReactNode, useEffect, useState } from 'react'
 import { FaCrown, FaPlus } from 'react-icons/fa'
 import { GiBootKick } from 'react-icons/gi'
 import { IoPersonRemove, IoShieldCheckmark } from 'react-icons/io5'
@@ -68,6 +68,8 @@ function CasinoPlayer({ player, position, isNext, hasAdmin = false }: PlayerProp
 
     const { user } = useUser();
 
+    const isPlayer = player !== undefined;
+
     const click = () =>
     {
         update(<InviteModal />)
@@ -94,8 +96,9 @@ function CasinoPlayer({ player, position, isNext, hasAdmin = false }: PlayerProp
         getHigherLowerInstance().sendPromotionRequest(player.uuid, user.uuid)
     }
 
+
     return (
-        <li className={`${styles["casino-player"]} ${isNext ? styles["casino-player--next"] : ""}`} data-spot={position}>
+        <li className={`${styles["casino-player"]} ${isNext ? styles["casino-player--next"] : ""} `} data-spot={position}>
             {
                 player ?
                     <>
@@ -130,6 +133,7 @@ function CasinoPlayer({ player, position, isNext, hasAdmin = false }: PlayerProp
                                 </>
                             }
                         </span>
+
                         <span className={styles["casino-player__username"]}>{player?.username}</span>
                     </>
                     :

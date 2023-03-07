@@ -63,7 +63,7 @@ function HigherLowerGame({ code }: Props)
 
         if (code === undefined) return;
 
-        join(code, user)
+        // join(code, user)
     }, [user, code])
 
     return (

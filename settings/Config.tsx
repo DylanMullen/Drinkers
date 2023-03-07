@@ -4,7 +4,7 @@ export const TWITTER_URL: string = "https://twitter.com/StillSite";
 
 //
 
-const DEBUG = process.env.USE_LOCAL?.toLowerCase() === "true" ?? false;
+export const DEBUG = process.env.USE_LOCAL?.toLowerCase() === "true" ?? false;
 const LOCAL_IP = process.env.LOCAL_IP
 
 export const URL: string = DEBUG ? `http://${LOCAL_IP}:3000` : "https://drinkers.party"

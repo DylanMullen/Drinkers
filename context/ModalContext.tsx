@@ -1,6 +1,6 @@
 
 // import Backdrop from "components/shared/backdrop";
-import { domAnimation, LazyMotion } from "framer-motion";
+import { AnimatePresence, domAnimation, LazyMotion } from "framer-motion";
 import dynamic from "next/dynamic";
 import React, { lazy, PropsWithChildren, ReactNode, Suspense, useContext, useState } from "react"
 

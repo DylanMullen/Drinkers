@@ -1,11 +1,19 @@
 import React, { PropsWithChildren, useContext, useEffect, useState } from "react";
+import { getRandomAvatar } from "utils/NameUtil";
 import { getUser, logout as logoutUser, saveUser, User } from "utils/UserUtil";
+import { v4 } from "uuid"
 
 type Context = {
     user?: User;
     updateGuest: (name: string) => void,
     updateGuestAvatar: (avatar: string) => void
     logout: () => void
+}
+
+export const dummy: User = {
+    username: "Loading",
+    avatar: getRandomAvatar("Loading"),
+    uuid: v4(),
 }
 
 const initial: Context = {
