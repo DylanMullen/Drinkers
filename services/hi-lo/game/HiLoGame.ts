@@ -1,7 +1,8 @@
+import { CardStyle } from "components/shared/playing-card/PlayingCard"
 import store from "redux/store"
 import Game from "services/game/Game"
 import { GameResponse } from "services/game/GameSocket"
-import { HigherLowerPlayer, NewPlayer, NextTurnUpdate, Prompt } from "../models/models"
+import { HigherLowerPlayer, NewPlayer, NextTurnUpdate, Prompt, Theme } from "../models/models"
 import { HiLoActions, HiLoSelectors, hiloSlice } from "../redux/slice"
 
 export default class HiLoGame extends Game
@@ -13,6 +14,7 @@ export default class HiLoGame extends Game
 
     handle(data: GameResponse): void
     {
+        console.log(data)
         switch (data.id)
         {
             case 0: this.handleGameState(data.body.started); break;
@@ -22,6 +24,7 @@ export default class HiLoGame extends Game
             case 4: this.handleLeave(data.body.uuid); break;
             case 5: this.handlePromoted(data.body.uuid); break;
             case 6: this.handlePrompt(data.body); break;
+            case 7: this.handleTheme(data.body);break;
             default: break;
         }
     }
@@ -105,6 +108,32 @@ export default class HiLoGame extends Game
         })
     }
 
+    sendTableAdjust(color: string, sender: string)
+    {
+        this.send({
+            id: 7,
+            sender,
+            content: {
+                type: "table",
+                table: color
+            }
+        })
+    }
+
+    sendCardTheme(style: CardStyle[], sender: string)
+    {
+        this.send({
+            id: 7,
+            sender,
+            content: {
+                type: "card",
+                red: style[0],
+                black: style[1]
+            }
+        })
+    }
+
+
     handleNextTurn(nextTurn: NextTurnUpdate)
     {
         store.dispatch(HiLoActions.nextTurn(nextTurn))
@@ -137,6 +166,11 @@ export default class HiLoGame extends Game
     {
         console.log(prompt)
         store.dispatch(HiLoActions.updatePrompt(prompt))
+    }
+
+    handleTheme(theme: Theme)
+    {
+        store.dispatch(HiLoActions.updateTheme(theme))
     }
 
     isOwner(uuid: string)

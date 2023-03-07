@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import store, { RootState } from "redux/store";
-import HiLoGameState, { Prompt } from "../models/models";
+import HiLoGameState, { Prompt, Theme } from "../models/models";
 import HiLoGame, { HigherLowerPlayer, NextTurnUpdate, PlayerPositionUpdate } from "../models/models";
 
 
@@ -14,6 +14,7 @@ const initialState: HiLoGameState = {
     },
     gameplay: {
         currentNumber: -1,
+        suite: 0,
         players: {
             current: "",
             next: "",
@@ -28,6 +29,28 @@ const initialState: HiLoGameState = {
             wasWinner: false,
             flipCard: false
         }
+    },
+    theme: {
+        table: "#137547",
+        red: {
+            card: {
+                cardBackground: "#1b1b1b",
+            },
+            pips: {
+                color: "#e01e37",
+                size: "1.75rem"
+            }
+        },
+        black: {
+            card: {
+                cardBackground: "#1b1b1b",
+            },
+            pips: {
+                color: "#dee2e6",
+                size: "1.75rem"
+            }
+        }
+
     }
 }
 
@@ -47,6 +70,10 @@ export const hiloSlice = createSlice({
                     controls: {
                         ...state.gameplay.controls
                     }
+                },
+                theme: {
+                    ...state.theme,
+                    ...action.payload.theme
                 }
             }
         },
@@ -101,6 +128,13 @@ export const hiloSlice = createSlice({
         updateCard: (state, action: PayloadAction<boolean>) =>
         {
             state.gameplay.controls.flipCard = action.payload
+        },
+        updateTheme: (state, action: PayloadAction<Theme>) =>
+        {
+            state.theme = {
+                ...state.theme,
+                ...action.payload,
+            }
         }
     }
 })
@@ -120,11 +154,13 @@ export const HiLoActions = {
     updateWinner: hiloSlice.actions.updateWinner,
     updateButtons: hiloSlice.actions.updateShowButtons,
     updateCard: hiloSlice.actions.updateCard,
-    updatePrompt: hiloSlice.actions.updatePrompt
+    updatePrompt: hiloSlice.actions.updatePrompt,
+    updateTheme: hiloSlice.actions.updateTheme
 }
 
 export const HiLoSelectors = {
     settings: (state: RootState) => state.hilo.settings,
+    started: (state: RootState) => state.hilo.settings.started,
     game: (state: RootState) => state.hilo.gameplay,
     users: (state: RootState) => state.hilo.gameplay.players.players,
     currentUser: (state: RootState) => state.hilo.gameplay.players.current,
@@ -135,6 +171,7 @@ export const HiLoSelectors = {
     canShowButtons: (state: RootState) => state.hilo.gameplay.controls.canShowButtons,
     shouldFlip: (state: RootState) => state.hilo.gameplay.controls.flipCard,
     prompt: (state: RootState) => state.hilo.gameplay.prompt,
+    theme: (state: RootState) => state.hilo.theme,
     getUser: (uuid: string) =>
     {
         return store.getState().hilo.gameplay.players.players.find(e => e.uuid === uuid)

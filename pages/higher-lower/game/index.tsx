@@ -15,10 +15,10 @@ import useUser from 'context/UserContext';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head'
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { useAppSelector } from 'redux/store';
 import { HiLoController } from 'services/hi-lo/game/HiLoGameController';
-import { HiLoSelectors } from 'services/hi-lo/redux/slice';
+import { HiLoSelectors, hiloSlice } from 'services/hi-lo/redux/slice';
 
 import styles from 'styles/pages/higher-lower/game.module.scss'
 import { User } from 'utils/UserUtil';
@@ -26,18 +26,19 @@ import { User } from 'utils/UserUtil';
 import TextLogo from 'public/weblogo-text.svg'
 import Image from 'next/image';
 import { HexColorPicker } from 'react-colorful';
+import Lobby from 'components/higher-lower/lobby';
 
 type Props = { code: string }
 
-const poolTable = ["#008eba", "#137547", "#800080"]
 
 function HigherLowerGame({ code }: Props)
 {
+    const started = useAppSelector(HiLoSelectors.started);
+    const theme = useAppSelector(HiLoSelectors.theme)
+
     const { user } = useUser()
     const { hideNavigationButton, hide } = useNavigation();
 
-    const [color, setColor] = useState(poolTable[Math.floor(Math.random() * poolTable.length)])
-    const [showEditor, setShowEditor] = useState(false);
 
     const router = useRouter()
 
@@ -73,10 +74,8 @@ function HigherLowerGame({ code }: Props)
             <ModalHandler />
             <main className={styles["game"]}>
                 <div className={styles["game__board"]}>
-                    <CasinoBoard players={getCasinoPlayers()}
-                        casinoStyle={{
-                            tableTop: color
-                        }}
+                    <CasinoBoard
+                        players={<CasinoPlayerWrapper />}
                     >
                         <div className={styles["game__logo"]}>
                             <Image
@@ -85,45 +84,39 @@ function HigherLowerGame({ code }: Props)
                                 objectFit='contain'
                             />
                         </div>
-                        <div className={styles["game__cards"]}>
-                            <HiLoCards />
-                        </div>
+                        {
+                            started ?
+                                <div className={styles["game__cards"]}>
+                                    <HiLoCards />
+                                </div>
+                                :
+                                <Lobby />
+                        }
                     </CasinoBoard>
                 </div>
             </main>
-
-            <aside className={styles["theme-selector"]}>
-                {
-                    poolTable.map(e =>
-                    {
-                        return (
-                            <button className={styles["theme-selector__btn"]} style={{ background: e }} onClick={() => setColor(e)} />
-                        )
-                    })
-                }
-                {
-                    showEditor &&
-                    <div className={styles["theme-selector__editor"]}>
-                        <HexColorPicker color={color} onChange={(col) => setColor(col)} onBlur={() => setShowEditor(false)} />
-                    </div>
-                }
-                <button className={styles["theme-selector__btn"]} onClick={() => setShowEditor(prev => !prev)} />
-            </aside>
         </>
     )
 }
 
-function getCasinoPlayers()
+function CasinoPlayerWrapper()
 {
     const players = useAppSelector(HiLoSelectors.users);
+    const id = useAppSelector(HiLoSelectors.settings).gameID;
 
 
     return (
-        <CasinoPlayers
-            users={players}
-        />
+        <>
+            {
+                id !== "" &&
+                <CasinoPlayers
+                    users={players}
+                />
+            }
+        </>
     )
 }
+
 
 export async function getServerSideProps(context: GetServerSidePropsContext)
 {

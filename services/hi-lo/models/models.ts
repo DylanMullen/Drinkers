@@ -1,3 +1,4 @@
+import { CardStyle } from "components/shared/playing-card/PlayingCard";
 import { User } from "utils/UserUtil";
 
 export default interface HiLoGameState
@@ -7,10 +8,11 @@ export default interface HiLoGameState
         joinCode: string
         ownerID: string,
         type: "DICE" | "CARD",
-        started: boolean
+        started: boolean,
     },
     gameplay: {
         currentNumber: number,
+        suite: number,
         rounds: {
             currentRound: number,
             maxRounds: number,
@@ -26,8 +28,15 @@ export default interface HiLoGameState
             wasWinner: boolean,
             flipCard: boolean
         }
-    }
+    },
+    theme: Theme
 
+}
+
+export type Theme = {
+    table: string,
+    red: CardStyle,
+    black: CardStyle
 }
 
 

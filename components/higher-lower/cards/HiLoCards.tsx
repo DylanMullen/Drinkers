@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from 'redux/store';
 import { HiLoActions, HiLoSelectors, hiloSlice } from 'services/hi-lo/redux/slice';
 import HiLoCard from '../card/HiLoCard'
 
-import {motion} from 'framer-motion'
+import { motion } from 'framer-motion'
 
 import styles from './hilo-cards.module.scss'
 import useUser from 'context/UserContext';
@@ -109,6 +109,7 @@ function HiLoCards()
     const canShowButtons = useAppSelector(HiLoSelectors.canShowButtons);
     const wasWinner = useAppSelector(HiLoSelectors.wasWinner)
     const prompt = useAppSelector(HiLoSelectors.prompt);
+    const theme = useAppSelector(HiLoSelectors.theme)
 
     const { user } = useUser();
 
@@ -149,13 +150,15 @@ function HiLoCards()
         }, 750)
     }, [flip])
 
-    useEffect(()=>{
-        if(previous !== -1)return;
+    useEffect(() =>
+    {
+        if (previous !== -1) return;
         setPrevious(currentNumber)
-    },[currentNumber])
+    }, [currentNumber])
 
-    let showButtons = ((user?.uuid === nextPlayerUUID || (nextPlayer?.bot === true && user?.uuid === settings.ownerID)) && canShowButtons && !wasWinner) && !prompt ;
-
+    let showButtons = ((user?.uuid === nextPlayerUUID || (nextPlayer?.bot === true && user?.uuid === settings.ownerID)) && canShowButtons && !wasWinner) && !prompt;
+    
+    let style = getStyle([theme.red, theme.black])
     return (
         <div className={styles["hilo-cards"]}>
             <HiLoCard showButtons={false}>
@@ -164,7 +167,9 @@ function HiLoCards()
                         face: previous,
                         suite: 0
                     }}
-                    cardStyles={{ red: cardStyles[0], black: cardStyles[1] }}
+                    cardStyles={{ 
+                        red: style.red, 
+                        black: style.black }}
                     flipSettings={{ clickable: false, defaultFlipped: false, flipAnimation: variants(false), flipCallback: () => { } }}
                 />
 
@@ -172,7 +177,7 @@ function HiLoCards()
             <HiLoCard showButtons={showButtons}>
                 <div className={styles["hilo-cards__stacked"]}>
                     <PlayingCard
-                        cardStyles={{ red: cardStyles[0], black: cardStyles[1] }}
+                        cardStyles={{ red: style.red, black: style.black }}
                         flipSettings={{ clickable: false, defaultFlipped: true }}
                     />
                 </div>
@@ -181,7 +186,7 @@ function HiLoCards()
                         face: currentNumber,
                         suite: 0
                     }}
-                    cardStyles={{ red: cardStyles[0], black: cardStyles[1] }}
+                    cardStyles={{ red: style.red, black: style.black }}
                     flipSettings={{
                         clickable: false,
                         defaultFlipped: true,
@@ -194,6 +199,28 @@ function HiLoCards()
             </HiLoCard>
         </div>
     )
+}
+
+function getStyle(styles:CardStyle[]){
+
+    return {
+        red:{
+            ...styles[0],
+            card: {
+                ...styles[0].card,
+                width: "10rem",
+                height: "calc(10rem * 1.4)"
+            }
+        },
+        black: {
+            ...styles[1],
+            card: {
+                ...styles[1].card,
+                width: "10rem",
+                height: "calc(10rem * 1.4)"
+            }
+        }
+    }
 }
 
 function HiLoCardsWrapper()
@@ -229,8 +256,8 @@ function HiLoCardsWrapper()
                 <div className={styles["hilo-wrapper__ribbon"]}>
                     <Ribbon text='Winner Winner' show={showWinner} callback={updateWinner} />
                 </div>
-                <motion.div initial={{scale:0.75, opacity:0}} animate={{scale:1, opacity:1, transition:{ duration: 1}}}>
-                <HiLoCards />
+                <motion.div initial={{ scale: 0.75, opacity: 0 }} animate={{ scale: 1, opacity: 1, transition: { duration: 1 } }}>
+                    <HiLoCards />
                 </motion.div>
             </motion.div>
         </>

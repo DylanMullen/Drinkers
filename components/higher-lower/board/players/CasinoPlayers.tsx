@@ -68,8 +68,6 @@ function CasinoPlayer({ player, position, isNext, hasAdmin = false }: PlayerProp
 
     const { user } = useUser();
 
-    const isPlayer = player !== undefined;
-
     const click = () =>
     {
         update(<InviteModal />)
@@ -98,7 +96,9 @@ function CasinoPlayer({ player, position, isNext, hasAdmin = false }: PlayerProp
 
 
     return (
-        <li className={`${styles["casino-player"]} ${isNext ? styles["casino-player--next"] : ""} `} data-spot={position}>
+        <motion.li className={`${styles["casino-player"]} ${isNext ? styles["casino-player--next"] : ""} `} data-spot={position}
+            initial={{opacity: 0, translateY: "-5rem"}} animate={{opacity: 1, translateY: "0rem", transition:{delay: (position-1) * 0.25}}}
+        >
             {
                 player ?
                     <>
@@ -144,7 +144,7 @@ function CasinoPlayer({ player, position, isNext, hasAdmin = false }: PlayerProp
                     </>
             }
 
-        </li>
+        </motion.li>
     )
 }
 

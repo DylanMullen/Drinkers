@@ -5,36 +5,51 @@ import styles from './casino-board.module.scss'
 
 import Watermark from 'public/watermark.svg'
 import CasinoPlayers from './players/CasinoPlayers'
+import { useAppSelector } from 'redux/store'
+import { HiLoSelectors } from 'services/hi-lo/redux/slice'
 
 type Props = React.PropsWithChildren & {
+  // casinoStyle?: {
+  //   tableTop?: string,
+  //   inner?: string,
+  //   outer?: string
+  // }
+}
+
+type WrapperProps = React.PropsWithChildren & {
   players?: ReactNode
-  casinoStyle?: {
-    tableTop?: string,
-    inner?: string,
-    outer?: string
-  }
 }
 
 
-function CasinoBoard({ players, casinoStyle = {}, children }: Props)
+function CasinoBoard({ children }: Props)
+{
+  const theme = useAppSelector(HiLoSelectors.theme)
+  return (
+    <div className={styles["casino-board"]} style={{ backgroundColor: theme.table }}>
+      <div className={styles["casino-board__content"]}>
+        <div className={styles["casino-board__watermark__wrapper"]}>
+          <div className={styles["casino-board__watermark"]} />
+        </div>
+        <div className={styles["casino-board__children"]}>
+          {children}
+        </div>
+      </div>
+      <div className={styles["casino-board__edges"]}
+        style={{ boxShadow: getBoxShadow("#181817", "#131312") }}
+      />
+    </div>
+
+  )
+}
+
+function CasinoBoardWrapper({ players, children }: WrapperProps)
 {
   return (
     <div className={styles["casino-board__wrapper"]}>
+      <CasinoBoard>
+        {children}
+      </CasinoBoard>
       {players}
-
-      <div className={styles["casino-board"]} style={{ backgroundColor: casinoStyle?.tableTop }}>
-        <div className={styles["casino-board__content"]}>
-          <div className={styles["casino-board__watermark__wrapper"]}>
-            <div className={styles["casino-board__watermark"]} />
-          </div>
-          <div className={styles["casino-board__children"]}>
-            {children}
-          </div>
-        </div>
-        <div className={styles["casino-board__edges"]}
-          style={{ boxShadow: getBoxShadow(casinoStyle.inner ?? "#181817", casinoStyle.outer ?? "#131312") }}
-        />
-      </div>
     </div>
   )
 }
@@ -54,4 +69,4 @@ function getBoxShadow(inner: string, outer: string)
 
 
 
-export default CasinoBoard
+export default CasinoBoardWrapper
