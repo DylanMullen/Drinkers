@@ -259,10 +259,10 @@ $vw-desktop: 1200px;
             top: 1rem;
         }
 
-        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 200px))
+        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 100px))
         {
-            // top: 4rem;
             left: 0;
+            top: 15%;
         }
     }
 
@@ -286,10 +286,11 @@ $vw-desktop: 1200px;
 
         }
 
-        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 200px))
+        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 100px))
         {
             // top: 4rem;
             right: 0;
+            top: 15%;
         }
     }
 
@@ -309,14 +310,14 @@ $vw-desktop: 1200px;
 
         @media (min-width: calc($vw-mobile + 100px)) and (max-width: $vw-tablet)
         {
-            left: 0;
             top: 25%;
         }
-
-        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 200px))
+        
+        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 100px))
         {
             // top: 35%;
             left: 0;
+            left: -1.75rem;
         }
     }
 
@@ -343,10 +344,10 @@ $vw-desktop: 1200px;
             top: 25%;
         }
 
-        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 200px))
+        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 100px))
         {
             // top: 35%;
-            right: 0;
+            right: -1.75rem;
         }
     }
 
@@ -371,7 +372,7 @@ $vw-desktop: 1200px;
             bottom: 25%;
         }
 
-        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 200px))
+        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 100px))
         {
             // top: 35%;
             left: 5rem;
@@ -399,7 +400,7 @@ $vw-desktop: 1200px;
             bottom: 25%;
         }
 
-        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 200px))
+        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 100px))
         {
             // top: 35%;
             right: 5rem;
@@ -430,7 +431,7 @@ $vw-desktop: 1200px;
             bottom: 1rem;
         }
 
-        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 200px))
+        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 100px))
         {
             // top: 35%;
             left: 30%;
@@ -458,7 +459,7 @@ $vw-desktop: 1200px;
             bottom: 1rem;
         }
 
-        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 200px))
+        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 100px))
         {
             // top: 35%;
             right: 30%;

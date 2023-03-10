@@ -169,7 +169,7 @@ $vw-desktop: 1200px;
         // height: 100%;
         // height: 55rem;
 
-        aspect-ratio: 1 / 0.4824;
+        aspect-ratio: 1 / 0.49;
 
         padding: 2rem 10rem;
         position: relative;
@@ -179,6 +179,7 @@ $vw-desktop: 1200px;
 
         translate: 0 -3rem;
         
+
         @media (min-width: 0px) and (max-width: calc($vw-mobile + 100px))
         {
             transform: none;
@@ -206,18 +207,18 @@ $vw-desktop: 1200px;
             aspect-ratio: none;
 
             width: 100%;
-            aspect-ratio: 1 / 0.7;
+            aspect-ratio: 1 / 0.9;
 
             // height: 100%;
             padding: 2rem 2rem ;
         }
 
-        @media (min-width:  calc($vw-tablet + 150px)) and (max-width: calc($vw-desktop + 200px)) {
+        @media (min-width:  calc($vw-tablet + 150px)) and (max-width: calc($vw-desktop + 100px)) {
             transform: none;
             aspect-ratio: none;
 
             width: 100%;
-            aspect-ratio: 1 / 0.6;
+            aspect-ratio: 1 / 0.8;
 
             // height: 100%;
             padding: 2rem 2rem ;

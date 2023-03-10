@@ -13,7 +13,8 @@ $vw-desktop: 1200px;
     // padding: .5rem;
 
     border-radius: .65rem;
-
+    min-width: 10rem;
+    
     &__controls
     {
         position: absolute;
@@ -24,6 +25,11 @@ $vw-desktop: 1200px;
         top: 50%;
 
         transform: translate(calc(100% + 2.5rem), -50%);
+    }
+
+    &__card
+    {
+        font-size: 1.75rem;
     }
 
     &__btn

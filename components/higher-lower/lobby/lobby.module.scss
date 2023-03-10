@@ -1,3 +1,9 @@
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+$vw-desktop: 1200px;
+
+
 .hilo-lobby
 {
     // width: 100%;
@@ -26,6 +32,7 @@
 
         background-color: #2a2a2a;
         border-radius: 500px;
+        text-align: center;
     }
 
     &__settings
@@ -42,6 +49,12 @@
         display: flex;
 
         gap: 5rem;
+
+        @media (min-width:  0) and (max-width: calc($vw-tablet))
+        {
+            gap: 0rem;
+            flex-direction: column;
+        }
     }
 
     &__theme
@@ -150,4 +163,6 @@
 
         transform: translate(-50%, calc(-100% - 1rem));
     }
+
+
 }

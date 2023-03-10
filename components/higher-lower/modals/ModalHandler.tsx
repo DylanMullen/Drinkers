@@ -88,7 +88,7 @@ function ModalHandler({ }: Props)
     return (
         <>
             {
-                false &&
+                true &&
                 <div className={styles["debug-panel"]}>
                     <h1 className={styles["debug-panel__title"]}>Debug</h1>
                     <div className={styles["debug-panel__buttons"]}>
