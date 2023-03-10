@@ -1,6 +1,7 @@
 import { randomName } from "components/waterfall/lobby/profile-editor/ProfileEditor"
 import { deleteCookie, getCookie, hasCookie, setCookie } from "cookies-next"
 import { v4 } from "uuid"
+import { getRandomAvatar } from "./NameUtil"
 
 export type User = {
     uuid: string
@@ -38,12 +39,25 @@ export function getDefaultUser(): User
     }
 }
 
+export function createServerSideCookie(req:any, res:any)
+{
+    setCookie("user", {
+        uuid: v4(),
+        username: randomName(),
+        avatar: getRandomAvatar(randomName()),
+        guest: true
+    }, {
+        req,
+        res
+    })
+}
+
 function createCookie(): User
 {
     setCookie("user", {
         uuid: v4(),
         username: randomName(),
-        avatar: "https://ca.slack-edge.com/T0266FRGM-U011PLSSMA9-g7e8a6705c42-512",
+        avatar: getRandomAvatar(randomName()),
         guest: true
     })
     return JSON.parse(getCookie("user") as string);

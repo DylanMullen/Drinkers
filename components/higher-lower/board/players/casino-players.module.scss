@@ -1,4 +1,10 @@
+@use "sass:math";
+
 $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+$vw-desktop: 1200px;
 
 
 .casino-players
@@ -6,7 +12,6 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     // background-color: red;
     width: 100%;
     height: 100%;
-
     margin: 0;
     padding: 0;
 
@@ -14,13 +19,14 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     left: 0;
     top: 0;
 
-    // z-index: 1;
+    z-index: 100;
 
     list-style: none;
 
     perspective: 1500px;
 
     pointer-events: none;
+
 
     transform: translateZ(0px);
 
@@ -43,6 +49,16 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     pointer-events: all;
 
+    // background-color: yellow;
+
+    @media (min-width: 0px) and (max-width: calc($vw-mobile + 100px))
+    {
+        gap: .5rem;
+
+    }
+
+
+
     &--next
     {
         .casino-player__avatar
@@ -57,11 +73,9 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     &__avatar
     {
         font-size: 0;
-        width: fit-content;
-        height: fit-content;
 
         box-shadow: 0 0 2rem .75rem rgba(22, 22, 22, 0.2);
-
+        width: 7rem;
         border-radius: 50%;
 
         scale: 1;
@@ -78,8 +92,14 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
             width: 100%;
             height: 100%;
+
+
         }
 
+        @media (min-width: 0px) and (max-width: calc($vw-tablet + 450px))
+        {
+            width: 4rem;
+        }
 
     }
 
@@ -88,6 +108,11 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     {
         color: white;
         font-size: 1.75rem;
+
+        @media (min-width: 0px) and (max-width: calc($vw-tablet + 450px))
+        {
+            font-size: 1.5rem;
+        }
     }
 
     &__admin-btn
@@ -189,6 +214,11 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         svg
         {
             font-size: 2rem;
+
+            @media (min-width: 0px) and (max-width: calc($vw-tablet + 450px))
+            {
+                font-size: 1rem;
+            }
         }
 
         &:hover,
@@ -213,6 +243,27 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         left: 8%;
         color: red;
         // transform: translate(100%);
+
+        @media (min-width: 0px) and (max-width: calc($vw-mobile + 100px))
+        {
+            left: 0;
+            top: 0;
+
+            translate: -.5rem;
+            rotate: -45deg;
+        }
+
+        @media (min-width: calc($vw-mobile + 100px)) and (max-width: $vw-tablet)
+        {
+            left: 5rem;
+            top: 1rem;
+        }
+
+        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 200px))
+        {
+            // top: 4rem;
+            left: 0;
+        }
     }
 
     &[data-spot="8"]
@@ -220,42 +271,139 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         top: 10%;
         right: 8%;
 
+        @media (min-width: 0px) and (max-width: calc($vw-mobile + 100px))
+        {
+            right: 0;
+            top: 0;
+            translate: .5rem;
+            rotate: 45deg;
+        }
+
+        @media (min-width: calc($vw-mobile + 100px)) and (max-width: $vw-tablet)
+        {
+            right: 5rem;
+            top: 1rem;
+
+        }
+
+        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 200px))
+        {
+            // top: 4rem;
+            right: 0;
+        }
     }
 
     &[data-spot="2"]
     {
         left: 5%;
         top: 40%;
-        color: red;
 
+        @media (min-width: 0px) and (max-width: calc($vw-mobile + 100px))
+        {
+            left: 0;
+            top: 25%;
+            translate: -.5rem;
+            rotate: -90deg;
+
+        }
+
+        @media (min-width: calc($vw-mobile + 100px)) and (max-width: $vw-tablet)
+        {
+            left: 0;
+            top: 25%;
+        }
+
+        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 200px))
+        {
+            // top: 35%;
+            left: 0;
+        }
     }
 
 
     &[data-spot="7"]
     {
         right: 5%;
-        top: 20rem;
+        top: 40%;
         color: red;
 
+        @media (min-width: 0px) and (max-width: calc($vw-mobile + 100px))
+        {
+            right: 0;
+            top: 25%;
 
+            translate: .5rem;
+            rotate: 90deg;
+
+        }
+
+        @media (min-width: calc($vw-mobile + 100px)) and (max-width: $vw-tablet)
+        {
+            right: 0;
+            top: 25%;
+        }
+
+        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 200px))
+        {
+            // top: 35%;
+            right: 0;
+        }
     }
 
 
     &[data-spot="3"]
     {
         left: 13%;
-        bottom: 15%;
+        bottom: 12%;
         color: red;
 
+        @media (min-width: 0px) and (max-width: calc($vw-mobile + 100px))
+        {
+            left: 0;
+            bottom: 25%;
+            translate: -.5rem;
+            rotate: -90deg;
+        }
+
+        @media (min-width: calc($vw-mobile + 100px)) and (max-width: $vw-tablet)
+        {
+            left: 0;
+            bottom: 25%;
+        }
+
+        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 200px))
+        {
+            // top: 35%;
+            left: 5rem;
+        }
     }
 
     &[data-spot="6"]
     {
 
         right: 13%;
-        bottom: 15%;
+        bottom: 12%;
         color: red;
 
+        @media (min-width: 0px) and (max-width: calc($vw-mobile + 100px))
+        {
+            right: 0;
+            bottom: 25%;
+            translate: .5rem;
+            rotate: 90deg;
+        }
+
+        @media (min-width: calc($vw-mobile + 100px)) and (max-width: $vw-tablet)
+        {
+            right: 0;
+            bottom: 25%;
+        }
+
+        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 200px))
+        {
+            // top: 35%;
+            right: 5rem;
+        }
     }
 
     &[data-spot="4"]
@@ -265,6 +413,28 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         bottom: 1%;
         color: rgb(194, 53, 53);
 
+        @media (min-width: 0px) and (max-width: calc($vw-mobile + 100px))
+        {
+            left: 0;
+            bottom: 0;
+
+
+            translate: .5rem;
+            rotate: -135deg;
+
+        }
+
+        @media (min-width: calc($vw-mobile + 100px)) and (max-width: $vw-tablet)
+        {
+            left: 5rem;
+            bottom: 1rem;
+        }
+
+        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 200px))
+        {
+            // top: 35%;
+            left: 30%;
+        }
     }
 
     &[data-spot="5"]
@@ -273,10 +443,27 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         bottom: 1%;
         color: red;
 
+        @media (min-width: 0px) and (max-width: calc($vw-mobile + 100px))
+        {
+            right: 0;
+            bottom: 0;
+
+            translate: -.5rem;
+            rotate: 135deg;
+        }
+
+        @media (min-width: calc($vw-mobile + 100px)) and (max-width: $vw-tablet)
+        {
+            right: 5rem;
+            bottom: 1rem;
+        }
+
+        @media (min-width: calc($vw-tablet)) and (max-width: calc($vw-desktop + 200px))
+        {
+            // top: 35%;
+            right: 30%;
+        }
     }
-
-
-
 
 }
 

@@ -120,7 +120,7 @@ function PromptModal({ promptOwner, timeOut, text: { title, description } = { ti
                 dispatch(HiLoActions.updatePrompt(undefined))
                 close()
             }, 1000)
-        }, timeOut ?? 1000)
+        }, 3000)
 
     }, [shouldEnd])
 

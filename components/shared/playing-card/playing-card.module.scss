@@ -6,7 +6,7 @@ $bg: rgb(252, 252, 252);
 
 .playing-card
 {
-    width: 18rem;
+    width: 100%;
     aspect-ratio: 1 / $ratio;
 
     position: relative;
@@ -14,7 +14,7 @@ $bg: rgb(252, 252, 252);
     perspective: 1000px;
     transform-style: preserve-3d;
     backface-visibility: hidden;
-
+    font-size: inherit;
 
     &__back,
     &__front
@@ -58,7 +58,7 @@ $bg: rgb(252, 252, 252);
 
     &__pip
     {
-        font-size: 0;
+        // font-size: 0;
 
         text-align: center;
         grid-row: span 2;

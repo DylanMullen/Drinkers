@@ -103,9 +103,11 @@ const variants: (flipped: boolean) => Variants = (flipped: boolean) =>
 function HiLoCards()
 {
     const currentNumber = useAppSelector(HiLoSelectors.currentNumber)
+    const suite = useAppSelector(HiLoSelectors.suite)
+
     const flip = useAppSelector(HiLoSelectors.shouldFlip)
     const settings = useAppSelector(HiLoSelectors.settings)
-    const nextPlayerUUID = useAppSelector(HiLoSelectors.nextUser)
+    const nextPlayerUUID = useAppSelector(HiLoSelectors.currentUser)
     const canShowButtons = useAppSelector(HiLoSelectors.canShowButtons);
     const wasWinner = useAppSelector(HiLoSelectors.wasWinner)
     const prompt = useAppSelector(HiLoSelectors.prompt);
@@ -157,7 +159,7 @@ function HiLoCards()
     }, [currentNumber])
 
     let showButtons = ((user?.uuid === nextPlayerUUID || (nextPlayer?.bot === true && user?.uuid === settings.ownerID)) && canShowButtons && !wasWinner) && !prompt;
-    
+
     let style = getStyle([theme.red, theme.black])
     return (
         <div className={styles["hilo-cards"]}>
@@ -165,11 +167,12 @@ function HiLoCards()
                 <PlayingCard
                     settings={{
                         face: previous,
-                        suite: 0
+                        suite: suite
                     }}
-                    cardStyles={{ 
-                        red: style.red, 
-                        black: style.black }}
+                    cardStyles={{
+                        red: style.red,
+                        black: style.black
+                    }}
                     flipSettings={{ clickable: false, defaultFlipped: false, flipAnimation: variants(false), flipCallback: () => { } }}
                 />
 
@@ -184,7 +187,7 @@ function HiLoCards()
                 <PlayingCard
                     settings={{
                         face: currentNumber,
-                        suite: 0
+                        suite: suite
                     }}
                     cardStyles={{ red: style.red, black: style.black }}
                     flipSettings={{
@@ -201,23 +204,32 @@ function HiLoCards()
     )
 }
 
-function getStyle(styles:CardStyle[]){
+function getStyle(styles: CardStyle[]): { red: CardStyle, black: CardStyle }
+{
 
     return {
-        red:{
+        red: {
             ...styles[0],
             card: {
                 ...styles[0].card,
-                width: "10rem",
-                height: "calc(10rem * 1.4)"
+                // width: "100%",
+                // height: "calc(10rem * 1.4)"
+            },
+            pips: {
+                ...styles[0].pips,
+                size: "1em"
             }
         },
         black: {
             ...styles[1],
             card: {
                 ...styles[1].card,
-                width: "10rem",
-                height: "calc(10rem * 1.4)"
+                // width: "10rem",
+                // height: "calc(10rem * 1.4)"
+            },
+            pips: {
+                ...styles[1].pips,
+                size: "1em"
             }
         }
     }

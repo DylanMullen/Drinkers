@@ -1,11 +1,14 @@
 $border-colour: #181817;
-
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+$vw-desktop: 1200px;
 .casino-board
 {
 
     left: 0;
 
-    transform:  rotateX(35deg) translateY(-3rem);
+    transform:  rotateX(35deg) ;
     width: 100%;
     height: 100%;
     background-color: #800080;
@@ -102,7 +105,8 @@ $border-colour: #181817;
         // mask-size: 35%;
         background-image:  url("https://www.transparenttextures.com/patterns/pool-table.png"), url("https://www.transparenttextures.com/patterns/cartographer.png"), ;;
         // opacity: .75;
-        // background-size: 35%;
+
+
         transform: rotateZ(35DEG) translateX(-30%) translateY(-10%);
         overflow: hidden;
         z-index: -10;
@@ -161,15 +165,97 @@ $border-colour: #181817;
 
     &__wrapper
     {
-        width: 95vw;
+        width: 100%;
         // height: 100%;
-        height: 55rem;
+        // height: 55rem;
+
+        aspect-ratio: 1 / 0.4824;
 
         padding: 2rem 10rem;
         position: relative;
         
         perspective: 1500px;
         z-index: 0;
+
+        translate: 0 -3rem;
+        
+        @media (min-width: 0px) and (max-width: calc($vw-mobile + 100px))
+        {
+            transform: none;
+            aspect-ratio: none;
+
+            width: 100%;
+            height: 100%;
+            padding: 2rem 3rem ;
+
+            translate: 0 0;
+        }
+
+        @media (min-width:  calc($vw-mobile + 100px)) and (max-width: calc($vw-tablet)) {
+            transform: none;
+            translate: 0 0;
+
+            aspect-ratio: none;
+
+            width: 100%;
+            height: 100%;
+            padding: 2rem 5rem ;
+        }
+        @media (min-width:  $vw-tablet) and (max-width: calc($vw-tablet + 150px)) {
+            transform: none;
+            aspect-ratio: none;
+
+            width: 100%;
+            aspect-ratio: 1 / 0.7;
+
+            // height: 100%;
+            padding: 2rem 2rem ;
+        }
+
+        @media (min-width:  calc($vw-tablet + 150px)) and (max-width: calc($vw-desktop + 200px)) {
+            transform: none;
+            aspect-ratio: none;
+
+            width: 100%;
+            aspect-ratio: 1 / 0.6;
+
+            // height: 100%;
+            padding: 2rem 2rem ;
+        }
+
+    }
+    @media (min-width: 0px) and (max-width: $vw-tablet)
+    {
+        transform: none;
+
+        border-radius: 500px;
+
+        &__watermark
+        {
+            width: 300%;
+            transform: rotateZ(35DEG) translateX(-50%) translateY(-10%);
+        }
+
+        &__edges
+        {
+            // display: none;
+
+            box-shadow:       
+
+            inset 0px 0px 0px .5rem #131312,
+            inset 0px 0px 0px .75rem #181817,
+            inset 0px 0px 8rem .25rem rgba(0,0,0,0.75) !important
+        }
     }
 
+
+    &__players
+    {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+
+        transform: translate(-50%, calc(-50% + 3.35rem));
+        z-index: 10;
+    }
 }

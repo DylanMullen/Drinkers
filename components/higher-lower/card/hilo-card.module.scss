@@ -1,4 +1,8 @@
 $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+$vw-desktop: 1200px;
 
 
 .hilo-card
@@ -82,4 +86,60 @@ $pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
             scale: 0.9;
         }
     }
+
+    @media (min-width:  0px) and (max-width: calc($vw-mobile + 100px))
+    {
+        min-width: 7rem;
+
+        &__controls
+        {
+            // transform: translate(50%);
+            flex-direction: row;
+            transform: none;
+            right: 100%;
+            top: 100%;
+            transform: translateX(45%) translateY(2rem);
+        }
+
+        &__card
+        {
+            font-size: 1.2rem;
+        }
+    }
+
+    @media (min-width:  calc($vw-mobile + 100px)) and (max-width: calc($vw-tablet))
+    {
+        min-width: 9rem;
+        &__controls
+        {
+            // transform: translate(50%);
+            flex-direction: row;
+            transform: none;
+            right: 100%;
+            top: 100%;
+            transform: translateX(45%) translateY(2rem);
+        }
+
+        &__card
+        {
+            font-size: 1.5rem;
+        }
+    }
+
+    @media (min-width:  $vw-tablet) and (max-width: calc($vw-tablet + 100px)) {
+        min-width: 8rem;
+        &__card
+        {
+            font-size: 1.2rem;
+        }
+    }
+
+    @media (min-width:  calc($vw-tablet + 100px)) and (max-width: calc($vw-desktop + 200px)) {
+        min-width: 9rem;
+        &__card
+        {
+            font-size: 1.2rem;
+        }
+    }
+
 }

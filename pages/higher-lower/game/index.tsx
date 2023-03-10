@@ -21,7 +21,7 @@ import { HiLoController } from 'services/hi-lo/game/HiLoGameController';
 import { HiLoSelectors, hiloSlice } from 'services/hi-lo/redux/slice';
 
 import styles from 'styles/pages/higher-lower/game.module.scss'
-import { User } from 'utils/UserUtil';
+import { createServerSideCookie, getUser, User } from 'utils/UserUtil';
 
 import TextLogo from 'public/weblogo-text.svg'
 import Image from 'next/image';
@@ -121,6 +121,9 @@ function CasinoPlayerWrapper()
 export async function getServerSideProps(context: GetServerSidePropsContext)
 {
     let { code } = context.query
+
+    if(!context.req.cookies["user"])
+        createServerSideCookie(context.req, context.res)
 
     let user: User = JSON.parse(context.req.cookies["user"])
 

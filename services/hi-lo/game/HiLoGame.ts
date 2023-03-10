@@ -31,7 +31,7 @@ export default class HiLoGame extends Game
 
     sendNextTurn(type: string, sender: string)
     {
-        let nextPlayer = HiLoSelectors.getUser(store.getState().hilo.gameplay.players.next)
+        let nextPlayer = HiLoSelectors.getUser(store.getState().hilo.gameplay.players.current)
         let owner = store.getState().hilo.settings.ownerID
 
         if (nextPlayer?.uuid === sender || (nextPlayer?.bot && owner === sender))

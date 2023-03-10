@@ -35,7 +35,7 @@ function NextTurn({ username, callbacks = { end: () => { } } }: Props)
                 initial="initMain" variants={variants(2)}
                 animate="animateText"
             >
-                <span>{username}'s Turn</span>
+                <span>{username}&apos;s Turn</span>
             </motion.div>
             {bits}
         </div>

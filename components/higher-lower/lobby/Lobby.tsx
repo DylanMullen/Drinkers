@@ -10,6 +10,8 @@ import useUser from 'context/UserContext'
 import { useAppSelector } from 'redux/store'
 import { HiLoSelectors } from 'services/hi-lo/redux/slice'
 
+import {v4} from 'uuid'
+
 type Props = {}
 
 const poolTable = ["#008eba", "#137547", "#800080"]
@@ -59,6 +61,8 @@ const cardThemes: CardStyle[][] = [
 
 function Lobby({ }: Props)
 {
+
+  let owner = useAppSelector(HiLoSelectors.owner)
   const { user } = useUser();
 
   const start = () =>
@@ -67,11 +71,16 @@ function Lobby({ }: Props)
     getHigherLowerInstance().sendGameStateRequest(true, user.uuid)
   }
 
+  const isOwner = user && (user.uuid === owner)
+
   return (
     <div className={styles["hilo-lobby"]}>
-      <div className={styles["hilo-lobby__settings"]}>
-        <button className={styles["hilo-lobby__btn"]} onClick={start}>Start</button>
-      </div>
+      {
+        isOwner &&
+        <div className={styles["hilo-lobby__settings"]}>
+          <button className={styles["hilo-lobby__btn"]} onClick={start}>Start</button>
+        </div>
+      }
       <div className={styles["hilo-lobby__themes"]}>
         <ThemeSelector />
       </div>
@@ -131,7 +140,7 @@ function ThemeSelector()
             poolTable.map(e =>
             {
               return (
-                <button className={styles["theme-selector__btn"]} style={{ background: e }} onClick={() => sendTable(e)} />
+                <button key={v4()} className={styles["theme-selector__btn"]} style={{ background: e }} onClick={() => sendTable(e)} />
               )
             })
           }

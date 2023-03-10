@@ -160,12 +160,14 @@ export const HiLoActions = {
 
 export const HiLoSelectors = {
     settings: (state: RootState) => state.hilo.settings,
+    owner:(state:RootState)=>state.hilo.settings.ownerID,
     started: (state: RootState) => state.hilo.settings.started,
     game: (state: RootState) => state.hilo.gameplay,
     users: (state: RootState) => state.hilo.gameplay.players.players,
     currentUser: (state: RootState) => state.hilo.gameplay.players.current,
     nextUser: (state: RootState) => state.hilo.gameplay.players.next,
     currentNumber: (state: RootState) => state.hilo.gameplay.currentNumber,
+    suite: (state:RootState)=>state.hilo.gameplay.suite,
     rounds: (state: RootState) => state.hilo.gameplay.rounds,
     wasWinner: (state: RootState) => state.hilo.gameplay.controls.wasWinner,
     canShowButtons: (state: RootState) => state.hilo.gameplay.controls.canShowButtons,

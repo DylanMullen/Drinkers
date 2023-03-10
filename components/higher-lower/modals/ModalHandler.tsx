@@ -16,14 +16,18 @@ type Props = {}
 
 function ModalHandler({ }: Props)
 {
-    const nextPlayer = useAppSelector(HiLoSelectors.nextUser);
+    const nextPlayer = useAppSelector(HiLoSelectors.currentUser);
     const prompt = useAppSelector(HiLoSelectors.prompt)
+    const started = useAppSelector(HiLoSelectors.started)
+
     const { open, update, close } = useModalContext();
 
     const { user } = useUser()
 
     useEffect(() =>
     {
+        if(!started) return;
+        
         let user = HiLoSelectors.getUser(nextPlayer)
         if (!user) return;
 
@@ -31,16 +35,14 @@ function ModalHandler({ }: Props)
         update(<NextTurn username={user.username} callbacks={{ end: () => close() }} />, false)
         setTimeout(() =>
         {
-
             new Audio("/nextPlayer.mp3").play()
         }, 500)
         open()
-    }, [nextPlayer])
+    }, [nextPlayer, started])
 
     useEffect(() =>
     {
         if (!prompt) {
-            console.log(prompt);
             return;
         };
 
@@ -86,7 +88,7 @@ function ModalHandler({ }: Props)
     return (
         <>
             {
-                DEBUG &&
+                false &&
                 <div className={styles["debug-panel"]}>
                     <h1 className={styles["debug-panel__title"]}>Debug</h1>
                     <div className={styles["debug-panel__buttons"]}>

@@ -30,7 +30,7 @@ const pos2 = [4, 5, 3, 6, 2, 7, 1, 8]
 
 function CasinoPlayers({ users }: Props)
 {
-    let nextPlayer = useAppSelector(HiLoSelectors.nextUser)
+    let nextPlayer = useAppSelector(HiLoSelectors.currentUser)
     let owner = useAppSelector(HiLoSelectors.settings).ownerID;
 
     const { user } = useUser();
@@ -51,11 +51,10 @@ function CasinoPlayers({ users }: Props)
                 hasAdmin={hasAdmin}
             />
         )
-
     }
-
     return (
         <ul className={styles["casino-players"]}>
+            <div className={styles["casino-players__test"]}></div>
             {players}
         </ul>
     )
@@ -97,13 +96,13 @@ function CasinoPlayer({ player, position, isNext, hasAdmin = false }: PlayerProp
 
     return (
         <motion.li className={`${styles["casino-player"]} ${isNext ? styles["casino-player--next"] : ""} `} data-spot={position}
-            initial={{opacity: 0, translateY: "-5rem"}} animate={{opacity: 1, translateY: "0rem", transition:{delay: (position-1) * 0.25}}}
+            initial={{opacity: 0, translateY: "-5rem"}} animate={{opacity: 1, translateY: "0rem", transition:{delay: (position-1) * 0.1}}}
         >
             {
                 player ?
                     <>
                         <span className={styles["casino-player__avatar"]}>
-                            <Image src={player?.avatar} width="100%" height="100%" />
+                            <Image src={player?.avatar} width="100%" height="100%" layout='responsive'/>
                             {
                                 hasAdmin &&
                                 <>
