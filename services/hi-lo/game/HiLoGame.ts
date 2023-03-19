@@ -14,7 +14,6 @@ export default class HiLoGame extends Game
 
     handle(data: GameResponse): void
     {
-        console.log(data)
         switch (data.id)
         {
             case 0: this.handleGameState(data.body.started); break;
@@ -164,7 +163,6 @@ export default class HiLoGame extends Game
 
     handlePrompt(prompt: Prompt | undefined)
     {
-        console.log(prompt)
         store.dispatch(HiLoActions.updatePrompt(prompt))
     }
 

@@ -133,7 +133,7 @@ $vw-desktop: 1200px;
         cursor: pointer;
 
         border: 0;
-
+        position: relative;
 
         background: conic-gradient(from 90deg,
                 violet,
@@ -150,6 +150,28 @@ $vw-desktop: 1200px;
         &:hover
         {
             scale: 1.05;
+        }
+
+        &--selected
+        {
+            &::after
+            {
+                content: '';
+                width: 60%;
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+                background-color: #3a3a3a;
+                border: 1px solid rgb(255, 255, 255);
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            &--black::after
+            {
+                background-color: #2a2a2a;
+            }
         }
     }
 

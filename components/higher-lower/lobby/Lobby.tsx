@@ -10,7 +10,7 @@ import useUser from 'context/UserContext'
 import { useAppSelector } from 'redux/store'
 import { HiLoSelectors } from 'services/hi-lo/redux/slice'
 
-import {v4} from 'uuid'
+import { v4 } from 'uuid'
 
 type Props = {}
 
@@ -130,6 +130,8 @@ function ThemeSelector()
   }, [theme])
 
   const showCardStyle = hoverStyle ? hoverStyle : cardStyle
+  const isCardSelected = (cardTheme: CardStyle) => (theme.black.card?.cardBackground === cardTheme.card?.cardBackground) ?? false
+  const isCustomTable = !poolTable.includes(theme.table)
 
   return (
     <>
@@ -139,8 +141,9 @@ function ThemeSelector()
           {
             poolTable.map(e =>
             {
+              let selected = e === theme.table
               return (
-                <button key={v4()} className={styles["theme-selector__btn"]} style={{ background: e }} onClick={() => sendTable(e)} />
+                <button key={v4()} className={`${styles["theme-selector__btn"]} ${selected ? styles["theme-selector__btn--selected"] : ""}`} style={{ background: e }} onClick={() => sendTable(e)} />
               )
             })
           }
@@ -150,18 +153,22 @@ function ThemeSelector()
               <HexColorPicker color={theme.table} onChange={(col) => sendTable(col)} />
             </div>
           }
-          <button className={styles["theme-selector__btn"]} onClick={() => setShowEditor(prev => !prev)} />
+          <button className={`${styles["theme-selector__btn"]} ${isCustomTable ? styles["theme-selector__btn--selected"] : ""}`} onClick={() => setShowEditor(prev => !prev)} />
         </div>
       </div>
       <div className={styles["hilo-lobby__theme"]} onMouseEnter={() => setShowCard(true)} onMouseLeave={() => setShowCard(false)}>
         <span className={styles["hilo-lobby__subtitle"]}>Card Theme</span>
         <div className={styles["theme-selector"]}>
-          <button className={styles["theme-selector__btn"]}
+          <button
+            className={`${styles["theme-selector__btn"]} ${isCardSelected(cardThemes[1][0]) ?
+                styles["theme-selector__btn--selected"] + " " + styles["theme-selector__btn--selected--black"] : ""
+              }`}
             style={{ background: "white" }} onClick={() => sendCardTheme(cardThemes[1])}
             onMouseEnter={() => setHoverStyle(cardThemes[1])} onMouseLeave={() => setHoverStyle(undefined)}
           />
 
-          <button className={styles["theme-selector__btn"]}
+          <button className={`${styles["theme-selector__btn"]} ${isCardSelected(cardThemes[0][0]) ?
+              styles["theme-selector__btn--selected"] : ""}`}
             style={{ background: "#1b1b1b", border: "2px solid white" }} onClick={() => sendCardTheme(cardThemes[0])}
             onMouseEnter={() => setHoverStyle(cardThemes[0])} onMouseLeave={() => setHoverStyle(undefined)}
           />

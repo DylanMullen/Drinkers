@@ -45,16 +45,16 @@ export function getRandomName(): string
 
 export function getRandomAvatar(name: string)
 {
-    let scheme = ""
+    let scheme = getScheme()
+    return AVATAR_SERVICE + name + "-" + (Math.random() * 100) + "?colors=" + scheme
+}
+
+function getScheme(): string
+{
     let pallette = pallettes[Math.floor(Math.random() * pallettes.length)]
-
+    let scheme = ""
     pallette.forEach((e, i) => scheme = scheme.concat(e + (i === pallette.length - 1 ? "" : ",")))
-
-    let url = AVATAR_SERVICE + name + "-" + (Math.random() * 100) + "?colors=" +scheme
-
-    console.log(url)
-
-    return url
+    return scheme
 }
 
 
