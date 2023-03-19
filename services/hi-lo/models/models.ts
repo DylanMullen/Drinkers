@@ -42,7 +42,8 @@ export type Theme = {
 
 export type HigherLowerPlayer = User & {
     streak: number
-    highestStreak: number
+    highestStreak: number,
+    owner?: string
 }
 
 export type NextTurnUpdate = {

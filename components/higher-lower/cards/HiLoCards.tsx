@@ -158,7 +158,7 @@ function HiLoCards()
         setPrevious(currentNumber)
     }, [currentNumber])
 
-    let showButtons = ((user?.uuid === nextPlayerUUID || (nextPlayer?.bot === true && user?.uuid === settings.ownerID)) && canShowButtons && !wasWinner) && !prompt;
+    let showButtons = user && nextPlayer && ((user.uuid === nextPlayerUUID || (nextPlayer.bot === true && user?.uuid === (user.uuid || settings.ownerID))) && canShowButtons && !wasWinner) && !prompt;
 
     let style = getStyle([theme.red, theme.black])
     return (

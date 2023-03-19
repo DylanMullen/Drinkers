@@ -23,7 +23,7 @@ export default class HiLoGame extends Game
             case 4: this.handleLeave(data.body.uuid); break;
             case 5: this.handlePromoted(data.body.uuid); break;
             case 6: this.handlePrompt(data.body); break;
-            case 7: this.handleTheme(data.body);break;
+            case 7: this.handleTheme(data.body); break;
             default: break;
         }
     }
@@ -33,7 +33,9 @@ export default class HiLoGame extends Game
         let nextPlayer = HiLoSelectors.getUser(store.getState().hilo.gameplay.players.current)
         let owner = store.getState().hilo.settings.ownerID
 
-        if (nextPlayer?.uuid === sender || (nextPlayer?.bot && owner === sender))
+        if (!nextPlayer) return;
+
+        if((sender === owner || nextPlayer.uuid === sender) || (nextPlayer.bot && nextPlayer.owner === sender))
         {
             this.send({
                 id: 3,

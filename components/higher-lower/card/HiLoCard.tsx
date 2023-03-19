@@ -7,11 +7,10 @@ import styles from './hilo-card.module.scss';
 
 type Props = React.PropsWithChildren & {
     showButtons?: boolean,
-    showCard?: boolean
     callback?: () => void
 }
 
-function HiLoCard({ showButtons = false, showCard = true, callback = () => { }, children }: Props)
+function HiLoCard({ showButtons = false, callback = () => { }, children }: Props)
 {
     const { user } = useUser();
 
@@ -19,7 +18,8 @@ function HiLoCard({ showButtons = false, showCard = true, callback = () => { }, 
     const action = (action: "higher" | "lower", e: React.MouseEvent<HTMLButtonElement>) =>
     {
         e.currentTarget.blur()
-        getHigherLowerInstance().sendNextTurn(action, user?.uuid ?? "")
+        if (!user) return;
+        getHigherLowerInstance().sendNextTurn(action, user.uuid ?? "")
         callback()
     }
 
@@ -35,12 +35,9 @@ function HiLoCard({ showButtons = false, showCard = true, callback = () => { }, 
                 <div className={styles["hilo-card__controls"]}>
                     <button className={`${styles["hilo-card__btn"]} ${styles["hilo-card__btn--higher"]}`} onClick={e => action("higher", e)}>
                         <FaChevronUp />
-                        {/* <span className={`${styles["hilo-card__btn__text"]}`}>Higher</span> */}
-
                     </button>
                     <button className={`${styles["hilo-card__btn"]} ${styles["hilo-card__btn--lower"]}`} onClick={e => action("lower", e)}>
                         <FaChevronDown />
-                        {/* <span className={`${styles["hilo-card__btn__text"]}`}>Lower</span> */}
                     </button>
                 </div>
             }
