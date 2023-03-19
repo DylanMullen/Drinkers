@@ -36,22 +36,34 @@ function CasinoPlayers({ users }: Props)
     const { user } = useUser();
 
     let players: ReactNode[] = []
+
     for (let index = 0; index < 8; index++)
-    {
-        let player = users[index];
-        let isOwner = owner === user?.uuid
-
-        let hasAdmin = isOwner && (player !== undefined && player.uuid !== owner)
-
         players.push(
             <CasinoPlayer
-                player={users[index]}
-                position={pos2[index]}
+                player={undefined}
+                position={index + 1}
+                isNext={users[index]?.uuid === nextPlayer ?? false}
+                hasAdmin={false}
+            />
+        )
+    for (let index = 0; index < users.length; index++)
+    {
+        let player = users[index]
+        let isOwner = owner === user?.uuid
+
+        let pos = Math.floor((8 / 2) + (users.length / 2) - (index + 1))
+        let hasAdmin = isOwner && (player !== undefined && player.uuid !== owner)
+
+        players[pos] = (
+            <CasinoPlayer
+                player={player}
+                position={pos + 1}
                 isNext={users[index]?.uuid === nextPlayer ?? false}
                 hasAdmin={hasAdmin}
             />
         )
     }
+
     return (
         <ul className={styles["casino-players"]}>
             <div className={styles["casino-players__test"]}></div>
@@ -96,13 +108,13 @@ function CasinoPlayer({ player, position, isNext, hasAdmin = false }: PlayerProp
 
     return (
         <motion.li className={`${styles["casino-player"]} ${isNext ? styles["casino-player--next"] : ""} `} data-spot={position}
-            initial={{opacity: 0, translateY: "-5rem"}} animate={{opacity: 1, translateY: "0rem", transition:{delay: (position-1) * 0.1}}}
+            initial={{ opacity: 0, translateY: "-5rem" }} animate={{ opacity: 1, translateY: "0rem", transition: { delay: (position - 1) * 0.1 } }}
         >
             {
                 player ?
                     <>
                         <span className={styles["casino-player__avatar"]}>
-                            <Image src={player?.avatar} width="100%" height="100%" layout='responsive'/>
+                            <Image src={player?.avatar} width="100%" height="100%" layout='responsive' />
                             {
                                 hasAdmin &&
                                 <>

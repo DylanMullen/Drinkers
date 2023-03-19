@@ -30,7 +30,6 @@ export default interface HiLoGameState
         }
     },
     theme: Theme
-
 }
 
 export type Theme = {
