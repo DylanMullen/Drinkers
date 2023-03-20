@@ -7,8 +7,8 @@ const nextConfig = {
     domains: ['ca.slack-edge.com', 'cdn.discordapp.com', "upload.wikimedia.org", "source.boringavatars.com"],
   },
   env: {
-    DB_CREDIENTIALS_ACCESS: process.env.DB_CREDIENTIALS_ACCESS ?? "",
-    DB_CREDIENTIALS_SECRET: process.env.DB_CREDIENTIALS_SECRET ?? "",
+    DB_CREDIENTIALS_ACCESS: process.env.DB_CREDIENTIALS_ACCESS,
+    DB_CREDIENTIALS_SECRET: process.env.DB_CREDIENTIALS_SECRET,
     USE_LOCAL: process.env.USE_LOCAL ?? "false",
     LOCAL_IP: process.env.LOCAL_IP ?? "localhost",
     DISCORD_APP_ID: process.env.DISCORD_APP_ID ?? "",

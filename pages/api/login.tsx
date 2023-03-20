@@ -36,11 +36,12 @@ type DiscordUser = {
 
 const discord = new OAuth();
 const dynamo = new DynamoDBClient({
-  region: "eu-west-2", credentials: {
+  region: "eu-west-2",
+  credentials: {
     accessKeyId: process.env.DB_CREDIENTIALS_ACCESS ?? "",
-    secretAccessKey: process.env.DB_CREDIENTIALS_SECRET ?? ""
+    secretAccessKey: process.env.DB_CREDIENTIALS_SECRET ?? "",
   }
-});
+})
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse)
 {
@@ -89,7 +90,10 @@ async function loginWithDiscord(code: string)
   const discordDetails = await getDiscord(code);
 
   if (discordDetails === undefined)
+  {
+    console.log("discordDetails is undefined")
     return;
+  }
   let userDetails
   userDetails = await checkDatabase(discordDetails);
 
@@ -139,15 +143,17 @@ async function getDiscord(code: string): Promise<Discord | undefined>
       auth: authDetails,
       user: userDetails
     }
-
   } catch (error)
   {
+    console.log(error)
     return undefined
   }
 }
 
 async function authDiscord(code: string): Promise<DiscordAuth>
 {
+  console.log(process.env.DISCORD_APP_ID)
+  console.log(process.env.DISCORD_APP_SECRET)
   let response = await discord.tokenRequest({
     clientId: process.env.DISCORD_APP_ID,
     clientSecret: process.env.DISCORD_APP_SECRET,
