@@ -7,6 +7,7 @@ import useUser from 'context/UserContext';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { CgProfile as ProfileIcon } from 'react-icons/cg';
+import { HiLoController } from 'services/hi-lo/game/HiLoGameController';
 import { joinPirateGame } from 'services/pirate/game/PirateGameController';
 import { getCurrentGame, joinWaterfallGame } from 'services/waterfall/GameController';
 import { getUser, User } from 'utils/UserUtil';
@@ -16,19 +17,21 @@ import styles from './join-modal.module.scss'
 
 type Props = {
     close: Function
-    gameMode: GameMode
+    gameMode: GameMode,
+    joinCallback?: () => void
 }
 export enum GameMode
 {
     WATERFALL = "waterfall",
-    DRUNKCARDS = "drunkcards"
+    DRUNKCARDS = "drunkcards",
+    HIGHER_LOWER = "higher-lower"
 }
 
 export type Error = {
     message: string
 }
 
-function JoinModal({ close, gameMode }: Props)
+function JoinModal({ close, gameMode, joinCallback = () => { } }: Props)
 {
     const router = useRouter();
     const { update } = useModalContext()
@@ -46,12 +49,20 @@ function JoinModal({ close, gameMode }: Props)
                 return;
 
             let error
-            if (gameMode === GameMode.WATERFALL)
-                error = await joinWaterfallGame({ joinCode: joinCode, player: user })
-            else
-                error = await joinPirateGame(joinCode, user)
 
-            router.push(`/${gameMode}/${gameMode === GameMode.DRUNKCARDS ? "game?code=" + joinCode : joinCode}`, "", { shallow: true })
+            switch (gameMode)
+            {
+                case GameMode.WATERFALL:
+                    error = await joinWaterfallGame({ joinCode: joinCode, player: user })
+                    break;
+                case GameMode.DRUNKCARDS:
+                    error = await joinPirateGame(joinCode, user)
+                    break;
+                case GameMode.HIGHER_LOWER:
+                    error = await HiLoController.join(user, joinCode)
+                    break;
+            }
+            router.push(`/${gameMode}/game?code=${joinCode}`, undefined, { shallow: true })
             close()
         }
         update(<AdModal adTime={5} callback={callback} />)

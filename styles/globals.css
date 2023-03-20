@@ -21,7 +21,9 @@ html {
   background: linear-gradient(180deg, #37045c, #430c6a 50%, #440a6e 60%, #2a0643);
   background-repeat: no-repeat;
   background-attachment: fixed;
-
+/* 
+  background: rgb(2,62,138);
+  background: linear-gradient(0deg, rgba(2,62,138,1) 0%, rgba(2,74,146,1) 16%, rgba(1,154,199,1) 76%, rgba(0,180,216,1) 100%);  */
 }
 
 a {

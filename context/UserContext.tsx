@@ -1,15 +1,25 @@
 import React, { PropsWithChildren, useContext, useEffect, useState } from "react";
-import { getUser, logout as logoutUser, User } from "utils/UserUtil";
+import { getRandomAvatar } from "utils/NameUtil";
+import { getUser, logout as logoutUser, saveUser, User } from "utils/UserUtil";
+import { v4 } from "uuid"
 
 type Context = {
     user?: User;
-    updateGuest: (name: string) => void
+    updateGuest: (name: string) => void,
+    updateGuestAvatar: (avatar: string) => void
     logout: () => void
+}
+
+export const dummy: User = {
+    username: "Loading",
+    avatar: getRandomAvatar("Loading"),
+    uuid: v4(),
 }
 
 const initial: Context = {
     logout: () => { },
-    updateGuest: () => { }
+    updateGuest: () => { },
+    updateGuestAvatar: () => { }
 }
 
 const UserContext = React.createContext<Context>(initial)
@@ -45,12 +55,26 @@ export function UserProvider({ children }: PropsWithChildren)
         {
             if (prev.user === undefined) return prev;
 
+            prev.user.username = name
+            saveUser(prev.user)
+
             return {
                 ...prev,
-                user: {
-                    ...prev.user,
-                    username: name,
-                }
+            }
+        })
+    }
+
+    const updateGuestAvatar = (avatar: string) =>
+    {
+
+        setUser(prev =>
+        {
+            if (prev.user === undefined) return prev;
+
+            prev.user.avatar = avatar
+            saveUser(prev.user)
+            return {
+                ...prev,
             }
         })
     }
@@ -59,7 +83,8 @@ export function UserProvider({ children }: PropsWithChildren)
         <UserContext.Provider value={{
             user: user.user,
             logout: logout,
-            updateGuest: updateGuestName
+            updateGuest: updateGuestName,
+            updateGuestAvatar: updateGuestAvatar
         }}>
             {children}
         </UserContext.Provider>

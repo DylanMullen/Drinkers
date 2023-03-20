@@ -18,12 +18,13 @@ export const DISCORDURL = "https://discord.com/api/oauth2/authorize?client_id=85
 
 function ProfileModal({ close }: Props)
 {
-    const { user, updateGuest, logout } = useUser();
+    const { user, updateGuest, updateGuestAvatar } = useUser();
     const isSignedIn = !user?.guest;
 
-    const saveUser = (username: string) =>
+    const saveUser = (username: string, avatar:string) =>
     {
         updateGuest(username)
+        updateGuestAvatar(avatar)
         close()
     }
 

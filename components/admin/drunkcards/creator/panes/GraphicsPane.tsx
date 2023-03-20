@@ -79,11 +79,7 @@ function GraphicsPane()
         {
             let temp:GradientSetting = {...prev, gradients:grads}
 
-            console.log(Object.keys(grads).length)
-            console.log(Object.keys(prev.gradients).length)
-
             updateCurrent({settings, scheme: {...scheme, background: getGradientCSS(temp)}, isDefault: false})
-            console.log(getGradientCSS(temp))
             return temp
         })
     }

@@ -13,7 +13,6 @@ function Header({ name, logo, removeIconStyle }: Props)
 {
     let HeaderImage: React.ReactNode;
 
-    console.log(typeof logo)
     if (typeof logo === "string")
         HeaderImage = <Image src={logo} width="100%" height="100%" loading='eager' alt={`Drinkers.Beer - Waterfall`} unoptimized />
     else

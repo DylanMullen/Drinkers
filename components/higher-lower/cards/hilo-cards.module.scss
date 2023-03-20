@@ -1,0 +1,40 @@
+.hilo-cards
+{
+    display: flex;
+    gap: 1rem;
+
+    position: relative;
+
+    &__stacked
+    {
+        position: absolute;
+        font-size: inherit;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__ribbon
+    {
+        position: absolute;
+        left: -.5rem;
+        top: 1rem;
+    }
+
+    border: 5px double rgba(255, 255, 255, 0.75);
+    padding: 1rem;
+
+    border-radius: 1rem;
+
+}
+
+.hilo-wrapper
+{
+    position: relative;
+
+    &__ribbon
+    {
+        position: absolute;
+        top: 0;
+        left: 0.5rem;
+    }
+}

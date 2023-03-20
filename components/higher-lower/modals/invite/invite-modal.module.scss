@@ -1,0 +1,140 @@
+$pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+.invite-modal
+{
+    min-width: 50vw;
+    min-height: 50vh;
+    border-radius: .75rem;
+    background-color: rgb(243, 238, 238);
+
+
+
+    position: absolute;
+
+    // overflow: hidden;
+
+    top: 5rem;
+    &__title
+    {
+        // font-family: 'Sugar Snow', sans-serif;
+        letter-spacing: 1px;
+        kerning: none;
+
+        font-size: 2.5rem;
+        font-weight: 800;
+    }
+
+    &__invite
+    {
+        background-color: #2A2A2A;
+        height: 250px;
+        width: 100%;
+
+        border-bottom-left-radius: 50% 25%;
+        border-bottom-right-radius: 50% 25%;
+
+        border-top-right-radius: .5rem;
+        border-top-left-radius: .5rem;
+
+
+        box-shadow: 0px 6px 1rem 1px rgba(39, 39, 39, 0.5);
+
+        padding: 1rem;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        .invite-modal__title
+        {
+            color: white;
+        }
+    }
+
+    &__invite-btn
+    {
+        font-size: 1.3rem;
+        padding: .75rem 1rem;
+
+        border-radius: 500px;
+        width: 50%;
+
+        border: none;
+        outline: none;
+        font-weight: 500;
+        letter-spacing: 1px;
+        word-spacing: 2px;
+        background: linear-gradient(90deg, rgba(114,81,181,1) 0%, rgba(160,108,213,1) 100%);;
+        background-size: 200%;
+        background-position: 100%;
+        color: white;
+
+        cursor: pointer;
+
+        box-shadow: 0 10px .75rem 1px rgba(114,81,181,.5);
+
+        transition: scale 150ms $pop;
+
+        &:focus,&:hover
+        {
+            scale: 1.05;
+        }
+
+        &:active
+        {
+            scale: 0.95;
+        }
+    }
+
+    &__bot
+    {
+        padding: 1.5rem;
+        padding-bottom: 3rem;
+        display: flex;
+        gap: 1rem;
+        flex-direction: column;
+        align-items: center;
+        .invite-modal__title
+        {
+            font-size: 2rem;
+        }
+    }
+
+    &__close
+    {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        color: white;
+        font-size: 0;
+        background: transparent;
+        outline: 0;
+        
+        aspect-ratio: 1/1;
+        
+        cursor: pointer;
+        border: 2px solid white;
+        border-radius: 50%;
+
+        opacity: .5;
+        transition: opacity 150ms $pop, scale 150ms $pop;
+
+        svg
+        {
+            font-size: 1.25rem;
+        }
+
+        &:hover,&:focus
+        {
+            opacity: 1;
+        }
+
+        &:active
+        {
+            scale: 0.95;
+        }
+    }
+
+}
