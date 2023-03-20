@@ -86,7 +86,10 @@ async function loginWithDiscord(code: string)
   const discordDetails = await getDiscord(code);
 
   if (discordDetails === undefined)
+  {
+    console.log("discordDetails is undefined")
     return;
+  }
   let userDetails
   userDetails = await checkDatabase(discordDetails);
 
@@ -134,15 +137,17 @@ async function getDiscord(code: string): Promise<Discord | undefined>
       auth: authDetails,
       user: userDetails
     }
-
   } catch (error)
   {
+    console.log(error)
     return undefined
   }
 }
 
 async function authDiscord(code: string): Promise<DiscordAuth>
 {
+  console.log(process.env.DISCORD_APP_ID)
+  console.log(process.env.DISCORD_APP_SECRET)
   let response = await discord.tokenRequest({
     clientId: process.env.DISCORD_APP_ID,
     clientSecret: process.env.DISCORD_APP_SECRET,
