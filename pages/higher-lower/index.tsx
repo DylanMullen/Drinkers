@@ -15,7 +15,7 @@ import styles from 'styles/pages/higher-lower/index.module.scss'
 
 type Props = {}
 
-function index({ }: Props)
+function HiLo({ }: Props)
 {
   const router = useRouter();
   const { showNavigationButton } = useNavigation()
@@ -80,4 +80,4 @@ function index({ }: Props)
   )
 }
 
-export default index
+export default HiLo
