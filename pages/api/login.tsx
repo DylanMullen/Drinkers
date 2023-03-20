@@ -36,7 +36,11 @@ type DiscordUser = {
 
 const discord = new OAuth();
 const dynamo = new DynamoDBClient({
-  region: "eu-west-2"
+  region: "eu-west-2",
+  credentials: {
+    accessKeyId: process.env.DB_CREDIENTIALS_ACCESS ?? "",
+    secretAccessKey: process.env.DB_CREDIENTIALS_SECRET ?? "",
+  }
 })
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse)
