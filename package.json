@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start -H 192.168.0.16 -p 3000",
     "lint": "next lint",
     "analyze": "cross-env ANALYZE=true next build",
