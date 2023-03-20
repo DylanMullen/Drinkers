@@ -12,6 +12,7 @@ import Profile from '../profile';
 import styles from './navbar.module.scss'
 import Navlink from './navlink';
 import useNavigation from 'context/NavigationContext';
+import { BiStats } from 'react-icons/bi';
 
 type Props = {}
 
@@ -74,6 +75,11 @@ function Navbar({ }: Props)
                             text='Drunkcards'
                             icon={<GiCardRandom />}
                             link="/drunkcards"
+                        />
+                        <Navlink
+                            text='Higher Lower'
+                            icon={<BiStats />}
+                            link="/higher-lower"
                         />
                     </ul>
                     <div className={styles["navbar__footer"]}>

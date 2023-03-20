@@ -178,4 +178,9 @@ export default class HiLoGame extends Game
         return store.getState().hilo.settings.ownerID === uuid
     }
 
+    joinCode()
+    {
+        return store.getState().hilo.settings.joinCode
+    }
+
 }
