@@ -1,0 +1,181 @@
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+$vw-desktop: 1200px;
+
+.next-turn
+{
+    &__wrapper
+    {
+        position: absolute;
+        width: 100%;
+        height: fit-content;
+        // background-color: red;
+
+        z-index: 1;
+
+        top: 5rem;
+    }
+
+    &__main
+    {
+        // width: calc(100% + 1000px);
+        background-color: #ff5d8f;
+
+        box-shadow: .5rem 1rem .25rem .05rem rgba(42, 42, 42, .5);
+
+        text-align: center;
+
+        border-radius: 500px;
+
+        // position: absolute;
+        width: 120%;
+        // left: 0;
+        // top: 50%;
+
+        // transform: translateY(-50%);
+
+        z-index: 1;
+
+        position: relative;
+
+
+        span
+        {
+            font-size: 5rem;
+            letter-spacing: 2px;
+            font-weight: 800;
+            // -webkit-text-stroke: 5px white;
+            color: white;
+            font-family: 'Sugar Snow', sans-serif;
+            padding: 2rem;
+            display: block;
+        }
+    }
+
+
+    &__sides
+    {
+        padding: 1rem 0;
+        background-color: white;
+
+        width: 25%;
+        border-radius: 500px;
+
+        position: absolute;
+
+        box-shadow: .5rem .5rem .25rem 0.05rem rgba(42, 42, 42, .5);
+
+        z-index: 1;
+
+
+        &[data-key="1"]
+        {
+            background-color: rgb(0, 225, 255);
+            top: -1rem;
+        }
+
+        &[data-key="2"]
+        {
+            background-color: white;
+            top: -2.75rem;
+            left: 10%;
+            padding: .5rem;
+        }
+
+        &[data-key="3"]
+        {
+            background-color: white;
+            top: 1.75rem;
+            left: 5%;
+            padding: .5rem;
+
+            width: 15%;
+
+        }
+
+        &[data-key="4"]
+        {
+            background-color: aqua;
+            bottom: -2rem;
+            padding: .5rem;
+            width: 50%;
+            left: 15%;
+
+        }
+
+        &[data-key="5"]
+        {
+            background-color: white;
+            bottom: -3.75rem;
+            padding: .5rem;
+            // width: 50%;
+            left: 50%;
+        }
+
+        &[data-key="6"]
+        {
+            background-color: white;
+            bottom: -0.25rem;
+            padding: .5rem;
+            // width: 50%;
+            left: 05%;
+        }
+
+        &[data-key="8"]
+        {
+            // bottom: -0.25rem;
+            padding: .5rem;
+            top: -2rem;
+
+            right: 18%;
+
+            width: 15%;
+
+            background-color: aqua;
+
+        }
+
+        &[data-key="7"]
+        {
+            background-color: lightgrey;
+            bottom: -3.75rem;
+            padding: .5rem;
+            width: 10%;
+            left: 30%;
+        }
+
+        &[data-key="9"]
+        {
+            background-color: white;
+            top: -2rem;
+            padding: .5rem;
+
+            right: 5%;
+            width: 12%;
+        }
+
+        &[data-key="10"]
+        {
+            background-color: lightgray;
+            top: -3.75rem;
+            padding: .5rem;
+
+            right: 10%;
+            width: 12%;
+        }
+    }
+
+    @media (min-width: 0px) and (max-width: calc($vw-tablet))
+    {
+        &__wrapper
+        {
+            top: 25vh;
+        }
+        &__main > span
+        {
+            font-size: 3rem;
+        }
+    }
+
+}

@@ -100,6 +100,8 @@ async function loginWithDiscord(code: string)
   if (userDetails === undefined)
   {
     let response = await registerDiscordAccount(discordDetails)
+    console.log("registereding")
+
     return {
       uuid: response.uuid,
       discordId: response.details.user.id,
@@ -160,7 +162,7 @@ async function authDiscord(code: string): Promise<DiscordAuth>
     grantType: "authorization_code",
     redirectUri: API_URL.replace("api.", "") + "/api/login"
   })
-
+  
   return {
     accessToken: response.access_token,
     refreshToken: response.refresh_token,
@@ -192,7 +194,6 @@ async function checkDatabase(details: Discord | Homebrew)
   {
     let discordDetails = details as Discord;
     let awsResponse = await sendDiscordDatabaseLookup(discordDetails.user.id);
-
     if (!awsResponse.Items || (awsResponse.Items && awsResponse.Items.length) === 0)
     {
       return undefined;
@@ -225,6 +226,8 @@ async function sendDiscordDatabaseLookup(discordID: string)
 async function registerDiscordAccount(discordDetails: Discord)
 {
   let userUUID: string = uuid()
+
+  console.log("register")
 
   let params: PutItemCommandInput = {
     TableName: "users",

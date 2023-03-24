@@ -1,0 +1,40 @@
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+$vw-desktop: 1200px;
+
+.hilo-header
+{
+    padding-top: 8rem;
+
+    transition: padding 150ms ease-in;
+
+    @media (max-width: $vw-tablet)
+    {
+        padding-top: 2.75rem;
+    }
+}
+
+.hilo-lobby
+{
+    width: 100%;
+    padding: 0 18vw;
+    margin-top: 3rem;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 1rem;
+
+    &__wrapper
+    {
+        height: 100vh;
+        min-height: 100vh;
+    }
+
+    @media (max-width: $vw-tablet)
+    {
+        padding: 0 1rem;
+        margin-top: 0;
+    }
+}

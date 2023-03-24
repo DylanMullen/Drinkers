@@ -1,0 +1,151 @@
+$pop: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+$vw-desktop: 1200px;
+
+
+.hilo-card
+{
+    position: relative;
+
+    // border: 5px double white;
+    // padding: .5rem;
+
+    border-radius: .65rem;
+    min-width: 10rem;
+    
+    &__controls
+    {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        right: 0;
+        top: 50%;
+
+        transform: translate(calc(100% + 2.5rem), -50%);
+    }
+
+    &__card
+    {
+        font-size: 1.75rem;
+    }
+
+    &__btn
+    {
+        font-size: 0;
+        aspect-ratio: 1/1;
+        padding: 1rem;
+        border-radius: 50%;
+
+        background-color: transparent;
+        border: 2px solid white;
+
+        color: white;
+        cursor: pointer;
+
+        // opacity: 0.5;
+
+        transition: scale 150ms $pop, opacity 150ms $pop;
+        transform-origin: 0%;
+
+        display: flex;
+        align-items: center;
+        
+        svg
+        {
+            font-size: 1.25rem;
+        }
+
+
+        &__text
+        {
+            font-size: 1.75rem;
+            position: absolute;
+            right: 0;
+
+            transform: translate(calc(100% + 1rem));
+
+            font-family: 'Sugar Snow', sans-serif;
+
+
+            opacity: 0;
+
+            transition: opacity 150ms ease-in-out;
+
+        }
+
+        &:focus,&:hover
+        {
+            opacity: 1;
+            scale: 1.05;
+
+            .hilo-card__btn__text
+            {
+                opacity: 1;
+            }
+        }
+
+        &:active
+        {
+            scale: 0.9;
+        }
+    }
+
+    @media (min-width:  0px) and (max-width: calc($vw-mobile + 100px))
+    {
+        min-width: 7rem;
+
+        &__controls
+        {
+            // transform: translate(50%);
+            flex-direction: row;
+            transform: none;
+            right: 100%;
+            top: 100%;
+            transform: translateX(45%) translateY(2rem);
+        }
+
+        &__card
+        {
+            font-size: 1.2rem;
+        }
+    }
+
+    @media (min-width:  calc($vw-mobile + 100px)) and (max-width: calc($vw-tablet))
+    {
+        min-width: 9rem;
+        &__controls
+        {
+            // transform: translate(50%);
+            flex-direction: row;
+            transform: none;
+            right: 100%;
+            top: 100%;
+            transform: translateX(45%) translateY(2rem);
+        }
+
+        &__card
+        {
+            font-size: 1.5rem;
+        }
+    }
+
+    @media (min-width:  $vw-tablet) and (max-width: calc($vw-tablet + 100px)) {
+        min-width: 8rem;
+        &__card
+        {
+            font-size: 1.2rem;
+        }
+    }
+
+    @media (min-width:  calc($vw-tablet + 100px)) and (max-width: calc($vw-desktop + 200px)) {
+        min-width: 9rem;
+        &__card
+        {
+            font-size: 1.2rem;
+        }
+    }
+
+}

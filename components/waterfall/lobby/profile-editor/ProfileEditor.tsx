@@ -1,8 +1,10 @@
 import SubmitButton from 'components/shared/input/buttons/submit';
+import useUser from 'context/UserContext';
 import { setCookie } from 'cookies-next';
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { MouseEvent, useEffect, useState } from 'react'
 import { IoDiceSharp, IoSaveSharp } from 'react-icons/io5'
+import { getRandomAvatar, getRandomName } from 'utils/NameUtil';
 import { getUser, User } from 'utils/UserUtil';
 import { uuid } from 'uuidv4';
 
@@ -24,37 +26,65 @@ type ProfileAvatarProps = {
 
 function ProfileEditor({ callback, hydrate, text }: Props)
 {
-    const [user, setUser] = useState<User>();
-    const [avatar, setAvatar] = useState("https://ca.slack-edge.com/T0266FRGM-U011PLSSMA9-g7e8a6705c42-512");
+    const { user } = useUser();
+    const [avatars, setAvatars] = useState([
+        getRandomAvatar(getRandomName()),
+        getRandomAvatar(getRandomName()),
+        getRandomAvatar(getRandomName())
+    ])
     const [username, setUsername] = useState(randomName());
 
     const usernameChange = (e: React.ChangeEvent<HTMLInputElement>) => setUsername(() => e.target.value);
-    const diceClick = () => setUsername(() => randomName());
+    const diceClick = () =>
+    {
+        let temp = randomName();
+        setUsername(() => temp)
+        setAvatars(prev=>{
+            prev[1] = getRandomAvatar(temp)
+            prev[2] = getRandomAvatar(temp)
+            return [...prev]
+        })
+    };
 
-    const click = () => callback(username, avatar, uuid());
+    const click = (e: MouseEvent<HTMLButtonElement>) => { e.currentTarget.blur(); callback(username, avatars[0], uuid()); }
+
+    const updateAvatars = (index: number) =>
+    {
+        setAvatars(prev =>
+        {
+            let temp = prev[0]
+            prev[0] = prev[index]
+            prev[index] = temp
+
+            return [...prev]
+        })
+    }
 
 
     useEffect(() =>
     {
-        if (!hydrate)
+        if (!hydrate || !user)
             return;
 
-        let user = getUser();
-        setUser(user)
-        setAvatar(user.avatar)
         setUsername(user.username)
+
+        setAvatars(prev =>
+        {
+            prev[0] = user.avatar
+            return [...prev]
+        })
     }, [])
 
     return (
         <div className={styles["profile-editor"]}>
             <div className={styles["profile-editor__avatar"]}>
                 <div className={styles["profile-editor__avatar__selected"]}>
-                    <Image priority src={avatar} alt={`Selected Avatar`} width="100%" height={"100%"} />
+                    <Image priority src={avatars[0]} alt={`Selected Avatar`} width="100%" height={"100%"} />
 
                 </div>
                 <div className={styles["profile-editor__avatar__options"]}>
-                    <ProfileAvatar url="https://ca.slack-edge.com/T0266FRGM-U011PLSSMA9-g7e8a6705c42-512" callback={setAvatar} />
-                    <ProfileAvatar url="https://ca.slack-edge.com/T0266FRGM-U011PLSSMA9-g7e8a6705c42-512" callback={setAvatar} />
+                    <ProfileAvatar url={avatars[1]} callback={() => updateAvatars(1)} />
+                    <ProfileAvatar url={avatars[2]} callback={() => updateAvatars(2)} />
                 </div>
             </div>
             <div className={styles["profile-editor__body"]}>

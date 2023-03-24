@@ -1,0 +1,263 @@
+$border-colour: #181817;
+$vw-mobile: 480px;
+$vw-tablet: 768px;
+$vw-laptops: 1024px;
+$vw-desktop: 1200px;
+.casino-board
+{
+
+    left: 0;
+
+    transform:  rotateX(35deg) ;
+    width: 100%;
+    height: 100%;
+    background-color: #800080;
+    border-radius: .75rem;
+
+    border-bottom-left-radius: 45% 60%;
+    border-bottom-right-radius: 45% 60%;
+
+    position: relative;
+
+
+    min-height: fit-content;
+
+
+    position: relative;
+
+    transition: background-color 150ms ease-in-out;
+    
+    // scale: ;
+
+    // box-shadow:
+    // inset 1px -1.5rem 0px .75rem darken($border-colour, 2%),
+    // inset 1px -4rem 3px 2rem $border-colour,
+    // inset -2rem -2rem 3px 2rem $border-colour,
+    // inset 2rem -2rem 3px 2rem $border-colour,
+    // inset 10px -100px 8rem .25rem rgba(0,0,0,0.75),
+    // ;
+
+    &__body
+    {
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        // overflow: hidden;
+        position: relative;
+
+        // z-index: 3;
+
+        
+    }
+
+    &__edges
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+
+        top: 0;
+        z-index: 10;
+
+        pointer-events: none;
+
+    }
+
+    &__content
+    {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+    }
+
+    &__children
+    {
+        height: 100%;
+        border-radius: inherit;
+
+        padding: 0 4.75rem;
+        padding-bottom: 7rem;
+        padding-top: 2rem;
+
+        position: relative;
+
+        z-index: 0;
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 4rem;
+    }
+
+    &__watermark
+    {
+        width: 150%;
+        height: 200%;
+        position: absolute;
+        // left: -50%;
+        // top: -100%;
+        // mask: url(../../../public/watermark2.svg);
+        
+        // mask-size: 35%;
+        background-image:  url("https://www.transparenttextures.com/patterns/pool-table.png"), url("https://www.transparenttextures.com/patterns/cartographer.png"), ;;
+        // opacity: .75;
+
+
+        transform: rotateZ(35DEG) translateX(-30%) translateY(-10%);
+        overflow: hidden;
+        z-index: -10;
+
+        filter: grayscale(100%);
+
+        &__wrapper
+        {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            border-radius: inherit;
+            z-index: -10;
+
+        }
+    }
+
+    &::after
+    {
+        content: '';
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+
+
+
+
+        position: absolute;
+        left: 0;
+        top: 0;
+
+    }
+
+    &::before
+    {
+        // content: '';
+        width: calc(100% - 12rem);
+        height: calc(100% - 10rem);
+        position: absolute;
+        background-color:#0f5c38;
+        // border: 5px solid #246647;
+
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(calc(-50% - 3rem));
+
+        border-radius: inherit;
+    }
+
+    &__title
+    {
+        font-family: 'Sugar Snow', sans-serif;
+        font-size: 10rem;
+    }
+
+    &__wrapper
+    {
+        width: 100%;
+        // height: 100%;
+        // height: 55rem;
+
+        aspect-ratio: 1 / 0.49;
+
+        padding: 2rem 10rem;
+        position: relative;
+        
+        perspective: 1500px;
+        z-index: 0;
+
+        translate: 0 -3rem;
+
+        
+
+        @media (min-width: 0px) and (max-width: calc($vw-mobile + 100px))
+        {
+            transform: none;
+            aspect-ratio: none;
+
+            width: 100%;
+            height: 100%;
+            padding: 2rem 3rem ;
+
+            translate: 0 0;
+        }
+
+        @media (min-width:  calc($vw-mobile + 100px)) and (max-width: calc($vw-tablet)) {
+            transform: none;
+            translate: 0 0;
+
+            aspect-ratio: none;
+
+            width: 100%;
+            height: 100%;
+            padding: 2rem 5rem ;
+        }
+        @media (min-width:  $vw-tablet) and (max-width: calc($vw-tablet + 150px)) {
+            transform: none;
+            aspect-ratio: none;
+
+            width: 100%;
+            aspect-ratio: 1 / 0.9;
+
+            // height: 100%;
+            padding: 2rem 2rem ;
+        }
+
+        @media (min-width:  calc($vw-tablet + 150px)) and (max-width: calc($vw-desktop + 100px)) {
+            transform: none;
+            aspect-ratio: none;
+
+            width: 100%;
+            aspect-ratio: 1 / 0.8;
+
+            // height: 100%;
+            padding: 2rem 2rem ;
+        }
+
+    }
+    @media (min-width: 0px) and (max-width: $vw-tablet)
+    {
+        transform: none;
+
+        border-radius: 500px;
+
+        &__watermark
+        {
+            width: 300%;
+            transform: rotateZ(35DEG) translateX(-50%) translateY(-10%);
+        }
+
+        &__edges
+        {
+            // display: none;
+
+            box-shadow:       
+
+            inset 0px 0px 0px .5rem #131312,
+            inset 0px 0px 0px .75rem #181817,
+            inset 0px 0px 8rem .25rem rgba(0,0,0,0.75) !important
+        }
+    }
+
+
+    &__players
+    {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+
+        transform: translate(-50%, calc(-50% + 3.35rem));
+        z-index: 10;
+    }
+}
