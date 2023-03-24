@@ -8,6 +8,7 @@ export default function Document()
             <Head>
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6856245529744753"
                     crossOrigin="anonymous"></script>
+                <meta name="monetag" content="26da22f7f7edc01b12e4feb789dbfff2"></meta>
             </Head>
             <body>
                 <Main />
