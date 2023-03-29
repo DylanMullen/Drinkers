@@ -1,0 +1,260 @@
+$sidebar-bg: #3a86ff;
+$sidebar-secondary: #ade8f4;
+
+.login
+{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+
+    position: relative;
+
+    &__main
+    {
+        width: 35%;
+        background-color: $sidebar-bg;
+        background: rgb(2, 62, 138);
+        background: linear-gradient(0deg, rgb(36, 96, 175) 0%, rgb(61, 134, 207) 16%, rgba(1, 154, 199, 1) 76%, rgba(0, 180, 216, 1) 100%);
+
+        box-shadow: 0px 0px 1rem .25rem rgba(0, 0, 0, 0.25);
+
+        position: relative;
+        z-index: 1;
+
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 15rem 0;
+
+    }
+
+    &__title
+    {
+        font-weight: 500;
+        color: white;
+        font-size: 3rem;
+        text-align: center;
+
+        &--secondary
+        {
+            font-family: 'Sugar Snow';
+            letter-spacing: 2px;
+            // font-size: 3.25rem;
+        }
+        
+    }
+
+    &__subtitle
+    {
+        font-family: 'Sugar Snow';
+
+        font-size: 1.5rem;
+        color: white;
+        position: relative;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+        gap: 1.5rem;
+
+        &::after,
+        &::before
+        {
+            content: '';
+            flex: 1;
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            border-radius: 500px;
+        }
+    }
+
+    &__form
+    {
+        padding: 0rem 4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+    }
+
+    &__pictures
+    {
+        flex: 1;
+        background-color: hsl(0, 0%, 95%);
+    }
+
+    &__providers
+    {
+        display: flex;
+        list-style: none;
+        gap: 1rem;
+        padding: 0;
+        margin: 0;
+        padding: 0 1rem;
+        
+        &__wrapper
+        {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            gap: .5rem;
+            width: fit-content;
+            
+            justify-self: center;
+            align-self: center;
+            margin-top: 1rem;
+        }
+    }
+
+    &__provider
+    {
+        font-size: 0;
+        background-color: white;
+        padding: .5rem;
+        margin: 0;
+        border-radius: 50%;
+
+        box-shadow: 0px 0px 1rem .15rem rgba(0, 0, 0, 0.15);
+
+        svg
+        {
+            font-size: 2.5rem;
+        }
+
+        &__name
+        {
+            font-size: 0;
+        }
+
+        &--discord
+        {
+            color: white;
+            background-color: #5865F2;
+
+            background: rgb(68, 79, 195);
+            background: linear-gradient(-35deg, rgba(68, 79, 195, 1) 50%, rgba(88, 101, 242, 1) 50%);
+        }
+
+        &--google
+        {
+            background: rgb(231, 231, 231);
+            background: linear-gradient(-35deg, rgba(231, 231, 231, 1) 50%, rgba(255, 255, 255, 1) 50%);
+        }
+
+        &--twitter
+        {
+            color: white;
+            background: rgb(0, 135, 218);
+            background: linear-gradient(-35deg, rgba(0, 135, 218, 1) 50%, rgba(29, 161, 242, 1) 50%);
+        }
+
+        &--twitch
+        {
+            color: white;
+            background: rgb(75, 44, 133);
+            background: linear-gradient(-35deg, rgba(75, 44, 133, 1) 50%, rgba(100, 65, 165, 1) 50%);
+
+            svg
+            {
+                padding: .15rem;
+            }
+        }
+
+        &:hover,
+        &:focus
+        {
+            transform: scale(1.05);
+        }
+
+        &:active
+        {
+            transform: scale(0.95);
+        }
+    }
+
+    &__input-group
+    {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        label
+        {
+            color: white;
+            font-size: 1.5rem;
+            width: 15%;
+        }
+    }
+
+    &__input
+    {
+        flex: 1;
+        font-size: 1.25rem;
+        border: 0;
+        background: transparent;
+        border-bottom: 2px solid hsl(0, 0%, 98%);
+        outline: 0;
+        color: white;
+
+        padding: .5rem;
+
+
+        transition: background-color 150ms ease-in-out;
+
+        &:focus,&:hover
+        {
+            background-color: hsl(194, 99%, 36%);
+        }
+    }
+
+    &__btns
+    {
+        display: flex;
+        gap: 1rem;
+
+        justify-content: center;
+        align-items: center;
+        margin: 1rem 0;
+    }
+
+    &__btn
+    {
+        padding: .5rem 1.25rem;
+        font-size: 1.25rem;
+        border-radius: 0.75rem;
+        border: 0;
+        cursor: pointer;
+
+        background: transparent;
+
+        border-bottom: 2px solid white;
+
+        box-shadow: 0px .5rem .5rem .1rem rgba(0, 0, 0, 0.15);
+        font-weight: 600;
+        &--login
+        {
+            background-color: #1565c0;
+            color: white;
+        }
+
+        &--signup
+        {
+            background-color: #ffc300;
+        }
+
+        &:hover,
+        &:focus
+        {
+            transform: scale(1.05);
+        }
+
+        &:active
+        {
+            transform: scale(0.95);
+        }
+    }
+}
