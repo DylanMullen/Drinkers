@@ -14,7 +14,7 @@ type Props = {
     close: Function
 
 }
-export const DISCORDURL = "https://discord.com/api/oauth2/authorize?client_id=852274286017249330&redirect_uri=https%3A%2F%2Fdrinkers.party%2Fapi%2Flogin&response_type=code&scope=identify%20email"
+export const DISCORDURL = "https://discord.com/oauth2/authorize?client_id=852274286017249330&response_type=code&redirect_uri=https%3A%2F%2Fdrinkers.party%2Fapi%2Flogin&scope=identify+email"
 
 function ProfileModal({ close }: Props)
 {
