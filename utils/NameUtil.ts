@@ -1,5 +1,5 @@
 
-const AVATAR_SERVICE = "https://source.boringavatars.com/beam/512/Drinkers-"
+const AVATAR_SERVICE = "https://api.dicebear.com/9.x/bottts-neutral/svg?seed=Drinkers-"
 
 const PREFIXES: string[] = [
     "Drunk",
@@ -46,7 +46,7 @@ export function getRandomName(): string
 export function getRandomAvatar(name: string)
 {
     let scheme = getScheme()
-    return AVATAR_SERVICE + name + "-" + (Math.random() * 100) + "?colors=" + scheme
+    return AVATAR_SERVICE + name + "-" + (Math.random() * 35665)
 }
 
 function getScheme(): string
